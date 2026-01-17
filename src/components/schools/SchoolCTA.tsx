@@ -5,9 +5,9 @@ import { motion } from 'framer-motion';
 
 export function SchoolCTA() {
   return (
-    <section className="py-24 bg-primary relative overflow-hidden">
-      <div className="absolute top-10 left-[10%] w-48 h-48 rounded-full bg-white/10 blur-2xl" />
-      <div className="absolute bottom-10 right-[15%] w-64 h-64 rounded-full bg-secondary/10 blur-2xl" />
+    <section className="py-24 bg-foreground relative overflow-hidden">
+      <div className="absolute top-10 left-[10%] w-48 h-48 rounded-full bg-primary/20 blur-2xl" />
+      <div className="absolute bottom-10 right-[15%] w-64 h-64 rounded-full bg-accent/20 blur-2xl" />
       
       <div className="container relative">
         <div className="max-w-3xl mx-auto text-center">
@@ -40,7 +40,7 @@ export function SchoolCTA() {
           >
             <Button
               size="lg"
-              className="bg-white text-primary hover:bg-white/90 rounded-full shadow-lg"
+              className="bg-primary text-white hover:bg-primary/90 rounded-full shadow-lg"
               asChild
             >
               <Link to="/schools/demo">
@@ -49,7 +49,7 @@ export function SchoolCTA() {
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white/10 rounded-full" asChild>
+            <Button size="lg" variant="outline" className="border-2 border-white/30 text-white hover:bg-white/10 rounded-full" asChild>
               <a href="mailto:schools@studybug.com">
                 <Mail className="w-4 h-4 mr-2" />
                 Contact Sales

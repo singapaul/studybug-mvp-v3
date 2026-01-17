@@ -11,22 +11,22 @@ export function StatsBar() {
       icon: Building2,
       value: '500+',
       label: t('stats.schools'),
-      color: 'bg-secondary',
-      iconColor: 'text-white',
+      color: 'bg-accent',
+      iconColor: 'text-accent-foreground',
     },
     {
       icon: Users,
       value: '50,000+',
       label: t('stats.students'),
-      color: 'bg-primary',
+      color: 'bg-secondary',
       iconColor: 'text-white',
     },
     {
       icon: TrendingUp,
       value: '92%',
       label: t('stats.improvement'),
-      color: 'bg-coral',
-      iconColor: 'text-white',
+      color: 'bg-accent',
+      iconColor: 'text-accent-foreground',
     },
   ];
 
