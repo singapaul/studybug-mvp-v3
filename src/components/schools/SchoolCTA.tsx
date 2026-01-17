@@ -1,25 +1,46 @@
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Calendar, Mail } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export function SchoolCTA() {
   return (
-    <section className="py-20 bg-primary/5">
-      <div className="container">
+    <section className="py-24 bg-primary relative overflow-hidden">
+      <div className="absolute top-10 left-[10%] w-48 h-48 rounded-full bg-white/10 blur-2xl" />
+      <div className="absolute bottom-10 right-[15%] w-64 h-64 rounded-full bg-secondary/10 blur-2xl" />
+      
+      <div className="container relative">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-foreground mb-4">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl font-bold text-white mb-4"
+          >
             Ready to Transform Learning at Your School?
-          </h2>
-          <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            viewport={{ once: true }}
+            className="text-white/80 mb-8 max-w-2xl mx-auto"
+          >
             Book a personalized demo to see how Studybug can help your students
             achieve better results. Our education specialists will walk you
             through everything.
-          </p>
+          </motion.p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            viewport={{ once: true }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
             <Button
               size="lg"
-              className="gradient-primary text-primary-foreground hover:opacity-90"
+              className="bg-white text-primary hover:bg-white/90 rounded-full shadow-lg"
               asChild
             >
               <Link to="/schools/demo">
@@ -28,17 +49,23 @@ export function SchoolCTA() {
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" asChild>
+            <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white/10 rounded-full" asChild>
               <a href="mailto:schools@studybug.com">
                 <Mail className="w-4 h-4 mr-2" />
                 Contact Sales
               </a>
             </Button>
-          </div>
+          </motion.div>
 
-          <p className="text-sm text-muted-foreground mt-6">
+          <motion.p 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            viewport={{ once: true }}
+            className="text-sm text-white/70 mt-6"
+          >
             No commitment required · Response within 24 hours
-          </p>
+          </motion.p>
         </div>
       </div>
     </section>

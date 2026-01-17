@@ -5,18 +5,19 @@ import { Button } from '@/components/ui/button';
 import { 
   Gamepad2, Zap, BookOpen, Timer, Brain, CheckCircle, 
   Pencil, BarChart3, Trophy, WifiOff, Users, School,
-  FileDown, Sparkles, GraduationCap
+  FileDown, Sparkles, GraduationCap, ArrowRight
 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const gameModes = [
-  { icon: Gamepad2, name: 'Flip & Match', description: 'Classic memory matching game' },
-  { icon: Zap, name: 'Splat!', description: 'Fast-paced card reactions' },
-  { icon: CheckCircle, name: 'Multiple Choice', description: 'Quiz-style assessments' },
-  { icon: BookOpen, name: 'Flashcards', description: 'Traditional revision cards' },
-  { icon: Timer, name: 'Speed Round', description: 'Beat the clock challenges' },
-  { icon: Brain, name: 'Memory Challenge', description: 'Test your retention' },
-  { icon: CheckCircle, name: 'True/False', description: 'Quick decision games' },
-  { icon: Pencil, name: 'Fill in the Blanks', description: 'Complete the sentence' },
+  { icon: Gamepad2, name: 'Flip & Match', description: 'Classic memory matching game', color: 'bg-primary' },
+  { icon: Zap, name: 'Splat!', description: 'Fast-paced card reactions', color: 'bg-secondary' },
+  { icon: CheckCircle, name: 'Multiple Choice', description: 'Quiz-style assessments', color: 'bg-coral' },
+  { icon: BookOpen, name: 'Flashcards', description: 'Traditional revision cards', color: 'bg-warning' },
+  { icon: Timer, name: 'Speed Round', description: 'Beat the clock challenges', color: 'bg-accent' },
+  { icon: Brain, name: 'Memory Challenge', description: 'Test your retention', color: 'bg-primary' },
+  { icon: CheckCircle, name: 'True/False', description: 'Quick decision games', color: 'bg-secondary' },
+  { icon: Pencil, name: 'Fill in the Blanks', description: 'Complete the sentence', color: 'bg-coral' },
 ];
 
 const studentFeatures = [
@@ -39,23 +40,44 @@ export default function Features() {
       <Header />
       <main className="flex-1">
         {/* Hero */}
-        <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-accent/5">
-          <div className="container text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+        <section className="py-20 bg-primary relative overflow-hidden">
+          <div className="absolute top-10 left-[10%] w-48 h-48 rounded-full bg-white/10 blur-2xl" />
+          <div className="absolute bottom-10 right-[15%] w-64 h-64 rounded-full bg-secondary/20 blur-2xl" />
+          
+          <div className="container text-center relative">
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-4xl md:text-5xl font-bold text-white mb-6"
+            >
               Everything You Need to Make{' '}
-              <span className="text-gradient">Learning Engaging</span>
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
+              <span className="text-warning">Learning Engaging</span>
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="text-lg text-white/80 max-w-2xl mx-auto mb-8"
+            >
               Discover all the features that make Studybug the most engaging revision platform for students and teachers.
-            </p>
-            <Button size="lg" className="gradient-primary text-primary-foreground" asChild>
-              <Link to="/signup/individual">Start Free Trial</Link>
-            </Button>
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <Button size="lg" className="bg-white text-primary hover:bg-white/90 rounded-full shadow-lg" asChild>
+                <Link to="/signup/individual">
+                  Start Free Trial
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Link>
+              </Button>
+            </motion.div>
           </div>
         </section>
 
         {/* Game Modes */}
-        <section className="py-20 bg-background">
+        <section className="py-24 bg-white">
           <div className="container">
             <div className="text-center mb-12">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
@@ -72,27 +94,31 @@ export default function Features() {
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
               {gameModes.map((mode, index) => (
-                <div
+                <motion.div
                   key={index}
-                  className="p-6 rounded-2xl border border-border bg-card hover:border-primary/50 hover:shadow-lg transition-all group"
+                  whileHover={{ y: -6 }}
+                  className="p-6 rounded-3xl bg-white border border-border hover:shadow-xl transition-all group"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                    <mode.icon className="w-6 h-6 text-primary" />
-                  </div>
+                  <motion.div 
+                    whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
+                    className={`w-12 h-12 rounded-xl ${mode.color} flex items-center justify-center mb-4 shadow-md`}
+                  >
+                    <mode.icon className="w-6 h-6 text-white" />
+                  </motion.div>
                   <h3 className="font-semibold text-foreground mb-1">{mode.name}</h3>
                   <p className="text-sm text-muted-foreground">{mode.description}</p>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
         </section>
 
         {/* For Students */}
-        <section className="py-20 bg-muted/30">
+        <section className="py-24 bg-cream">
           <div className="container">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent-foreground text-sm font-medium mb-4">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/10 text-secondary text-sm font-medium mb-4">
                   <GraduationCap className="w-4 h-4" />
                   For Students
                 </div>
@@ -104,35 +130,47 @@ export default function Features() {
                 </p>
                 <div className="space-y-4">
                   {studentFeatures.map((feature, index) => (
-                    <div key={index} className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
-                        <feature.icon className="w-5 h-5 text-accent-foreground" />
+                    <motion.div 
+                      key={index} 
+                      whileHover={{ x: 4 }}
+                      className="flex items-start gap-4"
+                    >
+                      <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center flex-shrink-0 shadow-md">
+                        <feature.icon className="w-5 h-5 text-white" />
                       </div>
                       <div>
                         <h4 className="font-semibold text-foreground">{feature.title}</h4>
                         <p className="text-sm text-muted-foreground">{feature.description}</p>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
               <div className="relative">
-                <div className="aspect-square max-w-md mx-auto rounded-3xl bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center">
-                  <GraduationCap className="w-32 h-32 text-primary/40" />
-                </div>
+                <motion.div 
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 4, repeat: Infinity }}
+                  className="aspect-square max-w-md mx-auto rounded-3xl bg-secondary flex items-center justify-center shadow-2xl"
+                >
+                  <GraduationCap className="w-32 h-32 text-white/40" />
+                </motion.div>
               </div>
             </div>
           </div>
         </section>
 
         {/* For Teachers */}
-        <section className="py-20 bg-background">
+        <section className="py-24 bg-white">
           <div className="container">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="order-2 lg:order-1">
-                <div className="aspect-square max-w-md mx-auto rounded-3xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                  <School className="w-32 h-32 text-primary/40" />
-                </div>
+                <motion.div 
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
+                  className="aspect-square max-w-md mx-auto rounded-3xl bg-primary flex items-center justify-center shadow-2xl"
+                >
+                  <School className="w-32 h-32 text-white/40" />
+                </motion.div>
               </div>
               <div className="order-1 lg:order-2">
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
@@ -147,15 +185,19 @@ export default function Features() {
                 </p>
                 <div className="space-y-4">
                   {teacherFeatures.map((feature, index) => (
-                    <div key={index} className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <feature.icon className="w-5 h-5 text-primary" />
+                    <motion.div 
+                      key={index}
+                      whileHover={{ x: 4 }}
+                      className="flex items-start gap-4"
+                    >
+                      <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center flex-shrink-0 shadow-md">
+                        <feature.icon className="w-5 h-5 text-white" />
                       </div>
                       <div>
                         <h4 className="font-semibold text-foreground">{feature.title}</h4>
                         <p className="text-sm text-muted-foreground">{feature.description}</p>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
@@ -164,20 +206,26 @@ export default function Features() {
         </section>
 
         {/* CTA */}
-        <section className="py-20 bg-gradient-to-br from-primary/10 via-background to-accent/10">
-          <div className="container text-center">
-            <Sparkles className="w-12 h-12 text-primary mx-auto mb-6" />
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <section className="py-24 bg-secondary relative overflow-hidden">
+          <div className="absolute top-10 left-[10%] w-48 h-48 rounded-full bg-white/10 blur-2xl" />
+          <div className="absolute bottom-10 right-[15%] w-64 h-64 rounded-full bg-primary/10 blur-2xl" />
+          
+          <div className="container text-center relative">
+            <Sparkles className="w-12 h-12 text-white/60 mx-auto mb-6" />
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Ready to Try It?
             </h2>
-            <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-8">
+            <p className="text-lg text-white/80 max-w-xl mx-auto mb-8">
               Start your 14-day free trial and experience all features.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="gradient-primary text-primary-foreground" asChild>
-                <Link to="/signup/individual">Start Free Trial</Link>
+              <Button size="lg" className="bg-white text-secondary hover:bg-white/90 rounded-full shadow-lg" asChild>
+                <Link to="/signup/individual">
+                  Start Free Trial
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Link>
               </Button>
-              <Button size="lg" variant="outline" asChild>
+              <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white/10 rounded-full" asChild>
                 <Link to="/pricing">View Pricing</Link>
               </Button>
             </div>

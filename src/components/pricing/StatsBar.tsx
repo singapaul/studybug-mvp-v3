@@ -12,23 +12,26 @@ export function StatsBar() {
       value: '500+',
       label: t('stats.schools'),
       color: 'bg-secondary',
+      iconColor: 'text-white',
     },
     {
       icon: Users,
       value: '50,000+',
       label: t('stats.students'),
       color: 'bg-primary',
+      iconColor: 'text-white',
     },
     {
       icon: TrendingUp,
       value: '92%',
       label: t('stats.improvement'),
       color: 'bg-coral',
+      iconColor: 'text-white',
     },
   ];
 
   return (
-    <section className="py-8 bg-accent border-y border-border">
+    <section className="py-10 bg-white border-y border-border">
       <div className="container">
         <StaggerContainer className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
           {stats.map((stat, index) => (
@@ -39,15 +42,16 @@ export function StatsBar() {
               >
                 <motion.div 
                   whileHover={{ rotate: [0, -5, 5, 0] }}
-                  className={`w-14 h-14 rounded-2xl ${stat.color} flex items-center justify-center`}
+                  transition={{ duration: 0.3 }}
+                  className={`w-14 h-14 rounded-2xl ${stat.color} flex items-center justify-center shadow-md`}
                 >
-                  <stat.icon className="w-7 h-7 text-white" />
+                  <stat.icon className={`w-7 h-7 ${stat.iconColor}`} />
                 </motion.div>
                 <div>
-                  <div className="text-3xl md:text-4xl font-bold text-accent-foreground">
+                  <div className="text-3xl md:text-4xl font-bold text-foreground">
                     {stat.value}
                   </div>
-                  <div className="text-sm text-accent-foreground/80 font-medium">
+                  <div className="text-sm text-muted-foreground font-medium">
                     {stat.label}
                   </div>
                 </div>
