@@ -117,7 +117,7 @@ export default function Index() {
         </section>
 
         {/* Trust Badges */}
-        <section className="py-12 border-y border-border bg-muted/30">
+        <section className="py-12 border-y border-border bg-cream">
           <div className="container">
             <TrustBadges />
           </div>
@@ -134,7 +134,7 @@ export default function Index() {
         <Testimonials />
 
         {/* FAQ */}
-        <section className="py-20 bg-muted/30">
+        <section className="py-20 bg-cream">
           <div className="container">
             <FAQSection />
           </div>

@@ -43,10 +43,10 @@ export function Header() {
       <div className="container flex h-16 items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg gradient-primary shadow-md group-hover:shadow-glow transition-shadow">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary group-hover:scale-105 transition-transform">
             <Bug className="h-5 w-5 text-primary-foreground" />
           </div>
-          <span className="text-xl font-bold text-foreground">
+          <span className="text-xl font-bold font-display text-foreground">
             Study<span className="text-primary">bug</span>
           </span>
         </Link>
@@ -58,7 +58,7 @@ export function Header() {
               key={link.href}
               to={link.href}
               className={`text-sm font-medium transition-colors hover:text-primary ${
-                isActive(link.href) ? 'text-primary' : 'text-muted-foreground'
+                isActive(link.href) ? 'text-primary' : 'text-foreground'
               }`}
             >
               {link.label}
@@ -67,7 +67,7 @@ export function Header() {
           
           {/* Resources Dropdown */}
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+            <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium text-foreground hover:text-primary transition-colors">
               {t('nav.resources')}
               <ChevronDown className="w-4 h-4" />
             </DropdownMenuTrigger>
@@ -101,7 +101,7 @@ export function Header() {
           <Button variant="ghost" size="sm" asChild>
             <Link to="/login">{t('nav.login')}</Link>
           </Button>
-          <Button size="sm" className="gradient-primary text-primary-foreground hover:opacity-90" asChild>
+          <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90" asChild>
             <Link to="/signup/individual">{t('nav.startTrial')}</Link>
           </Button>
         </div>
@@ -146,7 +146,7 @@ export function Header() {
                 key={link.href}
                 to={link.href}
                 className={`text-sm font-medium py-3 px-2 rounded-lg ${
-                  isActive(link.href) ? 'text-primary bg-primary/5' : 'text-muted-foreground'
+                  isActive(link.href) ? 'text-primary bg-primary/5' : 'text-foreground'
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -157,7 +157,7 @@ export function Header() {
             {/* Mobile Resources Submenu */}
             <button
               onClick={() => setMobileResourcesOpen(!mobileResourcesOpen)}
-              className="flex items-center justify-between text-sm font-medium py-3 px-2 rounded-lg text-muted-foreground"
+              className="flex items-center justify-between text-sm font-medium py-3 px-2 rounded-lg text-foreground"
             >
               {t('nav.resources')}
               <ChevronDown className={`w-4 h-4 transition-transform ${mobileResourcesOpen ? 'rotate-180' : ''}`} />
@@ -183,7 +183,7 @@ export function Header() {
                   {t('nav.login')}
                 </Link>
               </Button>
-              <Button className="gradient-primary text-primary-foreground" asChild>
+              <Button className="bg-primary text-primary-foreground" asChild>
                 <Link to="/signup/individual" onClick={() => setMobileMenuOpen(false)}>
                   {t('nav.startTrial')}
                 </Link>
