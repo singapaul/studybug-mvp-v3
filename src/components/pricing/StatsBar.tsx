@@ -48,7 +48,7 @@ export function StatsBar() {
                   <stat.icon className={`w-7 h-7 ${stat.iconColor}`} />
                 </motion.div>
                 <div>
-                  <div className="text-3xl md:text-4xl font-bold text-foreground">
+                  <div className="text-3xl md:text-4xl font-bold text-foreground" style={{ fontFamily: "'Quicksand', system-ui, sans-serif" }}>
                     {stat.value}
                   </div>
                   <div className="text-sm text-muted-foreground font-medium">

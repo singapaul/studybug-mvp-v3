@@ -38,12 +38,6 @@ export function TrustBadges() {
     },
   ];
 
-  const schoolLogos = [
-    'Oakwood Academy',
-    'St. Mary\'s School',
-    'Riverside College',
-    'Westminster Academy',
-  ];
 
   return (
     <div className="space-y-8">
@@ -77,20 +71,6 @@ export function TrustBadges() {
         ))}
       </StaggerContainer>
 
-      {/* School logos placeholder */}
-      <ScrollReveal delay={0.3}>
-        <div className="flex flex-wrap justify-center gap-4">
-          {schoolLogos.map((school, index) => (
-            <motion.div
-              key={index}
-              whileHover={{ scale: 1.05 }}
-              className="px-4 py-2 rounded-lg bg-white border border-border text-sm text-muted-foreground font-medium cursor-default shadow-sm"
-            >
-              {school}
-            </motion.div>
-          ))}
-        </div>
-      </ScrollReveal>
     </div>
   );
 }
