@@ -83,18 +83,18 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   }
 
-  /* Display font only for large headings - Fredoka is friendly, rounded, modern */
+  /* Display font only for large headings - Quicksand is friendly, rounded, modern */
   h1, h2 {
-    font-family: 'Fredoka', system-ui, sans-serif;
-    font-weight: 600;
+    font-family: 'Quicksand', system-ui, sans-serif;
+    font-weight: 700;
   }
 
   /* UI-optimized font for smaller headings */
   h3, h4, h5, h6 {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
     font-weight: 600;
   }
 }
