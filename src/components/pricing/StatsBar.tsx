@@ -12,7 +12,7 @@ export function StatsBar() {
       value: '500+',
       label: t('stats.schools'),
       color: 'bg-accent',
-      iconColor: 'text-accent-foreground',
+      iconColor: 'text-white',
     },
     {
       icon: Users,
@@ -26,7 +26,7 @@ export function StatsBar() {
       value: '92%',
       label: t('stats.improvement'),
       color: 'bg-warning',
-      iconColor: 'text-warning-foreground',
+      iconColor: 'text-white',
     },
   ];
 

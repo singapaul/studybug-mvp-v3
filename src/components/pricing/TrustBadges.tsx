@@ -13,7 +13,7 @@ export function TrustBadges() {
       label: t('trust.gdpr'),
       description: t('trust.gdprDesc'),
       color: 'bg-accent',
-      iconColor: 'text-accent-foreground',
+      iconColor: 'text-white',
     },
     {
       icon: Lock,
@@ -27,7 +27,7 @@ export function TrustBadges() {
       label: t('trust.moneyBack'),
       description: t('trust.moneyBackDesc'),
       color: 'bg-warning',
-      iconColor: 'text-warning-foreground',
+      iconColor: 'text-white',
     },
     {
       icon: Flag,

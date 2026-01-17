@@ -28,17 +28,17 @@
     --muted: 47 50% 93%;
     --muted-foreground: 72 7% 40%;
 
-    /* Accent Pink/Lavender - #ECC1FF */
+    /* Accent Pink/Lavender - #ECC1FF - use white text for better contrast */
     --accent: 284 100% 88%;
-    --accent-foreground: 72 7% 17%;
+    --accent-foreground: 0 0% 100%;
 
     /* Success/Primary Green */
     --success: 96 58% 61%;
-    --success-foreground: 72 7% 17%;
+    --success-foreground: 0 0% 100%;
 
-    /* Yellow - #F5E211 */
+    /* Yellow - #F5E211 - use white text for better contrast */
     --warning: 54 93% 51%;
-    --warning-foreground: 72 7% 17%;
+    --warning-foreground: 0 0% 100%;
 
     /* Coral - #FF705D */
     --destructive: 7 100% 68%;
@@ -86,10 +86,10 @@
     font-family: 'DM Sans', system-ui, sans-serif;
   }
 
-  /* Display font only for large headings */
+  /* Display font only for large headings - Nunito is friendly, modern, rounded */
   h1, h2 {
-    font-family: 'Fredoka', system-ui, sans-serif;
-    font-weight: 600;
+    font-family: 'Nunito', system-ui, sans-serif;
+    font-weight: 700;
   }
 
   /* UI-optimized font for smaller headings */

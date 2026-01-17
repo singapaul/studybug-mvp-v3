@@ -82,7 +82,7 @@ export function Testimonials() {
                     whileHover={{ scale: 1.1 }}
                     className={`w-12 h-12 rounded-full ${testimonial.accentColor} flex items-center justify-center shadow-md`}
                   >
-                    <User className={`w-6 h-6 ${testimonial.accentColor === 'bg-secondary' ? 'text-white' : 'text-foreground'}`} />
+                    <User className="w-6 h-6 text-white" />
                   </motion.div>
                   <div>
                     <div className="font-semibold text-foreground">
