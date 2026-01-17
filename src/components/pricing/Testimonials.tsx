@@ -31,25 +31,24 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <section className="py-24 bg-secondary relative overflow-hidden">
+    <section className="py-24 bg-cream relative overflow-hidden">
       {/* Decorative circles */}
-      <div className="absolute top-10 left-[5%] w-48 h-48 rounded-full bg-white/10 blur-2xl" />
+      <div className="absolute top-10 left-[5%] w-48 h-48 rounded-full bg-secondary/10 blur-2xl" />
       <div className="absolute bottom-10 right-[10%] w-64 h-64 rounded-full bg-accent/15 blur-2xl" />
       <div className="absolute top-1/2 right-[20%] w-32 h-32 rounded-full bg-coral/10 blur-xl" />
       
-      {/* Subtle wave pattern */}
-      <div className="absolute inset-0 opacity-5" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='1' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E")`,
-        backgroundSize: '100% 100%',
-        backgroundPosition: 'bottom'
+      {/* Subtle pattern */}
+      <div className="absolute inset-0 opacity-[0.02]" style={{
+        backgroundImage: `radial-gradient(circle at 2px 2px, hsl(var(--foreground)) 1px, transparent 0)`,
+        backgroundSize: '32px 32px'
       }} />
       
       <div className="container relative">
         <ScrollReveal className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Trusted by 1,500+ learners across the UK
           </h2>
-          <p className="text-lg text-white/80">
+          <p className="text-lg text-muted-foreground">
             See what students and educators are saying about Studybug
           </p>
         </ScrollReveal>
