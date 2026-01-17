@@ -10,14 +10,42 @@ interface FlashCard {
   answer: string;
 }
 
-const demoCards: FlashCard[] = [
+const questionBank: FlashCard[] = [
+  // Maths
   { id: 1, question: "What is 5 + 3?", answer: "8" },
-  { id: 2, question: "Capital of France?", answer: "Paris" },
-  { id: 3, question: "H₂O is the formula for?", answer: "Water" },
+  { id: 2, question: "What is 9 - 4?", answer: "5" },
+  { id: 3, question: "What is 6 × 2?", answer: "12" },
+  { id: 4, question: "What is 15 ÷ 3?", answer: "5" },
+  { id: 5, question: "What is 7 + 8?", answer: "15" },
+  // Geography
+  { id: 6, question: "Capital of France?", answer: "Paris" },
+  { id: 7, question: "Capital of Spain?", answer: "Madrid" },
+  { id: 8, question: "Capital of Italy?", answer: "Rome" },
+  { id: 9, question: "Capital of Germany?", answer: "Berlin" },
+  { id: 10, question: "Which ocean is the largest?", answer: "Pacific" },
+  // Science
+  { id: 11, question: "H₂O is the formula for?", answer: "Water" },
+  { id: 12, question: "What planet is closest to the Sun?", answer: "Mercury" },
+  { id: 13, question: "How many legs does a spider have?", answer: "8" },
+  { id: 14, question: "What gas do plants breathe in?", answer: "CO₂" },
+  { id: 15, question: "What is the centre of an atom called?", answer: "Nucleus" },
+  // English
+  { id: 16, question: "What is the plural of 'child'?", answer: "Children" },
+  { id: 17, question: "What punctuation ends a question?", answer: "?" },
+  { id: 18, question: "Is 'quickly' a noun or adverb?", answer: "Adverb" },
+  // History
+  { id: 19, question: "Who was the first man on the Moon?", answer: "Neil Armstrong" },
+  { id: 20, question: "In which year did WW2 end?", answer: "1945" },
 ];
+
+function getRandomQuestions(count: number): FlashCard[] {
+  const shuffled = [...questionBank].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, count);
+}
 
 export function InteractiveDemo() {
   const { t } = useLocale();
+  const [demoCards, setDemoCards] = useState<FlashCard[]>(() => getRandomQuestions(3));
   const [currentCard, setCurrentCard] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [score, setScore] = useState(0);
@@ -51,6 +79,7 @@ export function InteractiveDemo() {
   };
 
   const reset = () => {
+    setDemoCards(getRandomQuestions(3));
     setCurrentCard(0);
     setIsFlipped(false);
     setScore(0);
