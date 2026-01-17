@@ -22,16 +22,22 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
   const annualTotal = plan.annualPrice;
 
   const getCardStyle = () => {
-    if (isPopular) {
+    if (plan.id === 'student') {
       return 'border-2 border-primary bg-white shadow-xl ring-4 ring-primary/10';
     }
-    return 'border border-border bg-white hover:border-accent hover:shadow-lg';
+    if (plan.id === 'teacher') {
+      return 'border-2 border-accent bg-white shadow-lg ring-4 ring-accent/10';
+    }
+    if (plan.id === 'school') {
+      return 'border-2 border-secondary bg-white shadow-lg ring-4 ring-secondary/10';
+    }
+    return 'border border-border bg-white hover:shadow-lg';
   };
 
   const getBadgeStyle = () => {
     switch (plan.badgeColor) {
       case 'accent':
-        return 'bg-coral text-white';
+        return 'bg-accent text-accent-foreground';
       case 'primary':
         return 'bg-primary text-white';
       case 'secondary':
@@ -42,13 +48,16 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
   };
 
   const getButtonStyle = () => {
-    if (isPopular) {
+    if (plan.id === 'student') {
       return 'bg-primary text-white hover:bg-primary/90 shadow-lg rounded-full';
     }
-    if (isFree) {
-      return 'bg-muted text-foreground hover:bg-muted/80 rounded-full';
+    if (plan.id === 'teacher') {
+      return 'bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg rounded-full';
     }
-    return 'bg-foreground text-white hover:bg-foreground/90 rounded-full';
+    if (plan.id === 'school') {
+      return 'bg-secondary text-white hover:bg-secondary/90 shadow-lg rounded-full';
+    }
+    return 'bg-muted text-foreground hover:bg-muted/80 rounded-full';
   };
 
   const getBadgeText = () => {
@@ -72,7 +81,7 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
           transition={{ delay: 0.2 }}
         >
           <span className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold shadow-md ${getBadgeStyle()}`}>
-            {isPopular && <Sparkles className="w-3 h-3" />}
+            {plan.id === 'student' && <Sparkles className="w-3 h-3" />}
             {getBadgeText()}
           </span>
         </motion.div>
