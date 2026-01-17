@@ -39,6 +39,13 @@ export function TrustBadges() {
   ];
 
 
+  const partnerBadges = [
+    { name: 'Education First', type: 'Partner' },
+    { name: 'UK EdTech', type: 'Certified' },
+    { name: 'Learning Alliance', type: 'Member' },
+    { name: 'TeachHub', type: 'Partner' },
+  ];
+
   return (
     <div className="space-y-8">
       {/* Trust message */}
@@ -71,6 +78,24 @@ export function TrustBadges() {
         ))}
       </StaggerContainer>
 
+      {/* Partner badges */}
+      <ScrollReveal delay={0.3}>
+        <div className="flex flex-wrap justify-center gap-3">
+          {partnerBadges.map((partner, index) => (
+            <motion.div
+              key={index}
+              whileHover={{ scale: 1.05 }}
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-muted border border-border text-sm cursor-default"
+            >
+              <div className="w-6 h-6 rounded-full bg-secondary/20 flex items-center justify-center">
+                <span className="text-xs font-bold text-secondary">{partner.name.charAt(0)}</span>
+              </div>
+              <span className="font-medium text-foreground">{partner.name}</span>
+              <span className="text-xs text-muted-foreground bg-background px-2 py-0.5 rounded-full">{partner.type}</span>
+            </motion.div>
+          ))}
+        </div>
+      </ScrollReveal>
     </div>
   );
 }

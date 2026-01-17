@@ -22,6 +22,7 @@ export function InteractiveDemo() {
   const [isFlipped, setIsFlipped] = useState(false);
   const [score, setScore] = useState(0);
   const [answered, setAnswered] = useState<number[]>([]);
+  const [answerResults, setAnswerResults] = useState<Record<number, boolean>>({});
   const [showCelebration, setShowCelebration] = useState(false);
 
   const card = demoCards[currentCard];
@@ -31,6 +32,7 @@ export function InteractiveDemo() {
     if (answered.includes(currentCard)) return;
     
     setAnswered([...answered, currentCard]);
+    setAnswerResults(prev => ({ ...prev, [currentCard]: correct }));
     if (correct) {
       setScore(score + 1);
     }
@@ -51,6 +53,7 @@ export function InteractiveDemo() {
     setIsFlipped(false);
     setScore(0);
     setAnswered([]);
+    setAnswerResults({});
   };
 
   return (
@@ -93,7 +96,9 @@ export function InteractiveDemo() {
                   key={idx}
                   className={`w-8 h-2 rounded-full transition-colors ${
                     answered.includes(idx)
-                      ? 'bg-success'
+                      ? answerResults[idx]
+                        ? 'bg-success'
+                        : 'bg-coral'
                       : idx === currentCard
                       ? 'bg-secondary'
                       : 'bg-muted'

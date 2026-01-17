@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Bug, Mail, Phone, MapPin, Twitter, Linkedin, Youtube } from 'lucide-react';
+import { Bug, Mail, Phone, MapPin } from 'lucide-react';
 
 export function Footer() {
   return (
@@ -19,18 +19,6 @@ export function Footer() {
             <p className="text-sm text-muted-foreground mb-4">
               Making revision fun and effective for students everywhere.
             </p>
-            {/* Social icons */}
-            <div className="flex items-center gap-3">
-              <a href="#" className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center text-foreground hover:bg-muted/80 transition-colors">
-                <Twitter className="w-4 h-4" />
-              </a>
-              <a href="#" className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center text-foreground hover:bg-muted/80 transition-colors">
-                <Linkedin className="w-4 h-4" />
-              </a>
-              <a href="#" className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center text-foreground hover:bg-muted/80 transition-colors">
-                <Youtube className="w-4 h-4" />
-              </a>
-            </div>
           </div>
 
           {/* Product */}
