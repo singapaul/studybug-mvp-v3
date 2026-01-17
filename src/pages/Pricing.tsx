@@ -87,7 +87,7 @@ export default function Pricing() {
             </div>
 
             <p className="text-center text-sm text-muted-foreground mt-8">
-              No credit card required • 14-day free trial • Cancel anytime
+              14-day free trial • Cancel anytime
             </p>
           </div>
         </section>
@@ -116,7 +116,7 @@ export default function Pricing() {
               Ready to Get Started?
             </h2>
             <p className="text-lg text-white/80 max-w-xl mx-auto mb-8">
-              Start your 14-day free trial today. No credit card required.
+              Start your 14-day free trial today. Cancel anytime.
             </p>
             <Button 
               size="lg" 
