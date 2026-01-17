@@ -82,7 +82,7 @@ const translations: Record<Language, Record<string, string>> = {
     'stats.improvement': 'Improvement',
     
     // Urgency
-    'urgency.message': 'Limited time: Save 25% on annual plans',
+    'urgency.message': 'January offer: Save 25% on annual plans',
     'urgency.endsIn': 'Ends in:',
     'urgency.days': 'days',
     'urgency.hrs': 'hrs',
@@ -181,7 +181,7 @@ const translations: Record<Language, Record<string, string>> = {
     'stats.improvement': 'Amélioration',
     
     // Urgency
-    'urgency.message': 'Offre limitée : Économisez 25% sur les plans annuels',
+    'urgency.message': 'Offre de janvier : Économisez 25% sur les plans annuels',
     'urgency.endsIn': 'Se termine dans :',
     'urgency.days': 'jours',
     'urgency.hrs': 'h',
@@ -280,7 +280,7 @@ const translations: Record<Language, Record<string, string>> = {
     'stats.improvement': 'Verbesserung',
     
     // Urgency
-    'urgency.message': 'Zeitlich begrenzt: Sparen Sie 25% bei Jahresplänen',
+    'urgency.message': 'Januar-Angebot: Sparen Sie 25% bei Jahresplänen',
     'urgency.endsIn': 'Endet in:',
     'urgency.days': 'Tage',
     'urgency.hrs': 'Std',
@@ -379,7 +379,7 @@ const translations: Record<Language, Record<string, string>> = {
     'stats.improvement': 'Mejora',
     
     // Urgency
-    'urgency.message': 'Tiempo limitado: Ahorra 25% en planes anuales',
+    'urgency.message': 'Oferta de enero: Ahorra 25% en planes anuales',
     'urgency.endsIn': 'Termina en:',
     'urgency.days': 'días',
     'urgency.hrs': 'hrs',
