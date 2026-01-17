@@ -54,8 +54,8 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              Turn Revision Into{' '}
-              <span className="text-secondary">Interactive Games</span>
+              Make Studying Fun.{' '}
+              <span className="text-secondary">Watch Grades Soar.</span>
             </motion.h1>
 
             <motion.p 
