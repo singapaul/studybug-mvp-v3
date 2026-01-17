@@ -79,7 +79,7 @@ export function HowItWorks() {
                   {step.heading}
                 </h3>
                 <p className="text-muted-foreground mb-4 leading-relaxed">{step.description}</p>
-                <p className="text-sm text-secondary font-medium flex items-center gap-2">
+                <p className="text-sm text-muted-foreground font-medium flex items-center gap-2">
                   <ArrowRight className="w-4 h-4" />
                   {step.smallText}
                 </p>

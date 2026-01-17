@@ -136,9 +136,6 @@ export function Footer() {
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} Studybug. All rights reserved.
           </p>
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-muted-foreground">Made with 💚 for learners</span>
-          </div>
         </div>
       </div>
     </footer>
