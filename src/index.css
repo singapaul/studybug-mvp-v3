@@ -86,9 +86,9 @@
     font-family: 'DM Sans', system-ui, sans-serif;
   }
 
-  /* Display font only for large headings - Nunito is friendly, modern, rounded */
+  /* Display font only for large headings - Baloo 2 is playful, rounded, fun */
   h1, h2 {
-    font-family: 'Nunito', system-ui, sans-serif;
+    font-family: 'Baloo 2', system-ui, sans-serif;
     font-weight: 700;
   }
 

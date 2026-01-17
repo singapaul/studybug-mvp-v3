@@ -9,11 +9,11 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary">
+              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-secondary">
                 <Bug className="h-4 w-4 text-white" />
               </div>
-              <span className="text-lg font-bold font-display text-foreground">
-                Study<span className="text-primary">bug</span>
+              <span className="text-lg font-bold text-foreground">
+                Study<span className="text-secondary">bug</span>
               </span>
             </Link>
             <p className="text-sm text-muted-foreground mb-4">
