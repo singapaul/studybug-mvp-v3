@@ -16,33 +16,30 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
   const isFree = plan.id === 'free';
   const isPopular = plan.tier === 'standard';
   
-  // Calculate annual price as monthly equivalent
   const monthlyPrice = plan.monthlyPrice;
   const annualMonthly = Math.round((plan.annualPrice / 12) * 100) / 100;
   const displayPrice = billingCycle === 'monthly' ? monthlyPrice : annualMonthly;
   const annualTotal = plan.annualPrice;
 
-  // Card styling based on tier
   const getCardStyle = () => {
     switch (plan.tier) {
       case 'free':
         return 'border-2 border-dashed border-border bg-white';
       case 'standard':
-        return 'border-2 border-primary bg-white shadow-lg ring-2 ring-primary/20';
+        return 'border-2 border-primary bg-white shadow-xl ring-4 ring-primary/10';
       case 'premium':
-        return 'border-2 border-secondary bg-white shadow-md';
+        return 'border-2 border-secondary/50 bg-white shadow-lg';
       case 'enterprise':
-        return 'border-2 border-accent bg-white shadow-md';
+        return 'border-2 border-accent bg-white shadow-lg';
       default:
         return 'border-2 border-border bg-white';
     }
   };
 
-  // Badge styling
   const getBadgeStyle = () => {
     switch (plan.badgeColor) {
       case 'accent':
-        return 'bg-warning text-warning-foreground';
+        return 'bg-warning text-foreground';
       case 'primary':
         return 'bg-primary text-white';
       case 'secondary':
@@ -52,7 +49,6 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
     }
   };
 
-  // Accent color for icon background
   const getAccentColor = () => {
     switch (plan.tier) {
       case 'free':
@@ -68,23 +64,21 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
     }
   };
 
-  // Button styling - all use primary green for CTA
   const getButtonStyle = () => {
     switch (plan.tier) {
       case 'free':
-        return 'bg-foreground text-background hover:bg-foreground/90';
+        return 'bg-muted text-foreground hover:bg-muted/80 rounded-full';
       case 'standard':
-        return 'bg-primary text-white hover:bg-primary/90 shadow-md';
+        return 'bg-primary text-white hover:bg-primary/90 shadow-lg rounded-full';
       case 'premium':
-        return 'bg-primary text-white hover:bg-primary/90';
+        return 'bg-secondary text-white hover:bg-secondary/90 rounded-full';
       case 'enterprise':
-        return 'bg-primary text-white hover:bg-primary/90';
+        return 'bg-foreground text-white hover:bg-foreground/90 rounded-full';
       default:
-        return 'bg-primary text-white';
+        return 'bg-primary text-white rounded-full';
     }
   };
 
-  // Get translated badge
   const getBadgeText = () => {
     if (!plan.badge) return null;
     if (plan.badge === 'Most Popular') return t('badge.mostPopular');
@@ -96,9 +90,8 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
   return (
     <motion.div
       whileHover={{ y: -8, transition: { duration: 0.3 } }}
-      className={`relative flex flex-col rounded-2xl p-6 transition-all h-full ${getCardStyle()}`}
+      className={`relative flex flex-col rounded-3xl p-6 transition-all h-full ${getCardStyle()}`}
     >
-      {/* Badge */}
       {plan.badge && (
         <motion.div 
           className="absolute -top-3 right-4"
@@ -106,19 +99,17 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
-          <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold shadow-md ${getBadgeStyle()}`}>
+          <span className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold shadow-md ${getBadgeStyle()}`}>
             {isPopular && <Sparkles className="w-3 h-3" />}
             {getBadgeText()}
           </span>
         </motion.div>
       )}
 
-      {/* Accent bar at top */}
-      <div className={`absolute inset-x-0 top-0 h-1.5 rounded-t-2xl ${getAccentColor()}`} />
+      <div className={`absolute inset-x-0 top-0 h-1.5 rounded-t-3xl ${getAccentColor()}`} />
 
-      {/* Header */}
       <div className="mb-6 pt-2">
-        <h3 className="text-xl font-bold text-foreground mb-1 font-display">
+        <h3 className="text-xl font-bold text-foreground mb-1">
           {t(`plan.${plan.id}`)}
         </h3>
         <p className="text-sm text-muted-foreground">
@@ -126,22 +117,21 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
         </p>
       </div>
 
-      {/* Price */}
       <div className="mb-6">
         {isCustomPricing ? (
           <div className="flex flex-col">
-            <span className="text-3xl font-bold text-foreground font-display">{t('pricing.customPricing')}</span>
+            <span className="text-3xl font-bold text-foreground">{t('pricing.customPricing')}</span>
             <span className="text-sm text-muted-foreground mt-1">{t('pricing.contactUs')}</span>
           </div>
         ) : isFree ? (
           <div className="flex flex-col">
-            <span className="text-4xl font-bold text-foreground font-display">{formatPrice(0)}</span>
+            <span className="text-4xl font-bold text-foreground">{formatPrice(0)}</span>
             <span className="text-sm text-muted-foreground mt-1">{t('pricing.freeForever')}</span>
           </div>
         ) : (
           <div className="flex flex-col">
             <div className="flex items-baseline gap-1">
-              <span className="text-4xl font-bold text-foreground font-display">
+              <span className="text-4xl font-bold text-foreground">
                 {formatPrice(displayPrice)}
               </span>
               <span className="text-muted-foreground">{t('pricing.perMonth')}</span>
@@ -155,7 +145,6 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
         )}
       </div>
 
-      {/* Features */}
       <ul className="space-y-3 mb-8 flex-1">
         {plan.features.map((feature, index) => (
           <motion.li 
@@ -173,15 +162,14 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
         ))}
         {plan.negativeFeatures?.map((feature, index) => (
           <li key={`neg-${index}`} className="flex items-start gap-3">
-            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-coral/10 flex items-center justify-center mt-0.5">
-              <X className="w-3 h-3 text-coral" />
+            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-muted flex items-center justify-center mt-0.5">
+              <X className="w-3 h-3 text-muted-foreground" />
             </div>
             <span className="text-sm text-muted-foreground">{feature}</span>
           </li>
         ))}
       </ul>
 
-      {/* CTA */}
       <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
         <Button
           onClick={onSelect}

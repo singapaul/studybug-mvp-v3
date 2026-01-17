@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useLocale } from '@/context/LocaleContext';
 import { LocaleSelector } from '@/components/LocaleSelector';
+import { motion } from 'framer-motion';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -33,41 +34,50 @@ export function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-white">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-white/95 backdrop-blur-sm">
       <div className="container flex h-16 items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary group-hover:scale-105 transition-transform">
-            <Bug className="h-5 w-5 text-foreground" />
-          </div>
-          <span className="text-xl font-bold font-display text-foreground">
+        <Link to="/" className="flex items-center gap-2.5 group">
+          <motion.div 
+            whileHover={{ scale: 1.05, rotate: [0, -5, 5, 0] }}
+            transition={{ duration: 0.3 }}
+            className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary shadow-md"
+          >
+            <Bug className="h-5 w-5 text-white" />
+          </motion.div>
+          <span className="text-xl font-bold text-foreground">
             Study<span className="text-primary">bug</span>
           </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               to={link.href}
-              className={`text-sm font-medium transition-colors hover:text-primary ${
+              className={`text-sm font-medium transition-colors hover:text-primary relative ${
                 isActive(link.href) ? 'text-primary' : 'text-foreground'
               }`}
             >
               {link.label}
+              {isActive(link.href) && (
+                <motion.div 
+                  layoutId="navIndicator"
+                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full"
+                />
+              )}
             </Link>
           ))}
           
-          {/* Resources Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium text-foreground hover:text-primary transition-colors">
               {t('nav.resources')}
               <ChevronDown className="w-4 h-4" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-40">
+            <DropdownMenuContent align="end" className="w-44 rounded-xl">
               {resourceLinks.map((link) => (
-                <DropdownMenuItem key={link.href} asChild>
+                <DropdownMenuItem key={link.href} asChild className="rounded-lg">
                   <Link to={link.href}>{link.label}</Link>
                 </DropdownMenuItem>
               ))}
@@ -76,25 +86,23 @@ export function Header() {
         </nav>
 
         {/* Desktop CTA */}
-        <div className="hidden md:flex items-center gap-2">
-          {/* Locale Selector */}
+        <div className="hidden md:flex items-center gap-3">
           <LocaleSelector />
 
-          <Button variant="ghost" size="sm" asChild>
+          <Button variant="ghost" size="sm" asChild className="rounded-full">
             <Link to="/login">{t('nav.login')}</Link>
           </Button>
-          <Button size="sm" className="bg-primary text-foreground hover:bg-primary/90 font-semibold" asChild>
+          <Button size="sm" className="bg-primary text-white hover:bg-primary/90 font-semibold rounded-full shadow-md" asChild>
             <Link to="/signup/individual">{t('nav.startTrial')}</Link>
           </Button>
         </div>
 
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center gap-2">
-          {/* Locale Selector */}
           <LocaleSelector />
 
           <button
-            className="p-2"
+            className="p-2 rounded-xl hover:bg-muted transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -109,13 +117,17 @@ export function Header() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-border bg-white animate-fade-in">
+        <motion.div 
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="md:hidden border-t border-border bg-white"
+        >
           <nav className="container py-4 flex flex-col gap-2">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
-                className={`text-sm font-medium py-3 px-2 rounded-lg ${
+                className={`text-sm font-medium py-3 px-4 rounded-xl ${
                   isActive(link.href) ? 'text-primary bg-primary/5' : 'text-foreground'
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
@@ -124,10 +136,9 @@ export function Header() {
               </Link>
             ))}
             
-            {/* Mobile Resources Submenu */}
             <button
               onClick={() => setMobileResourcesOpen(!mobileResourcesOpen)}
-              className="flex items-center justify-between text-sm font-medium py-3 px-2 rounded-lg text-foreground"
+              className="flex items-center justify-between text-sm font-medium py-3 px-4 rounded-xl text-foreground"
             >
               {t('nav.resources')}
               <ChevronDown className={`w-4 h-4 transition-transform ${mobileResourcesOpen ? 'rotate-180' : ''}`} />
@@ -138,7 +149,7 @@ export function Header() {
                   <Link
                     key={link.href}
                     to={link.href}
-                    className="block text-sm py-2 px-2 text-muted-foreground hover:text-primary"
+                    className="block text-sm py-2 px-4 text-muted-foreground hover:text-primary rounded-lg"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {link.label}
@@ -147,20 +158,20 @@ export function Header() {
               </div>
             )}
 
-            <div className="flex flex-col gap-2 pt-4 mt-2 border-t border-border">
-              <Button variant="outline" asChild>
+            <div className="flex flex-col gap-3 pt-4 mt-2 border-t border-border">
+              <Button variant="outline" asChild className="rounded-full">
                 <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
                   {t('nav.login')}
                 </Link>
               </Button>
-              <Button className="bg-primary text-foreground font-semibold" asChild>
+              <Button className="bg-primary text-white font-semibold rounded-full" asChild>
                 <Link to="/signup/individual" onClick={() => setMobileMenuOpen(false)}>
                   {t('nav.startTrial')}
                 </Link>
               </Button>
             </div>
           </nav>
-        </div>
+        </motion.div>
       )}
     </header>
   );

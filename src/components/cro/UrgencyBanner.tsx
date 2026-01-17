@@ -5,7 +5,6 @@ import { useLocale } from '@/context/LocaleContext';
 
 export function UrgencyBanner() {
   const { t } = useLocale();
-  // End date: 31st January 2026, 12:00 PM UTC
   const endDate = new Date('2026-01-31T12:00:00Z');
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
@@ -50,21 +49,21 @@ export function UrgencyBanner() {
       <div className="container flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6">
         <div className="flex items-center gap-2">
           <Zap className="w-4 h-4 text-warning" />
-          <span className="text-sm md:text-base font-semibold text-secondary-foreground">
+          <span className="text-sm md:text-base font-semibold text-white">
             {t('urgency.message')}
           </span>
         </div>
         
         <div className="flex items-center gap-1 md:gap-2">
-          <Clock className="w-4 h-4 text-secondary-foreground/80" />
-          <span className="text-xs text-secondary-foreground/80 mr-2">{t('urgency.endsIn')}</span>
-          <div className="flex items-center gap-1 md:gap-2 bg-white/20 rounded-lg px-3 py-1">
+          <Clock className="w-4 h-4 text-white/80" />
+          <span className="text-xs text-white/80 mr-2">{t('urgency.endsIn')}</span>
+          <div className="flex items-center gap-1 md:gap-2 bg-white/20 rounded-full px-4 py-1.5">
             <TimeBlock value={timeLeft.days} label={t('urgency.days')} />
-            <span className="text-secondary-foreground/60 font-bold">:</span>
+            <span className="text-white/60 font-bold">:</span>
             <TimeBlock value={timeLeft.hours} label={t('urgency.hrs')} />
-            <span className="text-secondary-foreground/60 font-bold">:</span>
+            <span className="text-white/60 font-bold">:</span>
             <TimeBlock value={timeLeft.minutes} label={t('urgency.min')} />
-            <span className="text-secondary-foreground/60 font-bold hidden md:inline">:</span>
+            <span className="text-white/60 font-bold hidden md:inline">:</span>
             <div className="hidden md:block">
               <TimeBlock value={timeLeft.seconds} label={t('urgency.sec')} />
             </div>

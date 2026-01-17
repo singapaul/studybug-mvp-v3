@@ -4,7 +4,7 @@ import { Footer } from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { 
   Upload, Gamepad2, BarChart3, FileText, Library, 
-  Settings, Target, Trophy, Sparkles, ChevronRight
+  Settings, Target, Trophy, Sparkles, ArrowRight
 } from 'lucide-react';
 import {
   Accordion,
@@ -12,6 +12,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { motion } from 'framer-motion';
 
 const steps = [
   {
@@ -24,6 +25,7 @@ const steps = [
       { icon: Library, text: 'Browse 400+ pre-built curriculum decks' },
       { icon: Settings, text: 'Customize cards with images and hints' },
     ],
+    color: 'bg-primary',
   },
   {
     number: 2,
@@ -35,6 +37,7 @@ const steps = [
       { icon: Settings, text: 'Customize game settings and time limits' },
       { icon: Gamepad2, text: '20+ different game modes to choose from' },
     ],
+    color: 'bg-secondary',
   },
   {
     number: 3,
@@ -46,6 +49,7 @@ const steps = [
       { icon: Trophy, text: 'Earn achievements and badges' },
       { icon: Target, text: 'Set goals and track milestones' },
     ],
+    color: 'bg-coral',
   },
 ];
 
@@ -78,32 +82,54 @@ export default function HowItWorks() {
       <Header />
       <main className="flex-1">
         {/* Hero */}
-        <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-accent/5">
-          <div className="container text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-success/10 text-success text-sm font-medium mb-6">
+        <section className="py-20 bg-primary relative overflow-hidden">
+          <div className="absolute top-10 left-[10%] w-48 h-48 rounded-full bg-white/10 blur-2xl" />
+          <div className="absolute bottom-10 right-[15%] w-64 h-64 rounded-full bg-secondary/10 blur-2xl" />
+          
+          <div className="container text-center relative">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-primary text-sm font-semibold mb-6 shadow-md"
+            >
               <Sparkles className="w-4 h-4" />
               From signup to your first game in under 5 minutes
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+            </motion.div>
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="text-4xl md:text-5xl font-bold text-white mb-6"
+            >
               Get Started in{' '}
-              <span className="text-gradient">3 Simple Steps</span>
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              <span className="text-warning">3 Simple Steps</span>
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-lg text-white/80 max-w-2xl mx-auto"
+            >
               Studybug makes it easy to turn any subject into an engaging learning game. Here's how it works.
-            </p>
+            </motion.p>
           </div>
         </section>
 
         {/* Steps */}
-        <section className="py-20 bg-background">
+        <section className="py-24 bg-white">
           <div className="container">
-            <div className="space-y-20">
+            <div className="space-y-24">
               {steps.map((step, index) => (
                 <div key={step.number} className={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
-                  <div className={index % 2 === 1 ? 'lg:order-2' : ''}>
+                  <motion.div 
+                    initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    className={index % 2 === 1 ? 'lg:order-2' : ''}
+                  >
                     {/* Step Number */}
                     <div className="flex items-center gap-4 mb-6">
-                      <div className="w-12 h-12 rounded-full gradient-primary flex items-center justify-center text-primary-foreground font-bold text-xl">
+                      <div className={`w-12 h-12 rounded-full ${step.color} flex items-center justify-center text-white font-bold text-xl shadow-lg`}>
                         {step.number}
                       </div>
                       <div className="h-px flex-1 bg-border max-w-[100px]" />
@@ -112,31 +138,44 @@ export default function HowItWorks() {
                     <h2 className="text-3xl font-bold text-foreground mb-4">
                       {step.title}
                     </h2>
-                    <p className="text-lg text-muted-foreground mb-8">
+                    <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
                       {step.description}
                     </p>
 
                     {/* Tips */}
                     <div className="space-y-4">
                       {step.tips.map((tip, tipIndex) => (
-                        <div key={tipIndex} className="flex items-start gap-3">
-                          <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                            <tip.icon className="w-4 h-4 text-primary" />
+                        <motion.div 
+                          key={tipIndex} 
+                          whileHover={{ x: 4 }}
+                          className="flex items-start gap-3"
+                        >
+                          <div className={`w-8 h-8 rounded-lg ${step.color} flex items-center justify-center flex-shrink-0 shadow-md`}>
+                            <tip.icon className="w-4 h-4 text-white" />
                           </div>
                           <span className="text-muted-foreground">{tip.text}</span>
-                        </div>
+                        </motion.div>
                       ))}
                     </div>
-                  </div>
+                  </motion.div>
 
                   {/* Illustration */}
-                  <div className={index % 2 === 1 ? 'lg:order-1' : ''}>
-                    <div className="aspect-video rounded-3xl bg-gradient-to-br from-primary/10 via-accent/10 to-secondary/10 border border-border flex items-center justify-center">
-                      <div className="w-24 h-24 rounded-2xl gradient-primary flex items-center justify-center shadow-xl">
-                        <step.icon className="w-12 h-12 text-primary-foreground" />
+                  <motion.div 
+                    initial={{ opacity: 0, x: index % 2 === 0 ? 20 : -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    className={index % 2 === 1 ? 'lg:order-1' : ''}
+                  >
+                    <motion.div 
+                      animate={{ y: [0, -10, 0] }}
+                      transition={{ duration: 4, repeat: Infinity, delay: index * 0.3 }}
+                      className={`aspect-video rounded-3xl ${step.color} flex items-center justify-center shadow-2xl`}
+                    >
+                      <div className="w-24 h-24 rounded-2xl bg-white/20 flex items-center justify-center">
+                        <step.icon className="w-12 h-12 text-white" />
                       </div>
-                    </div>
-                  </div>
+                    </motion.div>
+                  </motion.div>
                 </div>
               ))}
             </div>
@@ -144,7 +183,7 @@ export default function HowItWorks() {
         </section>
 
         {/* FAQ */}
-        <section className="py-20 bg-muted/30">
+        <section className="py-24 bg-cream">
           <div className="container max-w-3xl">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-foreground mb-4">
@@ -160,12 +199,12 @@ export default function HowItWorks() {
                 <AccordionItem
                   key={index}
                   value={`item-${index}`}
-                  className="bg-card border border-border rounded-xl px-6 data-[state=open]:shadow-md"
+                  className="bg-white border border-border rounded-2xl px-6 data-[state=open]:shadow-lg"
                 >
                   <AccordionTrigger className="text-left hover:no-underline py-5">
                     <span className="font-semibold text-foreground">{faq.question}</span>
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-5">
+                  <AccordionContent className="text-muted-foreground pb-5 leading-relaxed">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
@@ -175,19 +214,22 @@ export default function HowItWorks() {
         </section>
 
         {/* CTA */}
-        <section className="py-20 bg-gradient-to-br from-primary/10 via-background to-accent/10">
-          <div className="container text-center">
-            <Sparkles className="w-12 h-12 text-primary mx-auto mb-6" />
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <section className="py-24 bg-secondary relative overflow-hidden">
+          <div className="absolute top-10 left-[10%] w-48 h-48 rounded-full bg-white/10 blur-2xl" />
+          <div className="absolute bottom-10 right-[15%] w-64 h-64 rounded-full bg-primary/10 blur-2xl" />
+          
+          <div className="container text-center relative">
+            <Sparkles className="w-12 h-12 text-white/60 mx-auto mb-6" />
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Ready to Try It?
             </h2>
-            <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-8">
+            <p className="text-lg text-white/80 max-w-xl mx-auto mb-8">
               Start your 14-day free trial and see how easy revision can be.
             </p>
-            <Button size="lg" className="gradient-primary text-primary-foreground" asChild>
+            <Button size="lg" className="bg-white text-secondary hover:bg-white/90 rounded-full shadow-lg" asChild>
               <Link to="/signup/individual">
                 Start Free Trial
-                <ChevronRight className="w-5 h-5 ml-2" />
+                <ArrowRight className="w-5 h-5 ml-2" />
               </Link>
             </Button>
           </div>
