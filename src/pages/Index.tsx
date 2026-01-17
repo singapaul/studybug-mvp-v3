@@ -136,9 +136,9 @@ export default function Index() {
         <Testimonials />
 
         {/* Final CTA */}
-        <section className="py-20 bg-primary relative overflow-hidden">
+        <section className="py-20 bg-secondary relative overflow-hidden">
           <div className="absolute top-10 left-[10%] w-48 h-48 rounded-full bg-white/10 blur-2xl" />
-          <div className="absolute bottom-10 right-[15%] w-64 h-64 rounded-full bg-secondary/10 blur-2xl" />
+          <div className="absolute bottom-10 right-[15%] w-64 h-64 rounded-full bg-accent/10 blur-2xl" />
           
           <div className="container text-center relative">
             <ScrollReveal>
@@ -151,7 +151,7 @@ export default function Index() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
                   size="lg" 
-                  className="bg-white text-primary hover:bg-white/90 rounded-full shadow-lg font-semibold"
+                  className="bg-cta text-white hover:bg-cta/90 rounded-full shadow-lg font-semibold"
                   onClick={() => navigate('/signup/individual')}
                 >
                   Start 14-Day Free Trial

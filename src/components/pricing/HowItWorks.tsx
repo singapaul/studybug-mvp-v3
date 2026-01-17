@@ -9,7 +9,7 @@ const steps = [
     description:
       "Turn your notes into interactive challenges. Add your own topics or pick from our growing library of prebuilt subjects - ready to revise instantly.",
     smallText: 'Save time by importing from Docs or PDF',
-    color: 'bg-primary',
+    color: 'bg-secondary',
     iconColor: 'text-white',
   },
   {
@@ -18,8 +18,8 @@ const steps = [
     description:
       'Play your way - from flashcards and quizzes to speed games and memory matches. Studybug adapts to how you learn best.',
     smallText: '20+ learning games and counting',
-    color: 'bg-secondary',
-    iconColor: 'text-white',
+    color: 'bg-accent',
+    iconColor: 'text-foreground',
   },
   {
     icon: BarChart3,
@@ -27,8 +27,8 @@ const steps = [
     description:
       'Every game feeds into your personal dashboard. See your strongest topics, identify gaps, and celebrate your learning streaks.',
     smallText: 'Work towards achievements & milestones',
-    color: 'bg-coral',
-    iconColor: 'text-white',
+    color: 'bg-warning',
+    iconColor: 'text-foreground',
   },
 ];
 
@@ -75,7 +75,7 @@ export function HowItWorks() {
                   {step.heading}
                 </h3>
                 <p className="text-muted-foreground mb-4 leading-relaxed">{step.description}</p>
-                <p className="text-sm text-primary font-medium flex items-center gap-2">
+                <p className="text-sm text-secondary font-medium flex items-center gap-2">
                   <ArrowRight className="w-4 h-4" />
                   {step.smallText}
                 </p>

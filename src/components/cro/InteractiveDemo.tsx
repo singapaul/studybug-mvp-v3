@@ -83,7 +83,7 @@ export function InteractiveDemo() {
                   key={idx}
                   className={`w-8 h-2 rounded-full transition-colors ${
                     answered.includes(idx)
-                      ? 'bg-primary'
+                      ? 'bg-success'
                       : idx === currentCard
                       ? 'bg-secondary'
                       : 'bg-muted'
@@ -108,23 +108,23 @@ export function InteractiveDemo() {
             >
               {/* Front */}
               <div
-                className="absolute inset-0 w-full h-full rounded-3xl bg-primary p-8 flex flex-col items-center justify-center backface-hidden shadow-xl"
+                className="absolute inset-0 w-full h-full rounded-3xl bg-secondary p-8 flex flex-col items-center justify-center backface-hidden shadow-xl"
                 style={{ backfaceVisibility: 'hidden' }}
               >
-                <span className="text-xs uppercase tracking-wider text-primary-foreground/60 mb-4">
+                <span className="text-xs uppercase tracking-wider text-white/60 mb-4">
                   {t('demo.question')} {currentCard + 1}
                 </span>
-                <h3 className="text-2xl md:text-3xl font-bold text-primary-foreground text-center">
+                <h3 className="text-2xl md:text-3xl font-bold text-white text-center">
                   {card.question}
                 </h3>
-                <span className="text-sm text-primary-foreground/60 mt-6">
+                <span className="text-sm text-white/60 mt-6">
                   {t('demo.tapToReveal')}
                 </span>
               </div>
 
               {/* Back */}
               <div
-                className="absolute inset-0 w-full h-full rounded-3xl bg-card border-2 border-primary p-8 flex flex-col items-center justify-center shadow-xl"
+                className="absolute inset-0 w-full h-full rounded-3xl bg-card border-2 border-secondary p-8 flex flex-col items-center justify-center shadow-xl"
                 style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
               >
                 <span className="text-xs uppercase tracking-wider text-muted-foreground mb-4">
@@ -178,7 +178,7 @@ export function InteractiveDemo() {
                 <Button
                   size="lg"
                   onClick={() => handleAnswer(true)}
-                  className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90"
+                  className="flex-1 bg-success text-white hover:bg-success/90"
                 >
                   <Check className="w-5 h-5 mr-2" />
                   {t('demo.gotItRight')}
