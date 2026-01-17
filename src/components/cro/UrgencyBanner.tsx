@@ -31,10 +31,10 @@ export function UrgencyBanner() {
 
   const TimeBlock = ({ value, label }: { value: number; label: string }) => (
     <div className="flex flex-col items-center">
-      <span className="text-lg md:text-xl font-bold text-foreground tabular-nums">
+      <span className="text-lg md:text-xl font-bold text-white tabular-nums">
         {value.toString().padStart(2, '0')}
       </span>
-      <span className="text-[10px] md:text-xs text-foreground/70 uppercase tracking-wide">
+      <span className="text-[10px] md:text-xs text-white/80 uppercase tracking-wide">
         {label}
       </span>
     </div>

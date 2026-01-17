@@ -26,15 +26,15 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
   const getCardStyle = () => {
     switch (plan.tier) {
       case 'free':
-        return 'border-dashed border-2 border-border bg-muted/30';
+        return 'border-2 border-dashed border-border bg-white';
       case 'standard':
-        return 'border-2 border-primary bg-primary/5 shadow-lg shadow-primary/20 ring-2 ring-primary/20';
+        return 'border-2 border-primary bg-white shadow-lg ring-2 ring-primary/20';
       case 'premium':
-        return 'border-2 border-border bg-card shadow-md';
+        return 'border-2 border-secondary bg-white shadow-md';
       case 'enterprise':
-        return 'border-2 border-secondary/50 bg-gradient-to-br from-secondary/10 to-primary/5';
+        return 'border-2 border-accent bg-white shadow-md';
       default:
-        return 'border-2 border-border bg-card';
+        return 'border-2 border-border bg-white';
     }
   };
 
@@ -42,29 +42,45 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
   const getBadgeStyle = () => {
     switch (plan.badgeColor) {
       case 'accent':
-        return 'bg-accent text-accent-foreground';
+        return 'bg-warning text-warning-foreground';
       case 'primary':
-        return 'gradient-primary text-primary-foreground';
+        return 'bg-primary text-white';
       case 'secondary':
-        return 'bg-secondary text-secondary-foreground';
+        return 'bg-secondary text-white';
       default:
-        return 'bg-primary text-primary-foreground';
+        return 'bg-primary text-white';
     }
   };
 
-  // Button styling
+  // Accent color for icon background
+  const getAccentColor = () => {
+    switch (plan.tier) {
+      case 'free':
+        return 'bg-muted';
+      case 'standard':
+        return 'bg-primary';
+      case 'premium':
+        return 'bg-secondary';
+      case 'enterprise':
+        return 'bg-accent';
+      default:
+        return 'bg-primary';
+    }
+  };
+
+  // Button styling - all use primary green for CTA
   const getButtonStyle = () => {
     switch (plan.tier) {
       case 'free':
-        return 'bg-muted text-muted-foreground hover:bg-muted/80';
+        return 'bg-foreground text-background hover:bg-foreground/90';
       case 'standard':
-        return 'gradient-primary text-primary-foreground hover:opacity-90 shadow-lg shadow-primary/30';
+        return 'bg-primary text-white hover:bg-primary/90 shadow-md';
       case 'premium':
-        return 'bg-primary text-primary-foreground hover:bg-primary/90';
+        return 'bg-primary text-white hover:bg-primary/90';
       case 'enterprise':
-        return 'bg-secondary text-secondary-foreground hover:bg-secondary/90';
+        return 'bg-primary text-white hover:bg-primary/90';
       default:
-        return 'bg-primary text-primary-foreground';
+        return 'bg-primary text-white';
     }
   };
 
@@ -80,13 +96,8 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
   return (
     <motion.div
       whileHover={{ y: -8, transition: { duration: 0.3 } }}
-      className={`relative flex flex-col rounded-2xl p-6 transition-all h-full group ${getCardStyle()}`}
+      className={`relative flex flex-col rounded-2xl p-6 transition-all h-full ${getCardStyle()}`}
     >
-      {/* Popular glow effect */}
-      {isPopular && (
-        <div className="absolute inset-0 rounded-2xl gradient-primary opacity-5 group-hover:opacity-10 transition-opacity" />
-      )}
-
       {/* Badge */}
       {plan.badge && (
         <motion.div 
@@ -102,9 +113,12 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
         </motion.div>
       )}
 
+      {/* Accent bar at top */}
+      <div className={`absolute inset-x-0 top-0 h-1.5 rounded-t-2xl ${getAccentColor()}`} />
+
       {/* Header */}
-      <div className="mb-6">
-        <h3 className="text-xl font-bold text-foreground mb-1">
+      <div className="mb-6 pt-2">
+        <h3 className="text-xl font-bold text-foreground mb-1 font-display">
           {t(`plan.${plan.id}`)}
         </h3>
         <p className="text-sm text-muted-foreground">
@@ -116,24 +130,24 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
       <div className="mb-6">
         {isCustomPricing ? (
           <div className="flex flex-col">
-            <span className="text-3xl font-bold text-foreground">{t('pricing.customPricing')}</span>
+            <span className="text-3xl font-bold text-foreground font-display">{t('pricing.customPricing')}</span>
             <span className="text-sm text-muted-foreground mt-1">{t('pricing.contactUs')}</span>
           </div>
         ) : isFree ? (
           <div className="flex flex-col">
-            <span className="text-4xl font-bold text-foreground">{formatPrice(0)}</span>
+            <span className="text-4xl font-bold text-foreground font-display">{formatPrice(0)}</span>
             <span className="text-sm text-muted-foreground mt-1">{t('pricing.freeForever')}</span>
           </div>
         ) : (
           <div className="flex flex-col">
             <div className="flex items-baseline gap-1">
-              <span className="text-4xl font-bold text-foreground">
+              <span className="text-4xl font-bold text-foreground font-display">
                 {formatPrice(displayPrice)}
               </span>
               <span className="text-muted-foreground">{t('pricing.perMonth')}</span>
             </div>
             {billingCycle === 'annual' && (
-              <span className="text-sm text-success mt-1 font-medium">
+              <span className="text-sm text-primary mt-1 font-medium">
                 {t('pricing.billedAnnually')} {formatPrice(annualTotal)}
               </span>
             )}
@@ -151,16 +165,16 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: index * 0.05 }}
           >
-            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-success/10 flex items-center justify-center mt-0.5">
-              <Check className="w-3 h-3 text-success" />
+            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center mt-0.5">
+              <Check className="w-3 h-3 text-primary" />
             </div>
             <span className="text-sm text-foreground">{feature}</span>
           </motion.li>
         ))}
         {plan.negativeFeatures?.map((feature, index) => (
           <li key={`neg-${index}`} className="flex items-start gap-3">
-            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-destructive/10 flex items-center justify-center mt-0.5">
-              <X className="w-3 h-3 text-destructive" />
+            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-coral/10 flex items-center justify-center mt-0.5">
+              <X className="w-3 h-3 text-coral" />
             </div>
             <span className="text-sm text-muted-foreground">{feature}</span>
           </li>

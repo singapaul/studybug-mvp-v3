@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Bug, Menu, X, ChevronDown, Sun, Moon } from 'lucide-react';
+import { Bug, Menu, X, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import {
@@ -8,7 +8,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useTheme } from '@/context/ThemeContext';
 import { useLocale } from '@/context/LocaleContext';
 import { LocaleSelector } from '@/components/LocaleSelector';
 
@@ -16,14 +15,9 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
   const location = useLocation();
-  const { resolvedTheme, setTheme } = useTheme();
   const { t } = useLocale();
 
   const isActive = (path: string) => location.pathname === path;
-
-  const toggleTheme = () => {
-    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
-  };
 
   const navLinks = [
     { href: '/features', label: t('nav.features') },
@@ -39,12 +33,12 @@ export function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-white">
       <div className="container flex h-16 items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary group-hover:scale-105 transition-transform">
-            <Bug className="h-5 w-5 text-primary-foreground" />
+            <Bug className="h-5 w-5 text-foreground" />
           </div>
           <span className="text-xl font-bold font-display text-foreground">
             Study<span className="text-primary">bug</span>
@@ -86,22 +80,10 @@ export function Header() {
           {/* Locale Selector */}
           <LocaleSelector />
 
-          {/* Theme Toggle */}
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleTheme}
-            className="relative overflow-hidden"
-            aria-label="Toggle theme"
-          >
-            <Sun className={`h-5 w-5 transition-all duration-300 ${resolvedTheme === 'dark' ? 'rotate-90 scale-0' : 'rotate-0 scale-100'}`} />
-            <Moon className={`absolute h-5 w-5 transition-all duration-300 ${resolvedTheme === 'dark' ? 'rotate-0 scale-100' : '-rotate-90 scale-0'}`} />
-          </Button>
-
           <Button variant="ghost" size="sm" asChild>
             <Link to="/login">{t('nav.login')}</Link>
           </Button>
-          <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90" asChild>
+          <Button size="sm" className="bg-primary text-foreground hover:bg-primary/90 font-semibold" asChild>
             <Link to="/signup/individual">{t('nav.startTrial')}</Link>
           </Button>
         </div>
@@ -110,18 +92,6 @@ export function Header() {
         <div className="md:hidden flex items-center gap-2">
           {/* Locale Selector */}
           <LocaleSelector />
-
-          {/* Mobile Theme Toggle */}
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleTheme}
-            className="relative overflow-hidden"
-            aria-label="Toggle theme"
-          >
-            <Sun className={`h-5 w-5 transition-all duration-300 ${resolvedTheme === 'dark' ? 'rotate-90 scale-0' : 'rotate-0 scale-100'}`} />
-            <Moon className={`absolute h-5 w-5 transition-all duration-300 ${resolvedTheme === 'dark' ? 'rotate-0 scale-100' : '-rotate-90 scale-0'}`} />
-          </Button>
 
           <button
             className="p-2"
@@ -139,7 +109,7 @@ export function Header() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-border bg-background animate-fade-in">
+        <div className="md:hidden border-t border-border bg-white animate-fade-in">
           <nav className="container py-4 flex flex-col gap-2">
             {navLinks.map((link) => (
               <Link
@@ -183,7 +153,7 @@ export function Header() {
                   {t('nav.login')}
                 </Link>
               </Button>
-              <Button className="bg-primary text-primary-foreground" asChild>
+              <Button className="bg-primary text-foreground font-semibold" asChild>
                 <Link to="/signup/individual" onClick={() => setMobileMenuOpen(false)}>
                   {t('nav.startTrial')}
                 </Link>
