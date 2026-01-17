@@ -86,10 +86,10 @@
     font-family: 'Inter', system-ui, sans-serif;
   }
 
-  /* Display font only for large headings - Titan One is bold, rounded, fun */
+  /* Display font only for large headings - Quicksand is friendly, rounded, legible */
   h1, h2 {
-    font-family: 'Titan One', system-ui, sans-serif;
-    font-weight: 400; /* Titan One only has one weight */
+    font-family: 'Quicksand', system-ui, sans-serif;
+    font-weight: 700;
   }
 
   /* UI-optimized font for smaller headings */
