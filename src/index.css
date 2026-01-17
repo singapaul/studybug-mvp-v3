@@ -2,109 +2,112 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Studybug Design System - Education-focused, playful yet professional */
+/* Studybug Design System - Fresh, modern, education-focused */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
+    /* Background & Foreground */
+    --background: 47 50% 93%; /* #F6F1E5 cream */
+    --foreground: 72 7% 17%; /* #2D2E2A dark */
 
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card-foreground: 72 7% 17%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover-foreground: 72 7% 17%;
 
-    /* Primary Purple */
-    --primary: 263 70% 50%;
-    --primary-foreground: 0 0% 100%;
+    /* Primary Green - #8FD462 */
+    --primary: 96 58% 61%;
+    --primary-foreground: 72 7% 17%;
 
-    /* Secondary Blue */
-    --secondary: 217 91% 60%;
+    /* Secondary Blue - #2AA0FF */
+    --secondary: 207 100% 58%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 9% 46%;
+    --muted: 47 30% 90%;
+    --muted-foreground: 72 7% 40%;
 
-    /* Accent Yellow */
-    --accent: 45 93% 58%;
-    --accent-foreground: 222 47% 11%;
+    /* Accent Pink/Lavender - #ECC1FF */
+    --accent: 284 100% 88%;
+    --accent-foreground: 72 7% 17%;
 
-    /* Success Green */
-    --success: 160 84% 39%;
-    --success-foreground: 0 0% 100%;
+    /* Success/Primary Green */
+    --success: 96 58% 61%;
+    --success-foreground: 72 7% 17%;
 
-    --destructive: 0 84% 60%;
+    /* Yellow - #F5E211 */
+    --warning: 54 93% 51%;
+    --warning-foreground: 72 7% 17%;
+
+    /* Coral - #FF705D */
+    --destructive: 7 100% 68%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 263 70% 50%;
+    --border: 47 20% 85%;
+    --input: 47 20% 85%;
+    --ring: 96 58% 61%;
 
     --radius: 0.75rem;
 
-    /* Gradient tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(263 70% 50%), hsl(217 91% 60%));
-    --gradient-accent: linear-gradient(135deg, hsl(45 93% 58%), hsl(37 91% 55%));
-    --gradient-success: linear-gradient(135deg, hsl(160 84% 39%), hsl(142 76% 36%));
-
     /* Shadow tokens */
-    --shadow-sm: 0 1px 2px 0 hsl(222 47% 11% / 0.05);
-    --shadow-md: 0 4px 6px -1px hsl(222 47% 11% / 0.1), 0 2px 4px -2px hsl(222 47% 11% / 0.1);
-    --shadow-lg: 0 10px 15px -3px hsl(222 47% 11% / 0.1), 0 4px 6px -4px hsl(222 47% 11% / 0.1);
-    --shadow-xl: 0 20px 25px -5px hsl(222 47% 11% / 0.1), 0 8px 10px -6px hsl(222 47% 11% / 0.1);
-    --shadow-glow: 0 0 20px hsl(263 70% 50% / 0.3);
+    --shadow-sm: 0 1px 2px 0 hsl(72 7% 17% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(72 7% 17% / 0.1), 0 2px 4px -2px hsl(72 7% 17% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(72 7% 17% / 0.1), 0 4px 6px -4px hsl(72 7% 17% / 0.1);
+    --shadow-xl: 0 20px 25px -5px hsl(72 7% 17% / 0.1), 0 8px 10px -6px hsl(72 7% 17% / 0.1);
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 263 70% 50%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 263 70% 50%;
+    --sidebar-background: 47 50% 93%;
+    --sidebar-foreground: 72 7% 17%;
+    --sidebar-primary: 96 58% 61%;
+    --sidebar-primary-foreground: 72 7% 17%;
+    --sidebar-accent: 284 100% 88%;
+    --sidebar-accent-foreground: 72 7% 17%;
+    --sidebar-border: 47 20% 85%;
+    --sidebar-ring: 96 58% 61%;
   }
 
   .dark {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 98%;
+    --background: 72 7% 10%;
+    --foreground: 47 50% 93%;
 
-    --card: 222 47% 8%;
-    --card-foreground: 210 40% 98%;
+    --card: 72 7% 14%;
+    --card-foreground: 47 50% 93%;
 
-    --popover: 222 47% 8%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 72 7% 14%;
+    --popover-foreground: 47 50% 93%;
 
-    --primary: 263 70% 60%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 96 58% 55%;
+    --primary-foreground: 72 7% 10%;
 
-    --secondary: 217 91% 65%;
+    --secondary: 207 100% 58%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 72 7% 20%;
+    --muted-foreground: 47 30% 70%;
 
-    --accent: 45 93% 58%;
-    --accent-foreground: 222 47% 11%;
+    --accent: 284 100% 85%;
+    --accent-foreground: 72 7% 10%;
 
-    --success: 160 84% 45%;
-    --success-foreground: 0 0% 100%;
+    --success: 96 58% 55%;
+    --success-foreground: 72 7% 10%;
 
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
+    --warning: 54 93% 51%;
+    --warning-foreground: 72 7% 10%;
 
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 263 70% 60%;
+    --destructive: 7 100% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --sidebar-background: 222 47% 6%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 263 70% 60%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 263 70% 60%;
+    --border: 72 7% 25%;
+    --input: 72 7% 25%;
+    --ring: 96 58% 55%;
+
+    --sidebar-background: 72 7% 10%;
+    --sidebar-foreground: 47 50% 93%;
+    --sidebar-primary: 96 58% 55%;
+    --sidebar-primary-foreground: 72 7% 10%;
+    --sidebar-accent: 284 100% 85%;
+    --sidebar-accent-foreground: 47 50% 93%;
+    --sidebar-border: 72 7% 25%;
+    --sidebar-ring: 96 58% 55%;
   }
 }
 
@@ -115,31 +118,12 @@
 
   body {
     @apply bg-background text-foreground antialiased;
+    font-family: 'Nunito', system-ui, sans-serif;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
-}
 
-@layer utilities {
-  .gradient-primary {
-    background: var(--gradient-primary);
-  }
-
-  .gradient-accent {
-    background: var(--gradient-accent);
-  }
-
-  .gradient-success {
-    background: var(--gradient-success);
-  }
-
-  .shadow-glow {
-    box-shadow: var(--shadow-glow);
-  }
-
-  .text-gradient {
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Nunito', system-ui, sans-serif;
+    font-weight: 700;
   }
 }
