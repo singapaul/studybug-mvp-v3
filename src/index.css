@@ -86,10 +86,10 @@
     font-family: 'Inter', system-ui, sans-serif;
   }
 
-  /* Display font only for large headings - Lilita One is bold, fun, legible */
+  /* Display font only for large headings - Fredoka is friendly, rounded, modern */
   h1, h2 {
-    font-family: 'Lilita One', system-ui, sans-serif;
-    font-weight: 400; /* Lilita One only has one weight */
+    font-family: 'Fredoka', system-ui, sans-serif;
+    font-weight: 600;
   }
 
   /* UI-optimized font for smaller headings */
