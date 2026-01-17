@@ -40,39 +40,69 @@ export default function Features() {
       <Header />
       <main className="flex-1">
         {/* Hero */}
-        <section className="py-20 bg-primary relative overflow-hidden">
-          <div className="absolute top-10 left-[10%] w-48 h-48 rounded-full bg-white/10 blur-2xl" />
-          <div className="absolute bottom-10 right-[15%] w-64 h-64 rounded-full bg-secondary/20 blur-2xl" />
-          
-          <div className="container text-center relative">
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-4xl md:text-5xl font-bold text-white mb-6"
-            >
-              Everything You Need to Make{' '}
-              <span className="text-warning">Learning Engaging</span>
-            </motion.h1>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="text-lg text-white/80 max-w-2xl mx-auto mb-8"
-            >
-              Discover all the features that make Studybug the most engaging revision platform for students and teachers.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90 rounded-full shadow-lg" asChild>
-                <Link to="/signup/individual">
-                  Start Free Trial
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Link>
-              </Button>
-            </motion.div>
+        <section className="relative py-20 md:py-28 overflow-hidden bg-cream">
+          {/* Decorative shapes */}
+          <div className="absolute top-20 left-[5%] w-32 h-32 rounded-full bg-secondary/10 blur-2xl" />
+          <div className="absolute bottom-20 right-[10%] w-48 h-48 rounded-full bg-accent/15 blur-3xl" />
+          <div className="absolute top-1/2 right-[20%] w-24 h-24 rounded-full bg-coral/10 blur-xl" />
+
+          <div className="container relative">
+            <div className="max-w-3xl mx-auto text-center">
+              <motion.div 
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-border text-foreground text-sm font-medium mb-6 shadow-sm"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: 0.2 }}
+              >
+                <Sparkles className="w-4 h-4 text-primary" />
+                <span>20+ game modes to explore</span>
+              </motion.div>
+
+              <motion.h1 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight"
+              >
+                Everything You Need to Make{' '}
+                <span className="text-secondary">Learning Engaging</span>
+              </motion.h1>
+
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto"
+              >
+                Discover all the features that make Studybug the most engaging revision platform for students and teachers.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="flex flex-col sm:flex-row gap-4 justify-center"
+              >
+                <Button size="lg" className="bg-primary text-white hover:bg-primary/90 rounded-full shadow-lg font-semibold" asChild>
+                  <Link to="/signup/individual">
+                    Start Free Trial
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
+                </Button>
+                <Button size="lg" variant="outline" className="border-2 border-foreground/20 text-foreground bg-white hover:bg-muted rounded-full" asChild>
+                  <Link to="/pricing">View Pricing</Link>
+                </Button>
+              </motion.div>
+
+              <motion.p 
+                className="text-sm text-muted-foreground mt-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+              >
+                14-day free trial • Cancel anytime
+              </motion.p>
+            </div>
           </div>
         </section>
 
