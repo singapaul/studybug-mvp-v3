@@ -86,10 +86,10 @@
     font-family: 'Inter', system-ui, sans-serif;
   }
 
-  /* Display font only for large headings - Quicksand is friendly, rounded, legible */
+  /* Display font only for large headings - Lilita One is bold, fun, legible */
   h1, h2 {
-    font-family: 'Quicksand', system-ui, sans-serif;
-    font-weight: 700;
+    font-family: 'Lilita One', system-ui, sans-serif;
+    font-weight: 400; /* Lilita One only has one weight */
   }
 
   /* UI-optimized font for smaller headings */
