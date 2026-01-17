@@ -54,8 +54,8 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              Make Studying Fun.{' '}
-              <span className="text-secondary">Watch Grades Soar.</span>
+              Study Less.{' '}
+              <span className="text-secondary">Remember More.</span>
             </motion.h1>
 
             <motion.p 
