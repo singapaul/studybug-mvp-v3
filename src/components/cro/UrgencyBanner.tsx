@@ -31,10 +31,10 @@ export function UrgencyBanner() {
 
   const TimeBlock = ({ value, label }: { value: number; label: string }) => (
     <div className="flex flex-col items-center">
-      <span className="text-lg md:text-xl font-bold text-primary-foreground tabular-nums">
+      <span className="text-lg md:text-xl font-bold text-foreground tabular-nums">
         {value.toString().padStart(2, '0')}
       </span>
-      <span className="text-[10px] md:text-xs text-primary-foreground/80 uppercase tracking-wide">
+      <span className="text-[10px] md:text-xs text-foreground/70 uppercase tracking-wide">
         {label}
       </span>
     </div>
@@ -42,29 +42,29 @@ export function UrgencyBanner() {
 
   return (
     <motion.div
-      className="gradient-primary py-3 px-4"
+      className="bg-secondary py-3 px-4"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, type: "spring" }}
     >
       <div className="container flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6">
         <div className="flex items-center gap-2">
-          <Zap className="w-4 h-4 text-accent" />
-          <span className="text-sm md:text-base font-semibold text-primary-foreground">
+          <Zap className="w-4 h-4 text-warning" />
+          <span className="text-sm md:text-base font-semibold text-secondary-foreground">
             {t('urgency.message')}
           </span>
         </div>
         
         <div className="flex items-center gap-1 md:gap-2">
-          <Clock className="w-4 h-4 text-primary-foreground/80" />
-          <span className="text-xs text-primary-foreground/80 mr-2">{t('urgency.endsIn')}</span>
-          <div className="flex items-center gap-1 md:gap-2">
+          <Clock className="w-4 h-4 text-secondary-foreground/80" />
+          <span className="text-xs text-secondary-foreground/80 mr-2">{t('urgency.endsIn')}</span>
+          <div className="flex items-center gap-1 md:gap-2 bg-white/20 rounded-lg px-3 py-1">
             <TimeBlock value={timeLeft.days} label={t('urgency.days')} />
-            <span className="text-primary-foreground/60 font-bold">:</span>
+            <span className="text-secondary-foreground/60 font-bold">:</span>
             <TimeBlock value={timeLeft.hours} label={t('urgency.hrs')} />
-            <span className="text-primary-foreground/60 font-bold">:</span>
+            <span className="text-secondary-foreground/60 font-bold">:</span>
             <TimeBlock value={timeLeft.minutes} label={t('urgency.min')} />
-            <span className="text-primary-foreground/60 font-bold hidden md:inline">:</span>
+            <span className="text-secondary-foreground/60 font-bold hidden md:inline">:</span>
             <div className="hidden md:block">
               <TimeBlock value={timeLeft.seconds} label={t('urgency.sec')} />
             </div>

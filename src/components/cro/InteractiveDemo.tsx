@@ -54,14 +54,14 @@ export function InteractiveDemo() {
   };
 
   return (
-    <section className="py-16 md:py-20 bg-gradient-to-b from-background to-primary/5">
+    <section className="py-16 md:py-20 bg-background">
       <div className="container">
         <div className="text-center mb-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/20 text-accent-foreground text-sm font-medium mb-4"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-warning text-warning-foreground text-sm font-medium mb-4"
           >
             <Sparkles className="w-4 h-4" />
             {t('demo.badge')}
@@ -83,16 +83,16 @@ export function InteractiveDemo() {
                   key={idx}
                   className={`w-8 h-2 rounded-full transition-colors ${
                     answered.includes(idx)
-                      ? 'bg-success'
-                      : idx === currentCard
                       ? 'bg-primary'
+                      : idx === currentCard
+                      ? 'bg-secondary'
                       : 'bg-muted'
                   }`}
                 />
               ))}
             </div>
             <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-              <Trophy className="w-4 h-4 text-accent" />
+              <Trophy className="w-4 h-4 text-warning" />
               {score}/{demoCards.length}
             </div>
           </div>
@@ -108,7 +108,7 @@ export function InteractiveDemo() {
             >
               {/* Front */}
               <div
-                className="absolute inset-0 w-full h-full rounded-3xl gradient-primary p-8 flex flex-col items-center justify-center backface-hidden shadow-xl"
+                className="absolute inset-0 w-full h-full rounded-3xl bg-primary p-8 flex flex-col items-center justify-center backface-hidden shadow-xl"
                 style={{ backfaceVisibility: 'hidden' }}
               >
                 <span className="text-xs uppercase tracking-wider text-primary-foreground/60 mb-4">
@@ -124,7 +124,7 @@ export function InteractiveDemo() {
 
               {/* Back */}
               <div
-                className="absolute inset-0 w-full h-full rounded-3xl bg-card border-2 border-success p-8 flex flex-col items-center justify-center shadow-xl"
+                className="absolute inset-0 w-full h-full rounded-3xl bg-card border-2 border-primary p-8 flex flex-col items-center justify-center shadow-xl"
                 style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
               >
                 <span className="text-xs uppercase tracking-wider text-muted-foreground mb-4">
@@ -148,7 +148,7 @@ export function InteractiveDemo() {
                 className="text-center"
               >
                 <div className="flex items-center justify-center gap-2 mb-4">
-                  <Trophy className="w-6 h-6 text-accent" />
+                  <Trophy className="w-6 h-6 text-warning" />
                   <span className="text-xl font-bold text-foreground">
                     {score === demoCards.length ? t('demo.perfectScore') : t('demo.greatJob')}
                   </span>
@@ -170,7 +170,7 @@ export function InteractiveDemo() {
                   size="lg"
                   variant="outline"
                   onClick={() => handleAnswer(false)}
-                  className="flex-1 border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground"
+                  className="flex-1 border-coral text-coral hover:bg-coral hover:text-white"
                 >
                   <X className="w-5 h-5 mr-2" />
                   {t('demo.gotItWrong')}
@@ -178,7 +178,7 @@ export function InteractiveDemo() {
                 <Button
                   size="lg"
                   onClick={() => handleAnswer(true)}
-                  className="flex-1 bg-success text-success-foreground hover:bg-success/90"
+                  className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90"
                 >
                   <Check className="w-5 h-5 mr-2" />
                   {t('demo.gotItRight')}
