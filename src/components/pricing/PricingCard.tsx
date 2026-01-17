@@ -26,7 +26,7 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
       return 'border-2 border-primary bg-white shadow-xl ring-4 ring-primary/10';
     }
     if (plan.id === 'teacher') {
-      return 'border-2 border-accent bg-white shadow-lg ring-4 ring-accent/10';
+      return 'border-2 border-coral bg-white shadow-lg ring-4 ring-coral/10';
     }
     if (plan.id === 'school') {
       return 'border-2 border-secondary bg-white shadow-lg ring-4 ring-secondary/10';
@@ -37,7 +37,7 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
   const getBadgeStyle = () => {
     switch (plan.badgeColor) {
       case 'accent':
-        return 'bg-accent text-accent-foreground';
+        return 'bg-coral text-white';
       case 'primary':
         return 'bg-primary text-white';
       case 'secondary':
@@ -52,7 +52,7 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
       return 'bg-primary text-white hover:bg-primary/90 shadow-lg rounded-full';
     }
     if (plan.id === 'teacher') {
-      return 'bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg rounded-full';
+      return 'bg-coral text-white hover:bg-coral/90 shadow-lg rounded-full';
     }
     if (plan.id === 'school') {
       return 'bg-secondary text-white hover:bg-secondary/90 shadow-lg rounded-full';
@@ -80,7 +80,7 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
-          <span className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold shadow-md ${getBadgeStyle()}`}>
+          <span className={`inline-flex items-center justify-center gap-1 px-4 py-1.5 rounded-full text-xs font-semibold shadow-md whitespace-nowrap ${getBadgeStyle()}`}>
             {plan.id === 'student' && <Sparkles className="w-3 h-3" />}
             {getBadgeText()}
           </span>
