@@ -50,14 +50,21 @@ export default function Contact() {
       <Header />
       <main className="flex-1">
         {/* Hero */}
-        <section className="py-16 bg-cream">
-          <div className="container text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Get in Touch
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-              Questions? We're here to help. Send us a message and we'll respond within 24 hours.
-            </p>
+        <section className="relative py-20 md:py-28 overflow-hidden bg-cream">
+          {/* Decorative shapes */}
+          <div className="absolute top-20 left-[5%] w-32 h-32 rounded-full bg-secondary/10 blur-2xl" />
+          <div className="absolute bottom-20 right-[10%] w-48 h-48 rounded-full bg-accent/15 blur-3xl" />
+          <div className="absolute top-1/2 right-[20%] w-24 h-24 rounded-full bg-coral/10 blur-xl" />
+
+          <div className="container relative">
+            <div className="max-w-3xl mx-auto text-center">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
+                Get in <span className="text-secondary">Touch</span>
+              </h1>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+                Questions? We're here to help. Send us a message and we'll respond within 24 hours.
+              </p>
+            </div>
           </div>
         </section>
 
