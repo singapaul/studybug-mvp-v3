@@ -65,7 +65,7 @@ export function HowItWorks() {
                 className="relative bg-white rounded-3xl border border-border p-8 shadow-sm hover:shadow-xl transition-all h-full"
               >
                 {/* Step number */}
-                <div className={`absolute -top-4 left-8 w-8 h-8 rounded-full ${step.color} flex items-center justify-center font-bold text-sm shadow-lg ${step.color === 'bg-secondary' ? 'text-white' : 'text-foreground'}`}>
+                <div className={`absolute -top-4 left-8 w-8 h-8 rounded-full ${step.color} flex items-center justify-center font-bold text-sm shadow-lg text-white`}>
                   {index + 1}
                 </div>
 
