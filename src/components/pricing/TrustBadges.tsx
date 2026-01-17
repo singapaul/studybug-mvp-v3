@@ -41,7 +41,7 @@ export function TrustBadges() {
       {/* Trust message */}
       <ScrollReveal>
         <p className="text-center text-muted-foreground font-medium">
-          {t('trust.trusted')} <span className="text-primary font-semibold">{t('trust.studentsTeachers')}</span> {t('trust.acrossUK')}
+          {t('trust.trusted')} <span className="text-secondary font-semibold">{t('trust.studentsTeachers')}</span> {t('trust.acrossUK')}
         </p>
       </ScrollReveal>
 
@@ -57,9 +57,9 @@ export function TrustBadges() {
               <motion.div 
                 whileHover={{ rotate: [0, -10, 10, 0] }}
                 transition={{ duration: 0.4 }}
-                className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-2"
+                className="w-10 h-10 rounded-full bg-accent flex items-center justify-center mb-2"
               >
-                <badge.icon className="w-5 h-5 text-primary" />
+                <badge.icon className="w-5 h-5 text-accent-foreground" />
               </motion.div>
               <span className="font-semibold text-foreground text-sm">{badge.label}</span>
               <span className="text-xs text-muted-foreground">{badge.description}</span>

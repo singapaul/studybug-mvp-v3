@@ -57,7 +57,7 @@ export function HowItWorks() {
                 className="relative bg-white rounded-3xl border border-border p-8 shadow-sm hover:shadow-xl transition-all h-full"
               >
                 {/* Step number */}
-                <div className={`absolute -top-4 left-8 w-8 h-8 rounded-full ${step.color} flex items-center justify-center text-white font-bold text-sm shadow-lg`}>
+                <div className={`absolute -top-4 left-8 w-8 h-8 rounded-full ${step.color} flex items-center justify-center ${step.iconColor} font-bold text-sm shadow-lg`}>
                   {index + 1}
                 </div>
 

@@ -27,7 +27,7 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            {/* Trust badge */}
+            {/* Trust badge - simplified */}
             <motion.div 
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-border text-foreground text-sm font-medium mb-6 shadow-sm"
               initial={{ opacity: 0, scale: 0.9 }}
@@ -35,14 +35,14 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
               transition={{ duration: 0.4, delay: 0.2 }}
             >
               <div className="flex -space-x-1">
-                <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center">
-                  <Star className="w-3 h-3 text-white fill-white" />
+                <div className="w-5 h-5 rounded-full bg-accent flex items-center justify-center">
+                  <Star className="w-3 h-3 text-accent-foreground fill-accent-foreground" />
                 </div>
                 <div className="w-5 h-5 rounded-full bg-secondary flex items-center justify-center">
                   <Star className="w-3 h-3 text-white fill-white" />
                 </div>
-                <div className="w-5 h-5 rounded-full bg-coral flex items-center justify-center">
-                  <Star className="w-3 h-3 text-white fill-white" />
+                <div className="w-5 h-5 rounded-full bg-accent flex items-center justify-center">
+                  <Star className="w-3 h-3 text-accent-foreground fill-accent-foreground" />
                 </div>
               </div>
               <span>Trusted by 10,000+ students & teachers</span>
@@ -67,16 +67,16 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
               Studybug transforms boring flashcards into engaging games. Students learn faster, retain more, and actually enjoy studying.
             </motion.p>
 
-            {/* Key benefits */}
+            {/* Key benefits - cleaner design */}
             <motion.div 
-              className="flex flex-wrap gap-4 mb-8 justify-center lg:justify-start"
+              className="flex flex-wrap gap-3 mb-8 justify-center lg:justify-start"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.45 }}
             >
               {['20+ Game Modes', 'Progress Tracking', 'Works Offline'].map((benefit, i) => (
-                <div key={i} className="flex items-center gap-2 text-sm text-foreground bg-white/80 px-3 py-1.5 rounded-full">
-                  <Check className="w-4 h-4 text-success" />
+                <div key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Check className="w-4 h-4 text-primary" />
                   <span>{benefit}</span>
                 </div>
               ))}
@@ -91,7 +91,7 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
               <Button
                 size="lg"
                 onClick={() => navigate('/signup/individual')}
-                className="bg-cta text-white hover:bg-cta/90 px-8 font-semibold rounded-full shadow-lg hover-lift text-base"
+                className="bg-primary text-white hover:bg-primary/90 px-8 font-semibold rounded-full shadow-lg hover-lift text-base"
               >
                 Start 14-Day Free Trial
                 <ArrowRight className="w-4 h-4 ml-2" />
@@ -103,7 +103,7 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
                 className="border-2 border-foreground/20 text-foreground bg-white hover:bg-muted rounded-full"
               >
                 <Play className="w-4 h-4 mr-2" />
-                Watch Demo
+                See How It Works
               </Button>
             </motion.div>
 
@@ -180,15 +180,15 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
                 </div>
               </motion.div>
 
-              {/* Floating success card */}
+              {/* Floating success card - simplified */}
               <motion.div 
-                className="absolute -top-6 -right-8 bg-white rounded-2xl shadow-xl p-4 flex items-center gap-3 border border-primary/20"
+                className="absolute -top-4 -right-6 bg-white rounded-xl shadow-lg p-3 flex items-center gap-2 border border-border"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 1 }}
               >
-                <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
-                  <Check className="w-5 h-5 text-white" />
+                <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
+                  <Check className="w-4 h-4 text-white" />
                 </div>
                 <div>
                   <div className="text-sm font-semibold text-foreground">Correct!</div>
@@ -196,15 +196,15 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
                 </div>
               </motion.div>
 
-              {/* Floating streak card */}
+              {/* Floating streak card - simplified */}
               <motion.div 
-                className="absolute -bottom-4 -left-6 bg-white rounded-2xl shadow-xl p-4 flex items-center gap-3 border border-coral/20"
+                className="absolute -bottom-3 -left-4 bg-white rounded-xl shadow-lg p-3 flex items-center gap-2 border border-border"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 1.2 }}
               >
-                <div className="w-10 h-10 rounded-xl bg-coral flex items-center justify-center">
-                  <Sparkles className="w-5 h-5 text-white" />
+                <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center">
+                  <Sparkles className="w-4 h-4 text-accent-foreground" />
                 </div>
                 <div>
                   <div className="text-sm font-semibold text-foreground">7 Day Streak!</div>

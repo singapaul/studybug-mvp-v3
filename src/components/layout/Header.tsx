@@ -56,22 +56,22 @@ export function Header() {
             <Link
               key={link.href}
               to={link.href}
-              className={`text-sm font-medium transition-colors hover:text-primary relative ${
-                isActive(link.href) ? 'text-primary' : 'text-foreground'
+              className={`text-sm font-medium transition-colors hover:text-secondary relative ${
+                isActive(link.href) ? 'text-secondary' : 'text-foreground'
               }`}
             >
               {link.label}
               {isActive(link.href) && (
                 <motion.div 
                   layoutId="navIndicator"
-                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full"
+                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-secondary rounded-full"
                 />
               )}
             </Link>
           ))}
           
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium text-foreground hover:text-primary transition-colors">
+            <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium text-foreground hover:text-secondary transition-colors">
               {t('nav.resources')}
               <ChevronDown className="w-4 h-4" />
             </DropdownMenuTrigger>
@@ -92,7 +92,7 @@ export function Header() {
           <Button variant="ghost" size="sm" asChild className="rounded-full">
             <Link to="/login">{t('nav.login')}</Link>
           </Button>
-          <Button size="sm" className="bg-cta text-white hover:bg-cta/90 font-semibold rounded-full shadow-md" asChild>
+          <Button size="sm" className="bg-primary text-white hover:bg-primary/90 font-semibold rounded-full shadow-md" asChild>
             <Link to="/signup/individual">{t('nav.startTrial')}</Link>
           </Button>
         </div>
@@ -128,7 +128,7 @@ export function Header() {
                 key={link.href}
                 to={link.href}
                 className={`text-sm font-medium py-3 px-4 rounded-xl ${
-                  isActive(link.href) ? 'text-primary bg-primary/5' : 'text-foreground'
+                  isActive(link.href) ? 'text-secondary bg-secondary/5' : 'text-foreground'
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -149,7 +149,7 @@ export function Header() {
                   <Link
                     key={link.href}
                     to={link.href}
-                    className="block text-sm py-2 px-4 text-muted-foreground hover:text-primary rounded-lg"
+                    className="block text-sm py-2 px-4 text-muted-foreground hover:text-secondary rounded-lg"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {link.label}
@@ -164,7 +164,7 @@ export function Header() {
                   {t('nav.login')}
                 </Link>
               </Button>
-              <Button className="bg-cta text-white font-semibold rounded-full" asChild>
+              <Button className="bg-primary text-white font-semibold rounded-full" asChild>
                 <Link to="/signup/individual" onClick={() => setMobileMenuOpen(false)}>
                   {t('nav.startTrial')}
                 </Link>

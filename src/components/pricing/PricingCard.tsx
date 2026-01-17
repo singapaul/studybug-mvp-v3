@@ -23,9 +23,9 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
 
   const getCardStyle = () => {
     if (isPopular) {
-      return 'border-2 border-cta bg-white shadow-xl ring-4 ring-cta/10';
+      return 'border-2 border-primary bg-white shadow-xl ring-4 ring-primary/10';
     }
-    return 'border border-border bg-white hover:border-secondary/30 hover:shadow-lg';
+    return 'border border-border bg-white hover:border-accent hover:shadow-lg';
   };
 
   const getBadgeStyle = () => {
@@ -43,12 +43,12 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
 
   const getButtonStyle = () => {
     if (isPopular) {
-      return 'bg-cta text-white hover:bg-cta/90 shadow-lg rounded-full';
+      return 'bg-primary text-white hover:bg-primary/90 shadow-lg rounded-full';
     }
     if (isFree) {
       return 'bg-muted text-foreground hover:bg-muted/80 rounded-full';
     }
-    return 'bg-secondary text-white hover:bg-secondary/90 rounded-full';
+    return 'bg-foreground text-white hover:bg-foreground/90 rounded-full';
   };
 
   const getBadgeText = () => {

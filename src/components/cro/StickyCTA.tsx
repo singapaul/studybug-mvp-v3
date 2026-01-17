@@ -51,7 +51,7 @@ export function StickyCTA() {
               <Button
                 size="sm"
                 onClick={() => navigate('/signup/individual')}
-                className="bg-cta text-white hover:bg-cta/90 whitespace-nowrap font-semibold rounded-full shadow-md"
+                className="bg-primary text-white hover:bg-primary/90 whitespace-nowrap font-semibold rounded-full shadow-md"
               >
                 {t('stickyCta.button')}
                 <ArrowRight className="w-4 h-4 ml-1" />

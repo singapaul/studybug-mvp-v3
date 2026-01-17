@@ -7,7 +7,7 @@ export function SchoolHero() {
   return (
     <section className="relative py-24 overflow-hidden bg-secondary">
       <div className="absolute top-10 left-[10%] w-48 h-48 rounded-full bg-white/10 blur-2xl" />
-      <div className="absolute bottom-10 right-[15%] w-64 h-64 rounded-full bg-primary/10 blur-2xl" />
+      <div className="absolute bottom-10 right-[15%] w-64 h-64 rounded-full bg-accent/10 blur-2xl" />
 
       <div className="container relative">
         <div className="max-w-3xl mx-auto text-center mb-16">
@@ -65,10 +65,10 @@ export function SchoolHero() {
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
           {[
-            { icon: Building2, value: '500+', label: 'UK Schools', color: 'bg-primary' },
-            { icon: Users, value: '100K+', label: 'Students', color: 'bg-coral' },
-            { icon: Clock, value: '12 min', label: 'Avg. session', color: 'bg-warning' },
-            { icon: BarChart3, value: '40%', label: 'Grade boost', color: 'bg-accent' },
+            { icon: Building2, value: '500+', label: 'UK Schools', color: 'bg-accent', iconColor: 'text-accent-foreground' },
+            { icon: Users, value: '100K+', label: 'Students', color: 'bg-secondary', iconColor: 'text-white' },
+            { icon: Clock, value: '12 min', label: 'Avg. session', color: 'bg-warning', iconColor: 'text-foreground' },
+            { icon: BarChart3, value: '40%', label: 'Grade boost', color: 'bg-accent', iconColor: 'text-accent-foreground' },
           ].map((stat, index) => (
             <motion.div
               key={index}
@@ -82,7 +82,7 @@ export function SchoolHero() {
                 whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
                 className={`w-12 h-12 rounded-xl ${stat.color} flex items-center justify-center mx-auto mb-3 shadow-md`}
               >
-                <stat.icon className="w-6 h-6 text-white" />
+                <stat.icon className={`w-6 h-6 ${stat.iconColor}`} />
               </motion.div>
               <div className="text-2xl md:text-3xl font-bold text-foreground">
                 {stat.value}
