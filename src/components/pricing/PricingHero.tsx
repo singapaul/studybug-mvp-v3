@@ -13,10 +13,10 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
 
   return (
     <section className="relative py-20 md:py-28 overflow-hidden bg-cream">
-      {/* Subtle decorative shapes */}
-      <div className="absolute top-20 left-[5%] w-32 h-32 rounded-full bg-primary/10 blur-2xl" />
-      <div className="absolute bottom-20 right-[10%] w-48 h-48 rounded-full bg-secondary/10 blur-3xl" />
-      <div className="absolute top-1/2 right-[20%] w-24 h-24 rounded-full bg-accent/20 blur-xl" />
+      {/* Subtle decorative shapes - using blue/pink accents, NOT green */}
+      <div className="absolute top-20 left-[5%] w-32 h-32 rounded-full bg-secondary/10 blur-2xl" />
+      <div className="absolute bottom-20 right-[10%] w-48 h-48 rounded-full bg-accent/15 blur-3xl" />
+      <div className="absolute top-1/2 right-[20%] w-24 h-24 rounded-full bg-warning/10 blur-xl" />
 
       <div className="container relative">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -55,7 +55,7 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               Turn Revision Into{' '}
-              <span className="text-primary">Interactive Games</span>
+              <span className="text-secondary">Interactive Games</span>
             </motion.h1>
 
             <motion.p 
@@ -75,8 +75,8 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
               transition={{ duration: 0.6, delay: 0.45 }}
             >
               {['20+ Game Modes', 'Progress Tracking', 'Works Offline'].map((benefit, i) => (
-                <div key={i} className="flex items-center gap-2 text-sm text-foreground">
-                  <Check className="w-4 h-4 text-primary" />
+                <div key={i} className="flex items-center gap-2 text-sm text-foreground bg-white/80 px-3 py-1.5 rounded-full">
+                  <Check className="w-4 h-4 text-success" />
                   <span>{benefit}</span>
                 </div>
               ))}
@@ -91,7 +91,7 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
               <Button
                 size="lg"
                 onClick={() => navigate('/signup/individual')}
-                className="bg-primary text-white hover:bg-primary/90 px-8 font-semibold rounded-full shadow-lg hover-lift text-base"
+                className="bg-cta text-white hover:bg-cta/90 px-8 font-semibold rounded-full shadow-lg hover-lift text-base"
               >
                 Start 14-Day Free Trial
                 <ArrowRight className="w-4 h-4 ml-2" />

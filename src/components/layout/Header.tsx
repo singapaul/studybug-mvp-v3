@@ -41,12 +41,12 @@ export function Header() {
           <motion.div 
             whileHover={{ scale: 1.05, rotate: [0, -5, 5, 0] }}
             transition={{ duration: 0.3 }}
-            className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary shadow-md"
+            className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary shadow-md"
           >
             <Bug className="h-5 w-5 text-white" />
           </motion.div>
           <span className="text-xl font-bold text-foreground">
-            Study<span className="text-primary">bug</span>
+            Study<span className="text-secondary">bug</span>
           </span>
         </Link>
 
@@ -92,7 +92,7 @@ export function Header() {
           <Button variant="ghost" size="sm" asChild className="rounded-full">
             <Link to="/login">{t('nav.login')}</Link>
           </Button>
-          <Button size="sm" className="bg-primary text-white hover:bg-primary/90 font-semibold rounded-full shadow-md" asChild>
+          <Button size="sm" className="bg-cta text-white hover:bg-cta/90 font-semibold rounded-full shadow-md" asChild>
             <Link to="/signup/individual">{t('nav.startTrial')}</Link>
           </Button>
         </div>
@@ -164,7 +164,7 @@ export function Header() {
                   {t('nav.login')}
                 </Link>
               </Button>
-              <Button className="bg-primary text-white font-semibold rounded-full" asChild>
+              <Button className="bg-cta text-white font-semibold rounded-full" asChild>
                 <Link to="/signup/individual" onClick={() => setMobileMenuOpen(false)}>
                   {t('nav.startTrial')}
                 </Link>
