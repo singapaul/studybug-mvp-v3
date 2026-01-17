@@ -71,7 +71,7 @@ export function InteractiveDemo() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-warning text-warning-foreground text-sm font-medium mb-4"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-coral text-coral-foreground text-sm font-medium mb-4"
           >
             <Sparkles className="w-4 h-4" />
             {t('demo.badge')}
@@ -102,7 +102,7 @@ export function InteractiveDemo() {
               ))}
             </div>
             <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-              <Trophy className="w-4 h-4 text-warning" />
+              <Trophy className="w-4 h-4 text-coral" />
               {score}/{demoCards.length}
             </div>
           </div>
@@ -158,7 +158,7 @@ export function InteractiveDemo() {
                 className="text-center"
               >
                 <div className="flex items-center justify-center gap-2 mb-4">
-                  <Trophy className="w-6 h-6 text-warning" />
+                  <Trophy className="w-6 h-6 text-coral" />
                   <span className="text-xl font-bold text-foreground">
                     {score === demoCards.length ? t('demo.perfectScore') : t('demo.greatJob')}
                   </span>

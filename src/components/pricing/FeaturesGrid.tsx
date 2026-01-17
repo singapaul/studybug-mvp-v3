@@ -59,7 +59,7 @@ export function FeaturesGrid() {
       {/* Decorative elements - using blue/pink, not green */}
       <div className="absolute top-20 right-10 w-32 h-32 rounded-full bg-secondary/10 blur-2xl" />
       <div className="absolute bottom-20 left-10 w-40 h-40 rounded-full bg-accent/15 blur-2xl" />
-      <div className="absolute top-1/2 left-1/4 w-24 h-24 rounded-full bg-warning/10 blur-xl" />
+      <div className="absolute top-1/2 left-1/4 w-24 h-24 rounded-full bg-coral/10 blur-xl" />
       
       <div className="container relative">
         <ScrollReveal className="text-center mb-16">

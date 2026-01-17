@@ -102,7 +102,7 @@ export default function HowItWorks() {
               className="text-4xl md:text-5xl font-bold text-white mb-6"
             >
               Get Started in{' '}
-              <span className="text-warning">3 Simple Steps</span>
+              <span className="text-accent">3 Simple Steps</span>
             </motion.h1>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
