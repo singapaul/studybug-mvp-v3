@@ -11,7 +11,7 @@ interface FlashCard {
 }
 
 const demoCards: FlashCard[] = [
-  { id: 1, question: "What is 7 × 8?", answer: "56" },
+  { id: 1, question: "What is 5 + 3?", answer: "8" },
   { id: 2, question: "Capital of France?", answer: "Paris" },
   { id: 3, question: "H₂O is the formula for?", answer: "Water" },
 ];
@@ -43,7 +43,9 @@ export function InteractiveDemo() {
     } else {
       setTimeout(() => {
         setIsFlipped(false);
-        setCurrentCard((currentCard + 1) % demoCards.length);
+        setTimeout(() => {
+          setCurrentCard((currentCard + 1) % demoCards.length);
+        }, 400);
       }, 600);
     }
   };
