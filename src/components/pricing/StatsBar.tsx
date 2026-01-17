@@ -25,8 +25,8 @@ export function StatsBar() {
       icon: TrendingUp,
       value: '92%',
       label: t('stats.improvement'),
-      color: 'bg-accent',
-      iconColor: 'text-accent-foreground',
+      color: 'bg-warning',
+      iconColor: 'text-warning-foreground',
     },
   ];
 

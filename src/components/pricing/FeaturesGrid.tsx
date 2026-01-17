@@ -51,9 +51,15 @@ const features = [
 export function FeaturesGrid() {
   return (
     <section className="py-24 bg-cream relative overflow-hidden">
+      {/* Subtle pattern overlay */}
+      <div className="absolute inset-0 opacity-[0.02]" style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232D2E2A' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+      }} />
+      
       {/* Decorative elements - using blue/pink, not green */}
       <div className="absolute top-20 right-10 w-32 h-32 rounded-full bg-secondary/10 blur-2xl" />
       <div className="absolute bottom-20 left-10 w-40 h-40 rounded-full bg-accent/15 blur-2xl" />
+      <div className="absolute top-1/2 left-1/4 w-24 h-24 rounded-full bg-warning/10 blur-xl" />
       
       <div className="container relative">
         <ScrollReveal className="text-center mb-16">

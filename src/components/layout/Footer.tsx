@@ -21,13 +21,13 @@ export function Footer() {
             </p>
             {/* Social icons */}
             <div className="flex items-center gap-3">
-              <a href="#" className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors">
+              <a href="#" className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-accent-foreground hover:bg-accent/80 transition-colors">
                 <Twitter className="w-4 h-4" />
               </a>
-              <a href="#" className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors">
+              <a href="#" className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-accent-foreground hover:bg-accent/80 transition-colors">
                 <Linkedin className="w-4 h-4" />
               </a>
-              <a href="#" className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors">
+              <a href="#" className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-accent-foreground hover:bg-accent/80 transition-colors">
                 <Youtube className="w-4 h-4" />
               </a>
             </div>

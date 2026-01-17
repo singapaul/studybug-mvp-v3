@@ -136,13 +136,24 @@ export default function Index() {
         <Testimonials />
 
         {/* Final CTA - Clean and focused */}
-        <section className="py-20 bg-foreground relative overflow-hidden">
+        <section className="py-20 bg-secondary relative overflow-hidden">
+          {/* Decorative shapes */}
+          <div className="absolute top-10 left-[5%] w-32 h-32 rounded-full bg-white/10 blur-2xl" />
+          <div className="absolute bottom-10 right-[10%] w-48 h-48 rounded-full bg-accent/20 blur-3xl" />
+          <div className="absolute top-1/2 left-[20%] w-24 h-24 rounded-full bg-warning/15 blur-xl" />
+          
+          {/* Subtle pattern overlay */}
+          <div className="absolute inset-0 opacity-5" style={{
+            backgroundImage: `radial-gradient(circle at 20px 20px, white 2px, transparent 0)`,
+            backgroundSize: '40px 40px'
+          }} />
+          
           <div className="container text-center relative">
             <ScrollReveal>
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
                 Start Learning Smarter Today
               </h2>
-              <p className="text-lg text-white/70 max-w-xl mx-auto mb-8">
+              <p className="text-lg text-white/80 max-w-xl mx-auto mb-8">
                 Join thousands of students and teachers who are making revision fun and effective.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -157,13 +168,13 @@ export default function Index() {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="border-2 border-white/30 text-white hover:bg-white/10 rounded-full"
+                  className="border-2 border-white/30 text-foreground bg-white hover:bg-white/90 rounded-full"
                   onClick={() => navigate('/schools')}
                 >
                   For Schools
                 </Button>
               </div>
-              <p className="text-sm text-white/50 mt-4">
+              <p className="text-sm text-white/70 mt-4">
                 No credit card required • Cancel anytime
               </p>
             </ScrollReveal>
@@ -171,8 +182,18 @@ export default function Index() {
         </section>
 
         {/* FAQ */}
-        <section className="py-20 bg-cream">
-          <div className="container">
+        <section className="py-20 bg-cream relative overflow-hidden">
+          {/* Subtle pattern */}
+          <div className="absolute inset-0 opacity-[0.02]" style={{
+            backgroundImage: `radial-gradient(circle at 2px 2px, hsl(var(--foreground)) 1px, transparent 0)`,
+            backgroundSize: '32px 32px'
+          }} />
+          
+          {/* Decorative shapes */}
+          <div className="absolute top-20 right-[10%] w-40 h-40 rounded-full bg-accent/10 blur-3xl" />
+          <div className="absolute bottom-20 left-[5%] w-32 h-32 rounded-full bg-secondary/8 blur-2xl" />
+          
+          <div className="container relative">
             <FAQSection />
           </div>
         </section>
