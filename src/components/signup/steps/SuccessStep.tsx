@@ -149,7 +149,7 @@ export function SuccessStep() {
       <div className="pt-4 space-y-3">
         <Button
           size="lg"
-          className="gradient-primary text-primary-foreground hover:opacity-90 px-8"
+          className="bg-primary text-white hover:bg-primary/90 px-8"
           asChild
         >
           <Link to="/">

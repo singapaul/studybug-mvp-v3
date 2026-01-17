@@ -21,7 +21,6 @@ export function TrustBadges() {
       icon: ShieldCheck,
       label: t('trust.moneyBack'),
       description: t('trust.moneyBackDesc'),
-      highlight: true,
     },
     {
       icon: Flag,
@@ -46,27 +45,21 @@ export function TrustBadges() {
         </p>
       </ScrollReveal>
 
-      {/* Badges */}
+      {/* Badges - all consistent white backgrounds */}
       <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-4" staggerDelay={0.1}>
         {badges.map((badge, index) => (
           <StaggerItem key={index}>
             <motion.div 
               whileHover={{ scale: 1.05, y: -4 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className={`flex flex-col items-center text-center p-4 rounded-xl bg-background border h-full cursor-default ${
-                badge.highlight 
-                  ? 'border-success/30 bg-success/5 shadow-md shadow-success/10' 
-                  : 'border-border'
-              }`}
+              className="flex flex-col items-center text-center p-4 rounded-xl bg-white border border-border h-full cursor-default shadow-sm"
             >
               <motion.div 
                 whileHover={{ rotate: [0, -10, 10, 0] }}
                 transition={{ duration: 0.4 }}
-                className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 ${
-                  badge.highlight ? 'bg-success/20' : 'bg-primary/10'
-                }`}
+                className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-2"
               >
-                <badge.icon className={`w-5 h-5 ${badge.highlight ? 'text-success' : 'text-primary'}`} />
+                <badge.icon className="w-5 h-5 text-primary" />
               </motion.div>
               <span className="font-semibold text-foreground text-sm">{badge.label}</span>
               <span className="text-xs text-muted-foreground">{badge.description}</span>
@@ -82,7 +75,7 @@ export function TrustBadges() {
             <motion.div
               key={index}
               whileHover={{ scale: 1.05 }}
-              className="px-4 py-2 rounded-lg bg-muted/50 border border-border text-sm text-muted-foreground font-medium cursor-default"
+              className="px-4 py-2 rounded-lg bg-white border border-border text-sm text-muted-foreground font-medium cursor-default shadow-sm"
             >
               {school}
             </motion.div>

@@ -102,7 +102,7 @@ export default function Login() {
 
               <Button
                 type="submit"
-                className="w-full gradient-primary text-primary-foreground hover:opacity-90"
+                className="w-full bg-primary text-white hover:bg-primary/90"
                 size="lg"
                 disabled={isLoading}
               >

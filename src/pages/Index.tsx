@@ -18,7 +18,9 @@ import { UrgencyBanner } from '@/components/cro/UrgencyBanner';
 import { StickyCTA } from '@/components/cro/StickyCTA';
 import { InteractiveDemo } from '@/components/cro/InteractiveDemo';
 import { MoneyBackBadge } from '@/components/cro/MoneyBackBadge';
+import { Button } from '@/components/ui/button';
 import { useLocale } from '@/context/LocaleContext';
+import { ArrowRight } from 'lucide-react';
 
 export default function Index() {
   const navigate = useNavigate();
@@ -132,6 +134,44 @@ export default function Index() {
 
         {/* Testimonials */}
         <Testimonials />
+
+        {/* Final CTA */}
+        <section className="py-20 bg-primary relative overflow-hidden">
+          <div className="absolute top-10 left-[10%] w-48 h-48 rounded-full bg-white/10 blur-2xl" />
+          <div className="absolute bottom-10 right-[15%] w-64 h-64 rounded-full bg-secondary/10 blur-2xl" />
+          
+          <div className="container text-center relative">
+            <ScrollReveal>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Start Learning Smarter Today
+              </h2>
+              <p className="text-lg text-white/80 max-w-xl mx-auto mb-8">
+                Join thousands of students and teachers who are making revision fun and effective.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button 
+                  size="lg" 
+                  className="bg-white text-primary hover:bg-white/90 rounded-full shadow-lg font-semibold"
+                  onClick={() => navigate('/signup/individual')}
+                >
+                  Start 14-Day Free Trial
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="border-2 border-white text-white hover:bg-white/10 rounded-full"
+                  onClick={() => navigate('/schools')}
+                >
+                  For Schools
+                </Button>
+              </div>
+              <p className="text-sm text-white/60 mt-4">
+                No credit card required • Cancel anytime
+              </p>
+            </ScrollReveal>
+          </div>
+        </section>
 
         {/* FAQ */}
         <section className="py-20 bg-cream">

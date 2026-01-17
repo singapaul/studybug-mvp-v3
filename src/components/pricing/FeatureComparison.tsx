@@ -111,8 +111,8 @@ function FeatureValue({ value }: { value: boolean | string }) {
   if (value === true) {
     return (
       <div className="flex justify-center">
-        <div className="w-6 h-6 rounded-full bg-success/10 flex items-center justify-center">
-          <Check className="w-4 h-4 text-success" />
+        <div className="w-6 h-6 rounded-full bg-primary/15 flex items-center justify-center">
+          <Check className="w-4 h-4 text-primary" strokeWidth={3} />
         </div>
       </div>
     );
@@ -120,8 +120,8 @@ function FeatureValue({ value }: { value: boolean | string }) {
   if (value === false) {
     return (
       <div className="flex justify-center">
-        <div className="w-6 h-6 rounded-full bg-muted flex items-center justify-center">
-          <X className="w-4 h-4 text-muted-foreground" />
+        <div className="w-6 h-6 rounded-full bg-destructive/10 flex items-center justify-center">
+          <X className="w-4 h-4 text-destructive" strokeWidth={2.5} />
         </div>
       </div>
     );
@@ -180,7 +180,7 @@ export function FeatureComparison() {
                 </th>
                 <th className="text-center py-4 px-4 font-semibold text-primary bg-primary/5 rounded-t-xl">
                   Student
-                  <span className="block text-xs font-normal text-accent">
+                  <span className="block text-xs font-normal text-primary/70">
                     Most Popular
                   </span>
                 </th>

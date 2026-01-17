@@ -57,7 +57,7 @@ export default function FreeSignup() {
 
               <div className="space-y-3">
                 <Button
-                  className="w-full gradient-primary text-primary-foreground hover:opacity-90"
+                  className="w-full bg-primary text-white hover:bg-primary/90"
                   size="lg"
                   onClick={() => toast({ title: "Demo Mode", description: "App dashboard coming soon!" })}
                 >
@@ -174,7 +174,7 @@ export default function FreeSignup() {
 
               <Button
                 type="submit"
-                className="w-full gradient-primary text-primary-foreground hover:opacity-90"
+                className="w-full bg-primary text-white hover:bg-primary/90"
                 size="lg"
                 disabled={isLoading}
               >
