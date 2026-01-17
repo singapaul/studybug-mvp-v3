@@ -1,7 +1,8 @@
-import { Shield, Lock, Flag, ShieldCheck } from 'lucide-react';
 import { ScrollReveal, StaggerContainer, StaggerItem } from '@/components/ui/scroll-reveal';
 import { motion } from 'framer-motion';
 import { useLocale } from '@/context/LocaleContext';
+import { ShieldIllustration, ClockIllustration } from '@/components/ui/animated-illustrations';
+import { Shield, Lock, ShieldCheck, Flag } from 'lucide-react';
 
 export function TrustBadges() {
   const { t } = useLocale();
@@ -11,21 +12,29 @@ export function TrustBadges() {
       icon: Shield,
       label: t('trust.gdpr'),
       description: t('trust.gdprDesc'),
+      color: 'bg-accent',
+      iconColor: 'text-accent-foreground',
     },
     {
       icon: Lock,
       label: t('trust.secure'),
       description: t('trust.secureDesc'),
+      color: 'bg-secondary',
+      iconColor: 'text-white',
     },
     {
       icon: ShieldCheck,
       label: t('trust.moneyBack'),
       description: t('trust.moneyBackDesc'),
+      color: 'bg-warning',
+      iconColor: 'text-warning-foreground',
     },
     {
       icon: Flag,
       label: t('trust.ukSupport'),
       description: t('trust.ukSupportDesc'),
+      color: 'bg-coral',
+      iconColor: 'text-white',
     },
   ];
 
@@ -45,7 +54,7 @@ export function TrustBadges() {
         </p>
       </ScrollReveal>
 
-      {/* Badges - all consistent white backgrounds */}
+      {/* Badges - all consistent white backgrounds with different accent colors */}
       <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-4" staggerDelay={0.1}>
         {badges.map((badge, index) => (
           <StaggerItem key={index}>
@@ -57,9 +66,9 @@ export function TrustBadges() {
               <motion.div 
                 whileHover={{ rotate: [0, -10, 10, 0] }}
                 transition={{ duration: 0.4 }}
-                className="w-10 h-10 rounded-full bg-accent flex items-center justify-center mb-2"
+                className={`w-10 h-10 rounded-full ${badge.color} flex items-center justify-center mb-2`}
               >
-                <badge.icon className="w-5 h-5 text-accent-foreground" />
+                <badge.icon className={`w-5 h-5 ${badge.iconColor}`} />
               </motion.div>
               <span className="font-semibold text-foreground text-sm">{badge.label}</span>
               <span className="text-xs text-muted-foreground">{badge.description}</span>

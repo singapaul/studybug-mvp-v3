@@ -54,8 +54,18 @@ export function InteractiveDemo() {
   };
 
   return (
-    <section className="py-16 md:py-20 bg-background">
-      <div className="container">
+    <section className="py-16 md:py-20 bg-background relative overflow-hidden">
+      {/* Subtle grid pattern */}
+      <div className="absolute inset-0 opacity-[0.02]" style={{
+        backgroundImage: `linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)`,
+        backgroundSize: '40px 40px'
+      }} />
+      
+      {/* Decorative shapes */}
+      <div className="absolute top-10 left-[10%] w-24 h-24 rounded-full bg-accent/10 blur-2xl" />
+      <div className="absolute bottom-10 right-[15%] w-32 h-32 rounded-full bg-secondary/10 blur-2xl" />
+      
+      <div className="container relative">
         <div className="text-center mb-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
