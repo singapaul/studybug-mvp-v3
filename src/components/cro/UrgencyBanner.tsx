@@ -48,7 +48,7 @@ export function UrgencyBanner() {
     >
       <div className="container flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6">
         <div className="flex items-center gap-2">
-          <Zap className="w-4 h-4 text-warning" />
+          <Zap className="w-4 h-4 text-accent" />
           <span className="text-sm md:text-base font-semibold text-white">
             {t('urgency.message')}
           </span>

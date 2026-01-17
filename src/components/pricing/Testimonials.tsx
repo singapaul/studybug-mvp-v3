@@ -25,7 +25,7 @@ const testimonials = [
     name: 'Year 7 Student',
     title: '',
     school: 'Flintshire, North Wales',
-    accentColor: 'bg-warning',
+    accentColor: 'bg-coral',
   },
 ];
 
@@ -35,7 +35,7 @@ export function Testimonials() {
       {/* Decorative circles */}
       <div className="absolute top-10 left-[5%] w-48 h-48 rounded-full bg-white/10 blur-2xl" />
       <div className="absolute bottom-10 right-[10%] w-64 h-64 rounded-full bg-accent/15 blur-2xl" />
-      <div className="absolute top-1/2 right-[20%] w-32 h-32 rounded-full bg-warning/10 blur-xl" />
+      <div className="absolute top-1/2 right-[20%] w-32 h-32 rounded-full bg-coral/10 blur-xl" />
       
       {/* Subtle wave pattern */}
       <div className="absolute inset-0 opacity-5" style={{
@@ -66,7 +66,7 @@ export function Testimonials() {
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
-                      className="w-4 h-4 fill-warning text-warning"
+                      className="w-4 h-4 fill-coral text-coral"
                     />
                   ))}
                 </div>

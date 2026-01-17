@@ -67,7 +67,7 @@ export function AccountDetailsStep({ onNext, onBack }: AccountDetailsStepProps) 
 
   const getStrengthLabel = () => {
     if (passwordStrength <= 1) return { label: 'Weak', color: 'bg-destructive' };
-    if (passwordStrength <= 3) return { label: 'Medium', color: 'bg-warning' };
+    if (passwordStrength <= 3) return { label: 'Medium', color: 'bg-coral' };
     return { label: 'Strong', color: 'bg-primary' };
   };
 

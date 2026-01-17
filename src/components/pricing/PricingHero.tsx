@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import { Check, Star, Zap, ArrowRight, Play, Sparkles } from 'lucide-react';
+import { ArrowRight, Play, Users, Sparkles, BookOpen, Gamepad2 } from 'lucide-react';
+import heroImage from '@/assets/studybug-hero.webp';
 
 interface PricingHeroProps {
   onStartTrial: () => void;
@@ -12,78 +13,74 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
   const navigate = useNavigate();
 
   return (
-    <section className="relative py-20 md:py-28 overflow-hidden bg-cream">
-      {/* Subtle decorative shapes - using blue/pink accents, NOT green */}
-      <div className="absolute top-20 left-[5%] w-32 h-32 rounded-full bg-secondary/10 blur-2xl" />
-      <div className="absolute bottom-20 right-[10%] w-48 h-48 rounded-full bg-accent/15 blur-3xl" />
-      <div className="absolute top-1/2 right-[20%] w-24 h-24 rounded-full bg-warning/10 blur-xl" />
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-secondary via-secondary to-secondary/90">
+      {/* Abstract background shapes */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-1/4 -right-1/4 w-[800px] h-[800px] rounded-full bg-accent/20 blur-3xl" />
+        <div className="absolute -bottom-1/4 -left-1/4 w-[600px] h-[600px] rounded-full bg-primary/15 blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-coral/10 blur-2xl" />
+      </div>
+      
+      {/* Dot pattern overlay */}
+      <div className="absolute inset-0 opacity-10" style={{
+        backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+        backgroundSize: '32px 32px'
+      }} />
 
-      <div className="container relative">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Content */}
+      <div className="container relative z-10 py-16 md:py-24">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+          {/* Left: Content */}
           <motion.div 
             className="text-center lg:text-left"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7 }}
           >
-            {/* Trust badge - simplified */}
+            {/* Social proof pill */}
             <motion.div 
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-border text-foreground text-sm font-medium mb-6 shadow-sm"
+              className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium mb-8"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, delay: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <div className="flex -space-x-1">
-                <div className="w-5 h-5 rounded-full bg-accent flex items-center justify-center">
-                  <Star className="w-3 h-3 text-accent-foreground fill-accent-foreground" />
-                </div>
-                <div className="w-5 h-5 rounded-full bg-secondary flex items-center justify-center">
-                  <Star className="w-3 h-3 text-white fill-white" />
-                </div>
-                <div className="w-5 h-5 rounded-full bg-warning flex items-center justify-center">
-                  <Star className="w-3 h-3 text-warning-foreground fill-warning-foreground" />
-                </div>
+              <div className="flex -space-x-2">
+                <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-xs font-bold text-white">S</div>
+                <div className="w-6 h-6 rounded-full bg-coral flex items-center justify-center text-xs font-bold text-white">T</div>
+                <div className="w-6 h-6 rounded-full bg-accent flex items-center justify-center text-xs font-bold text-accent-foreground">P</div>
               </div>
-              <span>Trusted by 10,000+ students & teachers</span>
+              <span>Loved by 10,000+ students & teachers</span>
             </motion.div>
 
             <motion.h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight"
-              initial={{ opacity: 0, y: 20 }}
+              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 leading-[1.1]"
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
             >
               Learning That{' '}
-              <span className="text-secondary">Feels Like Play.</span>
+              <span className="relative">
+                <span className="relative z-10 text-accent">Feels Like Play.</span>
+                <motion.div 
+                  className="absolute -bottom-2 left-0 right-0 h-3 bg-accent/30 rounded-full -z-0"
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 0.5, delay: 0.8 }}
+                />
+              </span>
             </motion.h1>
 
             <motion.p 
-              className="text-lg md:text-xl text-muted-foreground mb-8 max-w-xl mx-auto lg:mx-0"
+              className="text-lg md:text-xl text-white/80 mb-10 max-w-lg mx-auto lg:mx-0 leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              Studybug transforms boring flashcards into engaging games. Students learn faster, retain more, and actually enjoy studying.
+              Transform any subject into addictive learning games. Students study more, remember better, and actually enjoy revision.
             </motion.p>
 
-            {/* Key benefits - cleaner design */}
+            {/* CTA Buttons */}
             <motion.div 
-              className="flex flex-wrap gap-3 mb-8 justify-center lg:justify-start"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.45 }}
-            >
-              {['20+ Game Modes', 'Progress Tracking', 'Works Offline'].map((benefit, i) => (
-                <div key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Check className="w-4 h-4 text-primary" />
-                  <span>{benefit}</span>
-                </div>
-              ))}
-            </motion.div>
-
-            <motion.div 
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
@@ -91,125 +88,89 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
               <Button
                 size="lg"
                 onClick={() => navigate('/signup/individual')}
-                className="bg-primary text-white hover:bg-primary/90 px-8 font-semibold rounded-full shadow-lg hover-lift text-base"
+                className="bg-primary text-white hover:bg-primary/90 font-semibold rounded-full shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all"
               >
-                Start 14-Day Free Trial
-                <ArrowRight className="w-4 h-4 ml-2" />
+                Start Free Trial
+                <ArrowRight className="ml-2" />
               </Button>
               <Button 
                 size="lg" 
                 variant="outline" 
                 onClick={onLearnMore}
-                className="border-2 border-foreground/20 text-foreground bg-white hover:bg-muted rounded-full"
+                className="border-2 border-white/30 text-white bg-white/10 hover:bg-white/20 rounded-full backdrop-blur-sm"
               >
-                <Play className="w-4 h-4 mr-2" />
-                See How It Works
+                <Play className="mr-2" />
+                Watch Demo
               </Button>
             </motion.div>
 
-            <motion.p 
-              className="text-sm text-muted-foreground mt-4"
+            {/* Quick stats */}
+            <motion.div 
+              className="flex flex-wrap gap-6 justify-center lg:justify-start text-white/70 text-sm"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              No credit card required • Cancel anytime
-            </motion.p>
+              <div className="flex items-center gap-2">
+                <BookOpen className="w-4 h-4" />
+                <span>400+ ready-made decks</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Gamepad2 className="w-4 h-4" />
+                <span>20+ game modes</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Users className="w-4 h-4" />
+                <span>Used in 500+ schools</span>
+              </div>
+            </motion.div>
           </motion.div>
 
-          {/* Game Mockup */}
+          {/* Right: Visual */}
           <motion.div 
-            className="relative hidden lg:block"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            className="relative hidden lg:flex justify-center items-center"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
           >
+            {/* Main image container with glow */}
             <div className="relative">
-              {/* Main game card */}
+              {/* Glow effect behind image */}
+              <div className="absolute inset-0 bg-gradient-to-br from-accent/40 via-primary/30 to-coral/40 rounded-[2.5rem] blur-2xl scale-105" />
+              
+              {/* Main image card */}
               <motion.div 
-                className="relative bg-white rounded-3xl shadow-2xl p-6 max-w-sm mx-auto border border-border"
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="relative bg-white rounded-[2rem] p-3 shadow-2xl"
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
               >
-                {/* Game header */}
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-xl bg-secondary flex items-center justify-center">
-                      <Zap className="w-4 h-4 text-white" />
-                    </div>
-                    <span className="font-semibold text-foreground">Speed Round</span>
-                  </div>
-                  <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                    <Star className="w-4 h-4 text-warning fill-warning" />
-                    <span>8/10</span>
-                  </div>
-                </div>
+                <img 
+                  src={heroImage} 
+                  alt="Students enjoying Studybug learning games" 
+                  className="w-full max-w-md rounded-[1.5rem] object-cover"
+                />
+                
+                {/* Floating badge - top right */}
+                <motion.div 
+                  className="absolute -top-4 -right-4 bg-primary text-white px-4 py-2 rounded-full shadow-lg flex items-center gap-2"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 1 }}
+                >
+                  <Sparkles className="w-4 h-4" />
+                  <span className="text-sm font-semibold">Fun & Effective</span>
+                </motion.div>
 
-                {/* Question card */}
-                <div className="bg-secondary rounded-2xl p-6 mb-4 text-center">
-                  <p className="text-xs text-white/70 uppercase tracking-wide mb-2">Question 9</p>
-                  <h3 className="text-2xl font-bold text-white">What is 12 × 7?</h3>
-                </div>
-
-                {/* Answer options */}
-                <div className="grid grid-cols-2 gap-3 mb-4">
-                  {['72', '84', '96', '78'].map((answer, i) => (
-                    <motion.button
-                      key={answer}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className={`py-3 px-4 rounded-xl font-semibold text-lg transition-all ${
-                        answer === '84' 
-                          ? 'bg-primary text-white shadow-md' 
-                          : 'bg-muted text-foreground hover:bg-muted/80'
-                      }`}
-                    >
-                      {answer}
-                    </motion.button>
-                  ))}
-                </div>
-
-                {/* Progress bar */}
-                <div className="h-2 bg-muted rounded-full overflow-hidden">
-                  <motion.div 
-                    className="h-full bg-primary rounded-full"
-                    initial={{ width: 0 }}
-                    animate={{ width: '80%' }}
-                    transition={{ duration: 1, delay: 0.8 }}
-                  />
-                </div>
-              </motion.div>
-
-              {/* Floating success card - simplified */}
-              <motion.div 
-                className="absolute -top-4 -right-6 bg-white rounded-xl shadow-lg p-3 flex items-center gap-2 border border-border"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 1 }}
-              >
-                <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-                  <Check className="w-4 h-4 text-white" />
-                </div>
-                <div>
-                  <div className="text-sm font-semibold text-foreground">Correct!</div>
-                  <div className="text-xs text-muted-foreground">+10 points</div>
-                </div>
-              </motion.div>
-
-              {/* Floating streak card - simplified */}
-              <motion.div 
-                className="absolute -bottom-3 -left-4 bg-white rounded-xl shadow-lg p-3 flex items-center gap-2 border border-border"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 1.2 }}
-              >
-                <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center">
-                  <Sparkles className="w-4 h-4 text-accent-foreground" />
-                </div>
-                <div>
-                  <div className="text-sm font-semibold text-foreground">7 Day Streak!</div>
-                  <div className="text-xs text-muted-foreground">Keep it up</div>
-                </div>
+                {/* Floating stat - bottom left */}
+                <motion.div 
+                  className="absolute -bottom-4 -left-4 bg-white border border-border px-4 py-3 rounded-2xl shadow-lg"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.2 }}
+                >
+                  <div className="text-2xl font-bold text-foreground">92%</div>
+                  <div className="text-xs text-muted-foreground">improved grades</div>
+                </motion.div>
               </motion.div>
             </div>
           </motion.div>

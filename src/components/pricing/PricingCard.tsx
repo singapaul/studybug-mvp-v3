@@ -31,7 +31,7 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
   const getBadgeStyle = () => {
     switch (plan.badgeColor) {
       case 'accent':
-        return 'bg-warning text-foreground';
+        return 'bg-coral text-white';
       case 'primary':
         return 'bg-primary text-white';
       case 'secondary':
