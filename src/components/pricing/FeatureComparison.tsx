@@ -1,11 +1,9 @@
-import { useState } from 'react';
-import { Check, X, Info, ChevronDown, ChevronUp } from 'lucide-react';
+import { Check, X, Info } from 'lucide-react';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { Button } from '@/components/ui/button';
 import { ScrollReveal } from '@/components/ui/scroll-reveal';
 
 const features = [
@@ -130,8 +128,6 @@ function FeatureValue({ value }: { value: boolean | string }) {
 }
 
 export function FeatureComparison() {
-  const [isExpanded, setIsExpanded] = useState(false);
-
   return (
     <section className="py-16">
       <ScrollReveal>
@@ -145,30 +141,9 @@ export function FeatureComparison() {
         </div>
       </ScrollReveal>
 
-      {/* Mobile toggle */}
-      <div className="md:hidden mb-4">
-        <Button
-          variant="outline"
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="w-full flex items-center justify-center gap-2"
-        >
-          {isExpanded ? (
-            <>
-              Hide detailed comparison
-              <ChevronUp className="w-4 h-4" />
-            </>
-          ) : (
-            <>
-              Show detailed comparison
-              <ChevronDown className="w-4 h-4" />
-            </>
-          )}
-        </Button>
-      </div>
-
-      {/* Table - always visible on desktop, toggleable on mobile */}
+      {/* Table - always visible */}
       <ScrollReveal delay={0.2}>
-        <div className={`overflow-x-auto ${!isExpanded ? 'hidden md:block' : ''}`}>
+        <div className="overflow-x-auto">
           <table className="w-full min-w-[640px]">
             <thead>
               <tr className="border-b border-border">
