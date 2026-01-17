@@ -46,7 +46,7 @@ const translations: Record<Language, Record<string, string>> = {
     'pricing.freeForever': 'Free forever',
     'pricing.customPricing': 'Custom Pricing',
     'pricing.contactUs': 'Contact us for a quote',
-    'pricing.noCreditCard': 'No credit card required • 14-day free trial • Cancel anytime',
+    'pricing.noCreditCard': '14-day free trial • Cancel anytime',
     
     // Plans
     'plan.free': 'Free',

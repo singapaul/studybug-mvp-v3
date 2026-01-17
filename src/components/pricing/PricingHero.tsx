@@ -113,7 +113,7 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              No credit card required • Cancel anytime
+              14-day free trial • Cancel anytime
             </motion.p>
           </motion.div>
 

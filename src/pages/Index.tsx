@@ -175,7 +175,7 @@ export default function Index() {
                 </Button>
               </div>
               <p className="text-sm text-white/70 mt-4">
-                No credit card required • Cancel anytime
+                14-day free trial • Cancel anytime
               </p>
             </ScrollReveal>
           </div>
