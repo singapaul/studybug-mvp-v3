@@ -261,12 +261,12 @@ export function PaymentStep({ onNext, onBack }: PaymentStepProps) {
           </Button>
           <Button
             type="submit"
-            className="flex-1 gradient-primary text-primary-foreground hover:opacity-90"
+            className="flex-1 bg-primary text-white hover:bg-primary/90"
             disabled={isProcessing}
           >
             {isProcessing ? (
               <span className="flex items-center gap-2">
-                <span className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                 Processing...
               </span>
             ) : (

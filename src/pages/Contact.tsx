@@ -50,7 +50,7 @@ export default function Contact() {
       <Header />
       <main className="flex-1">
         {/* Hero */}
-        <section className="py-16 bg-gradient-to-br from-primary/5 via-background to-accent/5">
+        <section className="py-16 bg-cream">
           <div className="container text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
               Get in Touch
@@ -145,7 +145,7 @@ export default function Contact() {
                         <Button
                           type="submit"
                           size="lg"
-                          className="w-full gradient-primary text-primary-foreground hover:opacity-90"
+                          className="w-full bg-primary text-white hover:bg-primary/90"
                           disabled={isLoading}
                         >
                           {isLoading ? (

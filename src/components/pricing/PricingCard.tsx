@@ -22,18 +22,10 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
   const annualTotal = plan.annualPrice;
 
   const getCardStyle = () => {
-    switch (plan.tier) {
-      case 'free':
-        return 'border-2 border-dashed border-border bg-white';
-      case 'standard':
-        return 'border-2 border-primary bg-white shadow-xl ring-4 ring-primary/10';
-      case 'premium':
-        return 'border-2 border-secondary/50 bg-white shadow-lg';
-      case 'enterprise':
-        return 'border-2 border-accent bg-white shadow-lg';
-      default:
-        return 'border-2 border-border bg-white';
+    if (isPopular) {
+      return 'border-2 border-primary bg-white shadow-xl ring-4 ring-primary/10';
     }
+    return 'border border-border bg-white hover:border-primary/30 hover:shadow-lg';
   };
 
   const getBadgeStyle = () => {
@@ -49,34 +41,14 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
     }
   };
 
-  const getAccentColor = () => {
-    switch (plan.tier) {
-      case 'free':
-        return 'bg-muted';
-      case 'standard':
-        return 'bg-primary';
-      case 'premium':
-        return 'bg-secondary';
-      case 'enterprise':
-        return 'bg-accent';
-      default:
-        return 'bg-primary';
-    }
-  };
-
   const getButtonStyle = () => {
-    switch (plan.tier) {
-      case 'free':
-        return 'bg-muted text-foreground hover:bg-muted/80 rounded-full';
-      case 'standard':
-        return 'bg-primary text-white hover:bg-primary/90 shadow-lg rounded-full';
-      case 'premium':
-        return 'bg-secondary text-white hover:bg-secondary/90 rounded-full';
-      case 'enterprise':
-        return 'bg-foreground text-white hover:bg-foreground/90 rounded-full';
-      default:
-        return 'bg-primary text-white rounded-full';
+    if (isPopular) {
+      return 'bg-primary text-white hover:bg-primary/90 shadow-lg rounded-full';
     }
+    if (isFree) {
+      return 'bg-muted text-foreground hover:bg-muted/80 rounded-full';
+    }
+    return 'bg-foreground text-white hover:bg-foreground/90 rounded-full';
   };
 
   const getBadgeText = () => {
@@ -90,11 +62,11 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
   return (
     <motion.div
       whileHover={{ y: -8, transition: { duration: 0.3 } }}
-      className={`relative flex flex-col rounded-3xl p-6 transition-all h-full ${getCardStyle()}`}
+      className={`relative flex flex-col rounded-2xl p-6 transition-all h-full ${getCardStyle()}`}
     >
       {plan.badge && (
         <motion.div 
-          className="absolute -top-3 right-4"
+          className="absolute -top-3 left-1/2 -translate-x-1/2"
           initial={{ y: -10, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2 }}
@@ -105,8 +77,6 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
           </span>
         </motion.div>
       )}
-
-      <div className={`absolute inset-x-0 top-0 h-1.5 rounded-t-3xl ${getAccentColor()}`} />
 
       <div className="mb-6 pt-2">
         <h3 className="text-xl font-bold text-foreground mb-1">
@@ -154,16 +124,16 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: index * 0.05 }}
           >
-            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center mt-0.5">
-              <Check className="w-3 h-3 text-primary" />
+            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-primary/15 flex items-center justify-center mt-0.5">
+              <Check className="w-3 h-3 text-primary" strokeWidth={3} />
             </div>
             <span className="text-sm text-foreground">{feature}</span>
           </motion.li>
         ))}
         {plan.negativeFeatures?.map((feature, index) => (
           <li key={`neg-${index}`} className="flex items-start gap-3">
-            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-muted flex items-center justify-center mt-0.5">
-              <X className="w-3 h-3 text-muted-foreground" />
+            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-destructive/10 flex items-center justify-center mt-0.5">
+              <X className="w-3 h-3 text-destructive" strokeWidth={2.5} />
             </div>
             <span className="text-sm text-muted-foreground">{feature}</span>
           </li>

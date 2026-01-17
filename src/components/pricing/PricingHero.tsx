@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import { Check, Star, Zap, ArrowRight } from 'lucide-react';
+import { Check, Star, Zap, ArrowRight, Play, Sparkles } from 'lucide-react';
 
 interface PricingHeroProps {
   onStartTrial: () => void;
@@ -12,13 +12,14 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
   const navigate = useNavigate();
 
   return (
-    <section className="relative py-20 md:py-28 overflow-hidden bg-primary">
-      {/* Subtle decorative circles */}
-      <div className="absolute top-20 left-[10%] w-64 h-64 rounded-full bg-white/10 blur-3xl" />
-      <div className="absolute bottom-10 right-[15%] w-48 h-48 rounded-full bg-secondary/20 blur-2xl" />
+    <section className="relative py-20 md:py-28 overflow-hidden bg-cream">
+      {/* Subtle decorative shapes */}
+      <div className="absolute top-20 left-[5%] w-32 h-32 rounded-full bg-primary/10 blur-2xl" />
+      <div className="absolute bottom-20 right-[10%] w-48 h-48 rounded-full bg-secondary/10 blur-3xl" />
+      <div className="absolute top-1/2 right-[20%] w-24 h-24 rounded-full bg-accent/20 blur-xl" />
 
       <div className="container relative">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Content */}
           <motion.div 
             className="text-center lg:text-left"
@@ -26,34 +27,60 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
+            {/* Trust badge */}
             <motion.div 
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-foreground text-sm font-semibold mb-6 shadow-md"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-border text-foreground text-sm font-medium mb-6 shadow-sm"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4, delay: 0.2 }}
             >
-              <Zap className="w-4 h-4 text-secondary" />
-              14-day free trial on all paid plans
+              <div className="flex -space-x-1">
+                <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center">
+                  <Star className="w-3 h-3 text-white fill-white" />
+                </div>
+                <div className="w-5 h-5 rounded-full bg-secondary flex items-center justify-center">
+                  <Star className="w-3 h-3 text-white fill-white" />
+                </div>
+                <div className="w-5 h-5 rounded-full bg-coral flex items-center justify-center">
+                  <Star className="w-3 h-3 text-white fill-white" />
+                </div>
+              </div>
+              <span>Trusted by 10,000+ students & teachers</span>
             </motion.div>
 
             <motion.h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              Make Revision{' '}
-              <span className="text-warning">Fun</span> with Interactive Learning Games
+              Turn Revision Into{' '}
+              <span className="text-primary">Interactive Games</span>
             </motion.h1>
 
             <motion.p 
-              className="text-lg md:text-xl text-white/80 mb-8 max-w-xl mx-auto lg:mx-0"
+              className="text-lg md:text-xl text-muted-foreground mb-8 max-w-xl mx-auto lg:mx-0"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              Join thousands of students and teachers using Studybug to master any subject through engaging game-based learning.
+              Studybug transforms boring flashcards into engaging games. Students learn faster, retain more, and actually enjoy studying.
             </motion.p>
+
+            {/* Key benefits */}
+            <motion.div 
+              className="flex flex-wrap gap-4 mb-8 justify-center lg:justify-start"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.45 }}
+            >
+              {['20+ Game Modes', 'Progress Tracking', 'Works Offline'].map((benefit, i) => (
+                <div key={i} className="flex items-center gap-2 text-sm text-foreground">
+                  <Check className="w-4 h-4 text-primary" />
+                  <span>{benefit}</span>
+                </div>
+              ))}
+            </motion.div>
 
             <motion.div 
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
@@ -64,20 +91,30 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
               <Button
                 size="lg"
                 onClick={() => navigate('/signup/individual')}
-                className="bg-white text-primary hover:bg-white/90 px-8 font-semibold rounded-full shadow-lg hover-lift btn-glow"
+                className="bg-primary text-white hover:bg-primary/90 px-8 font-semibold rounded-full shadow-lg hover-lift text-base"
               >
-                Start Free Trial
+                Start 14-Day Free Trial
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
               <Button 
                 size="lg" 
                 variant="outline" 
                 onClick={onLearnMore}
-                className="border-2 border-white text-white bg-transparent hover:bg-white/10 rounded-full"
+                className="border-2 border-foreground/20 text-foreground bg-white hover:bg-muted rounded-full"
               >
-                See How It Works
+                <Play className="w-4 h-4 mr-2" />
+                Watch Demo
               </Button>
             </motion.div>
+
+            <motion.p 
+              className="text-sm text-muted-foreground mt-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+            >
+              No credit card required • Cancel anytime
+            </motion.p>
           </motion.div>
 
           {/* Game Mockup */}
@@ -90,7 +127,7 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
             <div className="relative">
               {/* Main game card */}
               <motion.div 
-                className="relative bg-white rounded-3xl shadow-2xl p-6 max-w-sm mx-auto"
+                className="relative bg-white rounded-3xl shadow-2xl p-6 max-w-sm mx-auto border border-border"
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               >
@@ -145,7 +182,7 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
 
               {/* Floating success card */}
               <motion.div 
-                className="absolute -top-6 -right-8 bg-white rounded-2xl shadow-xl p-4 flex items-center gap-3"
+                className="absolute -top-6 -right-8 bg-white rounded-2xl shadow-xl p-4 flex items-center gap-3 border border-primary/20"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 1 }}
@@ -161,13 +198,13 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
 
               {/* Floating streak card */}
               <motion.div 
-                className="absolute -bottom-4 -left-6 bg-white rounded-2xl shadow-xl p-4 flex items-center gap-3"
+                className="absolute -bottom-4 -left-6 bg-white rounded-2xl shadow-xl p-4 flex items-center gap-3 border border-coral/20"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 1.2 }}
               >
                 <div className="w-10 h-10 rounded-xl bg-coral flex items-center justify-center">
-                  <span className="text-white font-bold">🔥</span>
+                  <Sparkles className="w-5 h-5 text-white" />
                 </div>
                 <div>
                   <div className="text-sm font-semibold text-foreground">7 Day Streak!</div>

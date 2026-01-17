@@ -67,8 +67,8 @@ export function AccountDetailsStep({ onNext, onBack }: AccountDetailsStepProps) 
 
   const getStrengthLabel = () => {
     if (passwordStrength <= 1) return { label: 'Weak', color: 'bg-destructive' };
-    if (passwordStrength <= 3) return { label: 'Medium', color: 'bg-accent' };
-    return { label: 'Strong', color: 'bg-success' };
+    if (passwordStrength <= 3) return { label: 'Medium', color: 'bg-warning' };
+    return { label: 'Strong', color: 'bg-primary' };
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -291,7 +291,7 @@ export function AccountDetailsStep({ onNext, onBack }: AccountDetailsStepProps) 
           </Button>
           <Button
             type="submit"
-            className="flex-1 gradient-primary text-primary-foreground hover:opacity-90"
+            className="flex-1 bg-primary text-white hover:bg-primary/90"
           >
             Continue
           </Button>

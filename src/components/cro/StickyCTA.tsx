@@ -31,27 +31,27 @@ export function StickyCTA() {
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
           className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:bottom-6 z-50"
         >
-          <div className="relative bg-white rounded-2xl p-4 shadow-2xl max-w-sm md:max-w-md mx-auto md:mx-0 border border-border">
+          <div className="relative bg-primary rounded-2xl p-4 shadow-2xl max-w-sm md:max-w-md mx-auto md:mx-0 border-0">
             <button
               onClick={() => setIsDismissed(true)}
-              className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-muted flex items-center justify-center hover:bg-muted/80 transition-colors shadow-sm"
+              className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors shadow-sm"
             >
-              <X className="w-3 h-3 text-muted-foreground" />
+              <X className="w-3 h-3 text-white" />
             </button>
             
             <div className="flex items-center gap-4">
               <div className="flex-1">
-                <p className="text-foreground font-semibold text-sm md:text-base">
+                <p className="text-white font-semibold text-sm md:text-base">
                   {t('stickyCta.title')}
                 </p>
-                <p className="text-muted-foreground text-xs md:text-sm">
+                <p className="text-white/80 text-xs md:text-sm">
                   {t('stickyCta.subtitle')}
                 </p>
               </div>
               <Button
                 size="sm"
                 onClick={() => navigate('/signup/individual')}
-                className="bg-primary text-white hover:bg-primary/90 whitespace-nowrap font-semibold rounded-full"
+                className="bg-white text-primary hover:bg-white/90 whitespace-nowrap font-semibold rounded-full shadow-md"
               >
                 {t('stickyCta.button')}
                 <ArrowRight className="w-4 h-4 ml-1" />
