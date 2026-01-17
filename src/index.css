@@ -90,6 +90,7 @@
   h1, h2 {
     font-family: 'Quicksand', system-ui, sans-serif;
     font-weight: 700;
+    -webkit-text-stroke: 0.5px currentColor;
   }
 
   /* UI-optimized font for smaller headings */
