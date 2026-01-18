@@ -96,7 +96,7 @@ export function SchoolHero() {
               >
                 <stat.icon className={`w-6 h-6 ${stat.iconColor}`} />
               </motion.div>
-              <div className="text-2xl md:text-3xl font-bold text-foreground" style={{ fontFamily: "'Quicksand', system-ui, sans-serif" }}>
+              <div className="text-2xl md:text-3xl font-bold text-foreground" style={{ fontFamily: "'Bungee', system-ui, sans-serif" }}>
                 {stat.value}
               </div>
               <div className="text-sm text-muted-foreground">{stat.label}</div>
