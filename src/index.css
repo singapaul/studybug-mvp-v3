@@ -86,16 +86,15 @@
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   }
 
-  /* Display font only for large headings - Bungee is bold, playful, memorable */
+  /* Display font only for large headings - Quicksand is friendly, rounded, modern */
   h1, h2 {
-    font-family: 'Bungee', system-ui, sans-serif;
-    font-weight: 400;
-    -webkit-text-stroke: 0.5px currentColor;
+    font-family: 'Quicksand', system-ui, sans-serif;
+    font-weight: 700;
   }
 
-  /* Ensure any usage of Tailwind's `font-display` class also renders in Bungee */
+  /* Ensure any usage of Tailwind's `font-display` class also renders in Quicksand */
   .font-display {
-    font-family: 'Bungee', system-ui, sans-serif;
+    font-family: 'Quicksand', system-ui, sans-serif;
   }
 
   /* UI-optimized font for smaller headings */

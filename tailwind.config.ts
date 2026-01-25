@@ -15,7 +15,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
-        display: ['"Bungee"', 'sans-serif'],
+        display: ['Quicksand', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
