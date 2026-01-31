@@ -1,0 +1,160 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  TUTOR
+  STUDENT
+}
+
+enum SubscriptionStatus {
+  FREE
+  ACTIVE
+  CANCELLED
+  EXPIRED
+}
+
+enum GameType {
+  PAIRS
+  FLASHCARDS
+  MULTIPLE_CHOICE
+  SPLAT
+  SWIPE
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  passwordHash  String
+  role          Role
+  emailVerified Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  tutor   Tutor?
+  student Student?
+
+  @@index([email])
+}
+
+model Tutor {
+  id                 String             @id @default(cuid())
+  userId             String             @unique
+  subscriptionStatus SubscriptionStatus @default(FREE)
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  // Relations
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  groups Group[]
+  games  Game[]
+}
+
+model Student {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  groupMembers GroupMember[]
+  gameAttempts GameAttempt[]
+}
+
+model Group {
+  id          String   @id @default(cuid())
+  tutorId     String
+  name        String
+  ageRange    String?
+  subjectArea String?
+  joinCode    String   @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  tutor       Tutor         @relation(fields: [tutorId], references: [id], onDelete: Cascade)
+  members     GroupMember[]
+  assignments Assignment[]
+
+  @@index([tutorId])
+  @@index([joinCode])
+}
+
+model Game {
+  id        String   @id @default(cuid())
+  tutorId   String
+  name      String
+  gameType  GameType
+  gameData  String   // JSON stored as string
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  tutor       Tutor        @relation(fields: [tutorId], references: [id], onDelete: Cascade)
+  assignments Assignment[]
+
+  @@index([tutorId])
+  @@index([gameType])
+}
+
+model Assignment {
+  id             String    @id @default(cuid())
+  gameId         String
+  groupId        String
+  dueDate        DateTime?
+  passPercentage Int?      // Optional minimum percentage to pass
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  // Relations
+  game         Game          @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  group        Group         @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  gameAttempts GameAttempt[]
+
+  @@index([gameId])
+  @@index([groupId])
+  @@index([dueDate])
+}
+
+model GameAttempt {
+  id              String   @id @default(cuid())
+  assignmentId    String
+  studentId       String
+  scorePercentage Float
+  timeTaken       Int      // Time in seconds
+  completedAt     DateTime @default(now())
+  attemptData     String   // JSON stored as string for detailed results
+
+  // Relations
+  assignment Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  student    Student    @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([assignmentId])
+  @@index([studentId])
+  @@index([completedAt])
+}
+
+model GroupMember {
+  id        String   @id @default(cuid())
+  groupId   String
+  studentId String
+  joinedAt  DateTime @default(now())
+
+  // Relations
+  group   Group   @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([groupId, studentId])
+  @@index([groupId])
+  @@index([studentId])
+}

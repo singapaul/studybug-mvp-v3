@@ -1,126 +1,159 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
+import { Role } from '@/types/auth';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Eye, EyeOff, Mail, Lock, AlertCircle } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { GraduationCap, User, BookOpen, ArrowLeft } from 'lucide-react';
+import { useEffect } from 'react';
 
 export default function Login() {
+  const { login, isAuthenticated, session } = useAuth();
   const navigate = useNavigate();
-  const { toast } = useToast();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    
-    // Simulate login delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "Demo Mode",
-      description: "Login functionality coming soon - this is a demo",
-    });
-    
-    setIsLoading(false);
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated && session) {
+      const redirectPath = session.user.role === Role.TUTOR
+        ? '/tutor/dashboard'
+        : '/student/dashboard';
+      navigate(redirectPath, { replace: true });
+    }
+  }, [isAuthenticated, session, navigate]);
+
+  const handleRoleSelection = (role: Role) => {
+    login(role);
+    const path = role === Role.TUTOR ? '/tutor/dashboard' : '/student/dashboard';
+    navigate(path);
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-muted/30">
-      <Header />
-      <main className="flex-1 flex items-center justify-center py-12">
-        <div className="container max-w-md">
-          <div className="bg-card border border-border rounded-2xl p-8 shadow-lg">
-            {/* Header */}
-            <div className="text-center mb-8">
-              <h1 className="text-2xl font-bold text-foreground mb-2">
-                Welcome back
-              </h1>
-              <p className="text-muted-foreground">
-                Sign in to your Studybug account
-              </p>
+    <div className="min-h-screen bg-gradient-to-b from-background to-muted flex flex-col">
+      {/* Header */}
+      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <BookOpen className="h-8 w-8 text-primary" />
+              <span className="text-2xl font-bold">StudyBug</span>
             </div>
-
-            {/* Demo Notice */}
-            <div className="flex items-center gap-3 p-4 rounded-lg bg-accent/10 border border-accent/20 mb-6">
-              <AlertCircle className="w-5 h-5 text-accent-foreground flex-shrink-0" />
-              <p className="text-sm text-accent-foreground">
-                Demo mode - validation disabled
-              </p>
-            </div>
-
-            {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="your@email.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="pl-10"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                  <Input
-                    id="password"
-                    type={showPassword ? 'text' : 'password'}
-                    placeholder="Enter your password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="pl-10 pr-10"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                  >
-                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                  </button>
-                </div>
-              </div>
-
-              <div className="flex justify-end">
-                <Link to="#" className="text-sm text-primary hover:underline">
-                  Forgot password?
-                </Link>
-              </div>
-
-              <Button
-                type="submit"
-                className="w-full bg-primary text-white hover:bg-primary/90"
-                size="lg"
-                disabled={isLoading}
-              >
-                {isLoading ? 'Signing in...' : 'Log In'}
-              </Button>
-            </form>
-
-            {/* Footer */}
-            <p className="text-center text-sm text-muted-foreground mt-6">
-              Don't have an account?{' '}
-              <Link to="/signup/individual" className="text-primary font-medium hover:underline">
-                Start Free Trial
-              </Link>
-            </p>
+            <Button variant="ghost" onClick={() => navigate('/')}>
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Home
+            </Button>
           </div>
         </div>
-      </main>
-      <Footer />
+      </header>
+
+      {/* Main Content */}
+      <div className="flex-1 flex items-center justify-center p-4">
+        <div className="max-w-5xl w-full space-y-8">
+          {/* Header */}
+          <div className="text-center space-y-2">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Welcome to StudyBug</h1>
+            <p className="text-xl text-muted-foreground">
+              Choose your role to get started
+            </p>
+            {import.meta.env.DEV && (
+              <p className="text-sm text-amber-600 dark:text-amber-500 font-medium">
+                Development Mode: Select your role to continue
+              </p>
+            )}
+          </div>
+
+          {/* Role Selection Cards */}
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Tutor Card */}
+            <Card className="hover:shadow-lg transition-all cursor-pointer group border-2 hover:border-primary">
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                    <GraduationCap className="h-8 w-8 text-primary" />
+                  </div>
+                  <CardTitle className="text-2xl">I'm a Tutor</CardTitle>
+                </div>
+                <CardDescription className="text-base">
+                  Create engaging games, manage groups, and track student progress
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li className="flex items-center gap-2">
+                    <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                    Create interactive learning games
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                    Organize students into groups
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                    Assign activities and set deadlines
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                    Monitor performance and progress
+                  </li>
+                </ul>
+                <Button
+                  onClick={() => handleRoleSelection(Role.TUTOR)}
+                  className="w-full"
+                  size="lg"
+                >
+                  Continue as Tutor
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Student Card */}
+            <Card className="hover:shadow-lg transition-all cursor-pointer group border-2 hover:border-primary">
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="p-3 rounded-lg bg-secondary/50 group-hover:bg-secondary/70 transition-colors">
+                    <User className="h-8 w-8" />
+                  </div>
+                  <CardTitle className="text-2xl">I'm a Student</CardTitle>
+                </div>
+                <CardDescription className="text-base">
+                  Join groups, play learning games, and track your achievements
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li className="flex items-center gap-2">
+                    <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                    Join groups with a code
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                    Play fun educational games
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                    Complete assignments and challenges
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                    See your progress and scores
+                  </li>
+                </ul>
+                <Button
+                  onClick={() => handleRoleSelection(Role.STUDENT)}
+                  className="w-full"
+                  size="lg"
+                  variant="secondary"
+                >
+                  Continue as Student
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Footer Note */}
+          <p className="text-center text-sm text-muted-foreground">
+            Educational platform designed for interactive learning
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

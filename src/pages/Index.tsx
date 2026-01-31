@@ -1,5 +1,7 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
+import { Role } from '@/types/auth';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { PricingHero } from '@/components/pricing/PricingHero';
@@ -25,9 +27,20 @@ import { ArrowRight } from 'lucide-react';
 export default function Index() {
   const navigate = useNavigate();
   const { t } = useLocale();
+  const { isAuthenticated, session } = useAuth();
   const [billingCycle, setBillingCycle] = useState<BillingCycle>('annual');
   const pricingRef = useRef<HTMLDivElement>(null);
   const howItWorksRef = useRef<HTMLDivElement>(null);
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated && session) {
+      const redirectPath = session.user.role === Role.TUTOR
+        ? '/tutor/dashboard'
+        : '/student/dashboard';
+      navigate(redirectPath, { replace: true });
+    }
+  }, [isAuthenticated, session, navigate]);
 
   const handleSelectPlan = (planId: string) => {
     if (planId === 'school') {
