@@ -5,56 +5,30 @@ import { Footer } from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Eye, EyeOff, Mail, Lock, AlertCircle, Info } from 'lucide-react';
-import { useAuth } from '@/context/AuthContext';
+import { Eye, EyeOff, Mail, Lock, AlertCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 export default function Login() {
   const navigate = useNavigate();
-  const { login } = useAuth();
   const { toast } = useToast();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
     setIsLoading(true);
     
-    const result = await login(email, password);
+    // Simulate login delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
     
-    if (result.success) {
-      // Check the email to determine redirect
-      if (email.toLowerCase() === 'demo@studybug.io') {
-        navigate('/app/tutor/dashboard');
-      } else if (email.toLowerCase() === 'student@studybug.io') {
-        navigate('/app/student/dashboard');
-      } else {
-        // For signup accounts, check stored role
-        const stored = localStorage.getItem('studybug_user');
-        if (stored) {
-          const user = JSON.parse(stored);
-          navigate(user.role === 'tutor' ? '/app/tutor/dashboard' : '/app/student/dashboard');
-        }
-      }
-    } else {
-      setError(result.error || 'Login failed');
-    }
+    toast({
+      title: "Demo Mode",
+      description: "Login functionality coming soon - this is a demo",
+    });
     
     setIsLoading(false);
-  };
-
-  const fillDemoCredentials = (type: 'tutor' | 'student') => {
-    if (type === 'tutor') {
-      setEmail('demo@studybug.io');
-      setPassword('demo123');
-    } else {
-      setEmail('student@studybug.io');
-      setPassword('demo123');
-    }
   };
 
   return (
@@ -73,42 +47,13 @@ export default function Login() {
               </p>
             </div>
 
-            {/* Demo Credentials Card */}
-            <div className="bg-secondary/5 border border-secondary/20 rounded-xl p-4 mb-6">
-              <div className="flex items-start gap-3 mb-3">
-                <Info className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-sm font-medium text-foreground">Demo Credentials</p>
-                  <p className="text-xs text-muted-foreground">Click to auto-fill</p>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-2">
-                <button
-                  type="button"
-                  onClick={() => fillDemoCredentials('tutor')}
-                  className="text-left px-3 py-2 rounded-lg bg-white border border-border hover:border-secondary transition-colors"
-                >
-                  <p className="text-xs font-medium text-secondary">Tutor</p>
-                  <p className="text-xs text-muted-foreground">demo@studybug.io</p>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => fillDemoCredentials('student')}
-                  className="text-left px-3 py-2 rounded-lg bg-white border border-border hover:border-primary transition-colors"
-                >
-                  <p className="text-xs font-medium text-primary">Student</p>
-                  <p className="text-xs text-muted-foreground">student@studybug.io</p>
-                </button>
-              </div>
+            {/* Demo Notice */}
+            <div className="flex items-center gap-3 p-4 rounded-lg bg-accent/10 border border-accent/20 mb-6">
+              <AlertCircle className="w-5 h-5 text-accent-foreground flex-shrink-0" />
+              <p className="text-sm text-accent-foreground">
+                Demo mode - validation disabled
+              </p>
             </div>
-
-            {/* Error Message */}
-            {error && (
-              <div className="flex items-center gap-3 p-4 rounded-lg bg-destructive/10 border border-destructive/20 mb-6">
-                <AlertCircle className="w-5 h-5 text-destructive flex-shrink-0" />
-                <p className="text-sm text-destructive">{error}</p>
-              </div>
-            )}
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-5">
@@ -168,8 +113,8 @@ export default function Login() {
             {/* Footer */}
             <p className="text-center text-sm text-muted-foreground mt-6">
               Don't have an account?{' '}
-              <Link to="/signup" className="text-primary font-medium hover:underline">
-                Sign Up
+              <Link to="/signup/individual" className="text-primary font-medium hover:underline">
+                Start Free Trial
               </Link>
             </p>
           </div>
