@@ -463,3 +463,46 @@ export async function addStudentToGroup(
     throw appError;
   }
 }
+
+/**
+ * Get all groups a student is a member of
+ */
+export async function getStudentGroups(studentId: string): Promise<GroupWithDetails[]> {
+  try {
+    if (!studentId) {
+      throw createErrorResponse(
+        ErrorCode.INVALID_INPUT,
+        'Student ID is required',
+        'getStudentGroups called without studentId',
+        400
+      );
+    }
+
+    const members = getMembers();
+    const studentMemberships = members.filter((m) => m.studentId === studentId);
+
+    const groups = getGroups();
+    const studentGroups: GroupWithDetails[] = [];
+
+    for (const membership of studentMemberships) {
+      const group = groups.find((g) => g.id === membership.groupId);
+      if (group) {
+        const groupMembers = members.filter((m) => m.groupId === group.id);
+        studentGroups.push({
+          ...group,
+          members: groupMembers,
+          memberCount: groupMembers.length,
+        });
+      }
+    }
+
+    return studentGroups;
+  } catch (error) {
+    const appError = handleAppError(error);
+    logError('Failed to get student groups', error, {
+      action: 'get_student_groups',
+      studentId,
+    });
+    throw appError;
+  }
+}

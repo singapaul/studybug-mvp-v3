@@ -41,3 +41,17 @@ export {
   joinGroupSchema,
   type JoinGroupFormData,
 } from './join-group.schema';
+
+// Settings schemas
+export {
+  profileSettingsSchema,
+  notificationSettingsSchema,
+  themeSettingsSchema,
+  contactSupportSchema,
+  passwordChangeSchema,
+  type ProfileSettingsFormData,
+  type NotificationSettingsFormData,
+  type ThemeSettingsFormData,
+  type ContactSupportFormData,
+  type PasswordChangeFormData,
+} from './settings.schema';

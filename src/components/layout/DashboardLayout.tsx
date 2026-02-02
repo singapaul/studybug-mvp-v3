@@ -47,11 +47,13 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     { name: 'Dashboard', path: '/tutor/dashboard', icon: LayoutDashboard },
     { name: 'Groups', path: '/tutor/groups', icon: Users },
     { name: 'Games', path: '/tutor/games', icon: Gamepad2 },
+    { name: 'Settings', path: '/tutor/settings', icon: Settings },
   ];
 
   const studentLinks = [
     { name: 'Dashboard', path: '/student/dashboard', icon: LayoutDashboard },
     { name: 'My Scores', path: '/student/scores', icon: BarChart3 },
+    { name: 'Settings', path: '/student/settings', icon: Settings },
   ];
 
   const navLinks = isTutor ? tutorLinks : studentLinks;

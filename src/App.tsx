@@ -23,6 +23,8 @@ import StudentDashboard from "./pages/student/StudentDashboard";
 import PlayGame from "./pages/student/PlayGame";
 import MyScores from "./pages/student/MyScores";
 import AttemptDetails from "./pages/student/AttemptDetails";
+import TutorSettings from "./pages/tutor/TutorSettings";
+import StudentSettings from "./pages/student/StudentSettings";
 import Pricing from "./pages/Pricing";
 import IndividualSignup from "./pages/IndividualSignup";
 import FreeSignup from "./pages/FreeSignup";
@@ -112,6 +114,14 @@ const App = () => (
                     </ProtectedRoute>
                   }
                 />
+                <Route
+                  path="/tutor/settings"
+                  element={
+                    <ProtectedRoute requiredRole={Role.TUTOR}>
+                      <TutorSettings />
+                    </ProtectedRoute>
+                  }
+                />
 
                 {/* Student Routes */}
                 <Route
@@ -143,6 +153,14 @@ const App = () => (
                   element={
                     <ProtectedRoute requiredRole={Role.STUDENT}>
                       <AttemptDetails />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/student/settings"
+                  element={
+                    <ProtectedRoute requiredRole={Role.STUDENT}>
+                      <StudentSettings />
                     </ProtectedRoute>
                   }
                 />

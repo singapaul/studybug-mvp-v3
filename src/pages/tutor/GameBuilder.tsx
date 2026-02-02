@@ -7,6 +7,7 @@ import { PairsBuilder } from '@/components/games/PairsBuilder';
 import { FlashcardsBuilder } from '@/components/games/FlashcardsBuilder';
 import { SplatBuilder } from '@/components/games/SplatBuilder';
 import { SwipeBuilder } from '@/components/games/SwipeBuilder';
+import DashboardLayout from '@/components/layout/DashboardLayout';
 
 export default function GameBuilder() {
   const { type } = useParams<{ type: string }>();
@@ -16,15 +17,17 @@ export default function GameBuilder() {
 
   if (!gameType || !Object.values(GameType).includes(gameType)) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold mb-2">Invalid Game Type</h2>
-          <p className="text-muted-foreground mb-4">The selected game type is not supported.</p>
-          <Button onClick={() => navigate('/tutor/games/create')}>
-            Back to Game Selection
-          </Button>
+      <DashboardLayout>
+        <div className="flex items-center justify-center py-12">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold mb-2">Invalid Game Type</h2>
+            <p className="text-muted-foreground mb-4">The selected game type is not supported.</p>
+            <Button onClick={() => navigate('/tutor/games/create')}>
+              Back to Game Selection
+            </Button>
+          </div>
         </div>
-      </div>
+      </DashboardLayout>
     );
   }
 
@@ -46,9 +49,9 @@ export default function GameBuilder() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <DashboardLayout>
       {/* Header */}
-      <header className="border-b sticky top-0 bg-background z-10">
+      <div className="border-b sticky top-0 bg-background z-10">
         <div className="container mx-auto px-4 py-4">
           <Button
             variant="ghost"
@@ -59,12 +62,12 @@ export default function GameBuilder() {
             Back
           </Button>
         </div>
-      </header>
+      </div>
 
       {/* Builder Content */}
-      <main className="container mx-auto px-4 py-6">
+      <div className="container mx-auto px-4 py-6">
         {renderBuilder()}
-      </main>
-    </div>
+      </div>
+    </DashboardLayout>
   );
 }

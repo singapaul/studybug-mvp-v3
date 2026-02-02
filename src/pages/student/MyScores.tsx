@@ -9,10 +9,10 @@ import ProgressTrendsTab from '@/components/student/progress/ProgressTrendsTab';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 
 export default function MyScores() {
-  const { user } = useAuth();
+  const { session } = useAuth();
   const [activeTab, setActiveTab] = useState('attempts');
 
-  if (!user) {
+  if (!session?.student?.id) {
     return null;
   }
 
@@ -47,15 +47,15 @@ export default function MyScores() {
           </TabsList>
 
           <TabsContent value="attempts">
-            <AssignmentAttemptsTab studentId={user.id} />
+            <AssignmentAttemptsTab studentId={session.student.id} />
           </TabsContent>
 
           <TabsContent value="bests">
-            <PersonalBestsTab studentId={user.id} />
+            <PersonalBestsTab studentId={session.student.id} />
           </TabsContent>
 
           <TabsContent value="trends">
-            <ProgressTrendsTab studentId={user.id} />
+            <ProgressTrendsTab studentId={session.student.id} />
           </TabsContent>
         </Tabs>
       </div>

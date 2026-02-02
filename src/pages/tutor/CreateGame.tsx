@@ -5,6 +5,7 @@ import { GAME_TEMPLATES } from '@/lib/game-templates';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, LayoutGrid, BookOpen, CheckCircle, Zap, Move, ArrowRight } from 'lucide-react';
+import DashboardLayout from '@/components/layout/DashboardLayout';
 
 const ICON_MAP: Record<string, any> = {
   LayoutGrid,
@@ -25,9 +26,9 @@ export default function CreateGame() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <DashboardLayout>
       {/* Header */}
-      <header className="border-b">
+      <div className="border-b bg-background">
         <div className="container mx-auto px-4 py-6">
           <Button
             variant="ghost"
@@ -45,10 +46,10 @@ export default function CreateGame() {
             </p>
           </div>
         </div>
-      </header>
+      </div>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {GAME_TEMPLATES.map((template) => {
             const Icon = ICON_MAP[template.icon];
@@ -130,7 +131,7 @@ export default function CreateGame() {
             </div>
           </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </DashboardLayout>
   );
 }

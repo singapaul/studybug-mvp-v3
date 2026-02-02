@@ -35,6 +35,7 @@ import {
 } from 'lucide-react';
 import { formatJoinCode, getJoinLink } from '@/lib/join-code';
 import { toast } from 'sonner';
+import DashboardLayout from '@/components/layout/DashboardLayout';
 
 export default function GroupDetail() {
   const { groupId } = useParams<{ groupId: string }>();
@@ -124,9 +125,11 @@ export default function GroupDetail() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
-      </div>
+      <DashboardLayout>
+        <div className="flex items-center justify-center py-12">
+          <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+        </div>
+      </DashboardLayout>
     );
   }
 
@@ -138,9 +141,9 @@ export default function GroupDetail() {
   const formattedCode = formatJoinCode(group.joinCode);
 
   return (
-    <div className="min-h-screen bg-background">
+    <DashboardLayout>
       {/* Header */}
-      <header className="border-b">
+      <div className="border-b bg-background">
         <div className="container mx-auto px-4 py-6">
           <Button
             variant="ghost"
@@ -174,10 +177,10 @@ export default function GroupDetail() {
             </Button>
           </div>
         </div>
-      </header>
+      </div>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8 space-y-8">
+      <div className="container mx-auto px-4 py-8 space-y-8">
         {/* Join Information Card */}
         <Card>
           <CardHeader>
@@ -349,7 +352,7 @@ export default function GroupDetail() {
             </CardContent>
           </Card>
         </div>
-      </main>
+      </div>
 
       {/* Invite Students Dialog */}
       <InviteStudentsDialog
@@ -385,6 +388,6 @@ export default function GroupDetail() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </div>
+    </DashboardLayout>
   );
 }
