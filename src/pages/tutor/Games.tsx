@@ -10,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Plus, Gamepad2, Loader2, LayoutGrid, BookOpen, CheckCircle, Zap, Move } from 'lucide-react';
 import { getTemplateColor, getTemplateName } from '@/lib/game-templates';
 import { toast } from 'sonner';
+import DashboardLayout from '@/components/layout/DashboardLayout';
 
 const GAME_TYPE_ICONS: Record<GameType, any> = {
   [GameType.PAIRS]: LayoutGrid,
@@ -102,9 +103,9 @@ export default function Games() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <DashboardLayout>
       {/* Header */}
-      <header className="border-b">
+      <div className="border-b bg-background">
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <div>
@@ -119,10 +120,10 @@ export default function Games() {
             </Button>
           </div>
         </div>
-      </header>
+      </div>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8">
         <Tabs value={filterType} onValueChange={(v) => setFilterType(v as GameType | 'ALL')}>
           <TabsList className="mb-6">
             <TabsTrigger value="ALL">All ({counts.ALL})</TabsTrigger>
@@ -167,7 +168,7 @@ export default function Games() {
             )}
           </TabsContent>
         </Tabs>
-      </main>
-    </div>
+      </div>
+    </DashboardLayout>
   );
 }

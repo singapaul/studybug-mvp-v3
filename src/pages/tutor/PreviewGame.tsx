@@ -10,6 +10,7 @@ import { getGameById } from '@/services/game.service';
 import PairsGame from '@/components/games/pairs/PairsGame';
 import FlashcardsGame from '@/components/games/flashcards/FlashcardsGame';
 import SplatGame from '@/components/games/splat/SplatGame';
+import SwipeGame from '@/components/games/swipe/SwipeGame';
 import { toast } from 'sonner';
 
 export default function PreviewGame() {
@@ -140,6 +141,16 @@ export default function PreviewGame() {
       case GameType.SPLAT:
         return (
           <SplatGame
+            gameData={game.gameData as any}
+            gameName={`${game.name} (Preview)`}
+            onComplete={handleGameComplete}
+            onExit={handleExit}
+          />
+        );
+
+      case GameType.SWIPE:
+        return (
+          <SwipeGame
             gameData={game.gameData as any}
             gameName={`${game.name} (Preview)`}
             onComplete={handleGameComplete}

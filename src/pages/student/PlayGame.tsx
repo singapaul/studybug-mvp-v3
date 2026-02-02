@@ -11,6 +11,7 @@ import { saveGameAttempt } from '@/services/game-attempt.service';
 import PairsGame from '@/components/games/pairs/PairsGame';
 import FlashcardsGame from '@/components/games/flashcards/FlashcardsGame';
 import SplatGame from '@/components/games/splat/SplatGame';
+import SwipeGame from '@/components/games/swipe/SwipeGame';
 import { toast } from 'sonner';
 
 export default function PlayGame() {
@@ -198,6 +199,16 @@ export default function PlayGame() {
       case GameType.SPLAT:
         return (
           <SplatGame
+            gameData={game.gameData as any}
+            gameName={game.name}
+            onComplete={handleGameComplete}
+            onExit={handleExit}
+          />
+        );
+
+      case GameType.SWIPE:
+        return (
+          <SwipeGame
             gameData={game.gameData as any}
             gameName={game.name}
             onComplete={handleGameComplete}

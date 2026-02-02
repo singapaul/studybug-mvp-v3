@@ -9,6 +9,7 @@ import { LocaleProvider } from "@/context/LocaleContext";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { RoleSwitcher } from "@/components/dev/RoleSwitcher";
+import { ErrorBoundary } from "@/components/error/ErrorBoundary";
 import { Role } from "@/types/auth";
 import Index from "./pages/Index";
 import TutorDashboard from "./pages/tutor/TutorDashboard";
@@ -48,8 +49,9 @@ const App = () => (
             <Toaster />
             <Sonner />
             <BrowserRouter>
-              <ScrollToTop />
-              <Routes>
+              <ErrorBoundary>
+                <ScrollToTop />
+                <Routes>
                 {/* Home - Landing Page */}
                 <Route path="/" element={<Index />} />
 
@@ -164,8 +166,9 @@ const App = () => (
                 <Route path="*" element={<NotFound />} />
               </Routes>
 
-              {/* Dev-only role switcher */}
-              <RoleSwitcher />
+                {/* Dev-only role switcher */}
+                <RoleSwitcher />
+              </ErrorBoundary>
             </BrowserRouter>
           </TooltipProvider>
         </AuthProvider>

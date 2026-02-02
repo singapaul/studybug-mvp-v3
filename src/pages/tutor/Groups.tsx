@@ -16,6 +16,7 @@ import { CreateGroupForm } from '@/components/groups/CreateGroupForm';
 import { GroupCard } from '@/components/groups/GroupCard';
 import { Plus, Users, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
+import DashboardLayout from '@/components/layout/DashboardLayout';
 
 export default function Groups() {
   const { session } = useAuth();
@@ -61,9 +62,9 @@ export default function Groups() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <DashboardLayout>
       {/* Header */}
-      <header className="border-b">
+      <div className="border-b bg-background">
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <div>
@@ -92,10 +93,10 @@ export default function Groups() {
             </Dialog>
           </div>
         </div>
-      </header>
+      </div>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8">
         {isLoading ? (
           <div className="flex items-center justify-center py-12">
             <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
@@ -138,7 +139,7 @@ export default function Groups() {
             ))}
           </div>
         )}
-      </main>
-    </div>
+      </div>
+    </DashboardLayout>
   );
 }

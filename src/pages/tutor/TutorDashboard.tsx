@@ -21,6 +21,7 @@ import {
 import { getTutorGroups } from '@/services/group.service';
 import { getTutorGames } from '@/services/game.service';
 import { format } from 'date-fns';
+import { TutorTestDataButton } from '@/components/dev/TutorTestDataButton';
 
 const GAME_TYPE_ICONS = {
   PAIRS: '🎴',
@@ -185,13 +186,6 @@ export default function TutorDashboard() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="flex gap-1 mb-3">
-                  {Object.values(GAME_TYPE_ICONS).map((icon, i) => (
-                    <span key={i} className="text-2xl">
-                      {icon}
-                    </span>
-                  ))}
-                </div>
                 <Button className="w-full" onClick={() => navigate('/tutor/games/create')}>
                   <Plus className="mr-2 h-4 w-4" />
                   New Game
@@ -404,6 +398,14 @@ export default function TutorDashboard() {
           </Card>
         )}
       </div>
+
+      {/* Dev Tools Button (Development Only) */}
+      {session?.tutor?.id && (
+        <TutorTestDataButton
+          tutorId={session.tutor.id}
+          onDataChanged={loadDashboardData}
+        />
+      )}
     </DashboardLayout>
   );
 }

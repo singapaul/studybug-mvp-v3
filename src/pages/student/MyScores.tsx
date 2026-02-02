@@ -6,6 +6,7 @@ import { Trophy, TrendingUp, History } from 'lucide-react';
 import AssignmentAttemptsTab from '@/components/student/progress/AssignmentAttemptsTab';
 import PersonalBestsTab from '@/components/student/progress/PersonalBestsTab';
 import ProgressTrendsTab from '@/components/student/progress/ProgressTrendsTab';
+import DashboardLayout from '@/components/layout/DashboardLayout';
 
 export default function MyScores() {
   const { user } = useAuth();
@@ -16,8 +17,8 @@ export default function MyScores() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-background p-6">
-      <div className="container mx-auto max-w-7xl">
+    <DashboardLayout>
+      <div className="container mx-auto max-w-7xl px-4 py-8">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
@@ -58,6 +59,6 @@ export default function MyScores() {
           </TabsContent>
         </Tabs>
       </div>
-    </div>
+    </DashboardLayout>
   );
 }

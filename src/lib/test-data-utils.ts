@@ -32,6 +32,15 @@ export function createTestAssignments() {
       createdAt: new Date(),
       updatedAt: new Date(),
     },
+    {
+      id: `assignment_${Date.now()}_4`,
+      gameId: 'test_game_4',
+      groupId: 'test_group_1',
+      dueDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000), // 5 days from now
+      passPercentage: 75,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
   ];
 
   localStorage.setItem('dev_assignments', JSON.stringify(assignments));
@@ -120,6 +129,27 @@ export function createTestGamesForAssignments() {
       createdAt: new Date(),
       updatedAt: new Date(),
     },
+    {
+      id: 'test_game_4',
+      tutorId: 'test_tutor',
+      name: 'True or False Science',
+      gameType: 'SWIPE',
+      gameData: JSON.stringify({
+        description: 'Swipe right for true, left for false',
+        items: [
+          { id: '1', statement: 'The Sun is a star', isCorrect: true },
+          { id: '2', statement: 'Fish can live without water', isCorrect: false },
+          { id: '3', statement: 'Plants produce oxygen', isCorrect: true },
+          { id: '4', statement: 'The Earth is flat', isCorrect: false },
+          { id: '5', statement: 'Water boils at 100°C at sea level', isCorrect: true },
+          { id: '6', statement: 'Humans have four lungs', isCorrect: false },
+          { id: '7', statement: 'The moon orbits around Earth', isCorrect: true },
+          { id: '8', statement: 'Birds are mammals', isCorrect: false },
+        ],
+      }),
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
   ];
 
   const existingGames = JSON.parse(localStorage.getItem('dev_games') || '[]');
@@ -192,10 +222,154 @@ export function initializeStudentTestData(studentId: string, tutorId: string) {
 }
 
 /**
+ * Initialize all test data needed for tutor dashboard testing
+ */
+export function initializeTutorTestData(tutorId: string) {
+  // Create test games
+  const games = [
+    {
+      id: `game_${Date.now()}_1`,
+      tutorId,
+      name: 'Multiplication Tables',
+      gameType: 'PAIRS',
+      gameData: JSON.stringify({
+        description: 'Match multiplication problems with their answers',
+        items: [
+          { id: '1', leftText: '3 × 4', rightText: '12' },
+          { id: '2', leftText: '6 × 7', rightText: '42' },
+          { id: '3', leftText: '8 × 9', rightText: '72' },
+          { id: '4', leftText: '5 × 5', rightText: '25' },
+          { id: '5', leftText: '7 × 8', rightText: '56' },
+          { id: '6', leftText: '9 × 6', rightText: '54' },
+        ],
+      }),
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      id: `game_${Date.now()}_2`,
+      tutorId,
+      name: 'States and Capitals',
+      gameType: 'FLASHCARDS',
+      gameData: JSON.stringify({
+        description: 'Learn US state capitals',
+        cards: [
+          { id: '1', front: 'California', back: 'Sacramento' },
+          { id: '2', front: 'Texas', back: 'Austin' },
+          { id: '3', front: 'Florida', back: 'Tallahassee' },
+          { id: '4', front: 'New York', back: 'Albany' },
+          { id: '5', front: 'Illinois', back: 'Springfield' },
+          { id: '6', front: 'Ohio', back: 'Columbus' },
+        ],
+      }),
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      id: `game_${Date.now()}_3`,
+      tutorId,
+      name: 'Fractions Quiz',
+      gameType: 'MULTIPLE_CHOICE',
+      gameData: JSON.stringify({
+        description: 'Test your knowledge of fractions',
+        questions: [
+          {
+            id: '1',
+            question: 'What is 1/2 + 1/4?',
+            options: [
+              { id: 'a', text: '1/6', isCorrect: false },
+              { id: 'b', text: '3/4', isCorrect: true },
+              { id: 'c', text: '2/6', isCorrect: false },
+              { id: 'd', text: '1/3', isCorrect: false },
+            ],
+          },
+          {
+            id: '2',
+            question: 'What is 3/4 - 1/2?',
+            options: [
+              { id: 'a', text: '1/4', isCorrect: true },
+              { id: 'b', text: '1/2', isCorrect: false },
+              { id: 'c', text: '2/4', isCorrect: false },
+              { id: 'd', text: '1/8', isCorrect: false },
+            ],
+          },
+        ],
+      }),
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+  ];
+
+  const existingGames = JSON.parse(localStorage.getItem('dev_games') || '[]');
+  const mergedGames = [...existingGames, ...games];
+  localStorage.setItem('dev_games', JSON.stringify(mergedGames));
+
+  // Create test group
+  const groups = JSON.parse(localStorage.getItem('dev_groups') || '[]');
+  const newGroup = {
+    id: `group_${Date.now()}`,
+    tutorId,
+    name: 'Grade 5 Math',
+    ageRange: '10-11',
+    subjectArea: 'Mathematics',
+    joinCode: `DEV${Math.random().toString(36).substr(2, 3).toUpperCase()}`,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  };
+  groups.push(newGroup);
+  localStorage.setItem('dev_groups', JSON.stringify(groups));
+
+  // Create test assignments
+  const assignments = [
+    {
+      id: `assignment_${Date.now()}_1`,
+      gameId: games[0].id,
+      groupId: newGroup.id,
+      dueDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), // 3 days from now
+      passPercentage: 70,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      id: `assignment_${Date.now()}_2`,
+      gameId: games[1].id,
+      groupId: newGroup.id,
+      dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days from now
+      passPercentage: 75,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      id: `assignment_${Date.now()}_3`,
+      gameId: games[2].id,
+      groupId: newGroup.id,
+      dueDate: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), // 2 days ago (overdue)
+      passPercentage: 80,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+  ];
+
+  const existingAssignments = JSON.parse(localStorage.getItem('dev_assignments') || '[]');
+  const mergedAssignments = [...existingAssignments, ...assignments];
+  localStorage.setItem('dev_assignments', JSON.stringify(mergedAssignments));
+
+  console.log('✅ Tutor test data initialized successfully!');
+  console.log('🎮 Created 3 test games');
+  console.log('👥 Created 1 test group');
+  console.log('📚 Created 3 assignments');
+
+  return { games, group: newGroup, assignments };
+}
+
+/**
  * Clear all test data
  */
 export function clearTestData() {
   localStorage.removeItem('dev_assignments');
   localStorage.removeItem('dev_game_attempts');
+  localStorage.removeItem('dev_games');
+  localStorage.removeItem('dev_groups');
+  localStorage.removeItem('dev_group_members');
   console.log('🧹 Test data cleared');
 }
