@@ -47,7 +47,11 @@ export interface AuthContextType {
   isAuthenticated: boolean;
   isTutor: boolean;
   isStudent: boolean;
+  isLoading: boolean;
   login: (role: Role) => void;
-  logout: () => void;
+  logout: () => Promise<void>;
   switchRole: (role: Role) => void;
+  signIn: (email: string, password: string) => Promise<void>;
+  signUp: (email: string, password: string, role: Role) => Promise<void>;
+  setUserRole: (role: Role) => Promise<void>;
 }
