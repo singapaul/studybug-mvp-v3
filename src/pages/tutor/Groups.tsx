@@ -34,7 +34,7 @@ export default function Groups() {
 
     try {
       setIsLoading(true);
-      const data = await getMyGroups(session.tutor.id);
+      const data = await getMyGroups();
       setGroups(data);
     } catch (error) {
       console.error('Error loading groups:', error);
@@ -49,7 +49,11 @@ export default function Groups() {
 
     try {
       setIsCreating(true);
-      const newGroup = await createGroup(session.tutor.id, data);
+      const newGroup = await createGroup({
+        name: data.name,
+        ageRange: data.ageRange,
+        subjectArea: data.subjectArea
+      });
       setGroups([newGroup, ...groups]);
       setIsDialogOpen(false);
       toast.success(`Group "${newGroup.name}" created successfully!`);

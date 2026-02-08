@@ -49,7 +49,7 @@ export function FlashcardsBuilder() {
     try {
       setIsSaving(true);
       const gameData: FlashcardsGameData = { cards };
-      await createGame(session.tutor.id, {
+      await createGame({
         name: gameName,
         gameType: GameType.FLASHCARDS,
         gameData,

@@ -128,7 +128,7 @@ export function MultipleChoiceBuilder() {
     );
   };
 
-  const handleDragEnd = (result: any) => {
+  const handleDragEnd = (result) => {
     if (!result.destination) return;
 
     const items = Array.from(questions);
@@ -169,7 +169,7 @@ export function MultipleChoiceBuilder() {
         questions,
       };
 
-      await createGame(session.tutor.id, {
+      await createGame({
         name: gameName,
         gameType: GameType.MULTIPLE_CHOICE,
         gameData,

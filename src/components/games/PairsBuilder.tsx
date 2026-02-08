@@ -55,7 +55,7 @@ export function PairsBuilder() {
     try {
       setIsSaving(true);
       const gameData: PairsGameData = { items: pairs };
-      await createGame(session.tutor.id, {
+      await createGame({
         name: gameName,
         gameType: GameType.PAIRS,
         gameData,
