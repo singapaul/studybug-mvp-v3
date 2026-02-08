@@ -66,8 +66,8 @@ export type Database = {
           gameType: Database["public"]["Enums"]["GameType"]
           id: string
           name: string
-          tutorId: string
           updatedAt: string
+          userId: string
         }
         Insert: {
           createdAt?: string
@@ -75,8 +75,8 @@ export type Database = {
           gameType: Database["public"]["Enums"]["GameType"]
           id?: string
           name: string
-          tutorId: string
           updatedAt?: string
+          userId: string
         }
         Update: {
           createdAt?: string
@@ -84,18 +84,10 @@ export type Database = {
           gameType?: Database["public"]["Enums"]["GameType"]
           id?: string
           name?: string
-          tutorId?: string
           updatedAt?: string
+          userId?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "Game_tutorId_fkey"
-            columns: ["tutorId"]
-            isOneToOne: false
-            referencedRelation: "Tutor"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       GameAttempt: {
         Row: {
@@ -459,4 +451,3 @@ export const Constants = {
     },
   },
 } as const
- 

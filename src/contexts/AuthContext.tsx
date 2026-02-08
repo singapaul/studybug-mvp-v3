@@ -72,7 +72,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     // Add role-specific profile data
     if (role === Role.TUTOR) {
       userSession.tutor = {
-        id: `tutor-${supabaseSession.user.id}`,
+        id: supabaseSession.user.id,
         userId: supabaseSession.user.id,
         subscriptionStatus: SubscriptionStatus.FREE,
         createdAt: new Date(supabaseSession.user.created_at),
@@ -80,7 +80,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       };
     } else {
       userSession.student = {
-        id: `student-${supabaseSession.user.id}`,
+        id: supabaseSession.user.id,
         userId: supabaseSession.user.id,
         createdAt: new Date(supabaseSession.user.created_at),
         updatedAt: new Date(supabaseSession.user.updated_at || supabaseSession.user.created_at),

@@ -20,8 +20,10 @@ export default function PreviewGame() {
   const [game, setGame] = useState<GameWithData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+ 
+  const userId = session.user.id || '';
 
-  const tutorId = session?.tutor?.id || '';
+   
 
   useEffect(() => {
     loadGameData();
@@ -43,7 +45,7 @@ export default function PreviewGame() {
       }
 
       // Verify this tutor owns the game
-      if (gameData.tutorId !== tutorId) {
+      if (gameData.userId !== userId) {
         throw new Error('You do not have permission to view this game');
       }
 

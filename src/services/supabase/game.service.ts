@@ -1,39 +1,29 @@
 /**
  * Supabase Game Service (Auth UID Based)
- * All functions use the current authenticated user
+ * All functions use the current authenticated user (auth.uid)
  */
 
 import { supabase } from '@/lib/supabase';
 import { Game, GameWithData, CreateGameInput, UpdateGameInput, GameData, GameType } from '@/types/game';
 
 /**
- * Get Tutor ID for current authenticated user
+ * Get current authenticated user ID
  */
-async function getCurrentTutorId(): Promise<string> {
+async function getCurrentUserId(): Promise<string> {
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {
     throw new Error('No authenticated user');
   }
 
-  const { data, error } = await supabase
-    .from('Tutor')
-    .select('id')
-    .eq('userId', user.id)
-    .single();
-
-  if (error || !data) {
-    throw new Error('Tutor profile not found');
-  }
-
-  return data.id;
+  return user.id;
 }
 
 /**
- * Get all games for current authenticated tutor
+ * Get all games for current authenticated user
  */
 export async function getMyGames(): Promise<Game[]> {
-  const tutorId = await getCurrentTutorId();
+  const userId = await getCurrentUserId();
 
   const { data, error } = await supabase
     .from('Game')
@@ -41,7 +31,7 @@ export async function getMyGames(): Promise<Game[]> {
       *,
       assignments:Assignment(count)
     `)
-    .eq('tutorId', tutorId)
+    .eq('userId', userId)
     .order('createdAt', { ascending: false });
 
   if (error) {
@@ -50,7 +40,7 @@ export async function getMyGames(): Promise<Game[]> {
 
   return data.map((game) => ({
     id: game.id,
-    tutorId: game.tutorId,
+    userId: game.userId,
     name: game.name,
     gameType: game.gameType as GameType,
     gameData: game.gameData,
@@ -81,7 +71,7 @@ export async function getGameById(gameId: string): Promise<GameWithData | null> 
 
   return {
     id: data.id,
-    tutorId: data.tutorId,
+    userId: data.userId,
     name: data.name,
     gameType: data.gameType as GameType,
     gameData: JSON.parse(data.gameData) as GameData,
@@ -91,15 +81,15 @@ export async function getGameById(gameId: string): Promise<GameWithData | null> 
 }
 
 /**
- * Get games filtered by type for current tutor
+ * Get games filtered by type for current user
  */
 export async function getMyGamesByType(type: GameType): Promise<Game[]> {
-  const tutorId = await getCurrentTutorId();
+  const userId = await getCurrentUserId();
 
   const { data, error } = await supabase
     .from('Game')
     .select('*')
-    .eq('tutorId', tutorId)
+    .eq('userId', userId)
     .eq('gameType', type)
     .order('createdAt', { ascending: false });
 
@@ -109,7 +99,7 @@ export async function getMyGamesByType(type: GameType): Promise<Game[]> {
 
   return data.map((game) => ({
     id: game.id,
-    tutorId: game.tutorId,
+    userId: game.userId,
     name: game.name,
     gameType: game.gameType as GameType,
     gameData: game.gameData,
@@ -119,15 +109,15 @@ export async function getMyGamesByType(type: GameType): Promise<Game[]> {
 }
 
 /**
- * Create a new game for current authenticated tutor
+ * Create a new game for current authenticated user
  */
 export async function createGame(input: CreateGameInput): Promise<GameWithData> {
-  const tutorId = await getCurrentTutorId();
+  const userId = await getCurrentUserId();
 
   const { data, error } = await supabase
     .from('Game')
     .insert({
-      tutorId: tutorId,
+      userId: userId,
       name: input.name,
       gameType: input.gameType,
       gameData: JSON.stringify(input.gameData),
@@ -141,7 +131,7 @@ export async function createGame(input: CreateGameInput): Promise<GameWithData> 
 
   return {
     id: data.id,
-    tutorId: data.tutorId,
+    userId: data.userId,
     name: data.name,
     gameType: data.gameType as GameType,
     gameData: JSON.parse(data.gameData) as GameData,
@@ -183,7 +173,7 @@ export async function updateGame(
 
   return {
     id: data.id,
-    tutorId: data.tutorId,
+    userId: data.userId,
     name: data.name,
     gameType: data.gameType as GameType,
     gameData: JSON.parse(data.gameData) as GameData,

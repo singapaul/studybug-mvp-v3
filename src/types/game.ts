@@ -11,7 +11,7 @@ export enum GameType {
 // Base game interface
 export interface Game {
   id: string;
-  tutorId: string;
+  userId: string; // auth.uid - references auth.users directly
   name: string;
   gameType: GameType;
   gameData: string; // JSON string of type-specific data
