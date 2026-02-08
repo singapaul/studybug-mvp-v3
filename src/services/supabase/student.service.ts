@@ -6,6 +6,7 @@
 import { supabase } from '@/lib/supabase';
 import { StudentAssignment, AssignmentFilter, AssignmentSort } from '@/types/assignment';
 import { Group } from '@/types/group';
+import { GameType } from '@/types/game';
 import { getGroupByJoinCode } from './group.service';
 
 /**
@@ -48,7 +49,6 @@ export async function joinGroup(
     };
   }
 
-  const studentEmail = user.email || '';
   const studentId = await getCurrentStudentId();
 
   const group = await getGroupByJoinCode(normalizedCode);
@@ -116,7 +116,7 @@ export async function getMyGroups(): Promise<Group[]> {
     throw new Error(`Failed to fetch student groups: ${error.message}`);
   }
 
-  return data.map((item: any) => ({
+  return data.map((item) => ({
     id: item.group.id,
     tutorId: item.group.tutorId,
     name: item.group.name,
@@ -147,7 +147,7 @@ export async function getMyAssignments(
     throw new Error(`Failed to fetch student memberships: ${memberError.message}`);
   }
 
-  const groupIds = memberData.map((m: any) => m.groupId);
+  const groupIds = memberData.map((m) => m.groupId);
 
   if (groupIds.length === 0) {
     return [];
@@ -179,14 +179,14 @@ export async function getMyAssignments(
   }
 
   // Build enriched assignments
-  const enrichedAssignments: StudentAssignment[] = assignments.map((assignment: any) => {
+  const enrichedAssignments: StudentAssignment[] = assignments.map((assignment) => {
     const studentAttempts = attempts.filter(
-      (a: any) => a.assignmentId === assignment.id
+      (a) => a.assignmentId === assignment.id
     );
 
     const bestScore =
       studentAttempts.length > 0
-        ? Math.max(...studentAttempts.map((a: any) => a.scorePercentage))
+        ? Math.max(...studentAttempts.map((a) => a.scorePercentage))
         : undefined;
 
     const isCompleted = studentAttempts.length > 0;
@@ -208,7 +208,7 @@ export async function getMyAssignments(
         id: assignment.game.id,
         tutorId: assignment.game.tutorId,
         name: assignment.game.name,
-        gameType: assignment.game.gameType,
+        gameType: assignment.game.gameType as GameType,
         gameData: JSON.parse(assignment.game.gameData),
         createdAt: new Date(assignment.game.createdAt),
         updatedAt: new Date(assignment.game.updatedAt),
@@ -320,7 +320,7 @@ export async function getMyAttempts(
     throw new Error(`Failed to fetch student attempts: ${error.message}`);
   }
 
-  let enrichedAttempts = data.map((attempt: any) => ({
+  let enrichedAttempts = data.map((attempt) => ({
     id: attempt.id,
     assignmentId: attempt.assignmentId,
     studentId: attempt.studentId,
@@ -336,22 +336,22 @@ export async function getMyAttempts(
   // Apply filters
   if (filters?.gameType) {
     enrichedAttempts = enrichedAttempts.filter(
-      (a: any) => a.game?.gameType === filters.gameType
+      (a) => a.game?.gameType === filters.gameType
     );
   }
   if (filters?.groupId) {
     enrichedAttempts = enrichedAttempts.filter(
-      (a: any) => a.group?.id === filters.groupId
+      (a) => a.group?.id === filters.groupId
     );
   }
   if (filters?.startDate) {
     enrichedAttempts = enrichedAttempts.filter(
-      (a: any) => new Date(a.completedAt) >= filters.startDate!
+      (a) => new Date(a.completedAt) >= filters.startDate!
     );
   }
   if (filters?.endDate) {
     enrichedAttempts = enrichedAttempts.filter(
-      (a: any) => new Date(a.completedAt) <= filters.endDate!
+      (a) => new Date(a.completedAt) <= filters.endDate!
     );
   }
 
@@ -365,8 +365,8 @@ export async function getMyPersonalBests() {
   const attempts = await getMyAttempts();
 
   // Group by game
-  const gameAttempts = new Map<string, any[]>();
-  attempts.forEach((attempt: any) => {
+  const gameAttempts = new Map<string, typeof attempts>();
+  attempts.forEach((attempt) => {
     const gameId = attempt.game?.id;
     if (!gameId) return;
 
@@ -377,13 +377,13 @@ export async function getMyPersonalBests() {
   });
 
   // Calculate personal bests
-  const personalBests = Array.from(gameAttempts.entries()).map(([gameId, gameAttemptsList]) => {
+  const personalBests = Array.from(gameAttempts.entries()).map(([, gameAttemptsList]) => {
     const game = gameAttemptsList[0].game;
-    const bestScore = Math.max(...gameAttemptsList.map((a: any) => a.scorePercentage));
-    const bestTime = Math.min(...gameAttemptsList.map((a: any) => a.timeTaken));
+    const bestScore = Math.max(...gameAttemptsList.map((a) => a.scorePercentage));
+    const bestTime = Math.min(...gameAttemptsList.map((a) => a.timeTaken));
     const totalAttempts = gameAttemptsList.length;
     const averageScore =
-      gameAttemptsList.reduce((sum: number, a: any) => sum + a.scorePercentage, 0) /
+      gameAttemptsList.reduce((sum, a) => sum + a.scorePercentage, 0) /
       totalAttempts;
 
     return {
@@ -393,7 +393,7 @@ export async function getMyPersonalBests() {
       totalAttempts,
       averageScore: Math.round(averageScore),
       lastPlayedAt: new Date(
-        Math.max(...gameAttemptsList.map((a: any) => new Date(a.completedAt).getTime()))
+        Math.max(...gameAttemptsList.map((a) => new Date(a.completedAt).getTime()))
       ),
     };
   });
@@ -415,7 +415,7 @@ export async function getMyProgressTrends(days: number = 30) {
   });
 
   // Calculate score over time
-  const scoreOverTime = attempts.map((attempt: any, index: number) => ({
+  const scoreOverTime = attempts.map((attempt, index: number) => ({
     date: new Date(attempt.completedAt).toLocaleDateString('en-US', {
       month: 'short',
       day: 'numeric',
@@ -426,7 +426,7 @@ export async function getMyProgressTrends(days: number = 30) {
 
   // Calculate performance by game type
   const gameTypePerformance = new Map<string, number[]>();
-  attempts.forEach((attempt: any) => {
+  attempts.forEach((attempt) => {
     const gameType = attempt.game?.gameType || 'Unknown';
     if (!gameTypePerformance.has(gameType)) {
       gameTypePerformance.set(gameType, []);
@@ -443,7 +443,7 @@ export async function getMyProgressTrends(days: number = 30) {
   );
 
   // Calculate streak
-  const attemptDates = attempts.map((a: any) => new Date(a.completedAt).toDateString());
+  const attemptDates = attempts.map((a) => new Date(a.completedAt).toDateString());
   const uniqueDates = [...new Set(attemptDates)].sort(
     (a, b) => new Date(b).getTime() - new Date(a).getTime()
   );
@@ -469,7 +469,7 @@ export async function getMyProgressTrends(days: number = 30) {
     averageScore:
       attempts.length > 0
         ? Math.round(
-            attempts.reduce((sum: number, a: any) => sum + a.scorePercentage, 0) /
+            attempts.reduce((sum, a) => sum + a.scorePercentage, 0) /
               attempts.length
           )
         : 0,

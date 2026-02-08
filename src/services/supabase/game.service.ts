@@ -48,7 +48,7 @@ export async function getMyGames(): Promise<Game[]> {
     throw new Error(`Failed to fetch games: ${error.message}`);
   }
 
-  return data.map((game: any) => ({
+  return data.map((game) => ({
     id: game.id,
     tutorId: game.tutorId,
     name: game.name,
@@ -107,7 +107,7 @@ export async function getMyGamesByType(type: GameType): Promise<Game[]> {
     throw new Error(`Failed to fetch games by type: ${error.message}`);
   }
 
-  return data.map((game: any) => ({
+  return data.map((game) => ({
     id: game.id,
     tutorId: game.tutorId,
     name: game.name,
@@ -160,7 +160,7 @@ export async function updateGame(
   gameId: string,
   input: UpdateGameInput
 ): Promise<GameWithData> {
-  const updateData: any = {};
+  const updateData: Record<string, unknown> = {};
 
   if (input.name !== undefined) {
     updateData.name = input.name;

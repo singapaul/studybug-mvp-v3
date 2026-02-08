@@ -80,7 +80,7 @@ export async function getMyGroups(): Promise<Group[]> {
       throw new Error(error.message);
     }
 
-    return data.map((group: any) => ({
+    return data.map((group) => ({
       id: group.id,
       tutorId: group.tutorId,
       name: group.name,
@@ -168,7 +168,7 @@ export async function getGroupById(groupId: string): Promise<GroupWithDetails | 
       joinCode: data.joinCode,
       createdAt: new Date(data.createdAt),
       updatedAt: new Date(data.updatedAt),
-      members: data.members.map((m: any) => ({
+      members: data.members.map((m) => ({
         id: m.id,
         groupId: m.groupId,
         studentId: m.studentId,
@@ -181,7 +181,7 @@ export async function getGroupById(groupId: string): Promise<GroupWithDetails | 
           },
         },
       })),
-      assignments: data.assignments.map((a: any) => ({
+      assignments: data.assignments.map((a) => ({
         id: a.id,
         gameId: a.gameId,
         dueDate: a.dueDate ? new Date(a.dueDate) : null,
@@ -362,7 +362,7 @@ export async function updateGroup(
       );
     }
 
-    const updateData: any = {};
+    const updateData: Record<string, unknown> = {};
 
     if (input.name !== undefined) {
       updateData.name = input.name.trim();
@@ -502,7 +502,7 @@ export async function getMyGroupsAsStudent(): Promise<GroupWithDetails[]> {
       throw new Error(error.message);
     }
 
-    return data.map((item: any) => {
+    return data.map((item) => {
       const group = item.group;
       return {
         id: group.id,

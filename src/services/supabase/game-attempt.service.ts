@@ -36,7 +36,7 @@ export async function saveGameAttempt(
   assignmentId: string,
   scorePercentage: number,
   timeTaken: number,
-  attemptData: any
+  attemptData: Record<string, unknown>
 ): Promise<GameAttempt> {
   const studentId = await getCurrentStudentId();
   const { data, error } = await supabase
@@ -84,7 +84,7 @@ export async function getMyAssignmentAttempts(
     throw new Error(`Failed to fetch assignment attempts: ${error.message}`);
   }
 
-  return data.map((attempt: any) => ({
+  return data.map((attempt) => ({
     id: attempt.id,
     assignmentId: attempt.assignmentId,
     studentId: attempt.studentId,
@@ -124,7 +124,7 @@ export async function getMyAttempts(): Promise<GameAttempt[]> {
     throw new Error(`Failed to fetch student attempts: ${error.message}`);
   }
 
-  return data.map((attempt: any) => ({
+  return data.map((attempt) => ({
     id: attempt.id,
     assignmentId: attempt.assignmentId,
     studentId: attempt.studentId,
