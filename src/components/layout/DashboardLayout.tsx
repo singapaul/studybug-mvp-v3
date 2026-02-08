@@ -1,7 +1,3 @@
-import { ReactNode, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '@/contexts/AuthContext';
-import { Role } from '@/types/auth';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -12,20 +8,24 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import {
-  BookOpen,
-  Users,
-  Gamepad2,
-  LayoutDashboard,
-  Menu,
-  ChevronDown,
-  LogOut,
-  Settings,
-  BarChart3,
-  User,
-  Layers,
-} from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 import { cn } from '@/lib/utils';
+import { Role } from '@/types/auth';
+import {
+  BarChart3,
+  BookOpen,
+  ChevronDown,
+  Gamepad2,
+  Layers,
+  LayoutDashboard,
+  LogOut,
+  Menu,
+  Settings,
+  User,
+  Users,
+} from 'lucide-react';
+import { ReactNode, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -147,11 +147,6 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                       </p>
                     </div>
                   </DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem disabled>
-                    <Settings className="mr-2 h-4 w-4" />
-                    <span>Settings</span>
-                  </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleLogout}>
                     <LogOut className="mr-2 h-4 w-4" />
