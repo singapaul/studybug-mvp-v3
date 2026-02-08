@@ -33,7 +33,7 @@ import {
   MessageCircle,
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { getStudentGroups } from '@/services/group.service';
+import { getMyGroups } from '@/services/supabase/group.service';
 import { GroupWithDetails } from '@/types/group';
 
 export default function StudentSettings() {
@@ -93,7 +93,7 @@ export default function StudentSettings() {
 
     setIsLoadingGroups(true);
     try {
-      const studentGroups = await getStudentGroups(session.student.id);
+      const studentGroups = await getMyGroups(session.student.id);
       setGroups(studentGroups);
     } catch (error) {
       console.error('Failed to load groups:', error);

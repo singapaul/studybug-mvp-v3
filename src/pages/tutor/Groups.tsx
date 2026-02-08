@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { getTutorGroups, createGroup } from '@/services/group.service';
+import { getMyGroups, createGroup } from '@/services/supabase/group.service';
 import { Group } from '@/types/group';
 import { CreateGroupFormData } from '@/schemas/group.schema';
 import { Button } from '@/components/ui/button';
@@ -34,7 +34,7 @@ export default function Groups() {
 
     try {
       setIsLoading(true);
-      const data = await getTutorGroups(session.tutor.id);
+      const data = await getMyGroups(session.tutor.id);
       setGroups(data);
     } catch (error) {
       console.error('Error loading groups:', error);

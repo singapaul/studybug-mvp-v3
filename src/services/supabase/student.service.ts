@@ -228,7 +228,7 @@ export async function getMyAssignments(
       isCompleted,
       isOverdue,
       isPassing,
-      gameAttempts: studentAttempts.map((a: any) => ({
+      gameAttempts: studentAttempts.map((a) => ({
         id: a.id,
         assignmentId: a.assignmentId,
         studentId: a.studentId,
@@ -301,7 +301,7 @@ export async function getMyAttempts(
 ) {
   const studentId = await getCurrentStudentId();
 
-  let query = supabase
+  const query = supabase
     .from('GameAttempt')
     .select(`
       *,
@@ -449,7 +449,7 @@ export async function getMyProgressTrends(days: number = 30) {
   );
 
   let currentStreak = 0;
-  let checkDate = new Date();
+  const checkDate = new Date();
 
   for (let i = 0; i < uniqueDates.length; i++) {
     const dateStr = checkDate.toDateString();

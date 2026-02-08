@@ -13,7 +13,7 @@ import {
   XCircle,
   Play,
 } from 'lucide-react';
-import { getAttemptDetails } from '@/services/student.service';
+import { getAttemptDetails } from '@/services/supabase/student.service';
 import { format } from 'date-fns';
 import { motion } from 'framer-motion';
 

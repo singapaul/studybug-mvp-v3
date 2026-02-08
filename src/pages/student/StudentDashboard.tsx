@@ -28,10 +28,10 @@ import {
 import { Group } from '@/types/group';
 import { StudentAssignment, AssignmentFilter, AssignmentSort } from '@/types/assignment';
 import {
-  getStudentGroups,
-  getStudentAssignments,
-  getStudentStats,
-} from '@/services/student.service';
+  getMyGroups,
+  getMyAssignments,
+  getMyStats,
+} from '@/services/supabase/student.service';
 import JoinGroupDialog from '@/components/student/JoinGroupDialog';
 import { StudentTestDataButton } from '@/components/dev/StudentTestDataButton';
 import { formatDistanceToNow } from 'date-fns';
@@ -73,9 +73,9 @@ export default function StudentDashboard() {
     setIsLoading(true);
     try {
       const [groupsData, assignmentsData, statsData] = await Promise.all([
-        getStudentGroups(studentId),
-        getStudentAssignments(studentId, filter, sort),
-        getStudentStats(studentId),
+        getMyGroups(),
+        getMyAssignments(filter, sort),
+        getMyStats(),
       ]);
 
       setGroups(groupsData);

@@ -4,8 +4,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import {
   getGroupById,
   removeStudentFromGroup,
-  addStudentToGroup,
-} from '@/services/group.service';
+} from '@/services/supabase/group.service';
 import { GroupWithDetails } from '@/types/group';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -107,21 +106,10 @@ export default function GroupDetail() {
   };
 
   // Dev helper: Add mock student
-  const addMockStudent = async () => {
-    if (!groupId) return;
-    try {
-      const randomId = Math.random().toString(36).substr(2, 9);
-      await addStudentToGroup(
-        groupId,
-        `student_${randomId}`,
-        `student${randomId}@example.com`
-      );
-      await loadGroup();
-      toast.success('Mock student added');
-    } catch (error: any) {
-      toast.error(error.message || 'Failed to add student');
-    }
-  };
+  // Removed - use the Join Group flow instead
+  // const addMockStudent = async () => {
+  //   Students should join groups using the join code via JoinGroupDialog
+  // };
 
   if (isLoading) {
     return (
@@ -257,15 +245,6 @@ export default function GroupDetail() {
                   <Users className="h-5 w-5" />
                   Students ({group.members.length})
                 </CardTitle>
-                {import.meta.env.DEV && (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={addMockStudent}
-                  >
-                    Add Mock Student
-                  </Button>
-                )}
               </div>
             </CardHeader>
             <CardContent>

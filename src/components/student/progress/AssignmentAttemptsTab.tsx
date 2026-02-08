@@ -19,7 +19,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Calendar, Clock, Trophy, Eye, Download, Filter } from 'lucide-react';
-import { getStudentAttempts, getStudentGroups } from '@/services/student.service';
+import { getMyAttempts, getMyGroups } from '@/services/supabase/student.service';
 import { GameType } from '@/types/game';
 import { format } from 'date-fns';
 
@@ -54,8 +54,8 @@ export default function AssignmentAttemptsTab({
     setLoading(true);
     try {
       const [attemptsData, groupsData] = await Promise.all([
-        getStudentAttempts(studentId),
-        getStudentGroups(studentId),
+        getMyAttempts(studentId),
+        getMyGroups(studentId),
       ]);
       setAttempts(attemptsData);
       setGroups(groupsData);

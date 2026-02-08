@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { AlertCircle, Home, ArrowLeft } from 'lucide-react';
 import { GameWithData, GameType } from '@/types/game';
-import { getGameById } from '@/services/game.service';
+import { getGameById } from '@/services/supabase/game.service';
 import PairsGame from '@/components/games/pairs/PairsGame';
 import FlashcardsGame from '@/components/games/flashcards/FlashcardsGame';
 import SplatGame from '@/components/games/splat/SplatGame';

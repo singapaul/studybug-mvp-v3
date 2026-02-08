@@ -511,7 +511,7 @@ export default function ApiTest() {
 
                   <Button
                     onClick={() => handleApiCall(
-                      () => groupService.getMyGroupsAsStudent(),
+                      () => groupService.getMyGroups(),
                       { authUserId: authUser.id, role: 'STUDENT' }
                     )}
                   >

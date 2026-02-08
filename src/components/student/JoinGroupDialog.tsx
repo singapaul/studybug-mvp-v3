@@ -11,7 +11,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
-import { joinGroup } from '@/services/student.service';
+import { joinGroup } from '@/services/supabase/student.service';
 
 interface JoinGroupDialogProps {
   open: boolean;
@@ -46,7 +46,7 @@ export default function JoinGroupDialog({
     setSuccess(null);
 
     try {
-      const result = await joinGroup(studentId, studentEmail, joinCode);
+      const result = await joinGroup(joinCode);
 
       if (result.success) {
         setSuccess(`Successfully joined ${result.groupName}!`);

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
-import { createGame } from '@/services/game.service';
+import { createGame } from '@/services/supabase/game.service';
 import { GameType, MultipleChoiceGameData, MultipleChoiceQuestion } from '@/types/game';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

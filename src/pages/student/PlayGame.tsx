@@ -7,7 +7,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { AlertCircle, Home } from 'lucide-react';
 import { Assignment } from '@/types/assignment';
 import { GameWithData, GameType } from '@/types/game';
-import { saveGameAttempt } from '@/services/game-attempt.service';
+import { saveGameAttempt } from '@/services/supabase/game-attempt.service';
 import PairsGame from '@/components/games/pairs/PairsGame';
 import FlashcardsGame from '@/components/games/flashcards/FlashcardsGame';
 import SplatGame from '@/components/games/splat/SplatGame';

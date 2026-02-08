@@ -18,8 +18,8 @@ import {
   BookOpen,
   Target,
 } from 'lucide-react';
-import { getTutorGroups } from '@/services/group.service';
-import { getTutorGames } from '@/services/game.service';
+import { getMyGroups } from '@/services/supabase/group.service';
+import { getMyGames } from '@/services/supabase/game.service';
 import { format } from 'date-fns';
 import { TutorTestDataButton } from '@/components/dev/TutorTestDataButton';
 
@@ -53,10 +53,9 @@ export default function TutorDashboard() {
 
     setLoading(true);
     try {
-      const tutorId = session.tutor.id;
       const [groupsData, gamesData] = await Promise.all([
-        getTutorGroups(tutorId),
-        getTutorGames(tutorId),
+        getMyGroups(),
+        getMyGames(),
       ]);
 
       // Calculate stats

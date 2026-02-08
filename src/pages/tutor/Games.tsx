@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
-import { getTutorGames } from '@/services/game.service';
+import { getMyGames } from '@/services/supabase/game.service';
 import { Game, GameType } from '@/types/game';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -36,7 +36,7 @@ export default function Games() {
 
     try {
       setIsLoading(true);
-      const data = await getTutorGames(session.tutor.id);
+      const data = await getMyGames(session.tutor.id);
       setGames(data);
     } catch (error) {
       console.error('Error loading games:', error);
