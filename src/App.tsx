@@ -19,6 +19,7 @@ import Games from './pages/tutor/Games';
 import CreateGame from './pages/tutor/CreateGame';
 import GameBuilder from './pages/tutor/GameBuilder';
 import PreviewGame from './pages/tutor/PreviewGame';
+import CreateAssignment from './pages/tutor/CreateAssignment';
 import StudentDashboard from './pages/student/StudentDashboard';
 import PlayGame from './pages/student/PlayGame';
 import MyScores from './pages/student/MyScores';
@@ -120,6 +121,14 @@ const App = () => (
                     element={
                       <ProtectedRoute requiredRole={Role.TUTOR}>
                         <TutorSettings />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/tutor/assignments/create"
+                    element={
+                      <ProtectedRoute requiredRole={Role.TUTOR}>
+                        <CreateAssignment />
                       </ProtectedRoute>
                     }
                   />

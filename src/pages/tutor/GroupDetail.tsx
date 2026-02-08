@@ -1,12 +1,6 @@
-import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useAuth } from '@/contexts/AuthContext';
-import { getGroupById, removeStudentFromGroup } from '@/services/supabase/group.service';
-import { deleteAssignment } from '@/services/supabase/assignment.service';
-import { GroupWithDetails } from '@/types/group';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { AssignGameDialog } from '@/components/groups/AssignGameDialog';
+import { InviteStudentsDialog } from '@/components/groups/InviteStudentsDialog';
+import DashboardLayout from '@/components/layout/DashboardLayout';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,23 +11,29 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { InviteStudentsDialog } from '@/components/groups/InviteStudentsDialog';
-import { AssignGameDialog } from '@/components/groups/AssignGameDialog';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useAuth } from '@/contexts/AuthContext';
+import { formatJoinCode, getJoinLink } from '@/lib/join-code';
+import { deleteAssignment } from '@/services/supabase/assignment.service';
+import { getGroupById, removeStudentFromGroup } from '@/services/supabase/group.service';
+import { GroupWithDetails } from '@/types/group';
 import {
   ArrowLeft,
-  Users,
-  UserPlus,
-  Copy,
-  Link as LinkIcon,
-  Trash2,
-  Gamepad2,
   Calendar,
   Check,
+  Copy,
+  Gamepad2,
+  Link as LinkIcon,
   Loader2,
+  Trash2,
+  UserPlus,
+  Users,
 } from 'lucide-react';
-import { formatJoinCode, getJoinLink } from '@/lib/join-code';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'sonner';
-import DashboardLayout from '@/components/layout/DashboardLayout';
 
 export default function GroupDetail() {
   const { groupId } = useParams<{ groupId: string }>();
@@ -313,10 +313,6 @@ export default function GroupDetail() {
                   <p className="text-sm text-muted-foreground mb-4">
                     No games assigned yet. Assign a game to this group so students can play.
                   </p>
-                  <Button variant="outline" size="sm" onClick={() => setAssignGameDialogOpen(true)}>
-                    <Gamepad2 className="mr-2 h-4 w-4" />
-                    Assign Game
-                  </Button>
                 </div>
               ) : (
                 <div className="space-y-3">

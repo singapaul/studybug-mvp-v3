@@ -193,7 +193,7 @@ export default function TutorDashboard() {
                 hasData ? 'hover:shadow-lg hover:border-primary' : 'opacity-50 cursor-not-allowed'
               }`}
             >
-              <CardHeader>
+              <CardHeader onClick={() => hasData && navigate('/tutor/assignments/create')}>
                 <div className="flex items-center justify-between mb-2">
                   <div
                     className={`p-3 rounded-lg ${
@@ -212,7 +212,11 @@ export default function TutorDashboard() {
                 <CardDescription>Assign games to groups with deadlines</CardDescription>
               </CardHeader>
               <CardContent>
-                <Button className="w-full" disabled={!hasData}>
+                <Button
+                  className="w-full"
+                  disabled={!hasData}
+                  onClick={() => navigate('/tutor/assignments/create')}
+                >
                   <Plus className="mr-2 h-4 w-4" />
                   {hasData ? 'New Assignment' : 'Create Games & Groups First'}
                 </Button>
