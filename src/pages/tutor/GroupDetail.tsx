@@ -14,7 +14,6 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useAuth } from '@/contexts/AuthContext';
 import { formatJoinCode, getJoinLink } from '@/lib/join-code';
 import { deleteAssignment } from '@/services/supabase/assignment.service';
 import { getGroupById, removeStudentFromGroup } from '@/services/supabase/group.service';
@@ -38,7 +37,7 @@ import { toast } from 'sonner';
 export default function GroupDetail() {
   const { groupId } = useParams<{ groupId: string }>();
   const navigate = useNavigate();
-  const { session } = useAuth();
+
   const [group, setGroup] = useState<GroupWithDetails | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [copiedCode, setCopiedCode] = useState(false);
