@@ -6,6 +6,16 @@
 import { GameAttempt } from '@/types/assignment';
 
 const ATTEMPTS_KEY = 'dev_game_attempts';
+const STUDENT_ID_KEY = 'dev_student_id';
+
+// Helper to get current student ID (mock implementation)
+function getCurrentStudentId(): string {
+  const studentId = localStorage.getItem(STUDENT_ID_KEY);
+  if (!studentId) {
+    throw new Error('No student ID found in session');
+  }
+  return studentId;
+}
 
 // Helper to get all attempts
 function getAttempts(): GameAttempt[] {
@@ -27,11 +37,11 @@ function saveAttempts(attempts: GameAttempt[]): void {
  */
 export async function saveGameAttempt(
   assignmentId: string,
-  studentId: string,
   scorePercentage: number,
   timeTaken: number,
   attemptData: any
 ): Promise<GameAttempt> {
+  const studentId = getCurrentStudentId();
   await new Promise((resolve) => setTimeout(resolve, 300));
 
   const attempts = getAttempts();
@@ -55,12 +65,12 @@ export async function saveGameAttempt(
 /**
  * Get all attempts for a specific assignment by a student
  */
-export async function getAssignmentAttempts(
-  assignmentId: string,
-  studentId: string
+export async function getMyAssignmentAttempts(
+  assignmentId: string
 ): Promise<GameAttempt[]> {
   await new Promise((resolve) => setTimeout(resolve, 200));
 
+  const studentId = getCurrentStudentId();
   const attempts = getAttempts();
   return attempts
     .filter((a) => a.assignmentId === assignmentId && a.studentId === studentId)
@@ -70,11 +80,10 @@ export async function getAssignmentAttempts(
 /**
  * Get best attempt for an assignment
  */
-export async function getBestAttempt(
-  assignmentId: string,
-  studentId: string
+export async function getMyBestAttempt(
+  assignmentId: string
 ): Promise<GameAttempt | null> {
-  const attempts = await getAssignmentAttempts(assignmentId, studentId);
+  const attempts = await getMyAssignmentAttempts(assignmentId);
   if (attempts.length === 0) return null;
 
   return attempts.reduce((best, current) =>
@@ -85,9 +94,10 @@ export async function getBestAttempt(
 /**
  * Get all attempts for a student across all assignments
  */
-export async function getStudentAttempts(studentId: string): Promise<GameAttempt[]> {
+export async function getMyAttempts(): Promise<GameAttempt[]> {
   await new Promise((resolve) => setTimeout(resolve, 200));
 
+  const studentId = getCurrentStudentId();
   const attempts = getAttempts();
   return attempts
     .filter((a) => a.studentId === studentId)

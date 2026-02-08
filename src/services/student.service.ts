@@ -5,8 +5,8 @@
 
 import { Group } from '@/types/group';
 import { StudentAssignment, AssignmentFilter, AssignmentSort } from '@/types/assignment';
-import { getGroupByJoinCode, addStudentToGroup, getGroups } from './group.service';
-import { getGames } from './game.service';
+// import { getGroupByJoinCode, addStudentToGroup, getGroups } from './group.service';
+// import { getGames } from './game.service';
 
 const MEMBERS_KEY = 'dev_group_members';
 const ASSIGNMENTS_KEY = 'dev_assignments';
@@ -429,7 +429,7 @@ export async function getStudentProgressTrends(
 
   let currentStreak = 0;
   const today = new Date().toDateString();
-  let checkDate = new Date();
+  const checkDate = new Date();
 
   for (let i = 0; i < uniqueDates.length; i++) {
     const dateStr = checkDate.toDateString();

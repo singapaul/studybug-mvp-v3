@@ -39,6 +39,7 @@ import Schools from "./pages/Schools";
 import SchoolDemo from "./pages/SchoolDemo";
 import SchoolDemoSuccess from "./pages/SchoolDemoSuccess";
 import NotFound from "./pages/NotFound";
+import ApiTest from "./pages/ApiTest";
 
 const queryClient = new QueryClient();
 
@@ -179,6 +180,9 @@ const App = () => (
                 <Route path="/schools" element={<Schools />} />
                 <Route path="/schools/demo" element={<SchoolDemo />} />
                 <Route path="/schools/demo/success" element={<SchoolDemoSuccess />} />
+
+                {/* API Testing */}
+                <Route path="/api" element={<ApiTest />} />
 
                 {/* 404 */}
                 <Route path="*" element={<NotFound />} />
