@@ -9,7 +9,16 @@ interface ProtectedRouteProps {
 }
 
 export function ProtectedRoute({ children, requiredRole }: ProtectedRouteProps) {
-  const { session, isAuthenticated } = useAuth();
+  const { session, isAuthenticated, isLoading } = useAuth();
+
+  // Show nothing while auth is loading
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
 
   // Not authenticated - redirect to home
   if (!isAuthenticated) {

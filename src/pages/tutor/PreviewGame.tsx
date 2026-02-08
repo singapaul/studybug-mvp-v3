@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent } from '@/components/ui/card';
@@ -16,22 +16,20 @@ import { toast } from 'sonner';
 export default function PreviewGame() {
   const { gameId } = useParams<{ gameId: string }>();
   const navigate = useNavigate();
-  const { session } = useAuth();
+  const { session, isLoading: authLoading } = useAuth();
   const [game, setGame] = useState<GameWithData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
- 
-  const userId = session.user.id || '';
 
-   
-
-  useEffect(() => {
-    loadGameData();
-  }, [gameId]);
-
-  const loadGameData = async () => {
+  const loadGameData = useCallback(async () => {
     if (!gameId) {
       setError('No game ID provided');
+      setIsLoading(false);
+      return;
+    }
+
+    if (!session?.user?.id) {
+      setError('Not authenticated');
       setIsLoading(false);
       return;
     }
@@ -45,18 +43,28 @@ export default function PreviewGame() {
       }
 
       // Verify this tutor owns the game
-      if (gameData.userId !== userId) {
+      if (gameData.userId !== session.user.id) {
         throw new Error('You do not have permission to view this game');
       }
 
       setGame(gameData);
-    } catch (err: any) {
+    } catch (err) {
       console.error('Failed to load game:', err);
-      setError(err.message || 'Failed to load game');
+      setError(err instanceof Error ? err.message : 'Failed to load game');
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [gameId, session]);
+
+  useEffect(() => {
+    // Wait for auth to load before loading game data
+    if (!authLoading && session) {
+      loadGameData();
+    } else if (!authLoading && !session) {
+      // Not authenticated, redirect
+      navigate('/');
+    }
+  }, [authLoading, session, loadGameData, navigate]);
 
   const handleGameComplete = async (result: {
     scorePercentage: number;
@@ -73,7 +81,8 @@ export default function PreviewGame() {
     navigate('/tutor/games');
   };
 
-  if (isLoading) {
+  // Show loading while auth is initializing
+  if (authLoading || isLoading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-4">
         <Card className="w-full max-w-md">
