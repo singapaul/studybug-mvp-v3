@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { getGroupById, removeStudentFromGroup } from '@/services/supabase/group.service';
+import { deleteAssignment } from '@/services/supabase/assignment.service';
 import { GroupWithDetails } from '@/types/group';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -17,6 +18,7 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { InviteStudentsDialog } from '@/components/groups/InviteStudentsDialog';
+import { AssignGameDialog } from '@/components/groups/AssignGameDialog';
 import {
   ArrowLeft,
   Users,
@@ -42,7 +44,9 @@ export default function GroupDetail() {
   const [copiedCode, setCopiedCode] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
   const [inviteDialogOpen, setInviteDialogOpen] = useState(false);
+  const [assignGameDialogOpen, setAssignGameDialogOpen] = useState(false);
   const [studentToRemove, setStudentToRemove] = useState<string | null>(null);
+  const [assignmentToRemove, setAssignmentToRemove] = useState<string | null>(null);
   const [isRemoving, setIsRemoving] = useState(false);
 
   useEffect(() => {
@@ -97,6 +101,23 @@ export default function GroupDetail() {
     } catch (error) {
       console.error('Error removing student:', error);
       toast.error('Failed to remove student');
+    } finally {
+      setIsRemoving(false);
+    }
+  };
+
+  const handleRemoveAssignment = async () => {
+    if (!assignmentToRemove) return;
+
+    try {
+      setIsRemoving(true);
+      await deleteAssignment(assignmentToRemove);
+      await loadGroup();
+      toast.success('Game assignment removed');
+      setAssignmentToRemove(null);
+    } catch (error) {
+      console.error('Error removing assignment:', error);
+      toast.error('Failed to remove assignment');
     } finally {
       setIsRemoving(false);
     }
@@ -274,21 +295,27 @@ export default function GroupDetail() {
           {/* Assigned Games Section */}
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Gamepad2 className="h-5 w-5" />
-                Assigned Games ({group.assignments.length})
-              </CardTitle>
+              <div className="flex items-center justify-between">
+                <CardTitle className="flex items-center gap-2">
+                  <Gamepad2 className="h-5 w-5" />
+                  Assigned Games ({group.assignments.length})
+                </CardTitle>
+                <Button size="sm" variant="outline" onClick={() => setAssignGameDialogOpen(true)}>
+                  <Gamepad2 className="mr-2 h-4 w-4" />
+                  Assign Game
+                </Button>
+              </div>
             </CardHeader>
             <CardContent>
               {group.assignments.length === 0 ? (
                 <div className="text-center py-8">
                   <Gamepad2 className="h-12 w-12 text-muted-foreground mx-auto mb-3" />
                   <p className="text-sm text-muted-foreground mb-4">
-                    No games assigned yet. Create a game and assign it to this group.
+                    No games assigned yet. Assign a game to this group so students can play.
                   </p>
-                  <Button variant="outline" size="sm">
+                  <Button variant="outline" size="sm" onClick={() => setAssignGameDialogOpen(true)}>
                     <Gamepad2 className="mr-2 h-4 w-4" />
-                    Create Game
+                    Assign Game
                   </Button>
                 </div>
               ) : (
@@ -296,22 +323,35 @@ export default function GroupDetail() {
                   {group.assignments.map((assignment) => (
                     <div
                       key={assignment.id}
-                      className="p-3 border rounded-lg hover:bg-muted/50 transition-colors"
+                      className="flex items-center justify-between p-3 border rounded-lg hover:bg-muted/50 transition-colors"
                     >
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <p className="font-medium">{assignment.game.name}</p>
+                      <div className="flex-1">
+                        <p className="font-medium">{assignment.game.name}</p>
+                        <div className="flex items-center gap-3 mt-1">
                           <p className="text-xs text-muted-foreground">
                             {assignment.game.gameType}
                           </p>
+                          {assignment.dueDate && (
+                            <Badge variant="outline" className="text-xs">
+                              <Calendar className="mr-1 h-3 w-3" />
+                              Due {new Date(assignment.dueDate).toLocaleDateString()}
+                            </Badge>
+                          )}
+                          {assignment.passPercentage && (
+                            <Badge variant="secondary" className="text-xs">
+                              Pass: {assignment.passPercentage}%
+                            </Badge>
+                          )}
                         </div>
-                        {assignment.dueDate && (
-                          <Badge variant="outline" className="shrink-0">
-                            <Calendar className="mr-1 h-3 w-3" />
-                            {new Date(assignment.dueDate).toLocaleDateString()}
-                          </Badge>
-                        )}
                       </div>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => setAssignmentToRemove(assignment.id)}
+                        className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
                     </div>
                   ))}
                 </div>
@@ -327,6 +367,16 @@ export default function GroupDetail() {
         onOpenChange={setInviteDialogOpen}
         groupName={group.name}
         joinCode={group.joinCode}
+      />
+
+      {/* Assign Game Dialog */}
+      <AssignGameDialog
+        open={assignGameDialogOpen}
+        onOpenChange={setAssignGameDialogOpen}
+        groupId={group.id}
+        groupName={group.name}
+        existingGameIds={group.assignments.map((a) => a.gameId)}
+        onAssignmentCreated={loadGroup}
       />
 
       {/* Remove Student Confirmation */}
@@ -351,6 +401,33 @@ export default function GroupDetail() {
             >
               {isRemoving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Remove Student
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Remove Assignment Confirmation */}
+      <AlertDialog
+        open={assignmentToRemove !== null}
+        onOpenChange={(open) => !open && setAssignmentToRemove(null)}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Remove Game Assignment</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to remove this game assignment? Students will no longer see this
+              game in their assignments list.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={isRemoving}>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleRemoveAssignment}
+              disabled={isRemoving}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              {isRemoving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              Remove Assignment
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

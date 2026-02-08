@@ -35,6 +35,7 @@ export interface GroupWithDetails extends Group {
     id: string;
     gameId: string;
     dueDate: Date | null;
+    passPercentage: number | null;
     game: {
       id: string;
       name: string;

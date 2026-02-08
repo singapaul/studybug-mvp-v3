@@ -1,35 +1,36 @@
-import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useAuth } from '@/contexts/AuthContext';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Skeleton } from '@/components/ui/skeleton';
-import { AlertCircle, Home } from 'lucide-react';
-import { Assignment } from '@/types/assignment';
-import { GameWithData, GameType } from '@/types/game';
-import { saveGameAttempt } from '@/services/supabase/game-attempt.service';
-import PairsGame from '@/components/games/pairs/PairsGame';
 import FlashcardsGame from '@/components/games/flashcards/FlashcardsGame';
+import PairsGame from '@/components/games/pairs/PairsGame';
 import SplatGame from '@/components/games/splat/SplatGame';
 import SwipeGame from '@/components/games/swipe/SwipeGame';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
+import { saveGameAttempt } from '@/services/supabase/game-attempt.service';
+import { getAssignmentById } from '@/services/supabase/student.service';
+import { Assignment } from '@/types/assignment';
+import {
+  GameType,
+  GameWithData,
+  PairsGameData,
+  FlashcardsGameData,
+  SplatGameData,
+  SwipeGameData,
+} from '@/types/game';
+import { AlertCircle, Home } from 'lucide-react';
+import { useEffect, useState, useCallback } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'sonner';
 
 export default function PlayGame() {
   const { assignmentId } = useParams<{ assignmentId: string }>();
   const navigate = useNavigate();
-  const { session } = useAuth();
+
   const [assignment, setAssignment] = useState<Assignment | null>(null);
   const [game, setGame] = useState<GameWithData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const studentId = session?.student?.id || '';
-
-  useEffect(() => {
-    loadGameData();
-  }, [assignmentId]);
-
-  const loadGameData = async () => {
+  const loadGameData = useCallback(async () => {
     if (!assignmentId) {
       setError('No assignment ID provided');
       setIsLoading(false);
@@ -37,82 +38,40 @@ export default function PlayGame() {
     }
 
     try {
-      // Load assignment
-      const assignmentsData = localStorage.getItem('dev_assignments');
-      if (!assignmentsData) {
-        throw new Error('No assignments found');
-      }
+      setIsLoading(true);
+      setError(null);
 
-      const assignments = JSON.parse(assignmentsData);
-      const foundAssignment = assignments.find((a: any) => a.id === assignmentId);
+      // Fetch assignment with game and group data from Supabase
+      const assignmentData = await getAssignmentById(assignmentId);
 
-      if (!foundAssignment) {
+      if (!assignmentData) {
         throw new Error('Assignment not found');
       }
 
-      // Convert dates
-      const assignmentWithDates = {
-        ...foundAssignment,
-        dueDate: foundAssignment.dueDate ? new Date(foundAssignment.dueDate) : null,
-        createdAt: new Date(foundAssignment.createdAt),
-        updatedAt: new Date(foundAssignment.updatedAt),
-      };
-
-      // Load game
-      const gamesData = localStorage.getItem('dev_games');
-      if (!gamesData) {
-        throw new Error('No games found');
-      }
-
-      const games = JSON.parse(gamesData);
-      const foundGame = games.find((g: any) => g.id === foundAssignment.gameId);
-
-      if (!foundGame) {
-        throw new Error('Game not found');
-      }
-
-      // Parse game data
-      const gameWithData: GameWithData = {
-        ...foundGame,
-        gameData: JSON.parse(foundGame.gameData),
-        createdAt: new Date(foundGame.createdAt),
-        updatedAt: new Date(foundGame.updatedAt),
-      };
-
-      // Load group for display
-      const groupsData = localStorage.getItem('dev_groups');
-      if (groupsData) {
-        const groups = JSON.parse(groupsData);
-        const group = groups.find((g: any) => g.id === foundAssignment.groupId);
-        if (group) {
-          assignmentWithDates.group = {
-            ...group,
-            createdAt: new Date(group.createdAt),
-            updatedAt: new Date(group.updatedAt),
-          };
-        }
-      }
-
-      assignmentWithDates.game = foundGame;
-      setAssignment(assignmentWithDates);
-      setGame(gameWithData);
-    } catch (err: any) {
+      setAssignment(assignmentData);
+      setGame(assignmentData.game);
+    } catch (err: unknown) {
       console.error('Failed to load game:', err);
-      setError(err.message || 'Failed to load game');
+      const errorMessage =
+        err instanceof Error ? err.message : 'Failed to load game. Please try again.';
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [assignmentId]);
+
+  useEffect(() => {
+    loadGameData();
+  }, [loadGameData]);
 
   const handleGameComplete = async (result: {
     scorePercentage: number;
     timeTaken: number;
-    attemptData: any;
+    attemptData: Record<string, unknown>;
   }) => {
     try {
       await saveGameAttempt(
         assignmentId!,
-        studentId,
         result.scorePercentage,
         result.timeTaken,
         result.attemptData
@@ -179,7 +138,7 @@ export default function PlayGame() {
       case GameType.PAIRS:
         return (
           <PairsGame
-            gameData={game.gameData as any}
+            gameData={game.gameData as PairsGameData}
             gameName={game.name}
             onComplete={handleGameComplete}
             onExit={handleExit}
@@ -189,7 +148,7 @@ export default function PlayGame() {
       case GameType.FLASHCARDS:
         return (
           <FlashcardsGame
-            gameData={game.gameData as any}
+            gameData={game.gameData as FlashcardsGameData}
             gameName={game.name}
             onComplete={handleGameComplete}
             onExit={handleExit}
@@ -199,7 +158,7 @@ export default function PlayGame() {
       case GameType.SPLAT:
         return (
           <SplatGame
-            gameData={game.gameData as any}
+            gameData={game.gameData as SplatGameData}
             gameName={game.name}
             onComplete={handleGameComplete}
             onExit={handleExit}
@@ -209,7 +168,7 @@ export default function PlayGame() {
       case GameType.SWIPE:
         return (
           <SwipeGame
-            gameData={game.gameData as any}
+            gameData={game.gameData as SwipeGameData}
             gameName={game.name}
             onComplete={handleGameComplete}
             onExit={handleExit}

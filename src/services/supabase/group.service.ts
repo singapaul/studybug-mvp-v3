@@ -137,6 +137,7 @@ export async function getGroupById(groupId: string): Promise<GroupWithDetails | 
           id,
           gameId,
           dueDate,
+          passPercentage,
           game:Game(
             id,
             name,
@@ -185,10 +186,11 @@ export async function getGroupById(groupId: string): Promise<GroupWithDetails | 
         id: a.id,
         gameId: a.gameId,
         dueDate: a.dueDate ? new Date(a.dueDate) : null,
+        passPercentage: a.passPercentage,
         game: {
           id: a.game.id,
           name: a.game.name,
-          gameType: a.gameType,
+          gameType: a.game.gameType,
         },
       })),
     };

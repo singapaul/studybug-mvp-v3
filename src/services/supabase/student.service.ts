@@ -473,6 +473,109 @@ export async function getMyProgressTrends(days: number = 30) {
 }
 
 /**
+ * Get a single assignment by ID with full details
+ */
+export async function getAssignmentById(assignmentId: string) {
+  const studentId = await getCurrentStudentId();
+
+  const { data, error } = await supabase
+    .from('Assignment')
+    .select(
+      `
+      *,
+      game:Game(*),
+      group:Group(*)
+    `
+    )
+    .eq('id', assignmentId)
+    .single();
+
+  if (error) {
+    if (error.code === 'PGRST116') {
+      return null; // Assignment not found
+    }
+    throw new Error(`Failed to fetch assignment: ${error.message}`);
+  }
+
+  // Verify the student has access to this assignment (is a member of the group)
+  const { data: membership, error: membershipError } = await supabase
+    .from('GroupMember')
+    .select('id')
+    .eq('groupId', data.groupId)
+    .eq('studentId', studentId)
+    .single();
+
+  if (membershipError || !membership) {
+    throw new Error('You do not have access to this assignment');
+  }
+
+  // Get student's attempts for this assignment
+  const { data: attempts, error: attemptsError } = await supabase
+    .from('GameAttempt')
+    .select('*')
+    .eq('assignmentId', assignmentId)
+    .eq('studentId', studentId);
+
+  if (attemptsError) {
+    throw new Error(`Failed to fetch attempts: ${attemptsError.message}`);
+  }
+
+  const studentAttempts = attempts || [];
+  const bestScore =
+    studentAttempts.length > 0
+      ? Math.max(...studentAttempts.map((a) => a.scorePercentage))
+      : undefined;
+
+  const isCompleted = studentAttempts.length > 0;
+  const isOverdue = data.dueDate && new Date(data.dueDate) < new Date();
+  const isPassing =
+    bestScore !== undefined && data.passPercentage ? bestScore >= data.passPercentage : undefined;
+
+  return {
+    id: data.id,
+    gameId: data.gameId,
+    groupId: data.groupId,
+    dueDate: data.dueDate ? new Date(data.dueDate) : null,
+    passPercentage: data.passPercentage,
+    createdAt: new Date(data.createdAt),
+    updatedAt: new Date(data.updatedAt),
+    game: {
+      id: data.game.id,
+      userId: data.game.userId,
+      name: data.game.name,
+      gameType: data.game.gameType as GameType,
+      gameData: JSON.parse(data.game.gameData),
+      createdAt: new Date(data.game.createdAt),
+      updatedAt: new Date(data.game.updatedAt),
+    },
+    group: {
+      id: data.group.id,
+      tutorId: data.group.tutorId,
+      name: data.group.name,
+      ageRange: data.group.ageRange,
+      subjectArea: data.group.subjectArea,
+      joinCode: data.group.joinCode,
+      createdAt: new Date(data.group.createdAt),
+      updatedAt: new Date(data.group.updatedAt),
+    },
+    bestScore,
+    attemptCount: studentAttempts.length,
+    isCompleted,
+    isOverdue,
+    isPassing,
+    gameAttempts: studentAttempts.map((a) => ({
+      id: a.id,
+      assignmentId: a.assignmentId,
+      studentId: a.studentId,
+      scorePercentage: a.scorePercentage,
+      timeTaken: a.timeTaken,
+      completedAt: new Date(a.completedAt),
+      attemptData: JSON.parse(a.attemptData),
+    })),
+  };
+}
+
+/**
  * Get detailed attempt data including question breakdown
  */
 export async function getAttemptDetails(attemptId: string) {
