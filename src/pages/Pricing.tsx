@@ -36,7 +36,7 @@ export default function Pricing() {
           <div className="absolute top-20 left-[5%] w-32 h-32 rounded-full bg-secondary/10 blur-2xl" />
           <div className="absolute bottom-20 right-[10%] w-48 h-48 rounded-full bg-accent/15 blur-3xl" />
           <div className="absolute top-1/2 right-[20%] w-24 h-24 rounded-full bg-coral/10 blur-xl" />
-          
+
           <div className="container relative">
             <div className="max-w-3xl mx-auto text-center">
               <motion.div
@@ -48,7 +48,7 @@ export default function Pricing() {
                 <Sparkles className="w-4 h-4 text-primary" />
                 14-day free trial on all paid plans
               </motion.div>
-              <motion.h1 
+              <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
@@ -56,7 +56,7 @@ export default function Pricing() {
               >
                 Simple, <span className="text-secondary">Transparent</span> Pricing
               </motion.h1>
-              <motion.p 
+              <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
@@ -116,7 +116,7 @@ export default function Pricing() {
         <section className="py-20 bg-primary relative overflow-hidden">
           <div className="absolute top-10 left-[10%] w-48 h-48 rounded-full bg-white/10 blur-2xl" />
           <div className="absolute bottom-10 right-[15%] w-64 h-64 rounded-full bg-secondary/10 blur-2xl" />
-          
+
           <div className="container text-center relative">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Ready to Get Started?
@@ -124,8 +124,8 @@ export default function Pricing() {
             <p className="text-lg text-white/80 max-w-xl mx-auto mb-8">
               Start your 14-day free trial today. Cancel anytime.
             </p>
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="bg-white text-primary hover:bg-white/90 rounded-full shadow-lg font-semibold"
               onClick={() => navigate('/signup/individual')}
             >

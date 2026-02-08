@@ -106,19 +106,14 @@ export default function ProgressTrendsTab({ studentId }: ProgressTrendsTabProps)
           <Card className="p-6 bg-gradient-to-br from-orange-50 to-white border-orange-200">
             <div className="flex items-center justify-between mb-2">
               <Flame className="h-8 w-8 text-orange-500" />
-              <Badge
-                variant="outline"
-                className="bg-orange-100 text-orange-800 border-orange-300"
-              >
+              <Badge variant="outline" className="bg-orange-100 text-orange-800 border-orange-300">
                 Current
               </Badge>
             </div>
             <p className="text-sm text-muted-foreground mb-1">Study Streak</p>
             <p className="text-4xl font-bold text-orange-600">
               {trends.currentStreak}
-              <span className="text-lg ml-1">
-                {trends.currentStreak === 1 ? 'day' : 'days'}
-              </span>
+              <span className="text-lg ml-1">{trends.currentStreak === 1 ? 'day' : 'days'}</span>
             </p>
           </Card>
         </motion.div>
@@ -131,17 +126,12 @@ export default function ProgressTrendsTab({ studentId }: ProgressTrendsTabProps)
           <Card className="p-6 bg-gradient-to-br from-blue-50 to-white border-blue-200">
             <div className="flex items-center justify-between mb-2">
               <Target className="h-8 w-8 text-blue-500" />
-              <Badge
-                variant="outline"
-                className="bg-blue-100 text-blue-800 border-blue-300"
-              >
+              <Badge variant="outline" className="bg-blue-100 text-blue-800 border-blue-300">
                 {timeRange} Days
               </Badge>
             </div>
             <p className="text-sm text-muted-foreground mb-1">Total Attempts</p>
-            <p className="text-4xl font-bold text-blue-600">
-              {trends.totalAttempts}
-            </p>
+            <p className="text-4xl font-bold text-blue-600">{trends.totalAttempts}</p>
           </Card>
         </motion.div>
 
@@ -153,17 +143,12 @@ export default function ProgressTrendsTab({ studentId }: ProgressTrendsTabProps)
           <Card className="p-6 bg-gradient-to-br from-green-50 to-white border-green-200">
             <div className="flex items-center justify-between mb-2">
               <TrendingUp className="h-8 w-8 text-green-500" />
-              <Badge
-                variant="outline"
-                className="bg-green-100 text-green-800 border-green-300"
-              >
+              <Badge variant="outline" className="bg-green-100 text-green-800 border-green-300">
                 Average
               </Badge>
             </div>
             <p className="text-sm text-muted-foreground mb-1">Score</p>
-            <p className="text-4xl font-bold text-green-600">
-              {trends.averageScore}%
-            </p>
+            <p className="text-4xl font-bold text-green-600">{trends.averageScore}%</p>
           </Card>
         </motion.div>
       </div>
@@ -175,11 +160,7 @@ export default function ProgressTrendsTab({ studentId }: ProgressTrendsTabProps)
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={trends.scoreOverTime}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis
-                dataKey="date"
-                tick={{ fontSize: 12 }}
-                tickMargin={10}
-              />
+              <XAxis dataKey="date" tick={{ fontSize: 12 }} tickMargin={10} />
               <YAxis
                 domain={[0, 100]}
                 tick={{ fontSize: 12 }}
@@ -211,17 +192,11 @@ export default function ProgressTrendsTab({ studentId }: ProgressTrendsTabProps)
       {/* Performance by Game Type */}
       {trends.performanceByGameType.length > 0 && (
         <Card className="p-6">
-          <h3 className="text-lg font-semibold mb-4">
-            Performance by Game Type
-          </h3>
+          <h3 className="text-lg font-semibold mb-4">Performance by Game Type</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={trends.performanceByGameType}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis
-                dataKey="gameType"
-                tick={{ fontSize: 12 }}
-                tickMargin={10}
-              />
+              <XAxis dataKey="gameType" tick={{ fontSize: 12 }} tickMargin={10} />
               <YAxis
                 domain={[0, 100]}
                 tick={{ fontSize: 12 }}
@@ -259,9 +234,7 @@ export default function ProgressTrendsTab({ studentId }: ProgressTrendsTabProps)
                   </p>
                 </div>
                 <div className="text-right">
-                  <p className="text-2xl font-bold text-blue-600">
-                    {gameType.averageScore}%
-                  </p>
+                  <p className="text-2xl font-bold text-blue-600">{gameType.averageScore}%</p>
                 </div>
               </div>
             ))}
@@ -280,8 +253,8 @@ export default function ProgressTrendsTab({ studentId }: ProgressTrendsTabProps)
             <div className="flex items-start gap-2">
               <Flame className="h-5 w-5 text-orange-500 flex-shrink-0 mt-0.5" />
               <p>
-                You're on a <span className="font-semibold">{trends.currentStreak}-day streak</span>!
-                {trends.currentStreak >= 3 && ' Keep up the amazing momentum!'}
+                You're on a <span className="font-semibold">{trends.currentStreak}-day streak</span>
+                !{trends.currentStreak >= 3 && ' Keep up the amazing momentum!'}
               </p>
             </div>
           )}
@@ -290,8 +263,8 @@ export default function ProgressTrendsTab({ studentId }: ProgressTrendsTabProps)
             <div className="flex items-start gap-2">
               <TrendingUp className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
               <p>
-                Your average score of <span className="font-semibold">{trends.averageScore}%</span> is
-                excellent! You're mastering the material.
+                Your average score of <span className="font-semibold">{trends.averageScore}%</span>{' '}
+                is excellent! You're mastering the material.
               </p>
             </div>
           )}
@@ -310,8 +283,9 @@ export default function ProgressTrendsTab({ studentId }: ProgressTrendsTabProps)
             <div className="flex items-start gap-2">
               <Target className="h-5 w-5 text-blue-500 flex-shrink-0 mt-0.5" />
               <p>
-                You've completed <span className="font-semibold">{trends.totalAttempts} attempts</span> in
-                the last {timeRange} days. Great dedication!
+                You've completed{' '}
+                <span className="font-semibold">{trends.totalAttempts} attempts</span> in the last{' '}
+                {timeRange} days. Great dedication!
               </p>
             </div>
           )}

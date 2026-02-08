@@ -10,7 +10,9 @@ import { GameAttempt } from '@/types/assignment';
  * Get Student ID for current authenticated user
  */
 async function getCurrentStudentId(): Promise<string> {
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   if (!user) {
     throw new Error('No authenticated user');
@@ -69,9 +71,7 @@ export async function saveGameAttempt(
 /**
  * Get all attempts for a specific assignment by a student
  */
-export async function getMyAssignmentAttempts(
-  assignmentId: string
-): Promise<GameAttempt[]> {
+export async function getMyAssignmentAttempts(assignmentId: string): Promise<GameAttempt[]> {
   const studentId = await getCurrentStudentId();
   const { data, error } = await supabase
     .from('GameAttempt')
@@ -98,9 +98,7 @@ export async function getMyAssignmentAttempts(
 /**
  * Get best attempt for an assignment
  */
-export async function getMyBestAttempt(
-  assignmentId: string
-): Promise<GameAttempt | null> {
+export async function getMyBestAttempt(assignmentId: string): Promise<GameAttempt | null> {
   const attempts = await getMyAssignmentAttempts(assignmentId);
   if (attempts.length === 0) return null;
 
@@ -139,10 +137,7 @@ export async function getMyAttempts(): Promise<GameAttempt[]> {
  * Delete all attempts for an assignment (for testing)
  */
 export async function deleteAssignmentAttempts(assignmentId: string): Promise<void> {
-  const { error } = await supabase
-    .from('GameAttempt')
-    .delete()
-    .eq('assignmentId', assignmentId);
+  const { error } = await supabase.from('GameAttempt').delete().eq('assignmentId', assignmentId);
 
   if (error) {
     throw new Error(`Failed to delete assignment attempts: ${error.message}`);

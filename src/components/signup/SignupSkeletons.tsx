@@ -91,7 +91,7 @@ export function PaymentSkeleton() {
             <Skeleton className="h-5 w-5" />
             <Skeleton className="h-5 w-24" />
           </div>
-          
+
           {[1, 2, 3, 4].map((i) => (
             <div key={i} className="space-y-2">
               <Skeleton className="h-4 w-24" />
@@ -120,7 +120,7 @@ export function PlanSummarySkeleton() {
   return (
     <div className="rounded-2xl border border-border bg-card p-6 space-y-6 sticky top-24">
       <Skeleton className="h-6 w-32" />
-      
+
       <div className="space-y-4">
         <div className="flex justify-between items-center">
           <Skeleton className="h-4 w-16" />

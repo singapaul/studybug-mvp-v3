@@ -4,13 +4,22 @@
  */
 
 import { supabase } from '@/lib/supabase';
-import { Game, GameWithData, CreateGameInput, UpdateGameInput, GameData, GameType } from '@/types/game';
+import {
+  Game,
+  GameWithData,
+  CreateGameInput,
+  UpdateGameInput,
+  GameData,
+  GameType,
+} from '@/types/game';
 
 /**
  * Get current authenticated user ID
  */
 async function getCurrentUserId(): Promise<string> {
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   if (!user) {
     throw new Error('No authenticated user');
@@ -27,10 +36,12 @@ export async function getMyGames(): Promise<Game[]> {
 
   const { data, error } = await supabase
     .from('Game')
-    .select(`
+    .select(
+      `
       *,
       assignments:Assignment(count)
-    `)
+    `
+    )
     .eq('userId', userId)
     .order('createdAt', { ascending: false });
 
@@ -56,11 +67,7 @@ export async function getMyGames(): Promise<Game[]> {
  * Get a single game by ID with parsed data
  */
 export async function getGameById(gameId: string): Promise<GameWithData | null> {
-  const { data, error } = await supabase
-    .from('Game')
-    .select('*')
-    .eq('id', gameId)
-    .single();
+  const { data, error } = await supabase.from('Game').select('*').eq('id', gameId).single();
 
   if (error) {
     if (error.code === 'PGRST116') {
@@ -146,10 +153,7 @@ export async function createGame(input: CreateGameInput): Promise<GameWithData> 
 /**
  * Update a game
  */
-export async function updateGame(
-  gameId: string,
-  input: UpdateGameInput
-): Promise<GameWithData> {
+export async function updateGame(gameId: string, input: UpdateGameInput): Promise<GameWithData> {
   const updateData: Record<string, unknown> = {};
 
   if (input.name !== undefined) {
@@ -186,10 +190,7 @@ export async function updateGame(
  * Delete a game
  */
 export async function deleteGame(gameId: string): Promise<void> {
-  const { error } = await supabase
-    .from('Game')
-    .delete()
-    .eq('id', gameId);
+  const { error } = await supabase.from('Game').delete().eq('id', gameId);
 
   if (error) {
     throw new Error(`Failed to delete game: ${error.message}`);

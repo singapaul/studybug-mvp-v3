@@ -12,11 +12,7 @@ import PairsResultScreen from './PairsResultScreen';
 interface PairsGameProps {
   gameData: PairsGameData;
   gameName: string;
-  onComplete: (result: {
-    scorePercentage: number;
-    timeTaken: number;
-    attemptData: any;
-  }) => void;
+  onComplete: (result: { scorePercentage: number; timeTaken: number; attemptData: any }) => void;
   onExit: () => void;
 }
 
@@ -39,12 +35,7 @@ function shuffleArray<T>(array: T[]): T[] {
   return shuffled;
 }
 
-export default function PairsGame({
-  gameData,
-  gameName,
-  onComplete,
-  onExit,
-}: PairsGameProps) {
+export default function PairsGame({ gameData, gameName, onComplete, onExit }: PairsGameProps) {
   const [cards, setCards] = useState<GameCard[]>([]);
   const [flippedCards, setFlippedCards] = useState<string[]>([]);
   const [moves, setMoves] = useState(0);
@@ -129,9 +120,7 @@ export default function PairsGame({
       setFlippedCards(newFlippedCards);
 
       // Update card state
-      setCards((prev) =>
-        prev.map((c) => (c.id === cardId ? { ...c, isFlipped: true } : c))
-      );
+      setCards((prev) => prev.map((c) => (c.id === cardId ? { ...c, isFlipped: true } : c)));
 
       // Check for match when 2 cards are flipped
       if (newFlippedCards.length === 2) {
@@ -159,9 +148,7 @@ export default function PairsGame({
     if (isMatch) {
       // Match found - keep cards flipped
       setCards((prev) =>
-        prev.map((c) =>
-          c.id === firstId || c.id === secondId ? { ...c, isMatched: true } : c
-        )
+        prev.map((c) => (c.id === firstId || c.id === secondId ? { ...c, isMatched: true } : c))
       );
       setFlippedCards([]);
       setIsChecking(false);
@@ -169,11 +156,7 @@ export default function PairsGame({
       // No match - flip cards back after delay
       setTimeout(() => {
         setCards((prev) =>
-          prev.map((c) =>
-            c.id === firstId || c.id === secondId
-              ? { ...c, isFlipped: false }
-              : c
-          )
+          prev.map((c) => (c.id === firstId || c.id === secondId ? { ...c, isFlipped: false } : c))
         );
         setFlippedCards([]);
         setIsChecking(false);
@@ -251,9 +234,7 @@ export default function PairsGame({
             <div className="flex-1">
               <h1 className="text-2xl font-bold mb-1">{gameName}</h1>
               {gameData.description && (
-                <p className="text-sm text-muted-foreground">
-                  {gameData.description}
-                </p>
+                <p className="text-sm text-muted-foreground">{gameData.description}</p>
               )}
             </div>
 

@@ -37,10 +37,7 @@ export {
 } from './assignment.schema';
 
 // Join group schemas
-export {
-  joinGroupSchema,
-  type JoinGroupFormData,
-} from './join-group.schema';
+export { joinGroupSchema, type JoinGroupFormData } from './join-group.schema';
 
 // Settings schemas
 export {

@@ -13,7 +13,10 @@ import { getGroupByJoinCode } from './group.service';
  * Get the current authenticated student's ID
  */
 async function getCurrentStudentId(): Promise<string> {
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
 
   if (authError || !user) {
     throw new Error('Not authenticated');
@@ -40,7 +43,10 @@ export async function joinGroup(
 ): Promise<{ success: boolean; error?: string; groupName?: string }> {
   const normalizedCode = joinCode.trim().toUpperCase();
 
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
 
   if (authError || !user) {
     return {
@@ -76,12 +82,10 @@ export async function joinGroup(
 
   try {
     // Add student to group
-    const { error: insertError } = await supabase
-      .from('GroupMember')
-      .insert({
-        groupId: group.id,
-        studentId: studentId,
-      });
+    const { error: insertError } = await supabase.from('GroupMember').insert({
+      groupId: group.id,
+      studentId: studentId,
+    });
 
     if (insertError) {
       throw insertError;
@@ -107,9 +111,11 @@ export async function getMyGroups(): Promise<Group[]> {
 
   const { data, error } = await supabase
     .from('GroupMember')
-    .select(`
+    .select(
+      `
       group:Group(*)
-    `)
+    `
+    )
     .eq('studentId', studentId);
 
   if (error) {
@@ -156,12 +162,14 @@ export async function getMyAssignments(
   // Get assignments for these groups with related data
   const { data: assignments, error: assignmentError } = await supabase
     .from('Assignment')
-    .select(`
+    .select(
+      `
       *,
       game:Game(*),
       group:Group(*),
       gameAttempts:GameAttempt(*)
-    `)
+    `
+    )
     .in('groupId', groupIds);
 
   if (assignmentError) {
@@ -180,9 +188,7 @@ export async function getMyAssignments(
 
   // Build enriched assignments
   const enrichedAssignments: StudentAssignment[] = assignments.map((assignment) => {
-    const studentAttempts = attempts.filter(
-      (a) => a.assignmentId === assignment.id
-    );
+    const studentAttempts = attempts.filter((a) => a.assignmentId === assignment.id);
 
     const bestScore =
       studentAttempts.length > 0
@@ -206,7 +212,7 @@ export async function getMyAssignments(
       updatedAt: new Date(assignment.updatedAt),
       game: {
         id: assignment.game.id,
-        tutorId: assignment.game.tutorId,
+        userId: assignment.game.userId,
         name: assignment.game.name,
         gameType: assignment.game.gameType as GameType,
         gameData: JSON.parse(assignment.game.gameData),
@@ -291,26 +297,26 @@ export async function getMyStats() {
 /**
  * Get all game attempts for the current student with enriched data
  */
-export async function getMyAttempts(
-  filters?: {
-    gameType?: string;
-    groupId?: string;
-    startDate?: Date;
-    endDate?: Date;
-  }
-) {
+export async function getMyAttempts(filters?: {
+  gameType?: string;
+  groupId?: string;
+  startDate?: Date;
+  endDate?: Date;
+}) {
   const studentId = await getCurrentStudentId();
 
   const query = supabase
     .from('GameAttempt')
-    .select(`
+    .select(
+      `
       *,
       assignment:Assignment(
         *,
         game:Game(*),
         group:Group(*)
       )
-    `)
+    `
+    )
     .eq('studentId', studentId)
     .order('completedAt', { ascending: false });
 
@@ -335,14 +341,10 @@ export async function getMyAttempts(
 
   // Apply filters
   if (filters?.gameType) {
-    enrichedAttempts = enrichedAttempts.filter(
-      (a) => a.game?.gameType === filters.gameType
-    );
+    enrichedAttempts = enrichedAttempts.filter((a) => a.game?.gameType === filters.gameType);
   }
   if (filters?.groupId) {
-    enrichedAttempts = enrichedAttempts.filter(
-      (a) => a.group?.id === filters.groupId
-    );
+    enrichedAttempts = enrichedAttempts.filter((a) => a.group?.id === filters.groupId);
   }
   if (filters?.startDate) {
     enrichedAttempts = enrichedAttempts.filter(
@@ -350,9 +352,7 @@ export async function getMyAttempts(
     );
   }
   if (filters?.endDate) {
-    enrichedAttempts = enrichedAttempts.filter(
-      (a) => new Date(a.completedAt) <= filters.endDate!
-    );
+    enrichedAttempts = enrichedAttempts.filter((a) => new Date(a.completedAt) <= filters.endDate!);
   }
 
   return enrichedAttempts;
@@ -383,8 +383,7 @@ export async function getMyPersonalBests() {
     const bestTime = Math.min(...gameAttemptsList.map((a) => a.timeTaken));
     const totalAttempts = gameAttemptsList.length;
     const averageScore =
-      gameAttemptsList.reduce((sum, a) => sum + a.scorePercentage, 0) /
-      totalAttempts;
+      gameAttemptsList.reduce((sum, a) => sum + a.scorePercentage, 0) / totalAttempts;
 
     return {
       game,
@@ -468,10 +467,7 @@ export async function getMyProgressTrends(days: number = 30) {
     totalAttempts: attempts.length,
     averageScore:
       attempts.length > 0
-        ? Math.round(
-            attempts.reduce((sum, a) => sum + a.scorePercentage, 0) /
-              attempts.length
-          )
+        ? Math.round(attempts.reduce((sum, a) => sum + a.scorePercentage, 0) / attempts.length)
         : 0,
   };
 }
@@ -482,14 +478,16 @@ export async function getMyProgressTrends(days: number = 30) {
 export async function getAttemptDetails(attemptId: string) {
   const { data, error } = await supabase
     .from('GameAttempt')
-    .select(`
+    .select(
+      `
       *,
       assignment:Assignment(
         *,
         game:Game(*),
         group:Group(*)
       )
-    `)
+    `
+    )
     .eq('id', attemptId)
     .single();
 

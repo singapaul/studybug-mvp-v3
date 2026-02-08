@@ -70,10 +70,7 @@ export function MultipleChoiceBuilder() {
         if (q.id === questionId && q.options.length < 4) {
           return {
             ...q,
-            options: [
-              ...q.options,
-              { id: `opt_${Date.now()}`, text: '', isCorrect: false },
-            ],
+            options: [...q.options, { id: `opt_${Date.now()}`, text: '', isCorrect: false }],
           };
         }
         return q;
@@ -87,9 +84,7 @@ export function MultipleChoiceBuilder() {
         if (q.id === questionId) {
           return {
             ...q,
-            options: q.options.map((opt) =>
-              opt.id === optionId ? { ...opt, text } : opt
-            ),
+            options: q.options.map((opt) => (opt.id === optionId ? { ...opt, text } : opt)),
           };
         }
         return q;
@@ -146,7 +141,8 @@ export function MultipleChoiceBuilder() {
       if (!q.question.trim()) return 'All questions must have text';
       if (q.options.length < 2) return 'Each question needs at least 2 options';
       if (q.options.some((opt) => !opt.text.trim())) return 'All options must have text';
-      if (!q.options.some((opt) => opt.isCorrect)) return 'Each question must have one correct answer';
+      if (!q.options.some((opt) => opt.isCorrect))
+        return 'Each question must have one correct answer';
     }
 
     return null;

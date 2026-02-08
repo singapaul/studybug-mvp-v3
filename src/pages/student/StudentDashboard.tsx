@@ -4,7 +4,13 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Skeleton } from '@/components/ui/skeleton';
 import DashboardLayout from '@/components/layout/DashboardLayout';
@@ -27,11 +33,7 @@ import {
 } from 'lucide-react';
 import { Group } from '@/types/group';
 import { StudentAssignment, AssignmentFilter, AssignmentSort } from '@/types/assignment';
-import {
-  getMyGroups,
-  getMyAssignments,
-  getMyStats,
-} from '@/services/supabase/student.service';
+import { getMyGroups, getMyAssignments, getMyStats } from '@/services/supabase/student.service';
 import JoinGroupDialog from '@/components/student/JoinGroupDialog';
 import { StudentTestDataButton } from '@/components/dev/StudentTestDataButton';
 import { formatDistanceToNow } from 'date-fns';
@@ -58,7 +60,12 @@ export default function StudentDashboard() {
   const navigate = useNavigate();
   const [groups, setGroups] = useState<Group[]>([]);
   const [assignments, setAssignments] = useState<StudentAssignment[]>([]);
-  const [stats, setStats] = useState({ totalGroups: 0, totalAssignments: 0, completedAssignments: 0, averageScore: 0 });
+  const [stats, setStats] = useState({
+    totalGroups: 0,
+    totalAssignments: 0,
+    completedAssignments: 0,
+    averageScore: 0,
+  });
   const [isLoading, setIsLoading] = useState(true);
   const [showJoinDialog, setShowJoinDialog] = useState(false);
   const [filter, setFilter] = useState<AssignmentFilter>('all');
@@ -138,9 +145,7 @@ export default function StudentDashboard() {
     const distance = formatDistanceToNow(dueDate, { addSuffix: true });
 
     return (
-      <span className={cn('text-sm', isOverdue && 'text-red-600 font-medium')}>
-        Due {distance}
-      </span>
+      <span className={cn('text-sm', isOverdue && 'text-red-600 font-medium')}>Due {distance}</span>
     );
   };
 
@@ -160,9 +165,7 @@ export default function StudentDashboard() {
             <h1 className="text-4xl font-bold mb-2">
               Welcome back, {session?.user.email.split('@')[0]}!
             </h1>
-            <p className="text-lg opacity-90 mb-6 max-w-2xl">
-              Continue your learning journey
-            </p>
+            <p className="text-lg opacity-90 mb-6 max-w-2xl">Continue your learning journey</p>
 
             {/* Join Code Button */}
             <Button
@@ -209,7 +212,9 @@ export default function StudentDashboard() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-4xl font-bold text-purple-600">{stats.completedAssignments}</div>
+                  <div className="text-4xl font-bold text-purple-600">
+                    {stats.completedAssignments}
+                  </div>
                   <p className="text-sm text-muted-foreground mt-1">total completions</p>
                 </CardContent>
               </Card>
@@ -256,10 +261,10 @@ export default function StudentDashboard() {
                     <Skeleton key={i} className="h-16" />
                   ))}
                 </div>
-              ) : assignments.filter(a => !a.isCompleted).slice(0, 3).length > 0 ? (
+              ) : assignments.filter((a) => !a.isCompleted).slice(0, 3).length > 0 ? (
                 <div className="space-y-3">
                   {assignments
-                    .filter(a => !a.isCompleted)
+                    .filter((a) => !a.isCompleted)
                     .slice(0, 3)
                     .map((assignment) => (
                       <div
@@ -273,9 +278,7 @@ export default function StudentDashboard() {
                           </div>
                           <div>
                             <p className="font-medium">{assignment.game.name}</p>
-                            <p className="text-xs text-muted-foreground">
-                              {assignment.group.name}
-                            </p>
+                            <p className="text-xs text-muted-foreground">{assignment.group.name}</p>
                           </div>
                         </div>
                         {assignment.dueDate && (
@@ -290,9 +293,7 @@ export default function StudentDashboard() {
                 <div className="text-center py-8">
                   <CheckCircle2 className="h-12 w-12 text-muted-foreground mx-auto mb-3 opacity-50" />
                   <p className="text-sm text-muted-foreground">
-                    {assignments.length === 0
-                      ? 'No assignments yet'
-                      : 'All caught up!'}
+                    {assignments.length === 0 ? 'No assignments yet' : 'All caught up!'}
                   </p>
                 </div>
               )}
@@ -320,10 +321,10 @@ export default function StudentDashboard() {
                     <Skeleton key={i} className="h-16" />
                   ))}
                 </div>
-              ) : assignments.filter(a => a.bestScore !== undefined).slice(0, 5).length > 0 ? (
+              ) : assignments.filter((a) => a.bestScore !== undefined).slice(0, 5).length > 0 ? (
                 <div className="space-y-3">
                   {assignments
-                    .filter(a => a.bestScore !== undefined)
+                    .filter((a) => a.bestScore !== undefined)
                     .slice(0, 5)
                     .map((assignment) => (
                       <div
@@ -335,13 +336,14 @@ export default function StudentDashboard() {
                             {assignment.bestScore! >= 90
                               ? '🏆'
                               : assignment.bestScore! >= 75
-                              ? '🎯'
-                              : '📚'}
+                                ? '🎯'
+                                : '📚'}
                           </div>
                           <div>
                             <p className="font-medium">{assignment.game.name}</p>
                             <p className="text-xs text-muted-foreground">
-                              {assignment.attemptCount} {assignment.attemptCount === 1 ? 'attempt' : 'attempts'}
+                              {assignment.attemptCount}{' '}
+                              {assignment.attemptCount === 1 ? 'attempt' : 'attempts'}
                             </p>
                           </div>
                         </div>
@@ -351,8 +353,8 @@ export default function StudentDashboard() {
                             assignment.bestScore! >= 90
                               ? 'bg-green-50 text-green-700 border-green-300'
                               : assignment.bestScore! >= 75
-                              ? 'bg-blue-50 text-blue-700 border-blue-300'
-                              : 'bg-yellow-50 text-yellow-700 border-yellow-300'
+                                ? 'bg-blue-50 text-blue-700 border-blue-300'
+                                : 'bg-yellow-50 text-yellow-700 border-yellow-300'
                           )}
                         >
                           {assignment.bestScore}%
@@ -457,7 +459,8 @@ export default function StudentDashboard() {
                       <Users className="h-16 w-16 text-muted-foreground mb-4" />
                       <h3 className="text-xl font-semibold mb-2">Join a Group to Get Started</h3>
                       <p className="text-sm text-muted-foreground text-center max-w-md mb-4">
-                        Enter a join code shared by your tutor to join a group and receive assignments.
+                        Enter a join code shared by your tutor to join a group and receive
+                        assignments.
                       </p>
                       <Button onClick={() => setShowJoinDialog(true)} size="lg">
                         <Plus className="mr-2 h-4 w-4" />
@@ -512,7 +515,9 @@ export default function StudentDashboard() {
                       {assignment.bestScore !== undefined && (
                         <div className="flex items-center gap-2 text-sm">
                           <BarChart3 className="h-4 w-4 text-muted-foreground" />
-                          <span className="font-medium">Best Score: {Math.round(assignment.bestScore)}%</span>
+                          <span className="font-medium">
+                            Best Score: {Math.round(assignment.bestScore)}%
+                          </span>
                           {assignment.passPercentage && (
                             <span className="text-muted-foreground">
                               (Pass: {assignment.passPercentage}%)
@@ -523,7 +528,8 @@ export default function StudentDashboard() {
 
                       {assignment.attemptCount > 0 && (
                         <p className="text-xs text-muted-foreground">
-                          {assignment.attemptCount} attempt{assignment.attemptCount !== 1 ? 's' : ''}
+                          {assignment.attemptCount} attempt
+                          {assignment.attemptCount !== 1 ? 's' : ''}
                         </p>
                       )}
 
@@ -579,11 +585,11 @@ export default function StudentDashboard() {
                         {group.name}
                       </CardTitle>
                       <CardDescription>
-                        {group.subjectArea && (
-                          <span className="block">{group.subjectArea}</span>
-                        )}
+                        {group.subjectArea && <span className="block">{group.subjectArea}</span>}
                         {group.ageRange && (
-                          <span className="text-xs text-muted-foreground">Age: {group.ageRange}</span>
+                          <span className="text-xs text-muted-foreground">
+                            Age: {group.ageRange}
+                          </span>
                         )}
                       </CardDescription>
                     </CardHeader>

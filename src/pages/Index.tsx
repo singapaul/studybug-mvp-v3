@@ -35,9 +35,8 @@ export default function Index() {
   // Redirect if already authenticated
   useEffect(() => {
     if (isAuthenticated && session) {
-      const redirectPath = session.user.role === Role.TUTOR
-        ? '/tutor/dashboard'
-        : '/student/dashboard';
+      const redirectPath =
+        session.user.role === Role.TUTOR ? '/tutor/dashboard' : '/student/dashboard';
       navigate(redirectPath, { replace: true });
     }
   }, [isAuthenticated, session, navigate]);
@@ -64,14 +63,11 @@ export default function Index() {
     <div className="min-h-screen flex flex-col">
       {/* Urgency Banner */}
       <UrgencyBanner />
-      
+
       <Header />
       <main className="flex-1">
         {/* Hero Section */}
-        <PricingHero 
-          onStartTrial={scrollToPricing}
-          onLearnMore={scrollToHowItWorks}
-        />
+        <PricingHero onStartTrial={scrollToPricing} onLearnMore={scrollToHowItWorks} />
 
         {/* Stats Bar */}
         <StatsBar />
@@ -97,13 +93,16 @@ export default function Index() {
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
                 {t('pricing.subtitle')}
               </p>
-              
+
               {/* Toggle */}
               <BillingToggle value={billingCycle} onChange={setBillingCycle} />
             </ScrollReveal>
 
             {/* Pricing Cards */}
-            <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto" staggerDelay={0.1}>
+            <StaggerContainer
+              className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto"
+              staggerDelay={0.1}
+            >
               {PLANS.map((plan) => (
                 <StaggerItem key={plan.id}>
                   <PricingCard
@@ -154,13 +153,16 @@ export default function Index() {
           <div className="absolute top-10 left-[5%] w-32 h-32 rounded-full bg-white/10 blur-2xl" />
           <div className="absolute bottom-10 right-[10%] w-48 h-48 rounded-full bg-accent/20 blur-3xl" />
           <div className="absolute top-1/2 left-[20%] w-24 h-24 rounded-full bg-coral/15 blur-xl" />
-          
+
           {/* Subtle pattern overlay */}
-          <div className="absolute inset-0 opacity-5" style={{
-            backgroundImage: `radial-gradient(circle at 20px 20px, white 2px, transparent 0)`,
-            backgroundSize: '40px 40px'
-          }} />
-          
+          <div
+            className="absolute inset-0 opacity-5"
+            style={{
+              backgroundImage: `radial-gradient(circle at 20px 20px, white 2px, transparent 0)`,
+              backgroundSize: '40px 40px',
+            }}
+          />
+
           <div className="container text-center relative">
             <ScrollReveal>
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
@@ -170,26 +172,24 @@ export default function Index() {
                 Join thousands of students and teachers who are making revision fun and effective.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   className="bg-primary text-white hover:bg-primary/90 rounded-full shadow-lg font-semibold"
                   onClick={() => navigate('/signup/individual')}
                 >
                   Start 14-Day Free Trial
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
-                <Button 
-                  size="lg" 
-                  variant="outline" 
+                <Button
+                  size="lg"
+                  variant="outline"
                   className="border-2 border-white/30 text-foreground bg-white hover:bg-white/90 rounded-full"
                   onClick={() => navigate('/schools')}
                 >
                   For Schools
                 </Button>
               </div>
-              <p className="text-sm text-white/70 mt-4">
-                14-day free trial • Cancel anytime
-              </p>
+              <p className="text-sm text-white/70 mt-4">14-day free trial • Cancel anytime</p>
             </ScrollReveal>
           </div>
         </section>
@@ -197,15 +197,18 @@ export default function Index() {
         {/* FAQ */}
         <section className="py-20 bg-cream relative overflow-hidden">
           {/* Subtle pattern */}
-          <div className="absolute inset-0 opacity-[0.02]" style={{
-            backgroundImage: `radial-gradient(circle at 2px 2px, hsl(var(--foreground)) 1px, transparent 0)`,
-            backgroundSize: '32px 32px'
-          }} />
-          
+          <div
+            className="absolute inset-0 opacity-[0.02]"
+            style={{
+              backgroundImage: `radial-gradient(circle at 2px 2px, hsl(var(--foreground)) 1px, transparent 0)`,
+              backgroundSize: '32px 32px',
+            }}
+          />
+
           {/* Decorative shapes */}
           <div className="absolute top-20 right-[10%] w-40 h-40 rounded-full bg-accent/10 blur-3xl" />
           <div className="absolute bottom-20 left-[5%] w-32 h-32 rounded-full bg-secondary/8 blur-2xl" />
-          
+
           <div className="container relative">
             <FAQSection />
           </div>

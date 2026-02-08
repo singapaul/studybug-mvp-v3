@@ -2,15 +2,7 @@ import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import {
-  Trophy,
-  Star,
-  Clock,
-  Undo2,
-  RotateCcw,
-  Home,
-  Sparkles,
-} from 'lucide-react';
+import { Trophy, Star, Clock, Undo2, RotateCcw, Home, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface PairsResultScreenProps {
@@ -129,9 +121,7 @@ export default function PairsResultScreen({
                   <Star
                     className={cn(
                       'h-12 w-12',
-                      star <= starRating
-                        ? 'fill-yellow-400 text-yellow-400'
-                        : 'text-gray-300'
+                      star <= starRating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
                     )}
                   />
                 </motion.div>
@@ -152,12 +142,8 @@ export default function PairsResultScreen({
                         <Trophy className="h-6 w-6 text-white" />
                       </div>
                     </div>
-                    <div className="text-3xl font-bold text-green-700 mb-1">
-                      100%
-                    </div>
-                    <div className="text-sm text-green-600 font-medium">
-                      Score
-                    </div>
+                    <div className="text-3xl font-bold text-green-700 mb-1">100%</div>
+                    <div className="text-sm text-green-600 font-medium">Score</div>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -174,12 +160,8 @@ export default function PairsResultScreen({
                         <Clock className="h-6 w-6 text-white" />
                       </div>
                     </div>
-                    <div className="text-3xl font-bold text-blue-700 mb-1">
-                      {formatTime(time)}
-                    </div>
-                    <div className="text-sm text-blue-600 font-medium">
-                      Time
-                    </div>
+                    <div className="text-3xl font-bold text-blue-700 mb-1">{formatTime(time)}</div>
+                    <div className="text-sm text-blue-600 font-medium">Time</div>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -196,12 +178,8 @@ export default function PairsResultScreen({
                         <Undo2 className="h-6 w-6 text-white" />
                       </div>
                     </div>
-                    <div className="text-3xl font-bold text-purple-700 mb-1">
-                      {moves}
-                    </div>
-                    <div className="text-sm text-purple-600 font-medium">
-                      Moves
-                    </div>
+                    <div className="text-3xl font-bold text-purple-700 mb-1">{moves}</div>
+                    <div className="text-sm text-purple-600 font-medium">Moves</div>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -218,11 +196,8 @@ export default function PairsResultScreen({
                 variant="outline"
                 className={cn(
                   'px-4 py-2 text-base font-semibold',
-                  isPerfectGame &&
-                    'border-green-500 bg-green-50 text-green-700',
-                  !isPerfectGame &&
-                    starRating === 2 &&
-                    'border-blue-500 bg-blue-50 text-blue-700',
+                  isPerfectGame && 'border-green-500 bg-green-50 text-green-700',
+                  !isPerfectGame && starRating === 2 && 'border-blue-500 bg-blue-50 text-blue-700',
                   !isPerfectGame &&
                     starRating === 1 &&
                     'border-orange-500 bg-orange-50 text-orange-700'
@@ -277,12 +252,7 @@ export default function PairsResultScreen({
                 <RotateCcw className="mr-2 h-5 w-5" />
                 Play Again
               </Button>
-              <Button
-                onClick={onExit}
-                variant="outline"
-                size="lg"
-                className="flex-1"
-              >
+              <Button onClick={onExit} variant="outline" size="lg" className="flex-1">
                 <Home className="mr-2 h-5 w-5" />
                 Back to Assignments
               </Button>

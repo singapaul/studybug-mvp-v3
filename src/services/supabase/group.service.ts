@@ -6,28 +6,22 @@
 import { supabase } from '@/lib/supabase';
 import { Group, GroupWithDetails, CreateGroupInput, GroupMember } from '@/types/group';
 import { generateJoinCode } from '@/lib/join-code';
-import {
-  createErrorResponse,
-  ErrorCode,
-  handleAppError,
-} from '@/lib/error-handling';
+import { createErrorResponse, ErrorCode, handleAppError } from '@/lib/error-handling';
 import { logError, logWarning } from '@/lib/error-logger';
 
 /**
  * Get Tutor ID for current authenticated user
  */
 async function getCurrentTutorId(): Promise<string> {
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   if (!user) {
     throw new Error('No authenticated user');
   }
 
-  const { data, error } = await supabase
-    .from('Tutor')
-    .select('id')
-    .eq('userId', user.id)
-    .single();
+  const { data, error } = await supabase.from('Tutor').select('id').eq('userId', user.id).single();
 
   if (error || !data) {
     throw new Error('Tutor profile not found');
@@ -40,7 +34,9 @@ async function getCurrentTutorId(): Promise<string> {
  * Get Student ID for current authenticated user
  */
 async function getCurrentStudentId(): Promise<string> {
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   if (!user) {
     throw new Error('No authenticated user');
@@ -68,11 +64,13 @@ export async function getMyGroups(): Promise<Group[]> {
 
     const { data, error } = await supabase
       .from('Group')
-      .select(`
+      .select(
+        `
         *,
         members:GroupMember(count),
         assignments:Assignment(count)
-      `)
+      `
+      )
       .eq('tutorId', tutorId)
       .order('createdAt', { ascending: false });
 
@@ -119,7 +117,8 @@ export async function getGroupById(groupId: string): Promise<GroupWithDetails | 
 
     const { data, error } = await supabase
       .from('Group')
-      .select(`
+      .select(
+        `
         *,
         members:GroupMember(
           id,
@@ -144,7 +143,8 @@ export async function getGroupById(groupId: string): Promise<GroupWithDetails | 
             gameType
           )
         )
-      `)
+      `
+      )
       .eq('id', groupId)
       .single();
 
@@ -445,10 +445,7 @@ export async function deleteGroup(groupId: string): Promise<void> {
       throw new Error(checkError.message);
     }
 
-    const { error } = await supabase
-      .from('Group')
-      .delete()
-      .eq('id', groupId);
+    const { error } = await supabase.from('Group').delete().eq('id', groupId);
 
     if (error) {
       throw new Error(error.message);
@@ -466,10 +463,7 @@ export async function deleteGroup(groupId: string): Promise<void> {
 /**
  * Remove a student from a group
  */
-export async function removeStudentFromGroup(
-  groupId: string,
-  studentId: string
-): Promise<void> {
+export async function removeStudentFromGroup(groupId: string, studentId: string): Promise<void> {
   const { error } = await supabase
     .from('GroupMember')
     .delete()
@@ -490,12 +484,14 @@ export async function getMyGroupsAsStudent(): Promise<GroupWithDetails[]> {
 
     const { data, error } = await supabase
       .from('GroupMember')
-      .select(`
+      .select(
+        `
         group:Group(
           *,
           members:GroupMember(count)
         )
-      `)
+      `
+      )
       .eq('studentId', studentId);
 
     if (error) {

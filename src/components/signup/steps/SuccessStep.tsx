@@ -115,10 +115,10 @@ export function SuccessStep() {
           <div className="flex justify-between items-center text-sm">
             <span className="text-muted-foreground">Trial ends</span>
             <span className="font-medium text-foreground">
-              {trialEndDate.toLocaleDateString('en-GB', { 
-                day: 'numeric', 
-                month: 'long', 
-                year: 'numeric' 
+              {trialEndDate.toLocaleDateString('en-GB', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
               })}
             </span>
           </div>
@@ -134,7 +134,9 @@ export function SuccessStep() {
               key={index}
               className="flex flex-col items-center p-6 rounded-xl border border-border bg-card text-center hover:border-primary/50 hover:shadow-md transition-all"
             >
-              <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${card.color}`}>
+              <div
+                className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${card.color}`}
+              >
                 <card.icon className="w-6 h-6" />
               </div>
               <h4 className="font-medium text-foreground mb-1">{card.title}</h4>
@@ -147,18 +149,16 @@ export function SuccessStep() {
 
       {/* Main CTA */}
       <div className="pt-4 space-y-3">
-        <Button
-          size="lg"
-          className="bg-primary text-white hover:bg-primary/90 px-8"
-          asChild
-        >
+        <Button size="lg" className="bg-primary text-white hover:bg-primary/90 px-8" asChild>
           <Link to="/">
             <Rocket className="w-4 h-4 mr-2" />
             Go to Dashboard
           </Link>
         </Button>
         <p className="text-sm text-muted-foreground">
-          <Link to="/" className="text-primary hover:underline">Skip for now →</Link>
+          <Link to="/" className="text-primary hover:underline">
+            Skip for now →
+          </Link>
         </p>
       </div>
     </div>

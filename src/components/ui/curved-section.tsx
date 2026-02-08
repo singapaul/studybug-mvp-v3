@@ -8,12 +8,12 @@ interface CurvedSectionProps {
   backgroundColor?: string;
 }
 
-export function CurvedSection({ 
-  children, 
-  className, 
-  curveTop = false, 
+export function CurvedSection({
+  children,
+  className,
+  curveTop = false,
   curveBottom = false,
-  backgroundColor = 'bg-background'
+  backgroundColor = 'bg-background',
 }: CurvedSectionProps) {
   return (
     <div className={cn('relative', backgroundColor, className)}>
@@ -31,9 +31,7 @@ export function CurvedSection({
           </svg>
         </div>
       )}
-      <div className="relative">
-        {children}
-      </div>
+      <div className="relative">{children}</div>
       {curveBottom && (
         <div className="absolute bottom-0 left-0 right-0 overflow-hidden leading-none translate-y-[1px]">
           <svg

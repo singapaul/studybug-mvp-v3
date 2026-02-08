@@ -64,22 +64,12 @@ export function StudentTestDataButton({ studentId, onDataChanged }: StudentTestD
           </div>
 
           <div className="space-y-2">
-            <Button
-              onClick={handleInitializeData}
-              className="w-full"
-              size="sm"
-              variant="default"
-            >
+            <Button onClick={handleInitializeData} className="w-full" size="sm" variant="default">
               <Plus className="mr-2 h-4 w-4" />
               Create Test Data
             </Button>
 
-            <Button
-              onClick={handleClearData}
-              className="w-full"
-              size="sm"
-              variant="destructive"
-            >
+            <Button onClick={handleClearData} className="w-full" size="sm" variant="destructive">
               <Trash2 className="mr-2 h-4 w-4" />
               Clear Test Data
             </Button>

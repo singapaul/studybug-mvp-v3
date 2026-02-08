@@ -10,14 +10,14 @@ const testimonials = [
   },
   {
     quote:
-      "The admin dashboard makes it so easy to track student progress. Our teachers love the pre-built revision decks.",
+      'The admin dashboard makes it so easy to track student progress. Our teachers love the pre-built revision decks.',
     author: 'James Chen',
     role: 'ICT Coordinator',
-    school: 'St. Mary\'s School',
+    school: "St. Mary's School",
   },
   {
     quote:
-      "Implementation was seamless with SSO. Students were up and running within minutes. Excellent support team.",
+      'Implementation was seamless with SSO. Students were up and running within minutes. Excellent support team.',
     author: 'Emma Thompson',
     role: 'Deputy Head',
     school: 'Riverside College',
@@ -26,7 +26,7 @@ const testimonials = [
 
 const schoolLogos = [
   'Oakwood Academy',
-  'St. Mary\'s School',
+  "St. Mary's School",
   'Riverside College',
   'Westminster Academy',
   'Kings College',
@@ -38,9 +38,7 @@ export function SchoolTestimonials() {
     <section className="py-20">
       <div className="container">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-foreground mb-4">
-            Trusted by Leading Schools
-          </h2>
+          <h2 className="text-3xl font-bold text-foreground mb-4">Trusted by Leading Schools</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             See why hundreds of schools choose Studybug for their students
           </p>
@@ -49,10 +47,7 @@ export function SchoolTestimonials() {
         {/* Testimonial Cards */}
         <div className="grid md:grid-cols-3 gap-6 mb-16">
           {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className="p-6 rounded-xl bg-card border border-border"
-            >
+            <div key={index} className="p-6 rounded-xl bg-card border border-border">
               {/* Stars */}
               <div className="flex gap-1 mb-4">
                 {[...Array(5)].map((_, i) => (
@@ -61,9 +56,7 @@ export function SchoolTestimonials() {
               </div>
 
               {/* Quote */}
-              <blockquote className="text-foreground mb-6">
-                "{testimonial.quote}"
-              </blockquote>
+              <blockquote className="text-foreground mb-6">"{testimonial.quote}"</blockquote>
 
               {/* Author */}
               <div className="flex items-center gap-3">
@@ -73,9 +66,7 @@ export function SchoolTestimonials() {
                   </span>
                 </div>
                 <div>
-                  <div className="font-medium text-foreground">
-                    {testimonial.author}
-                  </div>
+                  <div className="font-medium text-foreground">{testimonial.author}</div>
                   <div className="text-sm text-muted-foreground">
                     {testimonial.role}, {testimonial.school}
                   </div>
@@ -87,9 +78,7 @@ export function SchoolTestimonials() {
 
         {/* School Logos */}
         <div className="text-center">
-          <p className="text-sm text-muted-foreground mb-6">
-            Trusted by schools across the UK
-          </p>
+          <p className="text-sm text-muted-foreground mb-6">Trusted by schools across the UK</p>
           <div className="flex flex-wrap justify-center gap-8">
             {schoolLogos.map((school, index) => (
               <div

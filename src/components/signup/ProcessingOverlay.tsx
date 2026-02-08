@@ -7,10 +7,10 @@ interface ProcessingOverlayProps {
   submessage?: string;
 }
 
-export function ProcessingOverlay({ 
-  isVisible, 
-  message = "Processing...",
-  submessage = "Please wait while we set up your account"
+export function ProcessingOverlay({
+  isVisible,
+  message = 'Processing...',
+  submessage = 'Please wait while we set up your account',
 }: ProcessingOverlayProps) {
   if (!isVisible) return null;
 
@@ -33,13 +33,13 @@ export function ProcessingOverlay({
           <motion.div
             className="absolute inset-0 rounded-full border-4 border-primary/20"
             animate={{ rotate: 360 }}
-            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
           />
           {/* Inner spinning ring */}
           <motion.div
             className="absolute inset-0 rounded-full border-4 border-transparent border-t-primary"
             animate={{ rotate: 360 }}
-            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+            transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
           />
           {/* Center icon */}
           <div className="absolute inset-0 flex items-center justify-center">

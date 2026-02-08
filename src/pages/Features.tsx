@@ -2,35 +2,111 @@ import { Link } from 'react-router-dom';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
-import { 
-  Gamepad2, Zap, BookOpen, Timer, Brain, CheckCircle, 
-  Pencil, BarChart3, Trophy, WifiOff, Users, School,
-  FileDown, Sparkles, GraduationCap, ArrowRight
+import {
+  Gamepad2,
+  Zap,
+  BookOpen,
+  Timer,
+  Brain,
+  CheckCircle,
+  Pencil,
+  BarChart3,
+  Trophy,
+  WifiOff,
+  Users,
+  School,
+  FileDown,
+  Sparkles,
+  GraduationCap,
+  ArrowRight,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const gameModes = [
-  { icon: Gamepad2, name: 'Flip & Match', description: 'Classic memory matching game', color: 'bg-primary' },
+  {
+    icon: Gamepad2,
+    name: 'Flip & Match',
+    description: 'Classic memory matching game',
+    color: 'bg-primary',
+  },
   { icon: Zap, name: 'Splat!', description: 'Fast-paced card reactions', color: 'bg-secondary' },
-  { icon: CheckCircle, name: 'Multiple Choice', description: 'Quiz-style assessments', color: 'bg-coral' },
-  { icon: BookOpen, name: 'Flashcards', description: 'Traditional revision cards', color: 'bg-warning' },
-  { icon: Timer, name: 'Speed Round', description: 'Beat the clock challenges', color: 'bg-accent' },
-  { icon: Brain, name: 'Memory Challenge', description: 'Test your retention', color: 'bg-primary' },
-  { icon: CheckCircle, name: 'True/False', description: 'Quick decision games', color: 'bg-secondary' },
-  { icon: Pencil, name: 'Fill in the Blanks', description: 'Complete the sentence', color: 'bg-coral' },
+  {
+    icon: CheckCircle,
+    name: 'Multiple Choice',
+    description: 'Quiz-style assessments',
+    color: 'bg-coral',
+  },
+  {
+    icon: BookOpen,
+    name: 'Flashcards',
+    description: 'Traditional revision cards',
+    color: 'bg-warning',
+  },
+  {
+    icon: Timer,
+    name: 'Speed Round',
+    description: 'Beat the clock challenges',
+    color: 'bg-accent',
+  },
+  {
+    icon: Brain,
+    name: 'Memory Challenge',
+    description: 'Test your retention',
+    color: 'bg-primary',
+  },
+  {
+    icon: CheckCircle,
+    name: 'True/False',
+    description: 'Quick decision games',
+    color: 'bg-secondary',
+  },
+  {
+    icon: Pencil,
+    name: 'Fill in the Blanks',
+    description: 'Complete the sentence',
+    color: 'bg-coral',
+  },
 ];
 
 const studentFeatures = [
-  { icon: Pencil, title: 'Custom deck creation', description: 'Build your own revision materials tailored to your needs' },
-  { icon: BarChart3, title: 'Progress tracking', description: 'See your improvement over time with detailed analytics' },
-  { icon: Trophy, title: 'Achievement system', description: 'Earn badges and rewards as you progress' },
-  { icon: WifiOff, title: 'Offline mode', description: 'Download decks and study without internet' },
+  {
+    icon: Pencil,
+    title: 'Custom deck creation',
+    description: 'Build your own revision materials tailored to your needs',
+  },
+  {
+    icon: BarChart3,
+    title: 'Progress tracking',
+    description: 'See your improvement over time with detailed analytics',
+  },
+  {
+    icon: Trophy,
+    title: 'Achievement system',
+    description: 'Earn badges and rewards as you progress',
+  },
+  {
+    icon: WifiOff,
+    title: 'Offline mode',
+    description: 'Download decks and study without internet',
+  },
 ];
 
 const teacherFeatures = [
-  { icon: Users, title: 'Classroom management', description: 'Organize students into classes and groups' },
-  { icon: BarChart3, title: 'Student tracking', description: 'Monitor individual and class progress' },
-  { icon: BookOpen, title: 'Pre-built curriculum decks', description: '400+ ready-to-use subject decks' },
+  {
+    icon: Users,
+    title: 'Classroom management',
+    description: 'Organize students into classes and groups',
+  },
+  {
+    icon: BarChart3,
+    title: 'Student tracking',
+    description: 'Monitor individual and class progress',
+  },
+  {
+    icon: BookOpen,
+    title: 'Pre-built curriculum decks',
+    description: '400+ ready-to-use subject decks',
+  },
   { icon: FileDown, title: 'Export/import tools', description: 'Share and backup your materials' },
 ];
 
@@ -48,7 +124,7 @@ export default function Features() {
 
           <div className="container relative">
             <div className="max-w-3xl mx-auto text-center">
-              <motion.div 
+              <motion.div
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-border text-foreground text-sm font-medium mb-6 shadow-sm"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -58,7 +134,7 @@ export default function Features() {
                 <span>20+ game modes to explore</span>
               </motion.div>
 
-              <motion.h1 
+              <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
@@ -68,13 +144,14 @@ export default function Features() {
                 <span className="text-secondary">Learning Engaging</span>
               </motion.h1>
 
-              <motion.p 
+              <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto"
               >
-                Discover all the features that make Studybug the most engaging revision platform for students and teachers.
+                Discover all the features that make Studybug the most engaging revision platform for
+                students and teachers.
               </motion.p>
 
               <motion.div
@@ -83,18 +160,27 @@ export default function Features() {
                 transition={{ duration: 0.6, delay: 0.5 }}
                 className="flex flex-col sm:flex-row gap-4 justify-center"
               >
-                <Button size="lg" className="bg-primary text-white hover:bg-primary/90 rounded-full shadow-lg font-semibold" asChild>
+                <Button
+                  size="lg"
+                  className="bg-primary text-white hover:bg-primary/90 rounded-full shadow-lg font-semibold"
+                  asChild
+                >
                   <Link to="/signup/individual">
                     Start Free Trial
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
                 </Button>
-                <Button size="lg" variant="outline" className="border-2 border-foreground/20 text-foreground bg-white hover:bg-muted rounded-full" asChild>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-2 border-foreground/20 text-foreground bg-white hover:bg-muted rounded-full"
+                  asChild
+                >
                   <Link to="/pricing">View Pricing</Link>
                 </Button>
               </motion.div>
 
-              <motion.p 
+              <motion.p
                 className="text-sm text-muted-foreground mt-4"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -129,7 +215,7 @@ export default function Features() {
                   whileHover={{ y: -6 }}
                   className="p-6 rounded-3xl bg-white border border-border hover:shadow-xl transition-all group"
                 >
-                  <motion.div 
+                  <motion.div
                     whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
                     className={`w-12 h-12 rounded-xl ${mode.color} flex items-center justify-center mb-4 shadow-md`}
                   >
@@ -160,8 +246,8 @@ export default function Features() {
                 </p>
                 <div className="space-y-4">
                   {studentFeatures.map((feature, index) => (
-                    <motion.div 
-                      key={index} 
+                    <motion.div
+                      key={index}
                       whileHover={{ x: 4 }}
                       className="flex items-start gap-4"
                     >
@@ -177,7 +263,7 @@ export default function Features() {
                 </div>
               </div>
               <div className="relative">
-                <motion.div 
+                <motion.div
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 4, repeat: Infinity }}
                   className="aspect-square max-w-md mx-auto rounded-3xl bg-secondary flex items-center justify-center shadow-2xl"
@@ -194,7 +280,7 @@ export default function Features() {
           <div className="container">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="order-2 lg:order-1">
-                <motion.div 
+                <motion.div
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
                   className="aspect-square max-w-md mx-auto rounded-3xl bg-primary flex items-center justify-center shadow-2xl"
@@ -211,11 +297,12 @@ export default function Features() {
                   Powerful Classroom Tools
                 </h2>
                 <p className="text-lg text-muted-foreground mb-8">
-                  Manage your classes, track student progress, and access hundreds of curriculum-aligned decks.
+                  Manage your classes, track student progress, and access hundreds of
+                  curriculum-aligned decks.
                 </p>
                 <div className="space-y-4">
                   {teacherFeatures.map((feature, index) => (
-                    <motion.div 
+                    <motion.div
                       key={index}
                       whileHover={{ x: 4 }}
                       className="flex items-start gap-4"
@@ -239,23 +326,30 @@ export default function Features() {
         <section className="py-24 bg-secondary relative overflow-hidden">
           <div className="absolute top-10 left-[10%] w-48 h-48 rounded-full bg-white/10 blur-2xl" />
           <div className="absolute bottom-10 right-[15%] w-64 h-64 rounded-full bg-primary/10 blur-2xl" />
-          
+
           <div className="container text-center relative">
             <Sparkles className="w-12 h-12 text-white/60 mx-auto mb-6" />
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Ready to Try It?
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Try It?</h2>
             <p className="text-lg text-white/80 max-w-xl mx-auto mb-8">
               Start your 14-day free trial and experience all features.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-white text-secondary hover:bg-white/90 rounded-full shadow-lg" asChild>
+              <Button
+                size="lg"
+                className="bg-white text-secondary hover:bg-white/90 rounded-full shadow-lg"
+                asChild
+              >
                 <Link to="/signup/individual">
                   Start Free Trial
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white/10 rounded-full" asChild>
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-2 border-white text-white hover:bg-white/10 rounded-full"
+                asChild
+              >
                 <Link to="/pricing">View Pricing</Link>
               </Button>
             </div>

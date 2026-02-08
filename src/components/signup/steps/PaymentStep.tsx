@@ -13,7 +13,7 @@ const paymentSchema = z.object({
   cardCvc: z.string().min(3, 'CVC must be 3 digits').max(4),
   cardName: z.string().min(1, 'Name on card is required'),
   billingPostcode: z.string().min(1, 'Postcode is required'),
-  agreedToTerms: z.boolean().refine(val => val === true, 'You must agree to the terms'),
+  agreedToTerms: z.boolean().refine((val) => val === true, 'You must agree to the terms'),
 });
 
 interface PaymentStepProps {
@@ -24,11 +24,13 @@ interface PaymentStepProps {
 import { useState } from 'react';
 
 export function PaymentStep({ onNext, onBack }: PaymentStepProps) {
-  const { formData, updateFormData, isProcessing, setIsProcessing, setProcessingMessage } = useSignup();
+  const { formData, updateFormData, isProcessing, setIsProcessing, setProcessingMessage } =
+    useSignup();
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const selectedPlan = PLANS.find((p) => p.id === formData.plan);
-  const price = formData.billingCycle === 'monthly' ? selectedPlan?.monthlyPrice : selectedPlan?.annualPrice;
+  const price =
+    formData.billingCycle === 'monthly' ? selectedPlan?.monthlyPrice : selectedPlan?.annualPrice;
   const trialEndDate = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000);
 
   const formatCardNumber = (value: string) => {
@@ -96,12 +98,8 @@ export function PaymentStep({ onNext, onBack }: PaymentStepProps) {
   return (
     <div className="space-y-8 animate-fade-in">
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-foreground mb-2">
-          Payment details
-        </h2>
-        <p className="text-muted-foreground">
-          You won't be charged until your 14-day trial ends
-        </p>
+        <h2 className="text-2xl font-bold text-foreground mb-2">Payment details</h2>
+        <p className="text-muted-foreground">You won't be charged until your 14-day trial ends</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6 max-w-md mx-auto">
@@ -111,7 +109,12 @@ export function PaymentStep({ onNext, onBack }: PaymentStepProps) {
           <div>
             <p className="font-medium text-foreground">14-day free trial</p>
             <p className="text-sm text-muted-foreground">
-              You'll be charged £{price} on {trialEndDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+              You'll be charged £{price} on{' '}
+              {trialEndDate.toLocaleDateString('en-GB', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+              })}
             </p>
           </div>
         </div>
@@ -135,9 +138,7 @@ export function PaymentStep({ onNext, onBack }: PaymentStepProps) {
                 <Input
                   id="cardNumber"
                   value={formData.cardNumber}
-                  onChange={(e) =>
-                    updateFormData({ cardNumber: formatCardNumber(e.target.value) })
-                  }
+                  onChange={(e) => updateFormData({ cardNumber: formatCardNumber(e.target.value) })}
                   placeholder="1234 5678 9012 3456"
                   className={errors.cardNumber ? 'border-destructive pr-16' : 'pr-16'}
                 />
@@ -147,9 +148,7 @@ export function PaymentStep({ onNext, onBack }: PaymentStepProps) {
                   </span>
                 )}
               </div>
-              {errors.cardNumber && (
-                <p className="text-xs text-destructive">{errors.cardNumber}</p>
-              )}
+              {errors.cardNumber && <p className="text-xs text-destructive">{errors.cardNumber}</p>}
             </div>
 
             {/* Expiry & CVC */}
@@ -159,9 +158,7 @@ export function PaymentStep({ onNext, onBack }: PaymentStepProps) {
                 <Input
                   id="cardExpiry"
                   value={formData.cardExpiry}
-                  onChange={(e) =>
-                    updateFormData({ cardExpiry: formatExpiry(e.target.value) })
-                  }
+                  onChange={(e) => updateFormData({ cardExpiry: formatExpiry(e.target.value) })}
                   placeholder="MM/YY"
                   maxLength={5}
                   className={errors.cardExpiry ? 'border-destructive' : ''}
@@ -184,9 +181,7 @@ export function PaymentStep({ onNext, onBack }: PaymentStepProps) {
                   maxLength={4}
                   className={errors.cardCvc ? 'border-destructive' : ''}
                 />
-                {errors.cardCvc && (
-                  <p className="text-xs text-destructive">{errors.cardCvc}</p>
-                )}
+                {errors.cardCvc && <p className="text-xs text-destructive">{errors.cardCvc}</p>}
               </div>
             </div>
 
@@ -200,9 +195,7 @@ export function PaymentStep({ onNext, onBack }: PaymentStepProps) {
                 placeholder="John Doe"
                 className={errors.cardName ? 'border-destructive' : ''}
               />
-              {errors.cardName && (
-                <p className="text-xs text-destructive">{errors.cardName}</p>
-              )}
+              {errors.cardName && <p className="text-xs text-destructive">{errors.cardName}</p>}
             </div>
 
             {/* Billing Postcode */}
@@ -231,13 +224,26 @@ export function PaymentStep({ onNext, onBack }: PaymentStepProps) {
               onCheckedChange={(checked) => updateFormData({ agreedToTerms: checked === true })}
               className={errors.agreedToTerms ? 'border-destructive' : ''}
             />
-            <label htmlFor="terms" className="text-sm text-muted-foreground cursor-pointer leading-relaxed">
+            <label
+              htmlFor="terms"
+              className="text-sm text-muted-foreground cursor-pointer leading-relaxed"
+            >
               I agree to the{' '}
-              <a href="#" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
+              <a
+                href="#"
+                className="text-primary hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Terms of Service
               </a>{' '}
               and{' '}
-              <a href="#" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
+              <a
+                href="#"
+                className="text-primary hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Privacy Policy
               </a>
             </label>
@@ -277,7 +283,8 @@ export function PaymentStep({ onNext, onBack }: PaymentStepProps) {
 
         {/* Cancel note */}
         <p className="text-xs text-muted-foreground text-center">
-          Cancel anytime. No charge if you cancel before {trialEndDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}.
+          Cancel anytime. No charge if you cancel before{' '}
+          {trialEndDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}.
         </p>
       </form>
     </div>

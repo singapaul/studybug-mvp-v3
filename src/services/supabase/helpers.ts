@@ -8,11 +8,7 @@ import { supabase } from '@/lib/supabase';
  * Get Tutor ID from auth user ID
  */
 export async function getTutorIdFromUserId(userId: string): Promise<string> {
-  const { data, error } = await supabase
-    .from('Tutor')
-    .select('id')
-    .eq('userId', userId)
-    .single();
+  const { data, error } = await supabase.from('Tutor').select('id').eq('userId', userId).single();
 
   if (error || !data) {
     throw new Error('Tutor not found for this user');
@@ -25,11 +21,7 @@ export async function getTutorIdFromUserId(userId: string): Promise<string> {
  * Get Student ID from auth user ID
  */
 export async function getStudentIdFromUserId(userId: string): Promise<string> {
-  const { data, error } = await supabase
-    .from('Student')
-    .select('id')
-    .eq('userId', userId)
-    .single();
+  const { data, error } = await supabase.from('Student').select('id').eq('userId', userId).single();
 
   if (error || !data) {
     throw new Error('Student not found for this user');
@@ -42,7 +34,9 @@ export async function getStudentIdFromUserId(userId: string): Promise<string> {
  * Get current authenticated user ID
  */
 export async function getCurrentUserId(): Promise<string | null> {
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   return user?.id || null;
 }
 

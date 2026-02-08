@@ -69,12 +69,7 @@ export default function SplatButton({
       const rect = buttonRef.current.getBoundingClientRect();
       setButtonSize({ width: rect.width, height: rect.height });
 
-      const pos = generateRandomPosition(
-        index,
-        totalAnswers,
-        rect.width,
-        rect.height
-      );
+      const pos = generateRandomPosition(index, totalAnswers, rect.width, rect.height);
       setPosition(pos);
     }
   }, [index, totalAnswers]);

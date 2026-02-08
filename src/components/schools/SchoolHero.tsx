@@ -13,7 +13,7 @@ export function SchoolHero() {
 
       <div className="container relative">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <motion.div 
+          <motion.div
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-border text-foreground text-sm font-medium mb-6 shadow-sm"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -23,7 +23,7 @@ export function SchoolHero() {
             <span>For Schools & Institutions</span>
           </motion.div>
 
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -33,7 +33,7 @@ export function SchoolHero() {
             <span className="text-secondary">Interactive Revision Games</span>
           </motion.h1>
 
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -42,7 +42,7 @@ export function SchoolHero() {
             Trusted by schools across the UK to improve exam results and make learning memorable.
           </motion.p>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
@@ -58,13 +58,17 @@ export function SchoolHero() {
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" className="border-2 border-foreground/20 text-foreground bg-white hover:bg-muted rounded-full">
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-2 border-foreground/20 text-foreground bg-white hover:bg-muted rounded-full"
+            >
               <Download className="w-4 h-4 mr-2" />
               Download Brochure
             </Button>
           </motion.div>
 
-          <motion.p 
+          <motion.p
             className="text-sm text-muted-foreground mt-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -77,10 +81,34 @@ export function SchoolHero() {
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
           {[
-            { icon: Building2, value: '500+', label: 'UK Schools', color: 'bg-accent', iconColor: 'text-accent-foreground' },
-            { icon: Users, value: '100K+', label: 'Students', color: 'bg-secondary', iconColor: 'text-white' },
-            { icon: Clock, value: '12 min', label: 'Avg. session', color: 'bg-warning', iconColor: 'text-foreground' },
-            { icon: BarChart3, value: '40%', label: 'Grade boost', color: 'bg-coral', iconColor: 'text-coral-foreground' },
+            {
+              icon: Building2,
+              value: '500+',
+              label: 'UK Schools',
+              color: 'bg-accent',
+              iconColor: 'text-accent-foreground',
+            },
+            {
+              icon: Users,
+              value: '100K+',
+              label: 'Students',
+              color: 'bg-secondary',
+              iconColor: 'text-white',
+            },
+            {
+              icon: Clock,
+              value: '12 min',
+              label: 'Avg. session',
+              color: 'bg-warning',
+              iconColor: 'text-foreground',
+            },
+            {
+              icon: BarChart3,
+              value: '40%',
+              label: 'Grade boost',
+              color: 'bg-coral',
+              iconColor: 'text-coral-foreground',
+            },
           ].map((stat, index) => (
             <motion.div
               key={index}
@@ -90,13 +118,16 @@ export function SchoolHero() {
               whileHover={{ y: -4 }}
               className="text-center p-6 rounded-3xl bg-white border border-border shadow-sm"
             >
-              <motion.div 
+              <motion.div
                 whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
                 className={`w-12 h-12 rounded-xl ${stat.color} flex items-center justify-center mx-auto mb-3 shadow-md`}
               >
                 <stat.icon className={`w-6 h-6 ${stat.iconColor}`} />
               </motion.div>
-              <div className="text-2xl md:text-3xl font-bold text-foreground" style={{ fontFamily: "'Quicksand', system-ui, sans-serif" }}>
+              <div
+                className="text-2xl md:text-3xl font-bold text-foreground"
+                style={{ fontFamily: "'Quicksand', system-ui, sans-serif" }}
+              >
                 {stat.value}
               </div>
               <div className="text-sm text-muted-foreground">{stat.label}</div>

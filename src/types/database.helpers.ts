@@ -5,18 +5,17 @@
 import type { Database } from './database.types';
 
 // Table row types
-export type Tables<T extends keyof Database['public']['Tables']> = 
+export type Tables<T extends keyof Database['public']['Tables']> =
   Database['public']['Tables'][T]['Row'];
 
-export type Inserts<T extends keyof Database['public']['Tables']> = 
+export type Inserts<T extends keyof Database['public']['Tables']> =
   Database['public']['Tables'][T]['Insert'];
 
-export type Updates<T extends keyof Database['public']['Tables']> = 
+export type Updates<T extends keyof Database['public']['Tables']> =
   Database['public']['Tables'][T]['Update'];
 
 // Enum types
-export type Enums<T extends keyof Database['public']['Enums']> = 
-  Database['public']['Enums'][T];
+export type Enums<T extends keyof Database['public']['Enums']> = Database['public']['Enums'][T];
 
 // Specific table types (for convenience)
 export type Game = Tables<'Game'>;

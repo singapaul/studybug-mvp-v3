@@ -13,9 +13,8 @@ export default function Home() {
   // Redirect if already authenticated
   useEffect(() => {
     if (isAuthenticated && session) {
-      const redirectPath = session.user.role === Role.TUTOR
-        ? '/tutor/dashboard'
-        : '/student/dashboard';
+      const redirectPath =
+        session.user.role === Role.TUTOR ? '/tutor/dashboard' : '/student/dashboard';
       navigate(redirectPath, { replace: true });
     }
   }, [isAuthenticated, session, navigate]);
@@ -53,14 +52,20 @@ export default function Home() {
           </h1>
 
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Create interactive games, organize students into groups, and track progress — all in one place.
+            Create interactive games, organize students into groups, and track progress — all in one
+            place.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
             <Button onClick={() => navigate('/login')} size="lg" className="text-lg px-8">
               Get Started Free
             </Button>
-            <Button onClick={() => navigate('/login')} variant="outline" size="lg" className="text-lg px-8">
+            <Button
+              onClick={() => navigate('/login')}
+              variant="outline"
+              size="lg"
+              className="text-lg px-8"
+            >
               View Demo
             </Button>
           </div>
@@ -168,9 +173,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">How It Works</h2>
-            <p className="text-lg text-muted-foreground">
-              Get started in three simple steps
-            </p>
+            <p className="text-lg text-muted-foreground">Get started in three simple steps</p>
           </div>
 
           <div className="space-y-8">
@@ -182,7 +185,8 @@ export default function Home() {
               <div>
                 <h3 className="text-xl font-semibold mb-2">Create Your Account</h3>
                 <p className="text-muted-foreground">
-                  Choose whether you're a tutor or student. Tutors can create groups and games, while students join with a code.
+                  Choose whether you're a tutor or student. Tutors can create groups and games,
+                  while students join with a code.
                 </p>
               </div>
             </div>
@@ -195,7 +199,8 @@ export default function Home() {
               <div>
                 <h3 className="text-xl font-semibold mb-2">Set Up Your Classroom</h3>
                 <p className="text-muted-foreground">
-                  Tutors create groups and design interactive games. Students enter a join code to access their assignments.
+                  Tutors create groups and design interactive games. Students enter a join code to
+                  access their assignments.
                 </p>
               </div>
             </div>
@@ -208,7 +213,8 @@ export default function Home() {
               <div>
                 <h3 className="text-xl font-semibold mb-2">Learn & Track Progress</h3>
                 <p className="text-muted-foreground">
-                  Students play engaging games while tutors monitor performance, assign new activities, and celebrate achievements.
+                  Students play engaging games while tutors monitor performance, assign new
+                  activities, and celebrate achievements.
                 </p>
               </div>
             </div>
@@ -219,9 +225,7 @@ export default function Home() {
       {/* CTA Section */}
       <section className="container mx-auto px-4 py-20 text-center">
         <div className="max-w-3xl mx-auto space-y-6">
-          <h2 className="text-3xl md:text-4xl font-bold">
-            Ready to Transform Learning?
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold">Ready to Transform Learning?</h2>
           <p className="text-xl text-muted-foreground">
             Join thousands of educators making learning fun and effective
           </p>

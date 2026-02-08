@@ -148,5 +148,9 @@ export function isSplatGame(data: GameData): data is SplatGameData {
 }
 
 export function isSwipeGame(data: GameData): data is SwipeGameData {
-  return 'items' in data && Array.isArray(data.items) && data.items.some((item: any) => 'isCorrect' in item);
+  return (
+    'items' in data &&
+    Array.isArray(data.items) &&
+    data.items.some((item: any) => 'isCorrect' in item)
+  );
 }

@@ -87,22 +87,11 @@ export function DemoRequestForm() {
     navigate('/schools/demo/success');
   };
 
-  const studentOptions = [
-    '1-100',
-    '101-500',
-    '501-1000',
-    '1000+',
-  ];
+  const studentOptions = ['1-100', '101-500', '501-1000', '1000+'];
 
   const teacherOptions = ['1-20', '21-50', '51-100', '100+'];
 
-  const roleOptions = [
-    'Head Teacher',
-    'Deputy Head',
-    'Head of Department',
-    'IT Manager',
-    'Other',
-  ];
+  const roleOptions = ['Head Teacher', 'Deputy Head', 'Head of Department', 'IT Manager', 'Other'];
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
@@ -119,9 +108,7 @@ export function DemoRequestForm() {
           placeholder="e.g., Oakwood Academy"
           className={errors.schoolName ? 'border-destructive' : ''}
         />
-        {errors.schoolName && (
-          <p className="text-xs text-destructive">{errors.schoolName}</p>
-        )}
+        {errors.schoolName && <p className="text-xs text-destructive">{errors.schoolName}</p>}
       </div>
 
       {/* Contact Name & Role */}
@@ -138,9 +125,7 @@ export function DemoRequestForm() {
             placeholder="John Smith"
             className={errors.contactName ? 'border-destructive' : ''}
           />
-          {errors.contactName && (
-            <p className="text-xs text-destructive">{errors.contactName}</p>
-          )}
+          {errors.contactName && <p className="text-xs text-destructive">{errors.contactName}</p>}
         </div>
         <div className="space-y-2">
           <Label htmlFor="contactRole">Your Role *</Label>
@@ -148,9 +133,7 @@ export function DemoRequestForm() {
             value={formData.contactRole}
             onValueChange={(value) => updateField('contactRole', value)}
           >
-            <SelectTrigger
-              className={errors.contactRole ? 'border-destructive' : ''}
-            >
+            <SelectTrigger className={errors.contactRole ? 'border-destructive' : ''}>
               <SelectValue placeholder="Select your role" />
             </SelectTrigger>
             <SelectContent>
@@ -161,9 +144,7 @@ export function DemoRequestForm() {
               ))}
             </SelectContent>
           </Select>
-          {errors.contactRole && (
-            <p className="text-xs text-destructive">{errors.contactRole}</p>
-          )}
+          {errors.contactRole && <p className="text-xs text-destructive">{errors.contactRole}</p>}
         </div>
       </div>
 
@@ -182,9 +163,7 @@ export function DemoRequestForm() {
             placeholder="john@school.edu"
             className={errors.email ? 'border-destructive' : ''}
           />
-          {errors.email && (
-            <p className="text-xs text-destructive">{errors.email}</p>
-          )}
+          {errors.email && <p className="text-xs text-destructive">{errors.email}</p>}
         </div>
         <div className="space-y-2">
           <Label htmlFor="phone" className="flex items-center gap-2">
@@ -199,9 +178,7 @@ export function DemoRequestForm() {
             placeholder="+44 20 1234 5678"
             className={errors.phone ? 'border-destructive' : ''}
           />
-          {errors.phone && (
-            <p className="text-xs text-destructive">{errors.phone}</p>
-          )}
+          {errors.phone && <p className="text-xs text-destructive">{errors.phone}</p>}
         </div>
       </div>
 
@@ -216,9 +193,7 @@ export function DemoRequestForm() {
             value={formData.numberOfStudents}
             onValueChange={(value) => updateField('numberOfStudents', value)}
           >
-            <SelectTrigger
-              className={errors.numberOfStudents ? 'border-destructive' : ''}
-            >
+            <SelectTrigger className={errors.numberOfStudents ? 'border-destructive' : ''}>
               <SelectValue placeholder="Select range" />
             </SelectTrigger>
             <SelectContent>
@@ -239,9 +214,7 @@ export function DemoRequestForm() {
             value={formData.numberOfTeachers}
             onValueChange={(value) => updateField('numberOfTeachers', value)}
           >
-            <SelectTrigger
-              className={errors.numberOfTeachers ? 'border-destructive' : ''}
-            >
+            <SelectTrigger className={errors.numberOfTeachers ? 'border-destructive' : ''}>
               <SelectValue placeholder="Select range" />
             </SelectTrigger>
             <SelectContent>
@@ -297,9 +270,7 @@ export function DemoRequestForm() {
 
       {/* Additional Notes */}
       <div className="space-y-2">
-        <Label htmlFor="additionalNotes">
-          Additional Notes (optional)
-        </Label>
+        <Label htmlFor="additionalNotes">Additional Notes (optional)</Label>
         <Textarea
           id="additionalNotes"
           value={formData.additionalNotes}

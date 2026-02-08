@@ -38,7 +38,7 @@ export function Header() {
       <div className="container flex h-16 items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 group">
-          <motion.div 
+          <motion.div
             whileHover={{ scale: 1.05, rotate: [0, -5, 5, 0] }}
             transition={{ duration: 0.3 }}
             className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary shadow-md"
@@ -62,14 +62,14 @@ export function Header() {
             >
               {link.label}
               {isActive(link.href) && (
-                <motion.div 
+                <motion.div
                   layoutId="navIndicator"
                   className="absolute -bottom-1 left-0 right-0 h-0.5 bg-secondary rounded-full"
                 />
               )}
             </Link>
           ))}
-          
+
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium text-foreground hover:text-secondary transition-colors">
               {t('nav.resources')}
@@ -92,7 +92,11 @@ export function Header() {
           <Button variant="ghost" size="sm" asChild className="rounded-full">
             <Link to="/login">{t('nav.login')}</Link>
           </Button>
-          <Button size="sm" className="bg-primary text-white hover:bg-primary/90 font-semibold rounded-full shadow-md" asChild>
+          <Button
+            size="sm"
+            className="bg-primary text-white hover:bg-primary/90 font-semibold rounded-full shadow-md"
+            asChild
+          >
             <Link to="/signup/individual">{t('nav.startTrial')}</Link>
           </Button>
         </div>
@@ -117,7 +121,7 @@ export function Header() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           className="md:hidden border-t border-border bg-white"
@@ -135,13 +139,15 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
-            
+
             <button
               onClick={() => setMobileResourcesOpen(!mobileResourcesOpen)}
               className="flex items-center justify-between text-sm font-medium py-3 px-4 rounded-xl text-foreground"
             >
               {t('nav.resources')}
-              <ChevronDown className={`w-4 h-4 transition-transform ${mobileResourcesOpen ? 'rotate-180' : ''}`} />
+              <ChevronDown
+                className={`w-4 h-4 transition-transform ${mobileResourcesOpen ? 'rotate-180' : ''}`}
+              />
             </button>
             {mobileResourcesOpen && (
               <div className="pl-4 space-y-1">

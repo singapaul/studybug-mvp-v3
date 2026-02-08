@@ -239,9 +239,7 @@ export default function StudentSettings() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold">Settings</h1>
-          <p className="text-muted-foreground mt-1">
-            Manage your account settings and preferences
-          </p>
+          <p className="text-muted-foreground mt-1">Manage your account settings and preferences</p>
         </div>
 
         {/* Settings Tabs */}
@@ -270,9 +268,7 @@ export default function StudentSettings() {
             <Card>
               <CardHeader>
                 <CardTitle>Profile Information</CardTitle>
-                <CardDescription>
-                  Update your profile information and avatar
-                </CardDescription>
+                <CardDescription>Update your profile information and avatar</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 {/* Avatar Upload */}
@@ -356,9 +352,7 @@ export default function StudentSettings() {
                     maxLength={500}
                     rows={4}
                   />
-                  <p className="text-xs text-muted-foreground">
-                    {bio.length}/500 characters
-                  </p>
+                  <p className="text-xs text-muted-foreground">{bio.length}/500 characters</p>
                 </div>
 
                 {/* Save Button */}
@@ -711,20 +705,22 @@ export default function StudentSettings() {
               <AlertDialogCancel onClick={() => setShowUnsavedDialog(false)}>
                 Cancel
               </AlertDialogCancel>
-              <AlertDialogAction onClick={handleDiscardChanges}>
-                Discard Changes
-              </AlertDialogAction>
+              <AlertDialogAction onClick={handleDiscardChanges}>Discard Changes</AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
 
         {/* Leave Group Confirmation Dialog */}
-        <AlertDialog open={groupToLeave !== null} onOpenChange={(open) => !open && setGroupToLeave(null)}>
+        <AlertDialog
+          open={groupToLeave !== null}
+          onOpenChange={(open) => !open && setGroupToLeave(null)}
+        >
           <AlertDialogContent>
             <AlertDialogHeader>
               <AlertDialogTitle>Leave Group</AlertDialogTitle>
               <AlertDialogDescription>
-                Are you sure you want to leave this group? You will need to use the join code again to rejoin.
+                Are you sure you want to leave this group? You will need to use the join code again
+                to rejoin.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>

@@ -51,19 +51,19 @@ export function ExitIntentModal() {
             className="fixed inset-0 bg-foreground/60 backdrop-blur-sm z-50"
             onClick={() => setIsOpen(false)}
           />
-          
+
           {/* Modal */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
             className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-md mx-4"
           >
             <div className="bg-card rounded-3xl p-8 shadow-2xl border border-border relative overflow-hidden">
               {/* Background decoration */}
               <div className="absolute top-0 right-0 w-32 h-32 gradient-primary opacity-10 rounded-full -translate-y-1/2 translate-x-1/2" />
-              
+
               {/* Close button */}
               <button
                 onClick={() => setIsOpen(false)}
@@ -77,15 +77,13 @@ export function ExitIntentModal() {
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  transition={{ delay: 0.2, type: "spring" }}
+                  transition={{ delay: 0.2, type: 'spring' }}
                   className="w-16 h-16 gradient-accent rounded-2xl flex items-center justify-center mx-auto mb-6"
                 >
                   <Gift className="w-8 h-8 text-accent-foreground" />
                 </motion.div>
 
-                <h2 className="text-2xl font-bold text-foreground mb-2">
-                  Wait! Don't leave yet
-                </h2>
+                <h2 className="text-2xl font-bold text-foreground mb-2">Wait! Don't leave yet</h2>
                 <p className="text-muted-foreground mb-6">
                   We'd hate to see you go. Here's an exclusive offer just for you:
                 </p>
@@ -96,12 +94,8 @@ export function ExitIntentModal() {
                     <Clock className="w-5 h-5 text-primary" />
                     <span className="text-lg font-bold text-primary">Extended Free Trial</span>
                   </div>
-                  <p className="text-3xl font-bold text-foreground mb-1">
-                    21 Days Free
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Instead of the usual 14 days
-                  </p>
+                  <p className="text-3xl font-bold text-foreground mb-1">21 Days Free</p>
+                  <p className="text-sm text-muted-foreground">Instead of the usual 14 days</p>
                 </div>
 
                 <Button

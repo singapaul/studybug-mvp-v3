@@ -94,10 +94,18 @@ export function createTestGamesForAssignments() {
       gameData: JSON.stringify({
         description: 'Learn key science terms',
         cards: [
-          { id: '1', front: 'Photosynthesis', back: 'The process plants use to make food from sunlight, water, and carbon dioxide' },
+          {
+            id: '1',
+            front: 'Photosynthesis',
+            back: 'The process plants use to make food from sunlight, water, and carbon dioxide',
+          },
           { id: '2', front: 'Evaporation', back: 'When liquid turns into gas due to heat energy' },
           { id: '3', front: 'Gravity', back: 'The force that pulls objects toward each other' },
-          { id: '4', front: 'Ecosystem', back: 'A community of living organisms and their environment' },
+          {
+            id: '4',
+            front: 'Ecosystem',
+            back: 'A community of living organisms and their environment',
+          },
           { id: '5', front: 'Molecule', back: 'Two or more atoms bonded together' },
           { id: '6', front: 'Fossil', back: 'Preserved remains of ancient life' },
           { id: '7', front: 'Habitat', back: 'The natural home of an animal or plant' },

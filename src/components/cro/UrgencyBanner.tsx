@@ -11,7 +11,7 @@ export function UrgencyBanner() {
   useEffect(() => {
     const calculateTimeLeft = () => {
       const difference = endDate.getTime() - Date.now();
-      
+
       if (difference > 0) {
         setTimeLeft({
           days: Math.floor(difference / (1000 * 60 * 60 * 24)),
@@ -33,9 +33,7 @@ export function UrgencyBanner() {
       <span className="text-lg md:text-xl font-bold text-white tabular-nums">
         {value.toString().padStart(2, '0')}
       </span>
-      <span className="text-[10px] md:text-xs text-white/80 uppercase tracking-wide">
-        {label}
-      </span>
+      <span className="text-[10px] md:text-xs text-white/80 uppercase tracking-wide">{label}</span>
     </div>
   );
 
@@ -44,7 +42,7 @@ export function UrgencyBanner() {
       className="bg-secondary py-3 px-4"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.5, type: "spring" }}
+      transition={{ duration: 0.5, type: 'spring' }}
     >
       <div className="container flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6">
         <div className="flex items-center gap-2">
@@ -53,7 +51,7 @@ export function UrgencyBanner() {
             {t('urgency.message')}
           </span>
         </div>
-        
+
         <div className="hidden md:flex items-center gap-1 md:gap-2">
           <Clock className="w-4 h-4 text-white/80" />
           <span className="text-xs text-white/80 mr-2">{t('urgency.endsIn')}</span>

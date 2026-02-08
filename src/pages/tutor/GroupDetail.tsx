@@ -1,10 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
-import {
-  getGroupById,
-  removeStudentFromGroup,
-} from '@/services/supabase/group.service';
+import { getGroupById, removeStudentFromGroup } from '@/services/supabase/group.service';
 import { GroupWithDetails } from '@/types/group';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -133,11 +130,7 @@ export default function GroupDetail() {
       {/* Header */}
       <div className="border-b bg-background">
         <div className="container mx-auto px-4 py-6">
-          <Button
-            variant="ghost"
-            onClick={() => navigate('/tutor/groups')}
-            className="mb-4"
-          >
+          <Button variant="ghost" onClick={() => navigate('/tutor/groups')} className="mb-4">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Groups
           </Button>
@@ -146,15 +139,10 @@ export default function GroupDetail() {
             <div>
               <h1 className="text-3xl font-bold">{group.name}</h1>
               <div className="flex flex-wrap gap-2 mt-3">
-                {group.ageRange && (
-                  <Badge variant="secondary">{group.ageRange}</Badge>
-                )}
-                {group.subjectArea && (
-                  <Badge variant="outline">{group.subjectArea}</Badge>
-                )}
+                {group.ageRange && <Badge variant="secondary">{group.ageRange}</Badge>}
+                {group.subjectArea && <Badge variant="outline">{group.subjectArea}</Badge>}
                 <Badge variant="outline">
-                  {group.members.length}{' '}
-                  {group.members.length === 1 ? 'student' : 'students'}
+                  {group.members.length} {group.members.length === 1 ? 'student' : 'students'}
                 </Badge>
               </div>
             </div>
@@ -350,8 +338,8 @@ export default function GroupDetail() {
           <AlertDialogHeader>
             <AlertDialogTitle>Remove Student</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to remove this student from the group? They will
-              need to rejoin using the join code if they want to access this group again.
+              Are you sure you want to remove this student from the group? They will need to rejoin
+              using the join code if they want to access this group again.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

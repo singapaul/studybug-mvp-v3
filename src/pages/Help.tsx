@@ -3,9 +3,16 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { 
-  Search, BookOpen, GraduationCap, School, Settings, 
-  CreditCard, MessageCircle, ChevronRight, ExternalLink
+import {
+  Search,
+  BookOpen,
+  GraduationCap,
+  School,
+  Settings,
+  CreditCard,
+  MessageCircle,
+  ChevronRight,
+  ExternalLink,
 } from 'lucide-react';
 import {
   Accordion,
@@ -26,23 +33,28 @@ const categories = [
 const popularQuestions = [
   {
     question: 'How do I create my first deck?',
-    answer: 'Click "Create Deck" from your dashboard, add a title, then start adding cards. Each card has a front (question) and back (answer). You can also import content from documents.',
+    answer:
+      'Click "Create Deck" from your dashboard, add a title, then start adding cards. Each card has a front (question) and back (answer). You can also import content from documents.',
   },
   {
     question: 'Can I share decks with other students?',
-    answer: 'Yes! With a paid plan, you can share decks using a unique link. Recipients with a Studybug account can add your deck to their library.',
+    answer:
+      'Yes! With a paid plan, you can share decks using a unique link. Recipients with a Studybug account can add your deck to their library.',
   },
   {
     question: 'How does the free trial work?',
-    answer: 'Your 14-day free trial gives you full access to all features of your chosen plan. You won\'t be charged until the trial ends. Cancel anytime during the trial with no charge.',
+    answer:
+      "Your 14-day free trial gives you full access to all features of your chosen plan. You won't be charged until the trial ends. Cancel anytime during the trial with no charge.",
   },
   {
     question: 'What game modes are available?',
-    answer: 'Studybug offers 20+ game modes including Flashcards, Flip & Match, Speed Round, Memory Challenge, Multiple Choice, True/False, and more. Each mode offers a different way to learn.',
+    answer:
+      'Studybug offers 20+ game modes including Flashcards, Flip & Match, Speed Round, Memory Challenge, Multiple Choice, True/False, and more. Each mode offers a different way to learn.',
   },
   {
     question: 'How do I upgrade my plan?',
-    answer: 'Go to Account Settings > Subscription and click "Upgrade". Changes take effect immediately and you\'ll only pay the difference for the current billing period.',
+    answer:
+      'Go to Account Settings > Subscription and click "Upgrade". Changes take effect immediately and you\'ll only pay the difference for the current billing period.',
   },
 ];
 
@@ -55,18 +67,13 @@ export default function Help() {
         <section className="py-16 bg-cream">
           <div className="container">
             <div className="text-center max-w-2xl mx-auto">
-              <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-                Help Center
-              </h1>
+              <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">Help Center</h1>
               <p className="text-lg text-muted-foreground mb-8">
                 Search our knowledge base or browse categories below.
               </p>
               <div className="relative max-w-md mx-auto">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                <Input
-                  placeholder="Search for answers..."
-                  className="pl-12 h-12 text-lg"
-                />
+                <Input placeholder="Search for answers..." className="pl-12 h-12 text-lg" />
               </div>
             </div>
           </div>
@@ -101,7 +108,7 @@ export default function Help() {
             <h2 className="text-2xl font-bold text-foreground mb-8 text-center">
               Popular Questions
             </h2>
-            
+
             <Accordion type="single" collapsible className="space-y-4">
               {popularQuestions.map((faq, index) => (
                 <AccordionItem
@@ -127,9 +134,7 @@ export default function Help() {
             <h2 className="text-2xl font-bold text-foreground mb-4">
               Can't find what you're looking for?
             </h2>
-            <p className="text-muted-foreground mb-6">
-              Our support team is ready to help.
-            </p>
+            <p className="text-muted-foreground mb-6">Our support team is ready to help.</p>
             <Button size="lg" asChild>
               <Link to="/contact">
                 <MessageCircle className="w-5 h-5 mr-2" />

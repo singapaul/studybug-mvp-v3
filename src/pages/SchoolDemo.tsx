@@ -22,9 +22,7 @@ export default function SchoolDemo() {
               <div className="w-14 h-14 rounded-xl gradient-primary flex items-center justify-center mx-auto mb-4">
                 <Calendar className="w-7 h-7 text-primary-foreground" />
               </div>
-              <h1 className="text-2xl font-bold text-foreground mb-2">
-                Request a Demo
-              </h1>
+              <h1 className="text-2xl font-bold text-foreground mb-2">Request a Demo</h1>
               <p className="text-muted-foreground">
                 Fill in your details and we'll schedule a personalized demo for your school
               </p>

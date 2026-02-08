@@ -11,11 +11,7 @@ import { SwipeGameData } from '@/types/game';
 interface SwipeGameProps {
   gameData: SwipeGameData;
   gameName: string;
-  onComplete: (result: {
-    scorePercentage: number;
-    timeTaken: number;
-    attemptData: any;
-  }) => void;
+  onComplete: (result: { scorePercentage: number; timeTaken: number; attemptData: any }) => void;
   onExit: () => void;
 }
 
@@ -27,12 +23,7 @@ interface SwipeRecord {
   timestamp: number;
 }
 
-export default function SwipeGame({
-  gameData,
-  gameName,
-  onComplete,
-  onExit,
-}: SwipeGameProps) {
+export default function SwipeGame({ gameData, gameName, onComplete, onExit }: SwipeGameProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [swipeHistory, setSwipeHistory] = useState<SwipeRecord[]>([]);
   const [score, setScore] = useState(0);
@@ -299,12 +290,7 @@ export default function SwipeGame({
 
           {/* Undo Button */}
           <div className="flex justify-center gap-4">
-            <Button
-              variant="outline"
-              onClick={handleUndo}
-              disabled={!canUndo}
-              className="gap-2"
-            >
+            <Button variant="outline" onClick={handleUndo} disabled={!canUndo} className="gap-2">
               <Undo className="h-4 w-4" />
               Undo Last Swipe
             </Button>

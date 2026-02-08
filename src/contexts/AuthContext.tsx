@@ -109,13 +109,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
       });
 
       // Listen for auth changes
-      const { data: { subscription } } = supabaseAuth.onAuthStateChange(
-        (event, supabaseSession) => {
-          console.log('Auth state changed:', event);
-          setSession(convertSupabaseSession(supabaseSession));
-          setIsLoading(false);
-        }
-      );
+      const {
+        data: { subscription },
+      } = supabaseAuth.onAuthStateChange((event, supabaseSession) => {
+        console.log('Auth state changed:', event);
+        setSession(convertSupabaseSession(supabaseSession));
+        setIsLoading(false);
+      });
 
       return () => {
         subscription.unsubscribe();

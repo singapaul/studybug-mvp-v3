@@ -91,8 +91,8 @@ export class ErrorBoundary extends Component<Props, State> {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-center text-muted-foreground">
-                An unexpected error occurred. Don't worry, your data is safe. Please try
-                refreshing the page.
+                An unexpected error occurred. Don't worry, your data is safe. Please try refreshing
+                the page.
               </p>
 
               {/* Show error details in development */}
@@ -116,19 +116,11 @@ export class ErrorBoundary extends Component<Props, State> {
               )}
 
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                <Button
-                  onClick={this.handleReset}
-                  className="flex-1 gap-2"
-                  variant="default"
-                >
+                <Button onClick={this.handleReset} className="flex-1 gap-2" variant="default">
                   <RefreshCw className="h-4 w-4" />
                   Try Again
                 </Button>
-                <Button
-                  onClick={this.handleGoHome}
-                  variant="outline"
-                  className="flex-1 gap-2"
-                >
+                <Button onClick={this.handleGoHome} variant="outline" className="flex-1 gap-2">
                   <Home className="h-4 w-4" />
                   Go Home
                 </Button>

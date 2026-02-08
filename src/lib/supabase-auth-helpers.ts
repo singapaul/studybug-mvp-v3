@@ -157,11 +157,7 @@ export async function getCurrentUserRole(): Promise<Role | null> {
     }
 
     // Fallback: query User table
-    const { data, error } = await supabase
-      .from('User')
-      .select('role')
-      .eq('id', user.id)
-      .single();
+    const { data, error } = await supabase.from('User').select('role').eq('id', user.id).single();
 
     if (error || !data) {
       return null;

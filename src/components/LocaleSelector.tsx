@@ -8,7 +8,14 @@ import {
   DropdownMenuLabel,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { useLocale, Language, Currency, languageNames, languageFlags, currencyNames } from '@/context/LocaleContext';
+import {
+  useLocale,
+  Language,
+  Currency,
+  languageNames,
+  languageFlags,
+  currencyNames,
+} from '@/context/LocaleContext';
 
 export function LocaleSelector() {
   const { language, setLanguage, currency, setCurrency } = useLocale();
@@ -19,7 +26,11 @@ export function LocaleSelector() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" className="gap-1 text-muted-foreground hover:text-foreground">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="gap-1 text-muted-foreground hover:text-foreground"
+        >
           <Globe className="w-4 h-4" />
           <span className="hidden sm:inline">{languageFlags[language]}</span>
           <span className="text-xs">{currency}</span>
@@ -39,9 +50,9 @@ export function LocaleSelector() {
             {language === lang && <span className="ml-auto">✓</span>}
           </DropdownMenuItem>
         ))}
-        
+
         <DropdownMenuSeparator />
-        
+
         <DropdownMenuLabel className="text-xs text-muted-foreground">Currency</DropdownMenuLabel>
         {currencies.map((curr) => (
           <DropdownMenuItem

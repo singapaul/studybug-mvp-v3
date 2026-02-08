@@ -37,9 +37,7 @@ export default function PersonalBestsTab({ studentId }: PersonalBestsTabProps) {
       const totalAttempts = bests.reduce((sum, b) => sum + b.totalAttempts, 0);
       const overallAvg =
         totalGames > 0
-          ? Math.round(
-              bests.reduce((sum, b) => sum + b.bestScore, 0) / totalGames
-            )
+          ? Math.round(bests.reduce((sum, b) => sum + b.bestScore, 0) / totalGames)
           : 0;
 
       setStats({
@@ -92,9 +90,7 @@ export default function PersonalBestsTab({ studentId }: PersonalBestsTabProps) {
         <p className="text-muted-foreground mb-4">
           Complete some assignments to see your personal bests here
         </p>
-        <Button onClick={() => navigate('/student/dashboard')}>
-          View Assignments
-        </Button>
+        <Button onClick={() => navigate('/student/dashboard')}>View Assignments</Button>
       </Card>
     );
   }
@@ -164,8 +160,8 @@ export default function PersonalBestsTab({ studentId }: PersonalBestsTabProps) {
                           index === 0
                             ? 'text-yellow-500'
                             : index === 1
-                            ? 'text-gray-400'
-                            : 'text-orange-600'
+                              ? 'text-gray-400'
+                              : 'text-orange-600'
                         }`}
                       />
                     </div>

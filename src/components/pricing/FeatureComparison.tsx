@@ -1,9 +1,5 @@
 import { Check, X, Info } from 'lucide-react';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { ScrollReveal } from '@/components/ui/scroll-reveal';
 
 const features = [
@@ -85,7 +81,7 @@ const features = [
     student: false,
     teacher: false,
     school: true,
-    tooltip: 'Single sign-on with your school\'s existing authentication system',
+    tooltip: "Single sign-on with your school's existing authentication system",
   },
   {
     name: 'Admin dashboard',
@@ -132,9 +128,7 @@ export function FeatureComparison() {
     <section className="py-16">
       <ScrollReveal>
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-foreground mb-4">
-            Compare Plans
-          </h2>
+          <h2 className="text-3xl font-bold text-foreground mb-4">Compare Plans</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Find the perfect plan for your learning journey
           </p>
@@ -147,24 +141,14 @@ export function FeatureComparison() {
           <table className="w-full min-w-[640px]">
             <thead>
               <tr className="border-b border-border">
-                <th className="text-left py-4 px-4 font-semibold text-foreground">
-                  Features
-                </th>
-                <th className="text-center py-4 px-4 font-semibold text-muted-foreground">
-                  Free
-                </th>
+                <th className="text-left py-4 px-4 font-semibold text-foreground">Features</th>
+                <th className="text-center py-4 px-4 font-semibold text-muted-foreground">Free</th>
                 <th className="text-center py-4 px-4 font-semibold text-primary bg-primary/5 rounded-t-xl">
                   Student
-                  <span className="block text-xs font-normal text-primary/70">
-                    Most Popular
-                  </span>
+                  <span className="block text-xs font-normal text-primary/70">Most Popular</span>
                 </th>
-                <th className="text-center py-4 px-4 font-semibold text-foreground">
-                  Teacher
-                </th>
-                <th className="text-center py-4 px-4 font-semibold text-foreground">
-                  School
-                </th>
+                <th className="text-center py-4 px-4 font-semibold text-foreground">Teacher</th>
+                <th className="text-center py-4 px-4 font-semibold text-foreground">School</th>
               </tr>
             </thead>
             <tbody>

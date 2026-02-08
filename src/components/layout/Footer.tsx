@@ -26,22 +26,34 @@ export function Footer() {
             <h4 className="font-semibold font-display text-foreground mb-4">Product</h4>
             <ul className="space-y-2">
               <li>
-                <Link to="/features" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                <Link
+                  to="/features"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
                   Features
                 </Link>
               </li>
               <li>
-                <Link to="/pricing" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                <Link
+                  to="/pricing"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
                   Pricing
                 </Link>
               </li>
               <li>
-                <Link to="/schools" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                <Link
+                  to="/schools"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
                   For Schools
                 </Link>
               </li>
               <li>
-                <Link to="/how-it-works" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                <Link
+                  to="/how-it-works"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
                   How It Works
                 </Link>
               </li>
@@ -53,22 +65,34 @@ export function Footer() {
             <h4 className="font-semibold font-display text-foreground mb-4">Resources</h4>
             <ul className="space-y-2">
               <li>
-                <Link to="/help" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                <Link
+                  to="/help"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
                   Help Center
                 </Link>
               </li>
               <li>
-                <Link to="/resources" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                <Link
+                  to="/resources"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
                   Guides & Tutorials
                 </Link>
               </li>
               <li>
-                <Link to="/blog" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                <Link
+                  to="/blog"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
                   Blog
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                <Link
+                  to="/contact"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
                   Contact
                 </Link>
               </li>
@@ -80,16 +104,24 @@ export function Footer() {
             <h4 className="font-semibold font-display text-foreground mb-4">Legal</h4>
             <ul className="space-y-2">
               <li>
-                <span className="text-sm text-muted-foreground hover:text-primary cursor-pointer transition-colors">Privacy Policy</span>
+                <span className="text-sm text-muted-foreground hover:text-primary cursor-pointer transition-colors">
+                  Privacy Policy
+                </span>
               </li>
               <li>
-                <span className="text-sm text-muted-foreground hover:text-primary cursor-pointer transition-colors">Terms of Service</span>
+                <span className="text-sm text-muted-foreground hover:text-primary cursor-pointer transition-colors">
+                  Terms of Service
+                </span>
               </li>
               <li>
-                <span className="text-sm text-muted-foreground hover:text-primary cursor-pointer transition-colors">Cookie Policy</span>
+                <span className="text-sm text-muted-foreground hover:text-primary cursor-pointer transition-colors">
+                  Cookie Policy
+                </span>
               </li>
               <li>
-                <span className="text-sm text-muted-foreground hover:text-primary cursor-pointer transition-colors">GDPR Compliance</span>
+                <span className="text-sm text-muted-foreground hover:text-primary cursor-pointer transition-colors">
+                  GDPR Compliance
+                </span>
               </li>
             </ul>
           </div>
@@ -99,13 +131,19 @@ export function Footer() {
             <h4 className="font-semibold font-display text-foreground mb-4">Contact</h4>
             <ul className="space-y-3">
               <li>
-                <a href="mailto:hello@studybug.io" className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2">
+                <a
+                  href="mailto:hello@studybug.io"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
+                >
                   <Mail className="w-4 h-4" />
                   hello@studybug.io
                 </a>
               </li>
               <li>
-                <a href="tel:+442012345678" className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2">
+                <a
+                  href="tel:+442012345678"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
+                >
                   <Phone className="w-4 h-4" />
                   +44 20 1234 5678
                 </a>

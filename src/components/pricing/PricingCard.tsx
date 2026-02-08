@@ -15,7 +15,7 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
   const isCustomPricing = plan.id === 'school';
   const isFree = plan.id === 'free';
   const isPopular = plan.tier === 'standard';
-  
+
   const monthlyPrice = plan.monthlyPrice;
   const annualMonthly = Math.round((plan.annualPrice / 12) * 100) / 100;
   const displayPrice = billingCycle === 'monthly' ? monthlyPrice : annualMonthly;
@@ -74,13 +74,15 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
       className={`relative flex flex-col rounded-2xl p-6 transition-all h-full ${getCardStyle()}`}
     >
       {plan.badge && (
-        <motion.div 
+        <motion.div
           className="absolute -top-3 left-1/2 -translate-x-1/2"
           initial={{ y: -10, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
-          <span className={`inline-flex items-center justify-center gap-1 px-4 py-1.5 rounded-full text-xs font-semibold shadow-md whitespace-nowrap ${getBadgeStyle()}`}>
+          <span
+            className={`inline-flex items-center justify-center gap-1 px-4 py-1.5 rounded-full text-xs font-semibold shadow-md whitespace-nowrap ${getBadgeStyle()}`}
+          >
             {plan.id === 'student' && <Sparkles className="w-3 h-3" />}
             {getBadgeText()}
           </span>
@@ -88,12 +90,8 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
       )}
 
       <div className="mb-6 pt-2">
-        <h3 className="text-xl font-bold text-foreground mb-1">
-          {t(`plan.${plan.id}`)}
-        </h3>
-        <p className="text-sm text-muted-foreground">
-          {t(`plan.${plan.id}.subtitle`)}
-        </p>
+        <h3 className="text-xl font-bold text-foreground mb-1">{t(`plan.${plan.id}`)}</h3>
+        <p className="text-sm text-muted-foreground">{t(`plan.${plan.id}.subtitle`)}</p>
       </div>
 
       <div className="mb-6">
@@ -126,8 +124,8 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
 
       <ul className="space-y-3 mb-8 flex-1">
         {plan.features.map((feature, index) => (
-          <motion.li 
-            key={index} 
+          <motion.li
+            key={index}
             className="flex items-start gap-3"
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
@@ -150,11 +148,7 @@ export function PricingCard({ plan, billingCycle, onSelect }: PricingCardProps) 
       </ul>
 
       <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-        <Button
-          onClick={onSelect}
-          className={`w-full ${getButtonStyle()}`}
-          size="lg"
-        >
+        <Button onClick={onSelect} className={`w-full ${getButtonStyle()}`} size="lg">
           {plan.ctaText}
         </Button>
       </motion.div>

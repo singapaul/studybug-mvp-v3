@@ -21,14 +21,14 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
       <div className="container relative">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Content */}
-          <motion.div 
+          <motion.div
             className="text-center lg:text-left"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
             {/* Trust badge - simplified */}
-            <motion.div 
+            <motion.div
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-border text-foreground text-sm font-medium mb-6 shadow-sm"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -48,27 +48,27 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
               <span>Trusted by 10,000+ students & teachers</span>
             </motion.div>
 
-            <motion.h1 
+            <motion.h1
               className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              Learning That{' '}
-              <span className="text-secondary">Feels Like Play.</span>
+              Learning That <span className="text-secondary">Feels Like Play.</span>
             </motion.h1>
 
-            <motion.p 
+            <motion.p
               className="text-lg md:text-xl text-muted-foreground mb-8 max-w-xl mx-auto lg:mx-0"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              Studybug transforms boring flashcards into engaging games. Students learn faster, retain more, and actually enjoy studying.
+              Studybug transforms boring flashcards into engaging games. Students learn faster,
+              retain more, and actually enjoy studying.
             </motion.p>
 
             {/* Key benefits - cleaner design */}
-            <motion.div 
+            <motion.div
               className="flex flex-wrap gap-3 mb-8 justify-center lg:justify-start"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -82,7 +82,7 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
               ))}
             </motion.div>
 
-            <motion.div 
+            <motion.div
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -96,9 +96,9 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
                 Start 14-Day Free Trial
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
+              <Button
+                size="lg"
+                variant="outline"
                 onClick={onLearnMore}
                 className="border-2 border-foreground/20 text-foreground bg-white hover:bg-muted rounded-full"
               >
@@ -107,7 +107,7 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
               </Button>
             </motion.div>
 
-            <motion.p 
+            <motion.p
               className="text-sm text-muted-foreground mt-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -118,7 +118,7 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
           </motion.div>
 
           {/* Game Mockup */}
-          <motion.div 
+          <motion.div
             className="relative hidden lg:block"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -126,10 +126,10 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
           >
             <div className="relative">
               {/* Main game card */}
-              <motion.div 
+              <motion.div
                 className="relative bg-white rounded-3xl shadow-2xl p-6 max-w-sm mx-auto border border-border"
                 animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               >
                 {/* Game header */}
                 <div className="flex items-center justify-between mb-4">
@@ -159,8 +159,8 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       className={`py-3 px-4 rounded-xl font-semibold text-lg transition-all ${
-                        answer === '84' 
-                          ? 'bg-primary text-white shadow-md' 
+                        answer === '84'
+                          ? 'bg-primary text-white shadow-md'
                           : 'bg-muted text-foreground hover:bg-muted/80'
                       }`}
                     >
@@ -171,7 +171,7 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
 
                 {/* Progress bar */}
                 <div className="h-2 bg-muted rounded-full overflow-hidden">
-                  <motion.div 
+                  <motion.div
                     className="h-full bg-primary rounded-full"
                     initial={{ width: 0 }}
                     animate={{ width: '80%' }}
@@ -181,7 +181,7 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
               </motion.div>
 
               {/* Floating success card - simplified */}
-              <motion.div 
+              <motion.div
                 className="absolute -top-4 -right-6 bg-white rounded-xl shadow-lg p-3 flex items-center gap-2 border border-border"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -197,7 +197,7 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
               </motion.div>
 
               {/* Floating streak card - simplified */}
-              <motion.div 
+              <motion.div
                 className="absolute -bottom-3 -left-4 bg-white rounded-xl shadow-lg p-3 flex items-center gap-2 border border-border"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

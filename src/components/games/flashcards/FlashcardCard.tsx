@@ -67,9 +67,7 @@ export default function FlashcardCard({
               </div>
             )}
 
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 leading-tight">
-              {front}
-            </h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 leading-tight">{front}</h2>
 
             <div className="flex items-center justify-center gap-2 text-blue-600 text-sm font-medium mt-8">
               <RotateCw className="h-4 w-4 animate-pulse" />
@@ -110,13 +108,9 @@ export default function FlashcardCard({
               </div>
             )}
 
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 leading-tight">
-              {back}
-            </h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 leading-tight">{back}</h2>
 
-            <div className="text-sm text-muted-foreground mt-8">
-              Did you know the answer?
-            </div>
+            <div className="text-sm text-muted-foreground mt-8">Did you know the answer?</div>
           </div>
         </div>
       </motion.div>

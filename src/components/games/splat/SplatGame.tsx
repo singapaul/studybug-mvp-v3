@@ -15,11 +15,7 @@ import { playSound, initializeSounds, toggleMute, isMuted } from './soundEffects
 interface SplatGameProps {
   gameData: SplatGameData;
   gameName: string;
-  onComplete: (result: {
-    scorePercentage: number;
-    timeTaken: number;
-    attemptData: any;
-  }) => void;
+  onComplete: (result: { scorePercentage: number; timeTaken: number; attemptData: any }) => void;
   onExit: () => void;
 }
 
@@ -52,16 +48,11 @@ function shuffleArray<T>(array: T[]): T[] {
 // Calculate points based on reaction time
 function calculatePoints(reactionTime: number, timeLimit: number): number {
   const basePoints = 100;
-  const speedBonus = Math.max(0, Math.floor((timeLimit - reactionTime) / timeLimit * 50));
+  const speedBonus = Math.max(0, Math.floor(((timeLimit - reactionTime) / timeLimit) * 50));
   return basePoints + speedBonus;
 }
 
-export default function SplatGame({
-  gameData,
-  gameName,
-  onComplete,
-  onExit,
-}: SplatGameProps) {
+export default function SplatGame({ gameData, gameName, onComplete, onExit }: SplatGameProps) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState<QuestionState | null>(null);
   const [timeLeft, setTimeLeft] = useState(0);
@@ -122,9 +113,7 @@ export default function SplatGame({
     const item = gameData.items[index];
 
     // Generate wrong answers (shuffle other correct answers)
-    const otherAnswers = gameData.items
-      .filter((_, i) => i !== index)
-      .map((item) => item.answer);
+    const otherAnswers = gameData.items.filter((_, i) => i !== index).map((item) => item.answer);
 
     const shuffledWrong = shuffleArray(otherAnswers).slice(0, 2); // Take 2-5 wrong answers
     const allAnswers = shuffleArray([item.answer, ...shuffledWrong]);
@@ -312,17 +301,8 @@ export default function SplatGame({
             </div>
 
             <div className="flex items-center gap-3">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={toggleSound}
-                className="w-10 h-10 p-0"
-              >
-                {soundEnabled ? (
-                  <Volume2 className="h-4 w-4" />
-                ) : (
-                  <VolumeX className="h-4 w-4" />
-                )}
+              <Button variant="outline" size="sm" onClick={toggleSound} className="w-10 h-10 p-0">
+                {soundEnabled ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
               </Button>
               <Button variant="outline" size="sm" onClick={onExit}>
                 <Home className="mr-2 h-4 w-4" />
@@ -358,24 +338,25 @@ export default function SplatGame({
 
             {/* Timer */}
             <div className="flex items-center justify-center gap-3">
-              <Clock className={cn(
-                'h-6 w-6',
-                timeLeft <= 3 ? 'text-red-600 animate-pulse' : 'text-orange-600'
-              )} />
-              <div className={cn(
-                'text-5xl font-bold',
-                timeLeft <= 3 ? 'text-red-600 animate-pulse' : 'text-orange-600'
-              )}>
+              <Clock
+                className={cn(
+                  'h-6 w-6',
+                  timeLeft <= 3 ? 'text-red-600 animate-pulse' : 'text-orange-600'
+                )}
+              />
+              <div
+                className={cn(
+                  'text-5xl font-bold',
+                  timeLeft <= 3 ? 'text-red-600 animate-pulse' : 'text-orange-600'
+                )}
+              >
                 {timeLeft}
               </div>
             </div>
 
             <Progress
               value={timePercentage}
-              className={cn(
-                'h-3 mt-4',
-                timeLeft <= 3 && 'bg-red-100'
-              )}
+              className={cn('h-3 mt-4', timeLeft <= 3 && 'bg-red-100')}
             />
           </Card>
         </motion.div>

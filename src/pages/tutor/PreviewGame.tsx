@@ -111,9 +111,7 @@ export default function PreviewGame() {
               </div>
             </div>
             <h2 className="text-2xl font-bold">Unable to Load Game</h2>
-            <p className="text-muted-foreground">
-              {error || 'The game could not be found.'}
-            </p>
+            <p className="text-muted-foreground">{error || 'The game could not be found.'}</p>
             <div className="flex gap-2">
               <Button onClick={handleExit} className="flex-1">
                 <Home className="mr-2 h-4 w-4" />

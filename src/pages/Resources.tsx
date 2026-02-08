@@ -2,9 +2,16 @@ import { Link } from 'react-router-dom';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
-import { 
-  BookOpen, GraduationCap, School, FileText, Video, 
-  MessageCircle, Download, ChevronRight, ExternalLink
+import {
+  BookOpen,
+  GraduationCap,
+  School,
+  FileText,
+  Video,
+  MessageCircle,
+  Download,
+  ChevronRight,
+  ExternalLink,
 } from 'lucide-react';
 
 const teacherResources = [
@@ -120,9 +127,7 @@ export default function Resources() {
                   <h3 className="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
                     {resource.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    {resource.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground mb-4">{resource.description}</p>
                   <div className="flex items-center text-sm text-primary font-medium">
                     <Download className="w-4 h-4 mr-1" />
                     Download
@@ -156,9 +161,7 @@ export default function Resources() {
                   <h3 className="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
                     {resource.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    {resource.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground mb-4">{resource.description}</p>
                   <div className="flex items-center text-sm text-primary font-medium">
                     Read more
                     <ChevronRight className="w-4 h-4 ml-1" />
@@ -192,9 +195,7 @@ export default function Resources() {
                   <h3 className="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    {item.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground mb-4">{item.description}</p>
                   <div className="flex items-center text-sm text-primary font-medium">
                     Visit
                     <ExternalLink className="w-4 h-4 ml-1" />
@@ -211,9 +212,7 @@ export default function Resources() {
             <h2 className="text-2xl font-bold text-foreground mb-4">
               Can't find what you're looking for?
             </h2>
-            <p className="text-muted-foreground mb-6">
-              Our team is here to help you get started.
-            </p>
+            <p className="text-muted-foreground mb-6">Our team is here to help you get started.</p>
             <Button size="lg" asChild>
               <Link to="/contact">Contact Us</Link>
             </Button>

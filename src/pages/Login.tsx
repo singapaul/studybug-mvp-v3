@@ -24,9 +24,8 @@ export default function Login() {
   // Redirect if already authenticated
   useEffect(() => {
     if (isAuthenticated && session) {
-      const redirectPath = session.user.role === Role.TUTOR
-        ? '/tutor/dashboard'
-        : '/student/dashboard';
+      const redirectPath =
+        session.user.role === Role.TUTOR ? '/tutor/dashboard' : '/student/dashboard';
       navigate(redirectPath, { replace: true });
     }
   }, [isAuthenticated, session, navigate]);
@@ -125,7 +124,11 @@ export default function Login() {
               </li>
             </ul>
             <Button
-              onClick={() => isSignUp ? handleSignUpRoleSelection(Role.TUTOR) : handleMockRoleSelection(Role.TUTOR)}
+              onClick={() =>
+                isSignUp
+                  ? handleSignUpRoleSelection(Role.TUTOR)
+                  : handleMockRoleSelection(Role.TUTOR)
+              }
               className="w-full"
               size="lg"
             >
@@ -167,7 +170,11 @@ export default function Login() {
               </li>
             </ul>
             <Button
-              onClick={() => isSignUp ? handleSignUpRoleSelection(Role.STUDENT) : handleMockRoleSelection(Role.STUDENT)}
+              onClick={() =>
+                isSignUp
+                  ? handleSignUpRoleSelection(Role.STUDENT)
+                  : handleMockRoleSelection(Role.STUDENT)
+              }
               className="w-full"
               size="lg"
               variant="secondary"
@@ -223,20 +230,16 @@ export default function Login() {
           {!MOCK_USER_MODE && authMode === 'role-select' && (
             <>
               <div className="text-center space-y-2">
-                <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Welcome to StudyBug</h1>
-                <p className="text-xl text-muted-foreground">
-                  Get started with your account
-                </p>
+                <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
+                  Welcome to StudyBug
+                </h1>
+                <p className="text-xl text-muted-foreground">Get started with your account</p>
               </div>
 
               <div className="max-w-md mx-auto space-y-4">
                 <Card>
                   <CardContent className="pt-6 space-y-4">
-                    <Button
-                      onClick={() => setAuthMode('signin')}
-                      className="w-full"
-                      size="lg"
-                    >
+                    <Button onClick={() => setAuthMode('signin')} className="w-full" size="lg">
                       Sign In
                     </Button>
                     <Button
@@ -258,17 +261,11 @@ export default function Login() {
             <div className="max-w-md mx-auto">
               <Card>
                 <CardContent className="pt-6">
-                  <SignInForm
-                    onSuccess={handleAuthSuccess}
-                    onToggleMode={toggleAuthMode}
-                  />
+                  <SignInForm onSuccess={handleAuthSuccess} onToggleMode={toggleAuthMode} />
                 </CardContent>
               </Card>
               <div className="text-center mt-4">
-                <Button
-                  variant="ghost"
-                  onClick={() => setAuthMode('role-select')}
-                >
+                <Button variant="ghost" onClick={() => setAuthMode('role-select')}>
                   <ArrowLeft className="mr-2 h-4 w-4" />
                   Back
                 </Button>

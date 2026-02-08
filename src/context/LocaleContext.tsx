@@ -25,19 +25,21 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.blog': 'Blog',
     'nav.login': 'Log In',
     'nav.startTrial': 'Start Free Trial',
-    
+
     // Hero
     'hero.badge': '14-day free trial on all paid plans',
     'hero.title': 'Make Revision',
     'hero.titleHighlight': 'Fun',
     'hero.titleEnd': 'with Interactive Learning Games',
-    'hero.subtitle': 'Join thousands of students and teachers using Studybug to master any subject through engaging game-based learning.',
+    'hero.subtitle':
+      'Join thousands of students and teachers using Studybug to master any subject through engaging game-based learning.',
     'hero.cta': 'Start Free Trial',
     'hero.secondary': 'See How It Works',
-    
+
     // Pricing
     'pricing.title': 'Simple, transparent pricing',
-    'pricing.subtitle': 'Choose the plan that\'s right for you. All paid plans include a 14-day free trial.',
+    'pricing.subtitle':
+      "Choose the plan that's right for you. All paid plans include a 14-day free trial.",
     'pricing.monthly': 'Monthly',
     'pricing.annual': 'Annual',
     'pricing.save': 'Save 25%',
@@ -47,7 +49,7 @@ const translations: Record<Language, Record<string, string>> = {
     'pricing.customPricing': 'Custom Pricing',
     'pricing.contactUs': 'Contact us for a quote',
     'pricing.noCreditCard': '14-day free trial • Cancel anytime',
-    
+
     // Plans
     'plan.free': 'Free',
     'plan.student': 'Student',
@@ -57,12 +59,12 @@ const translations: Record<Language, Record<string, string>> = {
     'plan.student.subtitle': 'Perfect for independent learners',
     'plan.teacher.subtitle': 'Everything students get, plus classroom tools',
     'plan.school.subtitle': 'For schools, academies & institutions',
-    
+
     // Badges
     'badge.mostPopular': 'Most Popular',
     'badge.bestForEducators': 'Best for Educators',
     'badge.enterprise': 'Enterprise',
-    
+
     // Trust
     'trust.trusted': 'Trusted by',
     'trust.studentsTeachers': '1,000+ students and teachers',
@@ -75,12 +77,12 @@ const translations: Record<Language, Record<string, string>> = {
     'trust.moneyBackDesc': 'Full refund guarantee',
     'trust.ukSupport': 'UK-Based Support',
     'trust.ukSupportDesc': 'Fast responses',
-    
+
     // Stats
     'stats.schools': 'UK Schools',
     'stats.students': 'Students',
     'stats.improvement': 'Improvement',
-    
+
     // Urgency
     'urgency.message': 'January offer: Save 25% on annual plans',
     'urgency.endsIn': 'Ends in:',
@@ -88,11 +90,12 @@ const translations: Record<Language, Record<string, string>> = {
     'urgency.hrs': 'hrs',
     'urgency.min': 'min',
     'urgency.sec': 'sec',
-    
+
     // Demo
     'demo.badge': 'Try it yourself',
     'demo.title': 'Experience Studybug in Action',
-    'demo.subtitle': 'Flip the cards and test your knowledge. This is just a taste of our interactive learning!',
+    'demo.subtitle':
+      'Flip the cards and test your knowledge. This is just a taste of our interactive learning!',
     'demo.question': 'Question',
     'demo.answer': 'Answer',
     'demo.tapToReveal': 'Tap to reveal answer',
@@ -102,12 +105,12 @@ const translations: Record<Language, Record<string, string>> = {
     'demo.perfectScore': 'Perfect Score!',
     'demo.greatJob': 'Great job!',
     'demo.tryAgain': 'Try Again',
-    
+
     // Sticky CTA
     'stickyCta.title': 'Ready to boost your grades?',
     'stickyCta.subtitle': 'Start your 14-day free trial now',
     'stickyCta.button': 'Start Free',
-    
+
     // Money Back
     'moneyBack.title': '14-Day Money-Back Guarantee',
     'moneyBack.subtitle': 'Not satisfied? Get a full refund, no questions asked.',
@@ -119,24 +122,26 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.pricing': 'Tarifs',
     'nav.forSchools': 'Pour les écoles',
     'nav.resources': 'Ressources',
-    'nav.helpCenter': 'Centre d\'aide',
+    'nav.helpCenter': "Centre d'aide",
     'nav.contact': 'Contact',
     'nav.blog': 'Blog',
     'nav.login': 'Connexion',
     'nav.startTrial': 'Essai gratuit',
-    
+
     // Hero
     'hero.badge': 'Essai gratuit de 14 jours sur tous les plans payants',
     'hero.title': 'Rendez les révisions',
     'hero.titleHighlight': 'Amusantes',
-    'hero.titleEnd': 'avec des jeux d\'apprentissage interactifs',
-    'hero.subtitle': 'Rejoignez des milliers d\'étudiants et d\'enseignants utilisant Studybug pour maîtriser n\'importe quel sujet grâce à un apprentissage ludique.',
-    'hero.cta': 'Commencer l\'essai gratuit',
+    'hero.titleEnd': "avec des jeux d'apprentissage interactifs",
+    'hero.subtitle':
+      "Rejoignez des milliers d'étudiants et d'enseignants utilisant Studybug pour maîtriser n'importe quel sujet grâce à un apprentissage ludique.",
+    'hero.cta': "Commencer l'essai gratuit",
     'hero.secondary': 'Voir comment ça marche',
-    
+
     // Pricing
     'pricing.title': 'Tarification simple et transparente',
-    'pricing.subtitle': 'Choisissez le plan qui vous convient. Tous les plans payants incluent un essai gratuit de 14 jours.',
+    'pricing.subtitle':
+      'Choisissez le plan qui vous convient. Tous les plans payants incluent un essai gratuit de 14 jours.',
     'pricing.monthly': 'Mensuel',
     'pricing.annual': 'Annuel',
     'pricing.save': 'Économisez 25%',
@@ -145,8 +150,9 @@ const translations: Record<Language, Record<string, string>> = {
     'pricing.freeForever': 'Gratuit pour toujours',
     'pricing.customPricing': 'Tarif personnalisé',
     'pricing.contactUs': 'Contactez-nous pour un devis',
-    'pricing.noCreditCard': 'Pas de carte bancaire requise • Essai gratuit de 14 jours • Annulez à tout moment',
-    
+    'pricing.noCreditCard':
+      'Pas de carte bancaire requise • Essai gratuit de 14 jours • Annulez à tout moment',
+
     // Plans
     'plan.free': 'Gratuit',
     'plan.student': 'Étudiant',
@@ -156,12 +162,12 @@ const translations: Record<Language, Record<string, string>> = {
     'plan.student.subtitle': 'Parfait pour les apprenants autonomes',
     'plan.teacher.subtitle': 'Tout ce que les étudiants ont, plus des outils de classe',
     'plan.school.subtitle': 'Pour les écoles, académies et institutions',
-    
+
     // Badges
     'badge.mostPopular': 'Plus populaire',
     'badge.bestForEducators': 'Meilleur pour les éducateurs',
     'badge.enterprise': 'Entreprise',
-    
+
     // Trust
     'trust.trusted': 'Approuvé par',
     'trust.studentsTeachers': '1 000+ étudiants et enseignants',
@@ -174,12 +180,12 @@ const translations: Record<Language, Record<string, string>> = {
     'trust.moneyBackDesc': 'Remboursement intégral',
     'trust.ukSupport': 'Support au Royaume-Uni',
     'trust.ukSupportDesc': 'Réponses rapides',
-    
+
     // Stats
     'stats.schools': 'Écoles UK',
     'stats.students': 'Étudiants',
     'stats.improvement': 'Amélioration',
-    
+
     // Urgency
     'urgency.message': 'Offre de janvier : Économisez 25% sur les plans annuels',
     'urgency.endsIn': 'Se termine dans :',
@@ -187,11 +193,12 @@ const translations: Record<Language, Record<string, string>> = {
     'urgency.hrs': 'h',
     'urgency.min': 'min',
     'urgency.sec': 's',
-    
+
     // Demo
     'demo.badge': 'Essayez vous-même',
     'demo.title': 'Découvrez Studybug en action',
-    'demo.subtitle': 'Retournez les cartes et testez vos connaissances. Ce n\'est qu\'un aperçu de notre apprentissage interactif !',
+    'demo.subtitle':
+      "Retournez les cartes et testez vos connaissances. Ce n'est qu'un aperçu de notre apprentissage interactif !",
     'demo.question': 'Question',
     'demo.answer': 'Réponse',
     'demo.tapToReveal': 'Appuyez pour révéler la réponse',
@@ -201,12 +208,12 @@ const translations: Record<Language, Record<string, string>> = {
     'demo.perfectScore': 'Score parfait !',
     'demo.greatJob': 'Excellent travail !',
     'demo.tryAgain': 'Réessayer',
-    
+
     // Sticky CTA
     'stickyCta.title': 'Prêt à améliorer vos notes ?',
     'stickyCta.subtitle': 'Commencez votre essai gratuit de 14 jours',
     'stickyCta.button': 'Commencer',
-    
+
     // Money Back
     'moneyBack.title': 'Garantie de remboursement de 14 jours',
     'moneyBack.subtitle': 'Pas satisfait ? Obtenez un remboursement complet, sans questions.',
@@ -214,7 +221,7 @@ const translations: Record<Language, Record<string, string>> = {
   de: {
     // Navigation
     'nav.features': 'Funktionen',
-    'nav.howItWorks': 'So funktioniert\'s',
+    'nav.howItWorks': "So funktioniert's",
     'nav.pricing': 'Preise',
     'nav.forSchools': 'Für Schulen',
     'nav.resources': 'Ressourcen',
@@ -223,19 +230,21 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.blog': 'Blog',
     'nav.login': 'Anmelden',
     'nav.startTrial': 'Kostenlos testen',
-    
+
     // Hero
     'hero.badge': '14-tägige kostenlose Testversion bei allen kostenpflichtigen Plänen',
     'hero.title': 'Machen Sie das Lernen',
     'hero.titleHighlight': 'Spaßig',
     'hero.titleEnd': 'mit interaktiven Lernspielen',
-    'hero.subtitle': 'Schließen Sie sich Tausenden von Schülern und Lehrern an, die Studybug nutzen, um jedes Fach durch spielbasiertes Lernen zu meistern.',
+    'hero.subtitle':
+      'Schließen Sie sich Tausenden von Schülern und Lehrern an, die Studybug nutzen, um jedes Fach durch spielbasiertes Lernen zu meistern.',
     'hero.cta': 'Kostenlos testen',
-    'hero.secondary': 'So funktioniert\'s',
-    
+    'hero.secondary': "So funktioniert's",
+
     // Pricing
     'pricing.title': 'Einfache, transparente Preise',
-    'pricing.subtitle': 'Wählen Sie den Plan, der zu Ihnen passt. Alle kostenpflichtigen Pläne beinhalten eine 14-tägige kostenlose Testversion.',
+    'pricing.subtitle':
+      'Wählen Sie den Plan, der zu Ihnen passt. Alle kostenpflichtigen Pläne beinhalten eine 14-tägige kostenlose Testversion.',
     'pricing.monthly': 'Monatlich',
     'pricing.annual': 'Jährlich',
     'pricing.save': '25% sparen',
@@ -244,8 +253,9 @@ const translations: Record<Language, Record<string, string>> = {
     'pricing.freeForever': 'Für immer kostenlos',
     'pricing.customPricing': 'Individuelle Preise',
     'pricing.contactUs': 'Kontaktieren Sie uns für ein Angebot',
-    'pricing.noCreditCard': 'Keine Kreditkarte erforderlich • 14 Tage kostenlos testen • Jederzeit kündbar',
-    
+    'pricing.noCreditCard':
+      'Keine Kreditkarte erforderlich • 14 Tage kostenlos testen • Jederzeit kündbar',
+
     // Plans
     'plan.free': 'Kostenlos',
     'plan.student': 'Schüler',
@@ -255,12 +265,12 @@ const translations: Record<Language, Record<string, string>> = {
     'plan.student.subtitle': 'Perfekt für selbstständige Lernende',
     'plan.teacher.subtitle': 'Alles was Schüler haben, plus Klassenzimmer-Tools',
     'plan.school.subtitle': 'Für Schulen, Akademien und Institutionen',
-    
+
     // Badges
     'badge.mostPopular': 'Am beliebtesten',
     'badge.bestForEducators': 'Beste für Pädagogen',
     'badge.enterprise': 'Unternehmen',
-    
+
     // Trust
     'trust.trusted': 'Vertraut von',
     'trust.studentsTeachers': '1.000+ Schülern und Lehrern',
@@ -273,12 +283,12 @@ const translations: Record<Language, Record<string, string>> = {
     'trust.moneyBackDesc': 'Volle Rückerstattung',
     'trust.ukSupport': 'UK-basierter Support',
     'trust.ukSupportDesc': 'Schnelle Antworten',
-    
+
     // Stats
     'stats.schools': 'UK-Schulen',
     'stats.students': 'Schüler',
     'stats.improvement': 'Verbesserung',
-    
+
     // Urgency
     'urgency.message': 'Januar-Angebot: Sparen Sie 25% bei Jahresplänen',
     'urgency.endsIn': 'Endet in:',
@@ -286,11 +296,12 @@ const translations: Record<Language, Record<string, string>> = {
     'urgency.hrs': 'Std',
     'urgency.min': 'Min',
     'urgency.sec': 'Sek',
-    
+
     // Demo
     'demo.badge': 'Probieren Sie es selbst',
     'demo.title': 'Erleben Sie Studybug in Aktion',
-    'demo.subtitle': 'Drehen Sie die Karten um und testen Sie Ihr Wissen. Dies ist nur ein Vorgeschmack auf unser interaktives Lernen!',
+    'demo.subtitle':
+      'Drehen Sie die Karten um und testen Sie Ihr Wissen. Dies ist nur ein Vorgeschmack auf unser interaktives Lernen!',
     'demo.question': 'Frage',
     'demo.answer': 'Antwort',
     'demo.tapToReveal': 'Tippen zum Aufdecken',
@@ -300,12 +311,12 @@ const translations: Record<Language, Record<string, string>> = {
     'demo.perfectScore': 'Perfekte Punktzahl!',
     'demo.greatJob': 'Großartige Arbeit!',
     'demo.tryAgain': 'Erneut versuchen',
-    
+
     // Sticky CTA
     'stickyCta.title': 'Bereit, Ihre Noten zu verbessern?',
     'stickyCta.subtitle': 'Starten Sie jetzt Ihre 14-tägige kostenlose Testversion',
     'stickyCta.button': 'Kostenlos starten',
-    
+
     // Money Back
     'moneyBack.title': '14-Tage-Geld-zurück-Garantie',
     'moneyBack.subtitle': 'Nicht zufrieden? Erhalten Sie eine volle Rückerstattung, ohne Fragen.',
@@ -322,19 +333,21 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.blog': 'Blog',
     'nav.login': 'Iniciar sesión',
     'nav.startTrial': 'Prueba gratis',
-    
+
     // Hero
     'hero.badge': 'Prueba gratuita de 14 días en todos los planes de pago',
     'hero.title': 'Haz que estudiar sea',
     'hero.titleHighlight': 'Divertido',
     'hero.titleEnd': 'con juegos de aprendizaje interactivos',
-    'hero.subtitle': 'Únete a miles de estudiantes y profesores que usan Studybug para dominar cualquier tema a través del aprendizaje basado en juegos.',
+    'hero.subtitle':
+      'Únete a miles de estudiantes y profesores que usan Studybug para dominar cualquier tema a través del aprendizaje basado en juegos.',
     'hero.cta': 'Comenzar prueba gratis',
     'hero.secondary': 'Ver cómo funciona',
-    
+
     // Pricing
     'pricing.title': 'Precios simples y transparentes',
-    'pricing.subtitle': 'Elige el plan adecuado para ti. Todos los planes de pago incluyen una prueba gratuita de 14 días.',
+    'pricing.subtitle':
+      'Elige el plan adecuado para ti. Todos los planes de pago incluyen una prueba gratuita de 14 días.',
     'pricing.monthly': 'Mensual',
     'pricing.annual': 'Anual',
     'pricing.save': 'Ahorra 25%',
@@ -343,8 +356,9 @@ const translations: Record<Language, Record<string, string>> = {
     'pricing.freeForever': 'Gratis para siempre',
     'pricing.customPricing': 'Precios personalizados',
     'pricing.contactUs': 'Contáctanos para una cotización',
-    'pricing.noCreditCard': 'No se requiere tarjeta de crédito • Prueba gratuita de 14 días • Cancela en cualquier momento',
-    
+    'pricing.noCreditCard':
+      'No se requiere tarjeta de crédito • Prueba gratuita de 14 días • Cancela en cualquier momento',
+
     // Plans
     'plan.free': 'Gratis',
     'plan.student': 'Estudiante',
@@ -354,12 +368,12 @@ const translations: Record<Language, Record<string, string>> = {
     'plan.student.subtitle': 'Perfecto para estudiantes independientes',
     'plan.teacher.subtitle': 'Todo lo que tienen los estudiantes, más herramientas de aula',
     'plan.school.subtitle': 'Para escuelas, academias e instituciones',
-    
+
     // Badges
     'badge.mostPopular': 'Más popular',
     'badge.bestForEducators': 'Mejor para educadores',
     'badge.enterprise': 'Empresarial',
-    
+
     // Trust
     'trust.trusted': 'Confiado por',
     'trust.studentsTeachers': '1.000+ estudiantes y profesores',
@@ -372,12 +386,12 @@ const translations: Record<Language, Record<string, string>> = {
     'trust.moneyBackDesc': 'Reembolso completo',
     'trust.ukSupport': 'Soporte en Reino Unido',
     'trust.ukSupportDesc': 'Respuestas rápidas',
-    
+
     // Stats
     'stats.schools': 'Escuelas UK',
     'stats.students': 'Estudiantes',
     'stats.improvement': 'Mejora',
-    
+
     // Urgency
     'urgency.message': 'Oferta de enero: Ahorra 25% en planes anuales',
     'urgency.endsIn': 'Termina en:',
@@ -385,11 +399,12 @@ const translations: Record<Language, Record<string, string>> = {
     'urgency.hrs': 'hrs',
     'urgency.min': 'min',
     'urgency.sec': 'seg',
-    
+
     // Demo
     'demo.badge': 'Pruébalo tú mismo',
     'demo.title': 'Experimenta Studybug en acción',
-    'demo.subtitle': 'Voltea las tarjetas y pon a prueba tus conocimientos. ¡Esto es solo una muestra de nuestro aprendizaje interactivo!',
+    'demo.subtitle':
+      'Voltea las tarjetas y pon a prueba tus conocimientos. ¡Esto es solo una muestra de nuestro aprendizaje interactivo!',
     'demo.question': 'Pregunta',
     'demo.answer': 'Respuesta',
     'demo.tapToReveal': 'Toca para revelar la respuesta',
@@ -399,12 +414,12 @@ const translations: Record<Language, Record<string, string>> = {
     'demo.perfectScore': '¡Puntuación perfecta!',
     'demo.greatJob': '¡Excelente trabajo!',
     'demo.tryAgain': 'Intentar de nuevo',
-    
+
     // Sticky CTA
     'stickyCta.title': '¿Listo para mejorar tus notas?',
     'stickyCta.subtitle': 'Comienza tu prueba gratuita de 14 días ahora',
     'stickyCta.button': 'Comenzar gratis',
-    
+
     // Money Back
     'moneyBack.title': 'Garantía de devolución de 14 días',
     'moneyBack.subtitle': '¿No estás satisfecho? Obtén un reembolso completo, sin preguntas.',
@@ -424,7 +439,7 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     const saved = localStorage.getItem('studybug-language');
     return (saved as Language) || 'en';
   });
-  
+
   const [currency, setCurrency] = useState<Currency>(() => {
     const saved = localStorage.getItem('studybug-currency');
     return (saved as Currency) || 'GBP';
@@ -447,31 +462,33 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
   const formatPrice = (priceGBP: number): string => {
     const { symbol, rate } = currencyRates[currency];
     const convertedPrice = priceGBP * rate;
-    
+
     if (priceGBP === 0) {
       return `${symbol}0`;
     }
-    
+
     // Round to 2 decimal places
     const formattedPrice = Math.round(convertedPrice * 100) / 100;
-    
+
     // Format based on currency
     if (currency === 'EUR') {
       return `${formattedPrice.toFixed(2).replace('.', ',')}${symbol}`;
     }
-    
+
     return `${symbol}${formattedPrice % 1 === 0 ? formattedPrice : formattedPrice.toFixed(2)}`;
   };
 
   return (
-    <LocaleContext.Provider value={{
-      language,
-      setLanguage: handleSetLanguage,
-      currency,
-      setCurrency: handleSetCurrency,
-      t,
-      formatPrice,
-    }}>
+    <LocaleContext.Provider
+      value={{
+        language,
+        setLanguage: handleSetLanguage,
+        currency,
+        setCurrency: handleSetCurrency,
+        t,
+        formatPrice,
+      }}
+    >
       {children}
     </LocaleContext.Provider>
   );

@@ -24,11 +24,7 @@ import KeyboardShortcutsOverlay from './KeyboardShortcutsOverlay';
 interface FlashcardsGameProps {
   gameData: FlashcardsGameData;
   gameName: string;
-  onComplete: (result: {
-    scorePercentage: number;
-    timeTaken: number;
-    attemptData: any;
-  }) => void;
+  onComplete: (result: { scorePercentage: number; timeTaken: number; attemptData: any }) => void;
   onExit: () => void;
 }
 
@@ -370,7 +366,10 @@ export default function FlashcardsGame({
                 <BookOpen className="h-5 w-5 text-blue-500" />
                 <h1 className="text-2xl font-bold">{gameName}</h1>
                 {reviewMode && (
-                  <Badge variant="outline" className="bg-orange-50 text-orange-700 border-orange-300">
+                  <Badge
+                    variant="outline"
+                    className="bg-orange-50 text-orange-700 border-orange-300"
+                  >
                     Review Mode
                   </Badge>
                 )}
@@ -395,11 +394,7 @@ export default function FlashcardsGame({
                 <Shuffle className="h-4 w-4" />
               </Button>
 
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setShowShortcuts(true)}
-              >
+              <Button variant="ghost" size="sm" onClick={() => setShowShortcuts(true)}>
                 <HelpCircle className="h-4 w-4" />
               </Button>
             </div>
@@ -486,11 +481,7 @@ export default function FlashcardsGame({
       {/* Navigation */}
       <div className="container mx-auto max-w-2xl">
         <div className="flex items-center justify-between">
-          <Button
-            variant="outline"
-            onClick={handlePrevious}
-            disabled={currentIndex === 0}
-          >
+          <Button variant="outline" onClick={handlePrevious} disabled={currentIndex === 0}>
             <ChevronLeft className="mr-2 h-4 w-4" />
             Previous
           </Button>
@@ -530,10 +521,7 @@ export default function FlashcardsGame({
       </div>
 
       {/* Keyboard Shortcuts Overlay */}
-      <KeyboardShortcutsOverlay
-        open={showShortcuts}
-        onClose={() => setShowShortcuts(false)}
-      />
+      <KeyboardShortcutsOverlay open={showShortcuts} onClose={() => setShowShortcuts(false)} />
     </div>
   );
 }

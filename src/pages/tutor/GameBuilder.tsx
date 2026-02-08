@@ -22,9 +22,7 @@ export default function GameBuilder() {
           <div className="text-center">
             <h2 className="text-2xl font-bold mb-2">Invalid Game Type</h2>
             <p className="text-muted-foreground mb-4">The selected game type is not supported.</p>
-            <Button onClick={() => navigate('/tutor/games/create')}>
-              Back to Game Selection
-            </Button>
+            <Button onClick={() => navigate('/tutor/games/create')}>Back to Game Selection</Button>
           </div>
         </div>
       </DashboardLayout>
@@ -53,11 +51,7 @@ export default function GameBuilder() {
       {/* Header */}
       <div className="border-b sticky top-0 bg-background z-10">
         <div className="container mx-auto px-4 py-4">
-          <Button
-            variant="ghost"
-            onClick={() => navigate('/tutor/games/create')}
-            size="sm"
-          >
+          <Button variant="ghost" onClick={() => navigate('/tutor/games/create')} size="sm">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back
           </Button>
@@ -65,9 +59,7 @@ export default function GameBuilder() {
       </div>
 
       {/* Builder Content */}
-      <div className="container mx-auto px-4 py-6">
-        {renderBuilder()}
-      </div>
+      <div className="container mx-auto px-4 py-6">{renderBuilder()}</div>
     </DashboardLayout>
   );
 }

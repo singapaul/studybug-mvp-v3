@@ -75,19 +75,13 @@ export default function SwipeCard({ statement, image, onSwipe, isActive }: Swipe
           {/* Image (if provided) */}
           {image && (
             <div className="h-1/2 bg-muted relative overflow-hidden">
-              <img
-                src={image}
-                alt="Question"
-                className="w-full h-full object-cover"
-              />
+              <img src={image} alt="Question" className="w-full h-full object-cover" />
             </div>
           )}
 
           {/* Statement */}
           <div className={`${image ? 'h-1/2' : 'h-full'} flex items-center justify-center p-8`}>
-            <p className="text-2xl md:text-3xl font-semibold text-center">
-              {statement}
-            </p>
+            <p className="text-2xl md:text-3xl font-semibold text-center">{statement}</p>
           </div>
         </div>
 

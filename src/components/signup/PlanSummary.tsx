@@ -10,9 +10,7 @@ export function PlanSummary() {
   if (!selectedPlan) return null;
 
   const price =
-    formData.billingCycle === 'monthly'
-      ? selectedPlan.monthlyPrice
-      : selectedPlan.annualPrice;
+    formData.billingCycle === 'monthly' ? selectedPlan.monthlyPrice : selectedPlan.annualPrice;
 
   const trialEndDate = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000);
 
@@ -33,9 +31,7 @@ export function PlanSummary() {
         {/* Billing Cycle */}
         <div className="flex justify-between items-center">
           <span className="text-muted-foreground">Billing</span>
-          <span className="font-medium text-foreground capitalize">
-            {formData.billingCycle}
-          </span>
+          <span className="font-medium text-foreground capitalize">{formData.billingCycle}</span>
         </div>
 
         {/* Free Trial */}
@@ -62,9 +58,9 @@ export function PlanSummary() {
                 </span>{' '}
                 after your trial ends on{' '}
                 <span className="font-semibold text-foreground">
-                  {trialEndDate.toLocaleDateString('en-GB', { 
-                    day: 'numeric', 
-                    month: 'short' 
+                  {trialEndDate.toLocaleDateString('en-GB', {
+                    day: 'numeric',
+                    month: 'short',
                   })}
                 </span>
               </p>
@@ -92,8 +88,8 @@ export function PlanSummary() {
         {/* Help */}
         <div className="pt-4 border-t border-border">
           <p className="text-xs text-muted-foreground mb-2">Need help?</p>
-          <a 
-            href="mailto:support@studybug.com" 
+          <a
+            href="mailto:support@studybug.com"
             className="text-sm text-primary hover:underline flex items-center gap-2"
           >
             <Mail className="w-4 h-4" />

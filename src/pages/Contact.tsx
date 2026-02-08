@@ -29,20 +29,20 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
+
     // Simulate submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+
     setIsLoading(false);
     setIsSuccess(true);
     toast({
-      title: "Message sent!",
+      title: 'Message sent!',
       description: "We'll get back to you within 24 hours.",
     });
   };
 
   const updateField = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   return (
@@ -125,7 +125,10 @@ export default function Contact() {
 
                         <div className="space-y-2">
                           <Label htmlFor="subject">Subject</Label>
-                          <Select value={formData.subject} onValueChange={(value) => updateField('subject', value)}>
+                          <Select
+                            value={formData.subject}
+                            onValueChange={(value) => updateField('subject', value)}
+                          >
                             <SelectTrigger>
                               <SelectValue placeholder="Select a topic" />
                             </SelectTrigger>
@@ -176,8 +179,8 @@ export default function Contact() {
                   <h3 className="font-semibold text-foreground mb-4">Contact Info</h3>
                   <ul className="space-y-4">
                     <li>
-                      <a 
-                        href="mailto:hello@studybug.io" 
+                      <a
+                        href="mailto:hello@studybug.io"
                         className="flex items-start gap-3 text-muted-foreground hover:text-primary transition-colors"
                       >
                         <Mail className="w-5 h-5 flex-shrink-0 mt-0.5" />
@@ -188,8 +191,8 @@ export default function Contact() {
                       </a>
                     </li>
                     <li>
-                      <a 
-                        href="tel:+442012345678" 
+                      <a
+                        href="tel:+442012345678"
                         className="flex items-start gap-3 text-muted-foreground hover:text-primary transition-colors"
                       >
                         <Phone className="w-5 h-5 flex-shrink-0 mt-0.5" />

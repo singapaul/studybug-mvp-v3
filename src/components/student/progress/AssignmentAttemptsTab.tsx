@@ -27,9 +27,7 @@ interface AssignmentAttemptsTabProps {
   studentId: string;
 }
 
-export default function AssignmentAttemptsTab({
-  studentId,
-}: AssignmentAttemptsTabProps) {
+export default function AssignmentAttemptsTab({ studentId }: AssignmentAttemptsTabProps) {
   const navigate = useNavigate();
   const [attempts, setAttempts] = useState<any[]>([]);
   const [filteredAttempts, setFilteredAttempts] = useState<any[]>([]);
@@ -83,13 +81,9 @@ export default function AssignmentAttemptsTab({
     filtered.sort((a, b) => {
       switch (sortBy) {
         case 'date-desc':
-          return (
-            new Date(b.completedAt).getTime() - new Date(a.completedAt).getTime()
-          );
+          return new Date(b.completedAt).getTime() - new Date(a.completedAt).getTime();
         case 'date-asc':
-          return (
-            new Date(a.completedAt).getTime() - new Date(b.completedAt).getTime()
-          );
+          return new Date(a.completedAt).getTime() - new Date(b.completedAt).getTime();
         case 'score-desc':
           return b.scorePercentage - a.scorePercentage;
         case 'score-asc':
@@ -120,14 +114,7 @@ export default function AssignmentAttemptsTab({
   };
 
   const exportToCSV = () => {
-    const headers = [
-      'Date',
-      'Game',
-      'Game Type',
-      'Group',
-      'Score %',
-      'Time',
-    ];
+    const headers = ['Date', 'Game', 'Game Type', 'Group', 'Score %', 'Time'];
     const rows = filteredAttempts.map((attempt) => [
       format(new Date(attempt.completedAt), 'yyyy-MM-dd HH:mm'),
       attempt.game?.name || 'Unknown',
@@ -269,13 +256,9 @@ export default function AssignmentAttemptsTab({
                         </span>
                       </div>
                     </TableCell>
-                    <TableCell className="font-medium">
-                      {attempt.game?.name || 'Unknown'}
-                    </TableCell>
+                    <TableCell className="font-medium">{attempt.game?.name || 'Unknown'}</TableCell>
                     <TableCell>
-                      <Badge variant="outline">
-                        {attempt.game?.gameType || 'Unknown'}
-                      </Badge>
+                      <Badge variant="outline">{attempt.game?.gameType || 'Unknown'}</Badge>
                     </TableCell>
                     <TableCell className="text-muted-foreground">
                       {attempt.group?.name || 'Unknown'}

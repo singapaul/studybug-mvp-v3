@@ -20,7 +20,8 @@ export default function Blog() {
               The Studybug Blog
             </h1>
             <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-8">
-              Tips, insights, and stories about effective learning and revision strategies. We're working on great content for you.
+              Tips, insights, and stories about effective learning and revision strategies. We're
+              working on great content for you.
             </p>
           </div>
         </section>
@@ -35,7 +36,8 @@ export default function Blog() {
               We're Writing Something Great
             </h2>
             <p className="text-muted-foreground mb-8">
-              Our team is preparing articles about learning science, study tips, and success stories from schools using Studybug. Check back soon!
+              Our team is preparing articles about learning science, study tips, and success stories
+              from schools using Studybug. Check back soon!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" variant="outline" asChild>

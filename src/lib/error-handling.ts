@@ -86,9 +86,7 @@ export function isNetworkError(error: any): boolean {
  */
 export function isTimeoutError(error: any): boolean {
   return (
-    error.name === 'AbortError' ||
-    error.message?.includes('timeout') ||
-    error.code === 'ETIMEDOUT'
+    error.name === 'AbortError' || error.message?.includes('timeout') || error.code === 'ETIMEDOUT'
   );
 }
 
@@ -293,18 +291,13 @@ export async function canDeleteGame(gameId: string): Promise<boolean> {
 /**
  * Check if student has already joined group
  */
-export async function hasStudentJoinedGroup(
-  studentId: string,
-  groupId: string
-): Promise<boolean> {
+export async function hasStudentJoinedGroup(studentId: string, groupId: string): Promise<boolean> {
   try {
     const membersData = localStorage.getItem('dev_group_members');
     if (!membersData) return false;
 
     const members = JSON.parse(membersData);
-    return members.some(
-      (m: any) => m.studentId === studentId && m.groupId === groupId
-    );
+    return members.some((m: any) => m.studentId === studentId && m.groupId === groupId);
   } catch (error) {
     console.error('Error checking if student joined group:', error);
     return false;

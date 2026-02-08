@@ -63,9 +63,7 @@ export function SignUpForm({ role, onSuccess, onToggleMode }: SignUpFormProps) {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <div className="space-y-2">
         <h2 className="text-2xl font-bold">Create your {roleText} account</h2>
-        <p className="text-muted-foreground">
-          Enter your details to get started
-        </p>
+        <p className="text-muted-foreground">Enter your details to get started</p>
       </div>
 
       {error && (
@@ -85,9 +83,7 @@ export function SignUpForm({ role, onSuccess, onToggleMode }: SignUpFormProps) {
             {...register('email')}
             disabled={isSubmitting}
           />
-          {errors.email && (
-            <p className="text-sm text-destructive">{errors.email.message}</p>
-          )}
+          {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
         </div>
 
         <div className="space-y-2">
@@ -99,9 +95,7 @@ export function SignUpForm({ role, onSuccess, onToggleMode }: SignUpFormProps) {
             {...register('password')}
             disabled={isSubmitting}
           />
-          {errors.password && (
-            <p className="text-sm text-destructive">{errors.password.message}</p>
-          )}
+          {errors.password && <p className="text-sm text-destructive">{errors.password.message}</p>}
         </div>
 
         <div className="space-y-2">

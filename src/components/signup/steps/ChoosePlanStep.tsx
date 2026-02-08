@@ -39,12 +39,8 @@ export function ChoosePlanStep({ onNext }: ChoosePlanStepProps) {
   return (
     <div className="space-y-8 animate-fade-in">
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-foreground mb-2">
-          Choose your plan
-        </h2>
-        <p className="text-muted-foreground">
-          Start with a 14-day free trial. Cancel anytime.
-        </p>
+        <h2 className="text-2xl font-bold text-foreground mb-2">Choose your plan</h2>
+        <p className="text-muted-foreground">Start with a 14-day free trial. Cancel anytime.</p>
       </div>
 
       {/* Billing Toggle */}
@@ -78,11 +74,13 @@ export function ChoosePlanStep({ onNext }: ChoosePlanStepProps) {
               {/* Badge */}
               {plan.badge && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold shadow-md ${
-                    plan.badgeColor === 'accent' 
-                      ? 'bg-accent text-accent-foreground' 
-                      : 'gradient-primary text-primary-foreground'
-                  }`}>
+                  <span
+                    className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold shadow-md ${
+                      plan.badgeColor === 'accent'
+                        ? 'bg-accent text-accent-foreground'
+                        : 'gradient-primary text-primary-foreground'
+                    }`}
+                  >
                     <Sparkles className="w-3 h-3" />
                     {plan.badge}
                   </span>
@@ -92,19 +90,21 @@ export function ChoosePlanStep({ onNext }: ChoosePlanStepProps) {
               {/* Selection Indicator */}
               <div
                 className={`absolute top-4 right-4 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${
-                  isSelected
-                    ? 'bg-primary border-primary'
-                    : 'border-border bg-background'
+                  isSelected ? 'bg-primary border-primary' : 'border-border bg-background'
                 }`}
               >
                 {isSelected && <Check className="w-4 h-4 text-primary-foreground" />}
               </div>
 
               {/* Icon */}
-              <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${
-                isSelected ? 'bg-primary/10' : 'bg-muted'
-              }`}>
-                <Icon className={`w-6 h-6 ${isSelected ? 'text-primary' : 'text-muted-foreground'}`} />
+              <div
+                className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${
+                  isSelected ? 'bg-primary/10' : 'bg-muted'
+                }`}
+              >
+                <Icon
+                  className={`w-6 h-6 ${isSelected ? 'text-primary' : 'text-muted-foreground'}`}
+                />
               </div>
 
               {/* Plan Info */}
@@ -117,9 +117,7 @@ export function ChoosePlanStep({ onNext }: ChoosePlanStepProps) {
                 <span className="text-muted-foreground">/month</span>
               </div>
               {formData.billingCycle === 'annual' && (
-                <p className="text-sm text-success mb-4">
-                  Billed as £{plan.annualPrice}/year
-                </p>
+                <p className="text-sm text-success mb-4">Billed as £{plan.annualPrice}/year</p>
               )}
 
               {/* Features */}
@@ -149,7 +147,9 @@ export function ChoosePlanStep({ onNext }: ChoosePlanStepProps) {
               </div>
               <div className="text-left">
                 <h4 className="font-semibold text-foreground">Looking for a School plan?</h4>
-                <p className="text-sm text-muted-foreground">Bulk licensing for your entire institution →</p>
+                <p className="text-sm text-muted-foreground">
+                  Bulk licensing for your entire institution →
+                </p>
               </div>
             </div>
             <span className="text-sm font-medium text-secondary">Request Demo</span>

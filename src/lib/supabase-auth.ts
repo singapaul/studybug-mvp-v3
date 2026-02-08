@@ -64,7 +64,10 @@ export async function signOut() {
  * Get the current session
  */
 export async function getSession() {
-  const { data: { session }, error } = await supabase.auth.getSession();
+  const {
+    data: { session },
+    error,
+  } = await supabase.auth.getSession();
 
   if (error) {
     throw error;
@@ -77,7 +80,10 @@ export async function getSession() {
  * Get the current user
  */
 export async function getUser() {
-  const { data: { user }, error } = await supabase.auth.getUser();
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
 
   if (error) {
     throw error;

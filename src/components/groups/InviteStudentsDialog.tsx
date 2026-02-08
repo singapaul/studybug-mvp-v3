@@ -131,7 +131,10 @@ export function InviteStudentsDialog({
             <p className="text-sm font-medium">How students can join:</p>
             <ol className="text-sm text-muted-foreground space-y-1 list-decimal list-inside">
               <li>Visit the join page or click the shareable link</li>
-              <li>Enter the join code: <span className="font-mono font-semibold">{formattedCode}</span></li>
+              <li>
+                Enter the join code:{' '}
+                <span className="font-mono font-semibold">{formattedCode}</span>
+              </li>
               <li>Click "Join Group" to enroll</li>
             </ol>
           </div>

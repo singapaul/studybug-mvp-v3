@@ -10,11 +10,7 @@ export const profileSettingsSchema = z.object({
     .max(50, 'Display name must be less than 50 characters')
     .optional()
     .or(z.literal('')),
-  bio: z
-    .string()
-    .max(500, 'Bio must be less than 500 characters')
-    .optional()
-    .or(z.literal('')),
+  bio: z.string().max(500, 'Bio must be less than 500 characters').optional().or(z.literal('')),
   avatarUrl: z.string().url('Invalid avatar URL').optional().or(z.literal('')),
 });
 

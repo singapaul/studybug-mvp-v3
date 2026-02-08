@@ -5,7 +5,7 @@ import { useLocale } from '@/context/LocaleContext';
 
 export function StatsBar() {
   const { t } = useLocale();
-  
+
   const stats = [
     {
       icon: Building2,
@@ -36,11 +36,11 @@ export function StatsBar() {
         <StaggerContainer className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
           {stats.map((stat, index) => (
             <StaggerItem key={index}>
-              <motion.div 
+              <motion.div
                 whileHover={{ scale: 1.05 }}
                 className="flex items-center gap-4 text-center md:text-left cursor-default"
               >
-                <motion.div 
+                <motion.div
                   whileHover={{ rotate: [0, -5, 5, 0] }}
                   transition={{ duration: 0.3 }}
                   className={`w-14 h-14 rounded-2xl ${stat.color} flex items-center justify-center shadow-md`}
@@ -48,12 +48,13 @@ export function StatsBar() {
                   <stat.icon className={`w-7 h-7 ${stat.iconColor}`} />
                 </motion.div>
                 <div>
-                  <div className="text-3xl md:text-4xl font-bold text-foreground" style={{ fontFamily: "'Quicksand', system-ui, sans-serif" }}>
+                  <div
+                    className="text-3xl md:text-4xl font-bold text-foreground"
+                    style={{ fontFamily: "'Quicksand', system-ui, sans-serif" }}
+                  >
                     {stat.value}
                   </div>
-                  <div className="text-sm text-muted-foreground font-medium">
-                    {stat.label}
-                  </div>
+                  <div className="text-sm text-muted-foreground font-medium">{stat.label}</div>
                 </div>
               </motion.div>
             </StaggerItem>

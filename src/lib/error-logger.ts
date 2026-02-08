@@ -86,12 +86,7 @@ function getSessionContext(): LogContext {
 /**
  * Core logging function
  */
-function log(
-  level: LogLevel,
-  message: string,
-  error?: any,
-  additionalContext?: LogContext
-): void {
+function log(level: LogLevel, message: string, error?: any, additionalContext?: LogContext): void {
   const entry: LogEntry = {
     timestamp: getTimestamp(),
     level,
@@ -172,8 +167,7 @@ export function logCritical(message: string, error?: any, context?: LogContext):
  */
 export function logAppError(appError: AppError, context?: LogContext): void {
   const level =
-    appError.code === ErrorCode.INTERNAL_ERROR ||
-    appError.code === ErrorCode.DATABASE_ERROR
+    appError.code === ErrorCode.INTERNAL_ERROR || appError.code === ErrorCode.DATABASE_ERROR
       ? LogLevel.CRITICAL
       : LogLevel.ERROR;
 

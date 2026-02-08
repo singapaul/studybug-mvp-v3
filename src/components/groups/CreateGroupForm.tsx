@@ -48,15 +48,9 @@ export function CreateGroupForm({ onSubmit, isLoading }: CreateGroupFormProps) {
             <FormItem>
               <FormLabel>Group Name *</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="e.g., Year 5 Mathematics"
-                  {...field}
-                  disabled={isLoading}
-                />
+                <Input placeholder="e.g., Year 5 Mathematics" {...field} disabled={isLoading} />
               </FormControl>
-              <FormDescription>
-                Choose a descriptive name for your class or group
-              </FormDescription>
+              <FormDescription>Choose a descriptive name for your class or group</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -69,15 +63,9 @@ export function CreateGroupForm({ onSubmit, isLoading }: CreateGroupFormProps) {
             <FormItem>
               <FormLabel>Age Range</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="e.g., 9-10 years"
-                  {...field}
-                  disabled={isLoading}
-                />
+                <Input placeholder="e.g., 9-10 years" {...field} disabled={isLoading} />
               </FormControl>
-              <FormDescription>
-                Optional: Specify the age range of students
-              </FormDescription>
+              <FormDescription>Optional: Specify the age range of students</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -96,21 +84,14 @@ export function CreateGroupForm({ onSubmit, isLoading }: CreateGroupFormProps) {
                   disabled={isLoading}
                 />
               </FormControl>
-              <FormDescription>
-                Optional: Main subject or topic focus
-              </FormDescription>
+              <FormDescription>Optional: Main subject or topic focus</FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
 
         <div className="flex gap-3 justify-end">
-          <Button
-            type="button"
-            variant="outline"
-            onClick={() => form.reset()}
-            disabled={isLoading}
-          >
+          <Button type="button" variant="outline" onClick={() => form.reset()} disabled={isLoading}>
             Reset
           </Button>
           <Button type="submit" disabled={isLoading}>

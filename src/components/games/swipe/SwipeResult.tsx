@@ -39,7 +39,8 @@ export default function SwipeResult({
   };
 
   const getPerformanceLevel = () => {
-    if (scorePercentage >= 90) return { text: 'Outstanding!', color: 'text-yellow-600', emoji: '🏆' };
+    if (scorePercentage >= 90)
+      return { text: 'Outstanding!', color: 'text-yellow-600', emoji: '🏆' };
     if (scorePercentage >= 75) return { text: 'Excellent!', color: 'text-green-600', emoji: '🎯' };
     if (scorePercentage >= 60) return { text: 'Good Job!', color: 'text-blue-600', emoji: '👍' };
     return { text: 'Keep Practicing!', color: 'text-purple-600', emoji: '💪' };
@@ -58,9 +59,7 @@ export default function SwipeResult({
           className="text-center space-y-2"
         >
           <div className="text-6xl mb-4">{performance.emoji}</div>
-          <h1 className={`text-4xl font-bold ${performance.color}`}>
-            {performance.text}
-          </h1>
+          <h1 className={`text-4xl font-bold ${performance.color}`}>{performance.text}</h1>
           <p className="text-lg text-muted-foreground">
             You completed all {totalQuestions} questions!
           </p>
@@ -166,7 +165,10 @@ export default function SwipeResult({
                       <div className="flex-1">
                         <p className="font-medium mb-1">{swipe.statement}</p>
                         <div className="flex items-center gap-2 text-sm">
-                          <Badge variant="outline" className="bg-red-50 text-red-700 border-red-300">
+                          <Badge
+                            variant="outline"
+                            className="bg-red-50 text-red-700 border-red-300"
+                          >
                             You swiped: {swipe.direction === 'left' ? 'Wrong' : 'Correct'}
                           </Badge>
                           <span className="text-muted-foreground">
@@ -192,9 +194,7 @@ export default function SwipeResult({
             <Card className="bg-gradient-to-r from-yellow-50 to-orange-50 border-yellow-300">
               <CardContent className="py-6 text-center">
                 <div className="text-4xl mb-2">🎉</div>
-                <h3 className="text-xl font-bold text-yellow-800 mb-2">
-                  Perfect Score!
-                </h3>
+                <h3 className="text-xl font-bold text-yellow-800 mb-2">Perfect Score!</h3>
                 <p className="text-yellow-700">
                   You got every single question correct! Outstanding work!
                 </p>

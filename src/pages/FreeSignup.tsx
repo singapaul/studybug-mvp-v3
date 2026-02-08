@@ -24,16 +24,16 @@ export default function FreeSignup() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
+
     // Simulate signup delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+
     setIsLoading(false);
     setIsSuccess(true);
   };
 
   const updateField = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   if (isSuccess) {
@@ -59,16 +59,14 @@ export default function FreeSignup() {
                 <Button
                   className="w-full bg-primary text-white hover:bg-primary/90"
                   size="lg"
-                  onClick={() => toast({ title: "Demo Mode", description: "App dashboard coming soon!" })}
+                  onClick={() =>
+                    toast({ title: 'Demo Mode', description: 'App dashboard coming soon!' })
+                  }
                 >
                   <Sparkles className="w-5 h-5 mr-2" />
                   Start Exploring
                 </Button>
-                <Button
-                  variant="outline"
-                  className="w-full"
-                  onClick={() => navigate('/pricing')}
-                >
+                <Button variant="outline" className="w-full" onClick={() => navigate('/pricing')}>
                   View Upgrade Options
                 </Button>
               </div>
@@ -92,20 +90,14 @@ export default function FreeSignup() {
                 <Sparkles className="w-4 h-4" />
                 Free Forever
               </div>
-              <h1 className="text-2xl font-bold text-foreground mb-2">
-                Create your free account
-              </h1>
-              <p className="text-muted-foreground">
-                Get started with 3 game modes and 10 subjects
-              </p>
+              <h1 className="text-2xl font-bold text-foreground mb-2">Create your free account</h1>
+              <p className="text-muted-foreground">Get started with 3 game modes and 10 subjects</p>
             </div>
 
             {/* Demo Notice */}
             <div className="flex items-center gap-3 p-4 rounded-lg bg-accent/10 border border-accent/20 mb-6">
               <AlertCircle className="w-5 h-5 text-accent-foreground flex-shrink-0" />
-              <p className="text-sm text-accent-foreground">
-                Demo mode - validation disabled
-              </p>
+              <p className="text-sm text-accent-foreground">Demo mode - validation disabled</p>
             </div>
 
             {/* Form */}

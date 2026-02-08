@@ -52,7 +52,7 @@ export default function Groups() {
       const newGroup = await createGroup({
         name: data.name,
         ageRange: data.ageRange,
-        subjectArea: data.subjectArea
+        subjectArea: data.subjectArea,
       });
       setGroups([newGroup, ...groups]);
       setIsDialogOpen(false);
@@ -73,9 +73,7 @@ export default function Groups() {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl font-bold">My Groups</h1>
-              <p className="text-muted-foreground mt-1">
-                Manage your classes and student groups
-              </p>
+              <p className="text-muted-foreground mt-1">Manage your classes and student groups</p>
             </div>
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
               <DialogTrigger asChild>
@@ -88,8 +86,8 @@ export default function Groups() {
                 <DialogHeader>
                   <DialogTitle>Create New Group</DialogTitle>
                   <DialogDescription>
-                    Create a new class or student group. Students can join using the
-                    generated join code.
+                    Create a new class or student group. Students can join using the generated join
+                    code.
                   </DialogDescription>
                 </DialogHeader>
                 <CreateGroupForm onSubmit={handleCreateGroup} isLoading={isCreating} />
@@ -113,8 +111,8 @@ export default function Groups() {
             </div>
             <h2 className="text-2xl font-semibold mb-2">No groups yet</h2>
             <p className="text-muted-foreground text-center max-w-md mb-6">
-              Create your first class or student group to start organizing and managing
-              your students. Each group gets a unique join code.
+              Create your first class or student group to start organizing and managing your
+              students. Each group gets a unique join code.
             </p>
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
               <DialogTrigger asChild>
@@ -127,8 +125,8 @@ export default function Groups() {
                 <DialogHeader>
                   <DialogTitle>Create New Group</DialogTitle>
                   <DialogDescription>
-                    Create a new class or student group. Students can join using the
-                    generated join code.
+                    Create a new class or student group. Students can join using the generated join
+                    code.
                   </DialogDescription>
                 </DialogHeader>
                 <CreateGroupForm onSubmit={handleCreateGroup} isLoading={isCreating} />

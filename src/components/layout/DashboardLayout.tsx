@@ -65,7 +65,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     navigate('/');
   };
 
-  const NavLink = ({ link, onClick }: { link: typeof navLinks[0]; onClick?: () => void }) => {
+  const NavLink = ({ link, onClick }: { link: (typeof navLinks)[0]; onClick?: () => void }) => {
     const Icon = link.icon;
     return (
       <button
@@ -113,7 +113,12 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             {/* Right Side: Role Indicator & User Menu */}
             <div className="flex items-center gap-4">
               {/* Role Indicator */}
-              <div className={cn('hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-muted', roleColor)}>
+              <div
+                className={cn(
+                  'hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-muted',
+                  roleColor
+                )}
+              >
                 {RoleIcon && <RoleIcon className="h-4 w-4" />}
                 <span className="text-sm font-medium">{roleName}</span>
               </div>
@@ -178,7 +183,11 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                     {/* Mobile Navigation Links */}
                     <nav className="flex flex-col gap-2">
                       {navLinks.map((link) => (
-                        <NavLink key={link.path} link={link} onClick={() => setMobileMenuOpen(false)} />
+                        <NavLink
+                          key={link.path}
+                          link={link}
+                          onClick={() => setMobileMenuOpen(false)}
+                        />
                       ))}
                     </nav>
 

@@ -114,9 +114,7 @@ export default function FlashcardsResult({
                     stroke="currentColor"
                     strokeWidth="12"
                     fill="none"
-                    className={cn(
-                      percentage >= 75 ? 'text-green-500' : 'text-blue-500'
-                    )}
+                    className={cn(percentage >= 75 ? 'text-green-500' : 'text-blue-500')}
                     strokeDasharray={`${2 * Math.PI * 88}`}
                     initial={{ strokeDashoffset: 2 * Math.PI * 88 }}
                     animate={{
@@ -221,12 +219,7 @@ export default function FlashcardsResult({
               )}
 
               <div className="flex flex-col sm:flex-row gap-3">
-                <Button
-                  onClick={onPlayAgain}
-                  variant="outline"
-                  size="lg"
-                  className="flex-1"
-                >
+                <Button onClick={onPlayAgain} variant="outline" size="lg" className="flex-1">
                   <RotateCcw className="mr-2 h-5 w-5" />
                   Study Again
                 </Button>

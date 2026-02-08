@@ -61,9 +61,7 @@ export default function GenericError({
             {showDetails && error && process.env.NODE_ENV === 'development' && (
               <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-sm text-left">
                 <p className="font-semibold text-red-800 mb-2">Error Details:</p>
-                <p className="text-red-700 font-mono text-xs break-all">
-                  {error.message}
-                </p>
+                <p className="text-red-700 font-mono text-xs break-all">{error.message}</p>
                 {error.stack && (
                   <details className="mt-2">
                     <summary className="text-red-800 font-semibold cursor-pointer">

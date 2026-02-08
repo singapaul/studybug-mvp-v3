@@ -28,9 +28,7 @@ export default function NotFound() {
             </div>
           </div>
 
-          <h1 className="text-3xl font-bold text-foreground mb-3">
-            Oops! Page not found
-          </h1>
+          <h1 className="text-3xl font-bold text-foreground mb-3">Oops! Page not found</h1>
           <p className="text-lg text-muted-foreground mb-8">
             The page you're looking for doesn't exist or has been moved.
           </p>

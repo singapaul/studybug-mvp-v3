@@ -10,7 +10,7 @@ export function LiveSignupCounter() {
     // Simulate real-time signups
     const interval = setInterval(() => {
       if (Math.random() > 0.6) {
-        setCount(prev => prev + 1);
+        setCount((prev) => prev + 1);
         setShowPulse(true);
         setTimeout(() => setShowPulse(false), 1000);
       }
@@ -52,8 +52,8 @@ export function LiveSignupCounter() {
           >
             {count}
           </motion.span>
-        </AnimatePresence>
-        {' '}students signed up today
+        </AnimatePresence>{' '}
+        students signed up today
       </span>
       <TrendingUp className="w-3 h-3" />
     </motion.div>

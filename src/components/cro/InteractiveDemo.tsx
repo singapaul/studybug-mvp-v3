@@ -12,30 +12,30 @@ interface FlashCard {
 
 const questionBank: FlashCard[] = [
   // Maths
-  { id: 1, question: "What is 5 + 3?", answer: "8" },
-  { id: 2, question: "What is 9 - 4?", answer: "5" },
-  { id: 3, question: "What is 6 × 2?", answer: "12" },
-  { id: 4, question: "What is 15 ÷ 3?", answer: "5" },
-  { id: 5, question: "What is 7 + 8?", answer: "15" },
+  { id: 1, question: 'What is 5 + 3?', answer: '8' },
+  { id: 2, question: 'What is 9 - 4?', answer: '5' },
+  { id: 3, question: 'What is 6 × 2?', answer: '12' },
+  { id: 4, question: 'What is 15 ÷ 3?', answer: '5' },
+  { id: 5, question: 'What is 7 + 8?', answer: '15' },
   // Geography
-  { id: 6, question: "Capital of France?", answer: "Paris" },
-  { id: 7, question: "Capital of Spain?", answer: "Madrid" },
-  { id: 8, question: "Capital of Italy?", answer: "Rome" },
-  { id: 9, question: "Capital of Germany?", answer: "Berlin" },
-  { id: 10, question: "Which ocean is the largest?", answer: "Pacific" },
+  { id: 6, question: 'Capital of France?', answer: 'Paris' },
+  { id: 7, question: 'Capital of Spain?', answer: 'Madrid' },
+  { id: 8, question: 'Capital of Italy?', answer: 'Rome' },
+  { id: 9, question: 'Capital of Germany?', answer: 'Berlin' },
+  { id: 10, question: 'Which ocean is the largest?', answer: 'Pacific' },
   // Science
-  { id: 11, question: "H₂O is the formula for?", answer: "Water" },
-  { id: 12, question: "What planet is closest to the Sun?", answer: "Mercury" },
-  { id: 13, question: "How many legs does a spider have?", answer: "8" },
-  { id: 14, question: "What gas do plants breathe in?", answer: "CO₂" },
-  { id: 15, question: "What is the centre of an atom called?", answer: "Nucleus" },
+  { id: 11, question: 'H₂O is the formula for?', answer: 'Water' },
+  { id: 12, question: 'What planet is closest to the Sun?', answer: 'Mercury' },
+  { id: 13, question: 'How many legs does a spider have?', answer: '8' },
+  { id: 14, question: 'What gas do plants breathe in?', answer: 'CO₂' },
+  { id: 15, question: 'What is the centre of an atom called?', answer: 'Nucleus' },
   // English
-  { id: 16, question: "What is the plural of 'child'?", answer: "Children" },
-  { id: 17, question: "What punctuation ends a question?", answer: "?" },
-  { id: 18, question: "Is 'quickly' a noun or adverb?", answer: "Adverb" },
+  { id: 16, question: "What is the plural of 'child'?", answer: 'Children' },
+  { id: 17, question: 'What punctuation ends a question?', answer: '?' },
+  { id: 18, question: "Is 'quickly' a noun or adverb?", answer: 'Adverb' },
   // History
-  { id: 19, question: "Who was the first man on the Moon?", answer: "Neil Armstrong" },
-  { id: 20, question: "In which year did WW2 end?", answer: "1945" },
+  { id: 19, question: 'Who was the first man on the Moon?', answer: 'Neil Armstrong' },
+  { id: 20, question: 'In which year did WW2 end?', answer: '1945' },
 ];
 
 function getRandomQuestions(count: number): FlashCard[] {
@@ -58,13 +58,13 @@ export function InteractiveDemo() {
 
   const handleAnswer = (correct: boolean) => {
     if (answered.includes(currentCard)) return;
-    
+
     setAnswered([...answered, currentCard]);
-    setAnswerResults(prev => ({ ...prev, [currentCard]: correct }));
+    setAnswerResults((prev) => ({ ...prev, [currentCard]: correct }));
     if (correct) {
       setScore(score + 1);
     }
-    
+
     if (answered.length + 1 === demoCards.length) {
       setShowCelebration(true);
       setTimeout(() => setShowCelebration(false), 2000);
@@ -90,15 +90,18 @@ export function InteractiveDemo() {
   return (
     <section className="py-16 md:py-20 bg-background relative overflow-hidden">
       {/* Subtle grid pattern */}
-      <div className="absolute inset-0 opacity-[0.02]" style={{
-        backgroundImage: `linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)`,
-        backgroundSize: '40px 40px'
-      }} />
-      
+      <div
+        className="absolute inset-0 opacity-[0.02]"
+        style={{
+          backgroundImage: `linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)`,
+          backgroundSize: '40px 40px',
+        }}
+      />
+
       {/* Decorative shapes */}
       <div className="absolute top-10 left-[10%] w-24 h-24 rounded-full bg-accent/10 blur-2xl" />
       <div className="absolute bottom-10 right-[15%] w-32 h-32 rounded-full bg-secondary/10 blur-2xl" />
-      
+
       <div className="container relative">
         <div className="text-center mb-10">
           <motion.div
@@ -110,12 +113,8 @@ export function InteractiveDemo() {
             <Sparkles className="w-4 h-4" />
             {t('demo.badge')}
           </motion.div>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            {t('demo.title')}
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-            {t('demo.subtitle')}
-          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">{t('demo.title')}</h2>
+          <p className="text-lg text-muted-foreground max-w-xl mx-auto">{t('demo.subtitle')}</p>
         </div>
 
         <div className="max-w-md mx-auto">
@@ -131,8 +130,8 @@ export function InteractiveDemo() {
                         ? 'bg-success'
                         : 'bg-coral'
                       : idx === currentCard
-                      ? 'bg-secondary'
-                      : 'bg-muted'
+                        ? 'bg-secondary'
+                        : 'bg-muted'
                   }`}
                 />
               ))}
@@ -149,7 +148,7 @@ export function InteractiveDemo() {
               className="relative w-full aspect-[4/3] cursor-pointer"
               onClick={() => !answered.includes(currentCard) && setIsFlipped(!isFlipped)}
               animate={{ rotateY: isFlipped ? 180 : 0 }}
-              transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
+              transition={{ duration: 0.6, type: 'spring', stiffness: 100 }}
               style={{ transformStyle: 'preserve-3d' }}
             >
               {/* Front */}
@@ -163,9 +162,7 @@ export function InteractiveDemo() {
                 <h3 className="text-2xl md:text-3xl font-bold text-white text-center">
                   {card.question}
                 </h3>
-                <span className="text-sm text-white/60 mt-6">
-                  {t('demo.tapToReveal')}
-                </span>
+                <span className="text-sm text-white/60 mt-6">{t('demo.tapToReveal')}</span>
               </div>
 
               {/* Back */}

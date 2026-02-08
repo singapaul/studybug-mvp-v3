@@ -83,9 +83,7 @@ export default function AttemptDetails() {
             <p className="text-muted-foreground mb-4">
               The attempt you're looking for doesn't exist or has been deleted.
             </p>
-            <Button onClick={() => navigate('/student/scores')}>
-              Back to My Scores
-            </Button>
+            <Button onClick={() => navigate('/student/scores')}>Back to My Scores</Button>
           </Card>
         </div>
       </div>
@@ -97,27 +95,18 @@ export default function AttemptDetails() {
       <div className="container mx-auto max-w-4xl space-y-6">
         {/* Header */}
         <div className="flex items-center gap-4">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => navigate('/student/scores')}
-          >
+          <Button variant="ghost" size="sm" onClick={() => navigate('/student/scores')}>
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to My Scores
           </Button>
         </div>
 
         {/* Summary Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <Card className="p-8">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
               <div>
-                <h1 className="text-3xl font-bold mb-2">
-                  {attempt.game?.name || 'Unknown Game'}
-                </h1>
+                <h1 className="text-3xl font-bold mb-2">{attempt.game?.name || 'Unknown Game'}</h1>
                 <div className="flex flex-wrap items-center gap-2">
                   <Badge variant="outline">{attempt.game?.gameType}</Badge>
                   <span className="text-muted-foreground">•</span>
@@ -147,9 +136,7 @@ export default function AttemptDetails() {
                   <Clock className="h-6 w-6 text-blue-600" />
                   <span className="text-sm font-medium text-blue-600">Time</span>
                 </div>
-                <p className="text-4xl font-bold text-blue-600">
-                  {formatTime(attempt.timeTaken)}
-                </p>
+                <p className="text-4xl font-bold text-blue-600">{formatTime(attempt.timeTaken)}</p>
               </div>
 
               <div className="p-4 rounded-lg bg-purple-50 border-2 border-purple-300">
@@ -193,10 +180,7 @@ export default function AttemptDetails() {
                     <div className="p-4 bg-muted rounded-lg">
                       <p className="text-sm text-muted-foreground mb-1">Efficiency</p>
                       <p className="text-2xl font-bold">
-                        {Math.round(
-                          (attempt.attemptData.pairs / attempt.attemptData.moves) * 100
-                        )}
-                        %
+                        {Math.round((attempt.attemptData.pairs / attempt.attemptData.moves) * 100)}%
                       </p>
                     </div>
                     <div className="p-4 bg-muted rounded-lg">
@@ -278,9 +262,7 @@ export default function AttemptDetails() {
                   {/* Reaction Times Breakdown */}
                   {attempt.attemptData.reactionTimes && (
                     <div>
-                      <h3 className="text-sm font-semibold mb-3">
-                        Question-by-Question Breakdown
-                      </h3>
+                      <h3 className="text-sm font-semibold mb-3">Question-by-Question Breakdown</h3>
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                         {attempt.attemptData.reactionTimes.map((time: number, index: number) => (
                           <div
@@ -289,9 +271,7 @@ export default function AttemptDetails() {
                           >
                             <span className="text-sm font-medium">Q{index + 1}</span>
                             <div className="text-right">
-                              <p className="text-sm font-bold">
-                                {(time / 1000).toFixed(2)}s
-                              </p>
+                              <p className="text-sm font-bold">{(time / 1000).toFixed(2)}s</p>
                               <p className="text-xs text-muted-foreground">
                                 +{attempt.attemptData.scores?.[index] || 0}
                               </p>

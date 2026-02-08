@@ -8,10 +8,10 @@ export function SchoolCTA() {
     <section className="py-24 bg-foreground relative overflow-hidden">
       <div className="absolute top-10 left-[10%] w-48 h-48 rounded-full bg-primary/20 blur-2xl" />
       <div className="absolute bottom-10 right-[15%] w-64 h-64 rounded-full bg-accent/20 blur-2xl" />
-      
+
       <div className="container relative">
         <div className="max-w-3xl mx-auto text-center">
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -19,19 +19,18 @@ export function SchoolCTA() {
           >
             Ready to Transform Learning at Your School?
           </motion.h2>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             viewport={{ once: true }}
             className="text-white/80 mb-8 max-w-2xl mx-auto"
           >
-            Book a personalized demo to see how Studybug can help your students
-            achieve better results. Our education specialists will walk you
-            through everything.
+            Book a personalized demo to see how Studybug can help your students achieve better
+            results. Our education specialists will walk you through everything.
           </motion.p>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -49,7 +48,12 @@ export function SchoolCTA() {
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" className="border-2 border-white/30 text-white hover:bg-white/10 rounded-full" asChild>
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-2 border-white/30 text-white hover:bg-white/10 rounded-full"
+              asChild
+            >
               <a href="mailto:schools@studybug.com">
                 <Mail className="w-4 h-4 mr-2" />
                 Contact Sales
@@ -57,7 +61,7 @@ export function SchoolCTA() {
             </Button>
           </motion.div>
 
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.3 }}

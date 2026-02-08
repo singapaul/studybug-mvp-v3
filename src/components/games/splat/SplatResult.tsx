@@ -2,15 +2,7 @@ import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import {
-  Trophy,
-  Zap,
-  Target,
-  Clock,
-  TrendingUp,
-  RotateCcw,
-  Home,
-} from 'lucide-react';
+import { Trophy, Zap, Target, Clock, TrendingUp, RotateCcw, Home } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface SplatResultProps {
@@ -93,9 +85,7 @@ export default function SplatResult({
               transition={{ delay: 0.6, type: 'spring' }}
               className="text-center"
             >
-              <div className="text-6xl font-bold text-orange-600 mb-2">
-                {totalScore}
-              </div>
+              <div className="text-6xl font-bold text-orange-600 mb-2">{totalScore}</div>
               <div className="text-lg text-muted-foreground">Total Points</div>
               <Badge variant="outline" className="mt-2 text-base px-4 py-2">
                 {percentage}% Correct

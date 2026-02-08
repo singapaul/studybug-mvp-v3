@@ -44,7 +44,9 @@ export default function ApiTest() {
   }, []);
 
   const checkAuthStatus = async () => {
-    const { data: { user } } = await supabase.auth.getUser();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     setAuthUser(user);
   };
 
@@ -77,10 +79,7 @@ export default function ApiTest() {
     setRequestPayload(null);
   };
 
-  const handleApiCall = async (
-    apiFunction: () => Promise<any>,
-    payload?: any
-  ) => {
+  const handleApiCall = async (apiFunction: () => Promise<any>, payload?: any) => {
     setLoading(true);
     setError(null);
     setResult(null);
@@ -247,9 +246,7 @@ export default function ApiTest() {
       return (
         <Alert>
           <AlertDescription>
-            <pre className="max-h-96 overflow-auto text-xs">
-              {JSON.stringify(result, null, 2)}
-            </pre>
+            <pre className="max-h-96 overflow-auto text-xs">{JSON.stringify(result, null, 2)}</pre>
           </AlertDescription>
         </Alert>
       );
@@ -311,10 +308,9 @@ export default function ApiTest() {
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <Button
-                    onClick={() => handleApiCall(
-                      () => gameService.getMyGames(),
-                      { authUserId: authUser.id }
-                    )}
+                    onClick={() =>
+                      handleApiCall(() => gameService.getMyGames(), { authUserId: authUser.id })
+                    }
                   >
                     Get My Games
                   </Button>
@@ -326,10 +322,9 @@ export default function ApiTest() {
                       onChange={(e) => setGameId(e.target.value)}
                     />
                     <Button
-                      onClick={() => handleApiCall(
-                        () => gameService.getGameById(gameId),
-                        { gameId }
-                      )}
+                      onClick={() =>
+                        handleApiCall(() => gameService.getGameById(gameId), { gameId })
+                      }
                       disabled={!gameId}
                       className="w-full"
                     >
@@ -351,17 +346,18 @@ export default function ApiTest() {
                         },
                       };
                       handleApiCall(
-                        () => gameService.createGame({
-                          name: 'Test Game',
-                          gameType: GameType.PAIRS,
-                          gameData: {
-                            description: 'Test pairs game',
-                            items: [
-                              { id: '1', leftText: 'Cat', rightText: 'Meow' },
-                              { id: '2', leftText: 'Dog', rightText: 'Bark' },
-                            ],
-                          },
-                        }),
+                        () =>
+                          gameService.createGame({
+                            name: 'Test Game',
+                            gameType: GameType.PAIRS,
+                            gameData: {
+                              description: 'Test pairs game',
+                              items: [
+                                { id: '1', leftText: 'Cat', rightText: 'Meow' },
+                                { id: '2', leftText: 'Dog', rightText: 'Bark' },
+                              ],
+                            },
+                          }),
                         payload
                       );
                     }}
@@ -383,10 +379,7 @@ export default function ApiTest() {
                   </Button>
 
                   <Button
-                    onClick={() => handleApiCall(
-                      () => gameService.deleteGame(gameId),
-                      { gameId }
-                    )}
+                    onClick={() => handleApiCall(() => gameService.deleteGame(gameId), { gameId })}
                     disabled={!gameId}
                     variant="destructive"
                   >
@@ -394,10 +387,9 @@ export default function ApiTest() {
                   </Button>
 
                   <Button
-                    onClick={() => handleApiCall(
-                      () => gameService.duplicateGame(gameId),
-                      { gameId }
-                    )}
+                    onClick={() =>
+                      handleApiCall(() => gameService.duplicateGame(gameId), { gameId })
+                    }
                     disabled={!gameId}
                   >
                     Duplicate Game
@@ -419,10 +411,9 @@ export default function ApiTest() {
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <Button
-                    onClick={() => handleApiCall(
-                      () => groupService.getMyGroups(),
-                      { authUserId: authUser.id }
-                    )}
+                    onClick={() =>
+                      handleApiCall(() => groupService.getMyGroups(), { authUserId: authUser.id })
+                    }
                   >
                     Get My Groups
                   </Button>
@@ -434,10 +425,9 @@ export default function ApiTest() {
                       onChange={(e) => setGroupId(e.target.value)}
                     />
                     <Button
-                      onClick={() => handleApiCall(
-                        () => groupService.getGroupById(groupId),
-                        { groupId }
-                      )}
+                      onClick={() =>
+                        handleApiCall(() => groupService.getGroupById(groupId), { groupId })
+                      }
                       disabled={!groupId}
                       className="w-full"
                     >
@@ -452,10 +442,9 @@ export default function ApiTest() {
                       onChange={(e) => setJoinCode(e.target.value)}
                     />
                     <Button
-                      onClick={() => handleApiCall(
-                        () => groupService.getGroupByJoinCode(joinCode),
-                        { joinCode }
-                      )}
+                      onClick={() =>
+                        handleApiCall(() => groupService.getGroupByJoinCode(joinCode), { joinCode })
+                      }
                       disabled={!joinCode}
                       className="w-full"
                     >
@@ -471,11 +460,12 @@ export default function ApiTest() {
                         subjectArea: 'Math',
                       };
                       handleApiCall(
-                        () => groupService.createGroup({
-                          name: 'Test Group',
-                          ageRange: '10-12',
-                          subjectArea: 'Math',
-                        }),
+                        () =>
+                          groupService.createGroup({
+                            name: 'Test Group',
+                            ageRange: '10-12',
+                            subjectArea: 'Math',
+                          }),
                         payload
                       );
                     }}
@@ -487,9 +477,10 @@ export default function ApiTest() {
                     onClick={() => {
                       const payload = { groupId, name: 'Updated Group Name' };
                       handleApiCall(
-                        () => groupService.updateGroup(groupId, {
-                          name: 'Updated Group Name',
-                        }),
+                        () =>
+                          groupService.updateGroup(groupId, {
+                            name: 'Updated Group Name',
+                          }),
                         payload
                       );
                     }}
@@ -499,10 +490,9 @@ export default function ApiTest() {
                   </Button>
 
                   <Button
-                    onClick={() => handleApiCall(
-                      () => groupService.deleteGroup(groupId),
-                      { groupId }
-                    )}
+                    onClick={() =>
+                      handleApiCall(() => groupService.deleteGroup(groupId), { groupId })
+                    }
                     disabled={!groupId}
                     variant="destructive"
                   >
@@ -510,10 +500,12 @@ export default function ApiTest() {
                   </Button>
 
                   <Button
-                    onClick={() => handleApiCall(
-                      () => groupService.getMyGroups(),
-                      { authUserId: authUser.id, role: 'STUDENT' }
-                    )}
+                    onClick={() =>
+                      handleApiCall(() => groupService.getMyGroups(), {
+                        authUserId: authUser.id,
+                        role: 'STUDENT',
+                      })
+                    }
                   >
                     Get My Groups (Student)
                   </Button>
@@ -534,55 +526,58 @@ export default function ApiTest() {
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <Button
-                    onClick={() => handleApiCall(
-                      () => studentService.getMyGroups(),
-                      { authUserId: authUser.id }
-                    )}
+                    onClick={() =>
+                      handleApiCall(() => studentService.getMyGroups(), { authUserId: authUser.id })
+                    }
                   >
                     Get My Groups
                   </Button>
 
                   <Button
-                    onClick={() => handleApiCall(
-                      () => studentService.getMyAssignments(),
-                      { authUserId: authUser.id }
-                    )}
+                    onClick={() =>
+                      handleApiCall(() => studentService.getMyAssignments(), {
+                        authUserId: authUser.id,
+                      })
+                    }
                   >
                     Get My Assignments
                   </Button>
 
                   <Button
-                    onClick={() => handleApiCall(
-                      () => studentService.getMyStats(),
-                      { authUserId: authUser.id }
-                    )}
+                    onClick={() =>
+                      handleApiCall(() => studentService.getMyStats(), { authUserId: authUser.id })
+                    }
                   >
                     Get My Stats
                   </Button>
 
                   <Button
-                    onClick={() => handleApiCall(
-                      () => studentService.getMyAttempts(),
-                      { authUserId: authUser.id }
-                    )}
+                    onClick={() =>
+                      handleApiCall(() => studentService.getMyAttempts(), {
+                        authUserId: authUser.id,
+                      })
+                    }
                   >
                     Get My Attempts
                   </Button>
 
                   <Button
-                    onClick={() => handleApiCall(
-                      () => studentService.getMyPersonalBests(),
-                      { authUserId: authUser.id }
-                    )}
+                    onClick={() =>
+                      handleApiCall(() => studentService.getMyPersonalBests(), {
+                        authUserId: authUser.id,
+                      })
+                    }
                   >
                     Get Personal Bests
                   </Button>
 
                   <Button
-                    onClick={() => handleApiCall(
-                      () => studentService.getMyProgressTrends(30),
-                      { authUserId: authUser.id, daysBack: 30 }
-                    )}
+                    onClick={() =>
+                      handleApiCall(() => studentService.getMyProgressTrends(30), {
+                        authUserId: authUser.id,
+                        daysBack: 30,
+                      })
+                    }
                   >
                     Get Progress Trends
                   </Button>
@@ -594,10 +589,9 @@ export default function ApiTest() {
                       onChange={(e) => setJoinCode(e.target.value)}
                     />
                     <Button
-                      onClick={() => handleApiCall(
-                        () => studentService.joinGroup(joinCode),
-                        { joinCode }
-                      )}
+                      onClick={() =>
+                        handleApiCall(() => studentService.joinGroup(joinCode), { joinCode })
+                      }
                       disabled={!joinCode}
                       className="w-full"
                     >
@@ -634,15 +628,13 @@ export default function ApiTest() {
                         assignmentId,
                         score: 85.5,
                         timeSpent: 120,
-                        attemptData: { answers: ['correct', 'wrong', 'correct'] }
+                        attemptData: { answers: ['correct', 'wrong', 'correct'] },
                       };
                       handleApiCall(
-                        () => attemptService.saveGameAttempt(
-                          assignmentId,
-                          85.5,
-                          120,
-                          { answers: ['correct', 'wrong', 'correct'] }
-                        ),
+                        () =>
+                          attemptService.saveGameAttempt(assignmentId, 85.5, 120, {
+                            answers: ['correct', 'wrong', 'correct'],
+                          }),
                         payload
                       );
                     }}
@@ -652,30 +644,33 @@ export default function ApiTest() {
                   </Button>
 
                   <Button
-                    onClick={() => handleApiCall(
-                      () => attemptService.getMyAssignmentAttempts(assignmentId),
-                      { assignmentId }
-                    )}
+                    onClick={() =>
+                      handleApiCall(() => attemptService.getMyAssignmentAttempts(assignmentId), {
+                        assignmentId,
+                      })
+                    }
                     disabled={!assignmentId}
                   >
                     Get My Assignment Attempts
                   </Button>
 
                   <Button
-                    onClick={() => handleApiCall(
-                      () => attemptService.getMyBestAttempt(assignmentId),
-                      { assignmentId }
-                    )}
+                    onClick={() =>
+                      handleApiCall(() => attemptService.getMyBestAttempt(assignmentId), {
+                        assignmentId,
+                      })
+                    }
                     disabled={!assignmentId}
                   >
                     Get My Best Attempt
                   </Button>
 
                   <Button
-                    onClick={() => handleApiCall(
-                      () => attemptService.getMyAttempts(),
-                      { authUserId: authUser.id }
-                    )}
+                    onClick={() =>
+                      handleApiCall(() => attemptService.getMyAttempts(), {
+                        authUserId: authUser.id,
+                      })
+                    }
                   >
                     Get All My Attempts
                   </Button>

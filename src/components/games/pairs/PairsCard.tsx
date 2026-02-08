@@ -89,9 +89,7 @@ export default function PairsCard({
             'bg-gradient-to-br from-white to-gray-50',
             'flex flex-col items-center justify-center p-4',
             'border-4',
-            isMatched
-              ? 'border-green-400 bg-green-50'
-              : 'border-purple-200',
+            isMatched ? 'border-green-400 bg-green-50' : 'border-purple-200',
             'backface-hidden'
           )}
           style={{

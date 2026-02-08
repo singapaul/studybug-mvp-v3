@@ -78,11 +78,7 @@ export async function deleteImage(url: string): Promise<void> {
 /**
  * Resize image if too large (optional enhancement)
  */
-export async function resizeImage(
-  file: File,
-  maxWidth: number,
-  maxHeight: number
-): Promise<File> {
+export async function resizeImage(file: File, maxWidth: number, maxHeight: number): Promise<File> {
   return new Promise((resolve, reject) => {
     const img = new Image();
     const canvas = document.createElement('canvas');

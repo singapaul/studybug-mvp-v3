@@ -53,10 +53,7 @@ export default function TutorDashboard() {
 
     setLoading(true);
     try {
-      const [groupsData, gamesData] = await Promise.all([
-        getMyGroups(),
-        getMyGames(),
-      ]);
+      const [groupsData, gamesData] = await Promise.all([getMyGroups(), getMyGames()]);
 
       // Calculate stats
       const totalStudents = groupsData.reduce(
@@ -180,9 +177,7 @@ export default function TutorDashboard() {
                   <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
                 </div>
                 <CardTitle>Create a Game</CardTitle>
-                <CardDescription>
-                  Design interactive learning activities
-                </CardDescription>
+                <CardDescription>Design interactive learning activities</CardDescription>
               </CardHeader>
               <CardContent>
                 <Button className="w-full" onClick={() => navigate('/tutor/games/create')}>
@@ -195,9 +190,7 @@ export default function TutorDashboard() {
             {/* Create Assignment */}
             <Card
               className={`transition-all cursor-pointer group border-2 ${
-                hasData
-                  ? 'hover:shadow-lg hover:border-primary'
-                  : 'opacity-50 cursor-not-allowed'
+                hasData ? 'hover:shadow-lg hover:border-primary' : 'opacity-50 cursor-not-allowed'
               }`}
             >
               <CardHeader>
@@ -216,9 +209,7 @@ export default function TutorDashboard() {
                   )}
                 </div>
                 <CardTitle>Create Assignment</CardTitle>
-                <CardDescription>
-                  Assign games to groups with deadlines
-                </CardDescription>
+                <CardDescription>Assign games to groups with deadlines</CardDescription>
               </CardHeader>
               <CardContent>
                 <Button className="w-full" disabled={!hasData}>
@@ -280,7 +271,11 @@ export default function TutorDashboard() {
                 <div className="text-center py-8">
                   <Gamepad2 className="h-12 w-12 text-muted-foreground mx-auto mb-3 opacity-50" />
                   <p className="text-sm text-muted-foreground mb-3">No games created yet</p>
-                  <Button onClick={() => navigate('/tutor/games/create')} variant="outline" size="sm">
+                  <Button
+                    onClick={() => navigate('/tutor/games/create')}
+                    variant="outline"
+                    size="sm"
+                  >
                     <Plus className="mr-2 h-4 w-4" />
                     Create Your First Game
                   </Button>
@@ -400,10 +395,7 @@ export default function TutorDashboard() {
 
       {/* Dev Tools Button (Development Only) */}
       {session?.tutor?.id && (
-        <TutorTestDataButton
-          tutorId={session.tutor.id}
-          onDataChanged={loadDashboardData}
-        />
+        <TutorTestDataButton tutorId={session.tutor.id} onDataChanged={loadDashboardData} />
       )}
     </DashboardLayout>
   );

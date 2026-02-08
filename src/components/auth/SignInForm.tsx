@@ -53,9 +53,7 @@ export function SignInForm({ onSuccess, onToggleMode }: SignInFormProps) {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <div className="space-y-2">
         <h2 className="text-2xl font-bold">Welcome back</h2>
-        <p className="text-muted-foreground">
-          Sign in to your account to continue
-        </p>
+        <p className="text-muted-foreground">Sign in to your account to continue</p>
       </div>
 
       {error && (
@@ -75,9 +73,7 @@ export function SignInForm({ onSuccess, onToggleMode }: SignInFormProps) {
             {...register('email')}
             disabled={isSubmitting}
           />
-          {errors.email && (
-            <p className="text-sm text-destructive">{errors.email.message}</p>
-          )}
+          {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
         </div>
 
         <div className="space-y-2">
@@ -89,9 +85,7 @@ export function SignInForm({ onSuccess, onToggleMode }: SignInFormProps) {
             {...register('password')}
             disabled={isSubmitting}
           />
-          {errors.password && (
-            <p className="text-sm text-destructive">{errors.password.message}</p>
-          )}
+          {errors.password && <p className="text-sm text-destructive">{errors.password.message}</p>}
         </div>
       </div>
 

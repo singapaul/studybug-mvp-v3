@@ -57,15 +57,8 @@ export const PLANS: PlanDetails[] = [
     subtitle: 'Perfect for trying out',
     monthlyPrice: 0,
     annualPrice: 0,
-    features: [
-      '3 game modes',
-      '10 pre-built subjects',
-      'No account required to try',
-    ],
-    negativeFeatures: [
-      'No custom decks',
-      'No progress saving',
-    ],
+    features: ['3 game modes', '10 pre-built subjects', 'No account required to try'],
+    negativeFeatures: ['No custom decks', 'No progress saving'],
     ctaText: 'Start Free',
     tier: 'free',
   },

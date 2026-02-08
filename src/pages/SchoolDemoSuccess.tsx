@@ -12,11 +12,10 @@ export default function SchoolDemoSuccess() {
           <div className="w-20 h-20 rounded-full gradient-success flex items-center justify-center mx-auto mb-6">
             <CheckCircle2 className="w-10 h-10 text-success-foreground" />
           </div>
-          <h1 className="text-3xl font-bold text-foreground mb-4">
-            Demo Request Received!
-          </h1>
+          <h1 className="text-3xl font-bold text-foreground mb-4">Demo Request Received!</h1>
           <p className="text-muted-foreground mb-8">
-            Thank you for your interest in Studybug for schools. Our education team will contact you within 24 hours to schedule your personalized demo.
+            Thank you for your interest in Studybug for schools. Our education team will contact you
+            within 24 hours to schedule your personalized demo.
           </p>
           <div className="bg-card border border-border rounded-xl p-6 mb-8">
             <h3 className="font-semibold text-foreground mb-4">What happens next?</h3>
@@ -25,19 +24,25 @@ export default function SchoolDemoSuccess() {
                 <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                   <span className="text-xs font-bold text-primary">1</span>
                 </div>
-                <span className="text-sm text-muted-foreground">We'll review your requirements</span>
+                <span className="text-sm text-muted-foreground">
+                  We'll review your requirements
+                </span>
               </li>
               <li className="flex items-start gap-3">
                 <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                   <span className="text-xs font-bold text-primary">2</span>
                 </div>
-                <span className="text-sm text-muted-foreground">Schedule a demo at your preferred time</span>
+                <span className="text-sm text-muted-foreground">
+                  Schedule a demo at your preferred time
+                </span>
               </li>
               <li className="flex items-start gap-3">
                 <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                   <span className="text-xs font-bold text-primary">3</span>
                 </div>
-                <span className="text-sm text-muted-foreground">Get a custom proposal for your school</span>
+                <span className="text-sm text-muted-foreground">
+                  Get a custom proposal for your school
+                </span>
               </li>
             </ul>
           </div>

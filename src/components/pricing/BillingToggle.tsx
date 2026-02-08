@@ -8,7 +8,7 @@ interface BillingToggleProps {
 
 export function BillingToggle({ value, onChange }: BillingToggleProps) {
   const { t } = useLocale();
-  
+
   return (
     <div className="inline-flex items-center gap-1 p-1 rounded-xl bg-muted border border-border">
       <button

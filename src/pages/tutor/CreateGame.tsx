@@ -30,20 +30,14 @@ export default function CreateGame() {
       {/* Header */}
       <div className="border-b bg-background">
         <div className="container mx-auto px-4 py-6">
-          <Button
-            variant="ghost"
-            onClick={() => navigate('/tutor/games')}
-            className="mb-4"
-          >
+          <Button variant="ghost" onClick={() => navigate('/tutor/games')} className="mb-4">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Games
           </Button>
 
           <div>
             <h1 className="text-3xl font-bold">Create New Game</h1>
-            <p className="text-muted-foreground mt-1">
-              Choose a game type to get started
-            </p>
+            <p className="text-muted-foreground mt-1">Choose a game type to get started</p>
           </div>
         </div>
       </div>
@@ -66,9 +60,7 @@ export default function CreateGame() {
                 <CardHeader>
                   <div className="flex items-start gap-4 mb-2">
                     <div className={`p-3 rounded-lg ${template.color} bg-opacity-10`}>
-                      <Icon
-                        className={`h-8 w-8 ${template.color.replace('bg-', 'text-')}`}
-                      />
+                      <Icon className={`h-8 w-8 ${template.color.replace('bg-', 'text-')}`} />
                     </div>
                     <div className="flex-1">
                       <CardTitle className="text-xl group-hover:text-primary transition-colors">
@@ -115,19 +107,27 @@ export default function CreateGame() {
           <div className="grid md:grid-cols-2 gap-4 text-sm text-muted-foreground">
             <div>
               <p className="font-medium text-foreground mb-1">For Vocabulary & Matching:</p>
-              <p>Choose <strong>Pairs</strong> or <strong>Flashcards</strong></p>
+              <p>
+                Choose <strong>Pairs</strong> or <strong>Flashcards</strong>
+              </p>
             </div>
             <div>
               <p className="font-medium text-foreground mb-1">For Assessments & Quizzes:</p>
-              <p>Choose <strong>Multiple Choice</strong></p>
+              <p>
+                Choose <strong>Multiple Choice</strong>
+              </p>
             </div>
             <div>
               <p className="font-medium text-foreground mb-1">For Fast-Paced Learning:</p>
-              <p>Choose <strong>Splat</strong> for timed challenges</p>
+              <p>
+                Choose <strong>Splat</strong> for timed challenges
+              </p>
             </div>
             <div>
               <p className="font-medium text-foreground mb-1">For True/False Questions:</p>
-              <p>Choose <strong>Swipe</strong> for quick decisions</p>
+              <p>
+                Choose <strong>Swipe</strong> for quick decisions
+              </p>
             </div>
           </div>
         </div>

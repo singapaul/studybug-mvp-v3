@@ -62,9 +62,7 @@ export const multipleChoiceQuestionSchema = z.object({
 
 export const multipleChoiceGameDataSchema = z.object({
   description: z.string().optional(),
-  questions: z
-    .array(multipleChoiceQuestionSchema)
-    .min(5, 'At least 5 questions are required'),
+  questions: z.array(multipleChoiceQuestionSchema).min(5, 'At least 5 questions are required'),
 });
 
 // Splat game schemas

@@ -12,35 +12,37 @@ const accountTypes = [
     id: 'student' as AccountType,
     label: 'Student',
     emoji: '🎓',
-    description: 'I\'m learning for myself',
+    description: "I'm learning for myself",
     icon: GraduationCap,
   },
   {
     id: 'teacher' as AccountType,
     label: 'Teacher',
     emoji: '👨‍🏫',
-    description: 'I\'m an educator or tutor',
+    description: "I'm an educator or tutor",
     icon: BookOpen,
   },
   {
     id: 'parent' as AccountType,
     label: 'Parent',
     emoji: '👪',
-    description: 'I\'m paying for my child',
+    description: "I'm paying for my child",
     icon: Users,
   },
 ];
 
-const accountSchema = z.object({
-  firstName: z.string().min(1, 'First name is required').max(50),
-  lastName: z.string().min(1, 'Last name is required').max(50),
-  email: z.string().email('Please enter a valid email'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
-  confirmPassword: z.string().min(1, 'Please confirm your password'),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords don't match",
-  path: ["confirmPassword"],
-});
+const accountSchema = z
+  .object({
+    firstName: z.string().min(1, 'First name is required').max(50),
+    lastName: z.string().min(1, 'Last name is required').max(50),
+    email: z.string().email('Please enter a valid email'),
+    password: z.string().min(8, 'Password must be at least 8 characters'),
+    confirmPassword: z.string().min(1, 'Please confirm your password'),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ['confirmPassword'],
+  });
 
 interface AccountDetailsStepProps {
   onNext: () => void;
@@ -102,12 +104,8 @@ export function AccountDetailsStep({ onNext, onBack }: AccountDetailsStepProps) 
   return (
     <div className="space-y-8 animate-fade-in">
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-foreground mb-2">
-          Create your account
-        </h2>
-        <p className="text-muted-foreground">
-          Tell us a bit about yourself
-        </p>
+        <h2 className="text-2xl font-bold text-foreground mb-2">Create your account</h2>
+        <p className="text-muted-foreground">Tell us a bit about yourself</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6 max-w-md mx-auto">
@@ -129,9 +127,7 @@ export function AccountDetailsStep({ onNext, onBack }: AccountDetailsStepProps) 
                   }`}
                 >
                   <span className="text-2xl mb-1">{type.emoji}</span>
-                  <span className="text-sm font-medium text-foreground">
-                    {type.label}
-                  </span>
+                  <span className="text-sm font-medium text-foreground">{type.label}</span>
                 </button>
               );
             })}
@@ -149,9 +145,7 @@ export function AccountDetailsStep({ onNext, onBack }: AccountDetailsStepProps) 
               placeholder="John"
               className={errors.firstName ? 'border-destructive' : ''}
             />
-            {errors.firstName && (
-              <p className="text-xs text-destructive">{errors.firstName}</p>
-            )}
+            {errors.firstName && <p className="text-xs text-destructive">{errors.firstName}</p>}
           </div>
           <div className="space-y-2">
             <Label htmlFor="lastName">Last name *</Label>
@@ -162,9 +156,7 @@ export function AccountDetailsStep({ onNext, onBack }: AccountDetailsStepProps) 
               placeholder="Doe"
               className={errors.lastName ? 'border-destructive' : ''}
             />
-            {errors.lastName && (
-              <p className="text-xs text-destructive">{errors.lastName}</p>
-            )}
+            {errors.lastName && <p className="text-xs text-destructive">{errors.lastName}</p>}
           </div>
         </div>
 
@@ -192,9 +184,7 @@ export function AccountDetailsStep({ onNext, onBack }: AccountDetailsStepProps) 
             placeholder="john@example.com"
             className={errors.email ? 'border-destructive' : ''}
           />
-          {errors.email && (
-            <p className="text-xs text-destructive">{errors.email}</p>
-          )}
+          {errors.email && <p className="text-xs text-destructive">{errors.email}</p>}
         </div>
 
         {/* Password */}
@@ -214,11 +204,7 @@ export function AccountDetailsStep({ onNext, onBack }: AccountDetailsStepProps) 
               onClick={() => setShowPassword(!showPassword)}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
             >
-              {showPassword ? (
-                <EyeOff className="w-4 h-4" />
-              ) : (
-                <Eye className="w-4 h-4" />
-              )}
+              {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
           </div>
           {/* Password Strength Indicator */}
@@ -239,9 +225,7 @@ export function AccountDetailsStep({ onNext, onBack }: AccountDetailsStepProps) 
               </p>
             </div>
           )}
-          {errors.password && (
-            <p className="text-xs text-destructive">{errors.password}</p>
-          )}
+          {errors.password && <p className="text-xs text-destructive">{errors.password}</p>}
         </div>
 
         {/* Confirm Password */}
@@ -261,11 +245,7 @@ export function AccountDetailsStep({ onNext, onBack }: AccountDetailsStepProps) 
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
             >
-              {showConfirmPassword ? (
-                <EyeOff className="w-4 h-4" />
-              ) : (
-                <Eye className="w-4 h-4" />
-              )}
+              {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
           </div>
           {errors.confirmPassword && (
@@ -280,19 +260,11 @@ export function AccountDetailsStep({ onNext, onBack }: AccountDetailsStepProps) 
 
         {/* Actions */}
         <div className="flex gap-4 pt-4">
-          <Button
-            type="button"
-            variant="outline"
-            onClick={onBack}
-            className="flex-1"
-          >
+          <Button type="button" variant="outline" onClick={onBack} className="flex-1">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back
           </Button>
-          <Button
-            type="submit"
-            className="flex-1 bg-primary text-white hover:bg-primary/90"
-          >
+          <Button type="submit" className="flex-1 bg-primary text-white hover:bg-primary/90">
             Continue
           </Button>
         </div>

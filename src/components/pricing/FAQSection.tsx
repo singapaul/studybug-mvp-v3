@@ -10,7 +10,7 @@ const faqs = [
   {
     question: 'What happens after my free trial ends?',
     answer:
-      'Your trial gives you full access to your chosen plan for 14 days. If you don\'t cancel, you\'ll be automatically charged at the end of the trial period. You can cancel anytime during the trial with no charge.',
+      "Your trial gives you full access to your chosen plan for 14 days. If you don't cancel, you'll be automatically charged at the end of the trial period. You can cancel anytime during the trial with no charge.",
   },
   {
     question: 'Can I switch plans later?',
@@ -30,12 +30,12 @@ const faqs = [
   {
     question: 'Is my data secure?',
     answer:
-      'Yes. We\'re fully GDPR compliant and use bank-level encryption to protect all user data. Student information is never shared with third parties. Read our privacy policy for more details.',
+      "Yes. We're fully GDPR compliant and use bank-level encryption to protect all user data. Student information is never shared with third parties. Read our privacy policy for more details.",
   },
   {
     question: 'Can I use Studybug offline?',
     answer:
-      'Paid plans include offline mode - download your decks and play without an internet connection. Your progress will automatically sync when you\'re back online.',
+      "Paid plans include offline mode - download your decks and play without an internet connection. Your progress will automatically sync when you're back online.",
   },
 ];
 

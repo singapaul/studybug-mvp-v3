@@ -6,24 +6,14 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
-import {
-  ArrowLeft,
-  ArrowRight,
-  Space,
-  Command,
-  CheckCircle2,
-  XCircle,
-} from 'lucide-react';
+import { ArrowLeft, ArrowRight, Space, Command, CheckCircle2, XCircle } from 'lucide-react';
 
 interface KeyboardShortcutsOverlayProps {
   open: boolean;
   onClose: () => void;
 }
 
-export default function KeyboardShortcutsOverlay({
-  open,
-  onClose,
-}: KeyboardShortcutsOverlayProps) {
+export default function KeyboardShortcutsOverlay({ open, onClose }: KeyboardShortcutsOverlayProps) {
   const shortcuts = [
     {
       keys: ['Space', 'Enter'],
@@ -47,7 +37,7 @@ export default function KeyboardShortcutsOverlay({
     },
     {
       keys: ['2'],
-      description: 'I didn\'t know this (when flipped)',
+      description: "I didn't know this (when flipped)",
       icon: <XCircle className="h-4 w-4 text-red-600" />,
     },
     {
@@ -81,9 +71,7 @@ export default function KeyboardShortcutsOverlay({
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Keyboard Shortcuts & Gestures</DialogTitle>
-          <DialogDescription>
-            Learn the shortcuts to study more efficiently
-          </DialogDescription>
+          <DialogDescription>Learn the shortcuts to study more efficiently</DialogDescription>
         </DialogHeader>
 
         <div className="space-y-6">
@@ -102,11 +90,7 @@ export default function KeyboardShortcutsOverlay({
                   </div>
                   <div className="flex gap-1">
                     {shortcut.keys.map((key, idx) => (
-                      <Badge
-                        key={idx}
-                        variant="outline"
-                        className="font-mono text-xs px-2 py-1"
-                      >
+                      <Badge key={idx} variant="outline" className="font-mono text-xs px-2 py-1">
                         {key}
                       </Badge>
                     ))}

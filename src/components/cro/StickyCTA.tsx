@@ -28,7 +28,7 @@ export function StickyCTA() {
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:bottom-6 z-50"
         >
           <div className="relative bg-white rounded-2xl p-4 shadow-2xl max-w-sm md:max-w-md mx-auto md:mx-0 border border-border">
@@ -38,7 +38,7 @@ export function StickyCTA() {
             >
               <X className="w-3 h-3 text-foreground" />
             </button>
-            
+
             <div className="flex items-center gap-4">
               <div className="flex-1">
                 <p className="text-foreground font-semibold text-sm md:text-base">

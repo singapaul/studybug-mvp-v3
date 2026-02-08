@@ -9,7 +9,12 @@ import { AccountDetailsStep } from '@/components/signup/steps/AccountDetailsStep
 import { PaymentStep } from '@/components/signup/steps/PaymentStep';
 import { SuccessStep } from '@/components/signup/steps/SuccessStep';
 import { ProcessingOverlay } from '@/components/signup/ProcessingOverlay';
-import { PlanSelectionSkeleton, SignupStepSkeleton, PaymentSkeleton, PlanSummarySkeleton } from '@/components/signup/SignupSkeletons';
+import {
+  PlanSelectionSkeleton,
+  SignupStepSkeleton,
+  PaymentSkeleton,
+  PlanSummarySkeleton,
+} from '@/components/signup/SignupSkeletons';
 import { PlanType, BillingCycle } from '@/types/signup';
 
 const steps = [
@@ -21,7 +26,8 @@ const steps = [
 
 function SignupContent() {
   const [searchParams] = useSearchParams();
-  const { currentStep, setCurrentStep, updateFormData, isProcessing, processingMessage } = useSignup();
+  const { currentStep, setCurrentStep, updateFormData, isProcessing, processingMessage } =
+    useSignup();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -33,7 +39,7 @@ function SignupContent() {
     if (billing && (billing === 'monthly' || billing === 'annual')) {
       updateFormData({ billingCycle: billing });
     }
-    
+
     // Simulate initial loading
     const timer = setTimeout(() => setIsLoading(false), 800);
     return () => clearTimeout(timer);
@@ -58,18 +64,10 @@ function SignupContent() {
         return <ChoosePlanStep onNext={() => setCurrentStep(2)} />;
       case 2:
         return (
-          <AccountDetailsStep
-            onNext={() => setCurrentStep(3)}
-            onBack={() => setCurrentStep(1)}
-          />
+          <AccountDetailsStep onNext={() => setCurrentStep(3)} onBack={() => setCurrentStep(1)} />
         );
       case 3:
-        return (
-          <PaymentStep
-            onNext={() => setCurrentStep(4)}
-            onBack={() => setCurrentStep(2)}
-          />
-        );
+        return <PaymentStep onNext={() => setCurrentStep(4)} onBack={() => setCurrentStep(2)} />;
       case 4:
         return <SuccessStep />;
       default:
@@ -108,8 +106,8 @@ function SignupContent() {
       </main>
 
       {/* Processing Overlay */}
-      <ProcessingOverlay 
-        isVisible={isProcessing} 
+      <ProcessingOverlay
+        isVisible={isProcessing}
         message={processingMessage}
         submessage="Please wait while we set up your account"
       />

@@ -14,7 +14,7 @@ const pageVariants = {
 
 const pageTransition = {
   duration: 0.3,
-  ease: "easeOut" as const,
+  ease: 'easeOut' as const,
 };
 
 export function PageTransition({ children }: PageTransitionProps) {

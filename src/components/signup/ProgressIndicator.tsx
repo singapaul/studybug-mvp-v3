@@ -28,15 +28,11 @@ export function ProgressIndicator({ steps, currentStep }: ProgressIndicatorProps
                     isCompleted
                       ? 'gradient-primary text-primary-foreground'
                       : isCurrent
-                      ? 'bg-primary text-primary-foreground shadow-glow'
-                      : 'bg-muted text-muted-foreground border-2 border-border'
+                        ? 'bg-primary text-primary-foreground shadow-glow'
+                        : 'bg-muted text-muted-foreground border-2 border-border'
                   }`}
                 >
-                  {isCompleted ? (
-                    <Check className="w-5 h-5" />
-                  ) : (
-                    <span>{step.number}</span>
-                  )}
+                  {isCompleted ? <Check className="w-5 h-5" /> : <span>{step.number}</span>}
                 </div>
                 <span
                   className={`mt-2 text-xs font-medium hidden sm:block ${

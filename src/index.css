@@ -6,9 +6,23 @@
 
 @layer utilities {
   @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
-    20%, 40%, 60%, 80% { transform: translateX(10px); }
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+      transform: translateX(-10px);
+    }
+    20%,
+    40%,
+    60%,
+    80% {
+      transform: translateX(10px);
+    }
   }
 
   .animate-shake {
@@ -85,7 +99,6 @@
     --sidebar-border: 0 0% 90%;
     --sidebar-ring: 96 58% 61%;
   }
-
 }
 
 @layer base {
@@ -99,7 +112,8 @@
   }
 
   /* Display font only for large headings - Quicksand is friendly, rounded, modern */
-  h1, h2 {
+  h1,
+  h2 {
     font-family: 'Quicksand', system-ui, sans-serif;
     font-weight: 700;
   }
@@ -110,7 +124,10 @@
   }
 
   /* UI-optimized font for smaller headings */
-  h3, h4, h5, h6 {
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
     font-weight: 600;
   }
@@ -121,7 +138,7 @@
   .hover-lift {
     @apply transition-all duration-300 ease-out;
   }
-  
+
   .hover-lift:hover {
     @apply -translate-y-1 shadow-lg;
   }
@@ -142,7 +159,7 @@
   .btn-glow::after {
     content: '';
     @apply absolute inset-0 opacity-0 transition-opacity duration-300;
-    background: radial-gradient(circle at center, rgba(255,255,255,0.3) 0%, transparent 70%);
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
   }
 
   .btn-glow:hover::after {

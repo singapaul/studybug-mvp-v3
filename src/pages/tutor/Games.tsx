@@ -7,7 +7,16 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Plus, Gamepad2, Loader2, LayoutGrid, BookOpen, CheckCircle, Zap, Move } from 'lucide-react';
+import {
+  Plus,
+  Gamepad2,
+  Loader2,
+  LayoutGrid,
+  BookOpen,
+  CheckCircle,
+  Zap,
+  Move,
+} from 'lucide-react';
 import { getTemplateColor, getTemplateName } from '@/lib/game-templates';
 import { toast } from 'sonner';
 import DashboardLayout from '@/components/layout/DashboardLayout';
@@ -46,9 +55,8 @@ export default function Games() {
     }
   };
 
-  const filteredGames = filterType === 'ALL'
-    ? games
-    : games.filter((g) => g.gameType === filterType);
+  const filteredGames =
+    filterType === 'ALL' ? games : games.filter((g) => g.gameType === filterType);
 
   const getGameTypeCounts = () => {
     const counts: Record<string, number> = {
@@ -129,7 +137,9 @@ export default function Games() {
             <TabsTrigger value="ALL">All ({counts.ALL})</TabsTrigger>
             <TabsTrigger value={GameType.PAIRS}>Pairs ({counts.PAIRS})</TabsTrigger>
             <TabsTrigger value={GameType.FLASHCARDS}>Flashcards ({counts.FLASHCARDS})</TabsTrigger>
-            <TabsTrigger value={GameType.MULTIPLE_CHOICE}>Quiz ({counts.MULTIPLE_CHOICE})</TabsTrigger>
+            <TabsTrigger value={GameType.MULTIPLE_CHOICE}>
+              Quiz ({counts.MULTIPLE_CHOICE})
+            </TabsTrigger>
             <TabsTrigger value={GameType.SPLAT}>Splat ({counts.SPLAT})</TabsTrigger>
             <TabsTrigger value={GameType.SWIPE}>Swipe ({counts.SWIPE})</TabsTrigger>
           </TabsList>
@@ -146,7 +156,9 @@ export default function Games() {
                   <Gamepad2 className="h-12 w-12 text-muted-foreground" />
                 </div>
                 <h2 className="text-2xl font-semibold mb-2">
-                  {filterType === 'ALL' ? 'No games yet' : `No ${getTemplateName(filterType as GameType)} games yet`}
+                  {filterType === 'ALL'
+                    ? 'No games yet'
+                    : `No ${getTemplateName(filterType as GameType)} games yet`}
                 </h2>
                 <p className="text-muted-foreground text-center max-w-md mb-6">
                   {filterType === 'ALL'

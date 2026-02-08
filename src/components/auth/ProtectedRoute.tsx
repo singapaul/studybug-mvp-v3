@@ -28,9 +28,8 @@ export function ProtectedRoute({ children, requiredRole }: ProtectedRouteProps) 
   // Check role if specified
   if (requiredRole && session?.user.role !== requiredRole) {
     // Redirect to appropriate dashboard based on actual role
-    const redirectPath = session?.user.role === Role.TUTOR
-      ? '/tutor/dashboard'
-      : '/student/dashboard';
+    const redirectPath =
+      session?.user.role === Role.TUTOR ? '/tutor/dashboard' : '/student/dashboard';
     return <Navigate to={redirectPath} replace />;
   }
 

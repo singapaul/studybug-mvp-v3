@@ -38,13 +38,14 @@ export function TrustBadges() {
     },
   ];
 
-
   return (
     <div className="space-y-8">
       {/* Trust message */}
       <ScrollReveal>
         <p className="text-center text-muted-foreground font-medium">
-          {t('trust.trusted')} <span className="text-secondary font-semibold">{t('trust.studentsTeachers')}</span> {t('trust.acrossUK')}
+          {t('trust.trusted')}{' '}
+          <span className="text-secondary font-semibold">{t('trust.studentsTeachers')}</span>{' '}
+          {t('trust.acrossUK')}
         </p>
       </ScrollReveal>
 
@@ -52,12 +53,12 @@ export function TrustBadges() {
       <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-4" staggerDelay={0.1}>
         {badges.map((badge, index) => (
           <StaggerItem key={index}>
-            <motion.div 
+            <motion.div
               whileHover={{ scale: 1.05, y: -4 }}
-              transition={{ type: "spring", stiffness: 300 }}
+              transition={{ type: 'spring', stiffness: 300 }}
               className="flex flex-col items-center text-center p-4 rounded-xl bg-white border border-border h-full cursor-default shadow-sm"
             >
-              <motion.div 
+              <motion.div
                 whileHover={{ rotate: [0, -10, 10, 0] }}
                 transition={{ duration: 0.4 }}
                 className={`w-10 h-10 rounded-full ${badge.color} flex items-center justify-center mb-2`}
