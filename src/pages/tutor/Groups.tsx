@@ -1,8 +1,6 @@
-import { useState, useEffect } from 'react';
-import { useAuth } from '@/contexts/AuthContext';
-import { getMyGroups, createGroup } from '@/services/supabase/group.service';
-import { Group } from '@/types/group';
-import { CreateGroupFormData } from '@/schemas/group.schema';
+import { CreateGroupForm } from '@/components/groups/CreateGroupForm';
+import { GroupCard } from '@/components/groups/GroupCard';
+import DashboardLayout from '@/components/layout/DashboardLayout';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -12,11 +10,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { CreateGroupForm } from '@/components/groups/CreateGroupForm';
-import { GroupCard } from '@/components/groups/GroupCard';
-import { Plus, Users, Loader2 } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import { CreateGroupFormData } from '@/schemas/group.schema';
+import { createGroup, getMyGroups } from '@/services/supabase/group.service';
+import { Group } from '@/types/group';
+import { Loader2, Plus, Users } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
-import DashboardLayout from '@/components/layout/DashboardLayout';
 
 export default function Groups() {
   const { session } = useAuth();
