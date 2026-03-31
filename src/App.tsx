@@ -28,7 +28,6 @@ import TutorSettings from './pages/tutor/TutorSettings';
 import StudentSettings from './pages/student/StudentSettings';
 import Pricing from './pages/Pricing';
 import IndividualSignup from './pages/IndividualSignup';
-import FreeSignup from './pages/FreeSignup';
 import Login from './pages/Login';
 import Features from './pages/Features';
 import HowItWorks from './pages/HowItWorks';
@@ -177,8 +176,8 @@ const App = () => (
 
                   {/* Marketing Pages (kept for future use) */}
                   <Route path="/pricing" element={<Pricing />} />
+                  <Route path="/signup" element={<IndividualSignup />} />
                   <Route path="/signup/individual" element={<IndividualSignup />} />
-                  <Route path="/signup/free" element={<FreeSignup />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/features" element={<Features />} />
                   <Route path="/how-it-works" element={<HowItWorks />} />

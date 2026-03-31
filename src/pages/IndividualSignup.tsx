@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Header } from '@/components/layout/Header';
 import { SignupProvider, useSignup } from '@/context/SignupContext';
@@ -26,24 +26,28 @@ const steps = [
 
 function SignupContent() {
   const [searchParams] = useSearchParams();
-  const { currentStep, setCurrentStep, updateFormData, isProcessing, processingMessage } =
+  const navigate = useNavigate();
+  const { currentStep, setCurrentStep, updateFormData, formData, isProcessing, processingMessage } =
     useSignup();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const plan = searchParams.get('plan') as PlanType | null;
     const billing = searchParams.get('billing') as BillingCycle | null;
-    if (plan && (plan === 'student' || plan === 'teacher')) {
+    if (plan === 'free') {
+      updateFormData({ plan: 'free' });
+      setCurrentStep(2);
+    } else if (plan === 'student' || plan === 'teacher') {
       updateFormData({ plan });
     }
-    if (billing && (billing === 'monthly' || billing === 'annual')) {
+    if (billing === 'monthly' || billing === 'annual') {
       updateFormData({ billingCycle: billing });
     }
 
-    // Simulate initial loading
+    // Simulate initial loading — runs once on mount; URL params don't change during signup
     const timer = setTimeout(() => setIsLoading(false), 800);
     return () => clearTimeout(timer);
-  }, [searchParams, updateFormData]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const renderStepContent = () => {
     if (isLoading) {
@@ -62,10 +66,15 @@ function SignupContent() {
     switch (currentStep) {
       case 1:
         return <ChoosePlanStep onNext={() => setCurrentStep(2)} />;
-      case 2:
+      case 2: {
+        const isFree = formData.plan === 'free';
         return (
-          <AccountDetailsStep onNext={() => setCurrentStep(3)} onBack={() => setCurrentStep(1)} />
+          <AccountDetailsStep
+            onNext={() => setCurrentStep(isFree ? 4 : 3)}
+            onBack={() => (isFree ? navigate(-1) : setCurrentStep(1))}
+          />
         );
+      }
       case 3:
         return <PaymentStep onNext={() => setCurrentStep(4)} onBack={() => setCurrentStep(2)} />;
       case 4:
@@ -81,7 +90,7 @@ function SignupContent() {
       <main className="flex-1 py-8">
         <div className="container">
           {/* Progress */}
-          {currentStep < 4 && (
+          {currentStep < 4 && formData.plan !== 'free' && (
             <div className="max-w-2xl mx-auto mb-8">
               <ProgressIndicator steps={steps} currentStep={currentStep} />
             </div>
@@ -89,14 +98,14 @@ function SignupContent() {
 
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Main Content */}
-            <div className={currentStep === 4 ? 'lg:col-span-3' : 'lg:col-span-2'}>
+            <div className={currentStep === 4 || formData.plan === 'free' ? 'lg:col-span-3' : 'lg:col-span-2'}>
               <div className="bg-card border border-border rounded-2xl p-6 md:p-8">
                 {renderStepContent()}
               </div>
             </div>
 
             {/* Sidebar */}
-            {currentStep < 4 && (
+            {currentStep < 4 && formData.plan !== 'free' && (
               <div className="lg:col-span-1">
                 {isLoading ? <PlanSummarySkeleton /> : <PlanSummary />}
               </div>

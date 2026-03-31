@@ -94,7 +94,9 @@ export function SuccessStep() {
           Welcome to Studybug, {formData.firstName}! 🎉
         </h2>
         <p className="text-lg text-muted-foreground">
-          Your 14-day free trial has started. Let's get you set up!
+          {formData.plan === 'free'
+            ? "Your free account is ready. Let's get you set up!"
+            : "Your 14-day free trial has started. Let's get you set up!"}
         </p>
       </div>
 
@@ -112,16 +114,18 @@ export function SuccessStep() {
               {selectedPlan?.name} ({formData.billingCycle})
             </span>
           </div>
-          <div className="flex justify-between items-center text-sm">
-            <span className="text-muted-foreground">Trial ends</span>
-            <span className="font-medium text-foreground">
-              {trialEndDate.toLocaleDateString('en-GB', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric',
-              })}
-            </span>
-          </div>
+          {selectedPlan?.tier !== 'free' && (
+            <div className="flex justify-between items-center text-sm">
+              <span className="text-muted-foreground">Trial ends</span>
+              <span className="font-medium text-foreground">
+                {trialEndDate.toLocaleDateString('en-GB', {
+                  day: 'numeric',
+                  month: 'long',
+                  year: 'numeric',
+                })}
+              </span>
+            </div>
+          )}
         </div>
       </div>
 

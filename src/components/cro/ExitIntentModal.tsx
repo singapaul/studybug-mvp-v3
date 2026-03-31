@@ -36,7 +36,7 @@ export function ExitIntentModal() {
 
   const handleClaim = () => {
     setIsOpen(false);
-    navigate('/signup/individual?promo=EXTENDED');
+    navigate('/signup?promo=EXTENDED');
   };
 
   return (

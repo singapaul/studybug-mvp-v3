@@ -20,9 +20,9 @@ export default function Pricing() {
     if (planId === 'school') {
       navigate('/schools');
     } else if (planId === 'free') {
-      navigate('/signup/free');
+      navigate('/signup?plan=free');
     } else {
-      navigate(`/signup/individual?plan=${planId}&billing=${billingCycle}`);
+      navigate(`/signup?plan=${planId}&billing=${billingCycle}`);
     }
   };
 
@@ -127,7 +127,7 @@ export default function Pricing() {
             <Button
               size="lg"
               className="bg-white text-primary hover:bg-white/90 rounded-full shadow-lg font-semibold"
-              onClick={() => navigate('/signup/individual')}
+              onClick={() => navigate('/signup')}
             >
               Start Free Trial
               <ArrowRight className="w-4 h-4 ml-2" />

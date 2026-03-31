@@ -97,7 +97,7 @@ export function Header() {
             className="bg-primary text-white hover:bg-primary/90 font-semibold rounded-full shadow-md"
             asChild
           >
-            <Link to="/signup/individual">{t('nav.startTrial')}</Link>
+            <Link to="/signup">{t('nav.startTrial')}</Link>
           </Button>
         </div>
 
@@ -171,7 +171,7 @@ export function Header() {
                 </Link>
               </Button>
               <Button className="bg-primary text-white font-semibold rounded-full" asChild>
-                <Link to="/signup/individual" onClick={() => setMobileMenuOpen(false)}>
+                <Link to="/signup" onClick={() => setMobileMenuOpen(false)}>
                   {t('nav.startTrial')}
                 </Link>
               </Button>

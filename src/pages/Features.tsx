@@ -165,7 +165,7 @@ export default function Features() {
                   className="bg-primary text-white hover:bg-primary/90 rounded-full shadow-lg font-semibold"
                   asChild
                 >
-                  <Link to="/signup/individual">
+                  <Link to="/signup">
                     Start Free Trial
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
@@ -339,7 +339,7 @@ export default function Features() {
                 className="bg-white text-secondary hover:bg-white/90 rounded-full shadow-lg"
                 asChild
               >
-                <Link to="/signup/individual">
+                <Link to="/signup">
                   Start Free Trial
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Link>

@@ -71,7 +71,7 @@ export function PlanSummary() {
         {/* Change Plan Link */}
         {currentStep > 1 && (
           <Link
-            to="/signup/individual"
+            to="/signup"
             className="text-sm text-primary hover:underline flex items-center gap-1"
           >
             <ArrowLeft className="w-3 h-3" />

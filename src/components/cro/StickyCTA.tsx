@@ -50,7 +50,7 @@ export function StickyCTA() {
               </div>
               <Button
                 size="sm"
-                onClick={() => navigate('/signup/individual')}
+                onClick={() => navigate('/signup')}
                 className="bg-primary text-white hover:bg-primary/90 whitespace-nowrap font-semibold rounded-full shadow-md"
               >
                 {t('stickyCta.button')}

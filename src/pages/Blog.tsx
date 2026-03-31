@@ -47,7 +47,7 @@ export default function Blog() {
                 </Link>
               </Button>
               <Button size="lg" className="gradient-primary text-primary-foreground" asChild>
-                <Link to="/signup/individual">Start Free Trial</Link>
+                <Link to="/signup">Start Free Trial</Link>
               </Button>
             </div>
           </div>

@@ -90,7 +90,7 @@ export function PricingHero({ onStartTrial, onLearnMore }: PricingHeroProps) {
             >
               <Button
                 size="lg"
-                onClick={() => navigate('/signup/individual')}
+                onClick={() => navigate('/signup')}
                 className="bg-primary text-white hover:bg-primary/90 px-8 font-semibold rounded-full shadow-lg hover-lift text-base"
               >
                 Start 14-Day Free Trial

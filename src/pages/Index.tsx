@@ -45,9 +45,9 @@ export default function Index() {
     if (planId === 'school') {
       navigate('/schools');
     } else if (planId === 'free') {
-      navigate('/signup/free');
+      navigate('/signup?plan=free');
     } else {
-      navigate(`/signup/individual?plan=${planId}&billing=${billingCycle}`);
+      navigate(`/signup?plan=${planId}&billing=${billingCycle}`);
     }
   };
 
@@ -175,7 +175,7 @@ export default function Index() {
                 <Button
                   size="lg"
                   className="bg-primary text-white hover:bg-primary/90 rounded-full shadow-lg font-semibold"
-                  onClick={() => navigate('/signup/individual')}
+                  onClick={() => navigate('/signup')}
                 >
                   Start 14-Day Free Trial
                   <ArrowRight className="w-4 h-4 ml-2" />
