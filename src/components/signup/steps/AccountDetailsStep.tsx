@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { GraduationCap, BookOpen, Users, ArrowLeft, Eye, EyeOff, Check, X } from 'lucide-react';
 import { useState, useMemo } from 'react';
 import { z } from 'zod';
+import { supabase } from '@/lib/supabase';
 
 const accountTypes = [
   {
@@ -50,7 +51,7 @@ interface AccountDetailsStepProps {
 }
 
 export function AccountDetailsStep({ onNext, onBack }: AccountDetailsStepProps) {
-  const { formData, updateFormData } = useSignup();
+  const { formData, updateFormData, setIsProcessing, setProcessingMessage } = useSignup();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -73,7 +74,7 @@ export function AccountDetailsStep({ onNext, onBack }: AccountDetailsStepProps) 
     return { label: 'Strong', color: 'bg-primary' };
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const result = accountSchema.safeParse({
@@ -96,6 +97,30 @@ export function AccountDetailsStep({ onNext, onBack }: AccountDetailsStepProps) 
     }
 
     setErrors({});
+    setIsProcessing(true);
+    setProcessingMessage('Creating your account...');
+
+    const role = formData.accountType === 'teacher' ? 'TUTOR' : 'STUDENT';
+
+    const { error } = await supabase.auth.signUp({
+      email: formData.email,
+      password: formData.password,
+      options: {
+        data: {
+          role,
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+        },
+      },
+    });
+
+    setIsProcessing(false);
+
+    if (error) {
+      setErrors({ email: error.message });
+      return;
+    }
+
     onNext();
   };
 

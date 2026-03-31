@@ -7,6 +7,7 @@ export enum Role {
 
 export enum SubscriptionStatus {
   FREE = 'FREE',
+  TRIALING = 'TRIALING',
   ACTIVE = 'ACTIVE',
   CANCELLED = 'CANCELLED',
   EXPIRED = 'EXPIRED',
@@ -16,6 +17,8 @@ export interface User {
   id: string;
   email: string;
   role: Role;
+  firstName: string | null;
+  lastName: string | null;
   emailVerified: boolean;
   createdAt: Date;
   updatedAt: Date;
@@ -25,6 +28,8 @@ export interface Tutor {
   id: string;
   userId: string;
   subscriptionStatus: SubscriptionStatus;
+  trialEndsAt: Date | null;
+  subscriptionPeriodEnd: Date | null;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -32,6 +37,9 @@ export interface Tutor {
 export interface Student {
   id: string;
   userId: string;
+  subscriptionStatus: SubscriptionStatus;
+  trialEndsAt: Date | null;
+  subscriptionPeriodEnd: Date | null;
   createdAt: Date;
   updatedAt: Date;
 }

@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
+import { useSubscription } from '@/hooks/useSubscription';
+import { supabase } from '@/lib/supabase';
+import { SubscriptionStatus } from '@/types/auth';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -34,6 +37,8 @@ import { toast } from 'sonner';
 
 export default function TutorSettings() {
   const { session } = useAuth();
+  const { status, isTrial, trialEndsAt, subscriptionPeriodEnd } = useSubscription();
+  const [isOpeningPortal, setIsOpeningPortal] = useState(false);
   const [activeTab, setActiveTab] = useState('profile');
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [showUnsavedDialog, setShowUnsavedDialog] = useState(false);
@@ -56,6 +61,20 @@ export default function TutorSettings() {
   const [supportSubject, setSupportSubject] = useState('');
   const [supportMessage, setSupportMessage] = useState('');
   const [isSendingSupport, setIsSendingSupport] = useState(false);
+
+  const handleManageBilling = async () => {
+    setIsOpeningPortal(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('create-portal-session');
+      if (error || !data?.url) {
+        toast.error('Could not open billing portal. Please try again.');
+        return;
+      }
+      window.location.href = data.url;
+    } finally {
+      setIsOpeningPortal(false);
+    }
+  };
 
   useEffect(() => {
     // Load user settings from session/localStorage
@@ -491,21 +510,73 @@ export default function TutorSettings() {
                 <div className="flex items-center justify-between p-4 rounded-lg border bg-muted/50">
                   <div>
                     <h3 className="font-semibold text-lg">Current Plan</h3>
-                    <p className="text-sm text-muted-foreground">Free Trial</p>
+                    <p className="text-sm text-muted-foreground">
+                      {status === SubscriptionStatus.TRIALING && 'Free trial'}
+                      {status === SubscriptionStatus.ACTIVE && 'Active subscription'}
+                      {status === SubscriptionStatus.FREE && 'Free plan'}
+                      {status === SubscriptionStatus.CANCELLED && 'Cancelled'}
+                      {status === SubscriptionStatus.EXPIRED && 'Expired'}
+                    </p>
+                    {isTrial && trialEndsAt && (
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Trial ends{' '}
+                        {trialEndsAt.toLocaleDateString('en-GB', {
+                          day: 'numeric',
+                          month: 'long',
+                          year: 'numeric',
+                        })}
+                      </p>
+                    )}
+                    {status === SubscriptionStatus.ACTIVE && subscriptionPeriodEnd && (
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Renews{' '}
+                        {subscriptionPeriodEnd.toLocaleDateString('en-GB', {
+                          day: 'numeric',
+                          month: 'long',
+                          year: 'numeric',
+                        })}
+                      </p>
+                    )}
                   </div>
-                  <Badge variant="secondary" className="text-sm">
-                    Active
+                  <Badge
+                    variant={
+                      status === SubscriptionStatus.ACTIVE || status === SubscriptionStatus.TRIALING
+                        ? 'default'
+                        : 'secondary'
+                    }
+                    className="text-sm"
+                  >
+                    {status === SubscriptionStatus.TRIALING ? 'Trial' : status}
                   </Badge>
                 </div>
 
-                <div className="space-y-4">
-                  <p className="text-sm text-muted-foreground">
-                    Upgrade options and billing management coming soon!
+                <div className="space-y-3">
+                  {(status === SubscriptionStatus.ACTIVE || status === SubscriptionStatus.TRIALING) ? (
+                    <Button
+                      variant="outline"
+                      onClick={handleManageBilling}
+                      disabled={isOpeningPortal}
+                    >
+                      {isOpeningPortal ? (
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      ) : (
+                        <CreditCard className="mr-2 h-4 w-4" />
+                      )}
+                      Manage Billing
+                      <ExternalLink className="ml-2 h-3 w-3" />
+                    </Button>
+                  ) : (
+                    <Button
+                      className="bg-primary text-white hover:bg-primary/90"
+                      onClick={() => window.location.href = '/signup'}
+                    >
+                      <CreditCard className="mr-2 h-4 w-4" />
+                      Upgrade Plan
+                    </Button>
+                  )}
+                  <p className="text-xs text-muted-foreground">
+                    Billing is managed securely via Stripe. You'll be redirected to Stripe's portal to update your card, change plan, or cancel.
                   </p>
-                  <Button variant="outline" disabled>
-                    <CreditCard className="mr-2 h-4 w-4" />
-                    Upgrade Plan (Coming Soon)
-                  </Button>
                 </div>
               </CardContent>
             </Card>

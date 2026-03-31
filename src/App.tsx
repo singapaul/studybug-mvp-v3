@@ -40,6 +40,7 @@ import SchoolDemo from './pages/SchoolDemo';
 import SchoolDemoSuccess from './pages/SchoolDemoSuccess';
 import NotFound from './pages/NotFound';
 import ApiTest from './pages/ApiTest';
+import SignupComplete from './pages/SignupComplete';
 
 const queryClient = new QueryClient();
 
@@ -178,6 +179,7 @@ const App = () => (
                   <Route path="/pricing" element={<Pricing />} />
                   <Route path="/signup" element={<IndividualSignup />} />
                   <Route path="/signup/individual" element={<IndividualSignup />} />
+                  <Route path="/signup/complete" element={<SignupComplete />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/features" element={<Features />} />
                   <Route path="/how-it-works" element={<HowItWorks />} />

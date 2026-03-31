@@ -91,94 +91,12 @@ export function isTimeoutError(error: any): boolean {
 }
 
 /**
- * Transform Prisma errors to user-friendly messages
- * Prisma error codes: https://www.prisma.io/docs/reference/api-reference/error-reference
- */
-export function handlePrismaError(error: any): AppError {
-  // Unique constraint violation (e.g., duplicate join code)
-  if (error.code === 'P2002') {
-    const field = error.meta?.target?.[0] || 'field';
-
-    if (field === 'joinCode') {
-      return createErrorResponse(
-        ErrorCode.DUPLICATE_JOIN_CODE,
-        'This join code is already in use. Please try again.',
-        'A group with this join code already exists',
-        409,
-        'joinCode'
-      );
-    }
-
-    return createErrorResponse(
-      ErrorCode.DUPLICATE_ENTRY,
-      `A record with this ${field} already exists`,
-      error.message,
-      409,
-      field
-    );
-  }
-
-  // Foreign key constraint violation (e.g., deleting game that's assigned)
-  if (error.code === 'P2003') {
-    return createErrorResponse(
-      ErrorCode.FOREIGN_KEY_VIOLATION,
-      'Cannot perform this action due to existing references',
-      'This record is referenced by other data and cannot be deleted',
-      400
-    );
-  }
-
-  // Record not found
-  if (error.code === 'P2025') {
-    return createErrorResponse(
-      ErrorCode.NOT_FOUND,
-      'The requested record was not found',
-      error.message,
-      404
-    );
-  }
-
-  // Failed to connect to database
-  if (error.code === 'P1001') {
-    return createErrorResponse(
-      ErrorCode.DATABASE_ERROR,
-      'Unable to connect to the database',
-      'Please try again later',
-      503
-    );
-  }
-
-  // Database timeout
-  if (error.code === 'P1008') {
-    return createErrorResponse(
-      ErrorCode.TIMEOUT,
-      'Database operation timed out',
-      'The request took too long to process',
-      504
-    );
-  }
-
-  // Default Prisma error
-  return createErrorResponse(
-    ErrorCode.DATABASE_ERROR,
-    'A database error occurred',
-    error.message,
-    500
-  );
-}
-
-/**
  * Handle common application errors
  */
 export function handleAppError(error: any): AppError {
   // Already an AppError
   if (error.code && Object.values(ErrorCode).includes(error.code)) {
     return error as AppError;
-  }
-
-  // Prisma errors
-  if (error.code?.startsWith('P')) {
-    return handlePrismaError(error);
   }
 
   // Network errors

@@ -6,7 +6,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- Create enum types
 CREATE TYPE role AS ENUM ('TUTOR', 'STUDENT');
-CREATE TYPE subscription_status AS ENUM ('FREE', 'ACTIVE', 'CANCELLED', 'EXPIRED');
+CREATE TYPE subscription_status AS ENUM ('FREE', 'TRIALING', 'ACTIVE', 'CANCELLED', 'EXPIRED');
 CREATE TYPE game_type AS ENUM ('PAIRS', 'FLASHCARDS', 'MULTIPLE_CHOICE', 'SPLAT', 'SWIPE');
 
 -- Create updated_at trigger function
@@ -25,6 +25,8 @@ CREATE TABLE "User" (
     email text UNIQUE NOT NULL,
     password_hash text DEFAULT '', -- Not used, kept for compatibility
     role role NOT NULL,
+    first_name text,
+    last_name text,
     email_verified boolean DEFAULT false,
     created_at timestamptz DEFAULT NOW(),
     updated_at timestamptz DEFAULT NOW()
@@ -40,6 +42,11 @@ CREATE TABLE "Tutor" (
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     user_id uuid UNIQUE NOT NULL REFERENCES "User"(id) ON DELETE CASCADE,
     subscription_status subscription_status DEFAULT 'FREE',
+    stripe_customer_id text UNIQUE,
+    stripe_subscription_id text UNIQUE,
+    stripe_price_id text,
+    subscription_period_end timestamptz,
+    trial_ends_at timestamptz,
     created_at timestamptz DEFAULT NOW(),
     updated_at timestamptz DEFAULT NOW()
 );
@@ -51,6 +58,12 @@ CREATE TRIGGER update_tutor_updated_at BEFORE UPDATE ON "Tutor"
 CREATE TABLE "Student" (
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     user_id uuid UNIQUE NOT NULL REFERENCES "User"(id) ON DELETE CASCADE,
+    subscription_status subscription_status DEFAULT 'FREE',
+    stripe_customer_id text UNIQUE,
+    stripe_subscription_id text UNIQUE,
+    stripe_price_id text,
+    subscription_period_end timestamptz,
+    trial_ends_at timestamptz,
     created_at timestamptz DEFAULT NOW(),
     updated_at timestamptz DEFAULT NOW()
 );
@@ -148,24 +161,40 @@ ALTER TABLE "Assignment" ENABLE ROW LEVEL SECURITY;
 ALTER TABLE "GameAttempt" ENABLE ROW LEVEL SECURITY;
 ALTER TABLE "GroupMember" ENABLE ROW LEVEL SECURITY;
 
--- Create RLS policies (basic examples - adjust based on your auth strategy)
--- Users can read their own data
-CREATE POLICY "Users can view own data" ON "User"
-    FOR SELECT USING (auth.uid()::text = id::text);
+-- ============================================================================
+-- RLS POLICIES
+-- ============================================================================
 
--- Tutors can manage their own groups
+-- User: self-read
+CREATE POLICY "Users can view own data" ON "User"
+    FOR SELECT USING (auth.uid() = id);
+
+-- Tutor: self-read only (writes go through service role / Edge Functions)
+CREATE POLICY "Tutors can read own row" ON "Tutor"
+    FOR SELECT USING (auth.uid() = user_id);
+
+-- Student: self-read
+CREATE POLICY "Students can read own row" ON "Student"
+    FOR SELECT USING (auth.uid() = user_id);
+
+-- Student: tutors can read their students (via group membership)
+CREATE POLICY "Tutors can read their students" ON "Student"
+    FOR SELECT USING (
+        EXISTS (
+            SELECT 1 FROM "GroupMember" gm
+            JOIN "Group" g ON g.id = gm.group_id
+            JOIN "Tutor" t ON t.id = g.tutor_id
+            WHERE gm.student_id = "Student".id
+              AND t.user_id = auth.uid()
+        )
+    );
+
+-- Group: tutors manage their own groups; students can view groups they belong to
 CREATE POLICY "Tutors can manage own groups" ON "Group"
     FOR ALL USING (
         tutor_id IN (SELECT id FROM "Tutor" WHERE user_id = auth.uid())
     );
 
--- Tutors can manage their own games
-CREATE POLICY "Tutors can manage own games" ON "Game"
-    FOR ALL USING (
-        tutor_id IN (SELECT id FROM "Tutor" WHERE user_id = auth.uid())
-    );
-
--- Students can view groups they're members of
 CREATE POLICY "Students can view their groups" ON "Group"
     FOR SELECT USING (
         id IN (
@@ -174,7 +203,49 @@ CREATE POLICY "Students can view their groups" ON "Group"
         )
     );
 
--- Students can view their assignments
+-- GroupMember: tutors manage their group members; students see own memberships
+CREATE POLICY "Tutors can manage their group members" ON "GroupMember"
+    FOR ALL USING (
+        EXISTS (
+            SELECT 1 FROM "Group" g
+            JOIN "Tutor" t ON t.id = g.tutor_id
+            WHERE g.id = group_id AND t.user_id = auth.uid()
+        )
+    );
+
+CREATE POLICY "Students can read own group memberships" ON "GroupMember"
+    FOR SELECT USING (
+        EXISTS (
+            SELECT 1 FROM "Student" s
+            WHERE s.id = student_id AND s.user_id = auth.uid()
+        )
+    );
+
+-- Game: tutors manage their own games; students can view games assigned to them
+CREATE POLICY "Tutors can manage own games" ON "Game"
+    FOR ALL USING (
+        tutor_id IN (SELECT id FROM "Tutor" WHERE user_id = auth.uid())
+    );
+
+CREATE POLICY "Students can view assigned games" ON "Game"
+    FOR SELECT USING (
+        id IN (
+            SELECT a.game_id FROM "Assignment" a
+            JOIN "GroupMember" gm ON gm.group_id = a.group_id
+            JOIN "Student" s ON s.id = gm.student_id
+            WHERE s.user_id = auth.uid()
+        )
+    );
+
+-- Assignment: tutors manage their assignments; students view assignments for their groups
+CREATE POLICY "Tutors can manage own assignments" ON "Assignment"
+    FOR ALL USING (
+        game_id IN (
+            SELECT id FROM "Game"
+            WHERE tutor_id IN (SELECT id FROM "Tutor" WHERE user_id = auth.uid())
+        )
+    );
+
 CREATE POLICY "Students can view assignments" ON "Assignment"
     FOR SELECT USING (
         group_id IN (
@@ -183,10 +254,20 @@ CREATE POLICY "Students can view assignments" ON "Assignment"
         )
     );
 
--- Students can manage their own attempts
+-- GameAttempt: students manage their own attempts; tutors can read attempts for their games
 CREATE POLICY "Students can manage own attempts" ON "GameAttempt"
     FOR ALL USING (
         student_id IN (SELECT id FROM "Student" WHERE user_id = auth.uid())
+    );
+
+CREATE POLICY "Tutors can read attempts for their games" ON "GameAttempt"
+    FOR SELECT USING (
+        assignment_id IN (
+            SELECT a.id FROM "Assignment" a
+            JOIN "Game" g ON g.id = a.game_id
+            JOIN "Tutor" t ON t.id = g.tutor_id
+            WHERE t.user_id = auth.uid()
+        )
     );
 
 -- ============================================================================
@@ -201,7 +282,7 @@ DECLARE
     user_role text;
 BEGIN
     -- Get role from user metadata (set during signup)
-    -- Expected format: raw_user_meta_data: { role: 'TUTOR' or 'STUDENT' }
+    -- Expected format: raw_user_meta_data: { role: 'TUTOR' | 'STUDENT', first_name, last_name }
     user_role := NEW.raw_user_meta_data->>'role';
 
     -- Default to STUDENT if no role specified
@@ -220,6 +301,8 @@ BEGIN
         email,
         password_hash,
         role,
+        first_name,
+        last_name,
         email_verified,
         created_at,
         updated_at
@@ -228,6 +311,8 @@ BEGIN
         NEW.email,
         '', -- Password is managed by Supabase Auth, not stored here
         user_role::role,
+        NEW.raw_user_meta_data->>'first_name',
+        NEW.raw_user_meta_data->>'last_name',
         NEW.email_confirmed_at IS NOT NULL,
         NOW(),
         NOW()
@@ -249,10 +334,12 @@ BEGIN
     ELSIF user_role = 'STUDENT' THEN
         INSERT INTO public."Student" (
             user_id,
+            subscription_status,
             created_at,
             updated_at
         ) VALUES (
             NEW.id,
+            'FREE',
             NOW(),
             NOW()
         );
