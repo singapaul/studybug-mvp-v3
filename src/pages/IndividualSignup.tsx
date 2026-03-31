@@ -98,7 +98,11 @@ function SignupContent() {
 
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Main Content */}
-            <div className={currentStep === 4 || formData.plan === 'free' ? 'lg:col-span-3' : 'lg:col-span-2'}>
+            <div
+              className={
+                currentStep === 4 || formData.plan === 'free' ? 'lg:col-span-3' : 'lg:col-span-2'
+              }
+            >
               <div className="bg-card border border-border rounded-2xl p-6 md:p-8">
                 {renderStepContent()}
               </div>
