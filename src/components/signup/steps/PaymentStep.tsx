@@ -26,18 +26,27 @@ export function PaymentStep({ onNext: _onNext, onBack }: PaymentStepProps) {
     setIsProcessing(true);
     setProcessingMessage('Redirecting to payment...');
 
-    const { data, error: fnError } = await supabase.functions.invoke('create-checkout-session', {
-      body: { plan: formData.plan, billingCycle: formData.billingCycle },
-    });
+    try {
+      const { data, error: fnError } = await supabase.functions.invoke('create-checkout-session', {
+        body: { plan: formData.plan, billingCycle: formData.billingCycle },
+      });
 
-    if (fnError || !data?.url) {
+      if (fnError || !data?.url) {
+        const message = fnError?.message || JSON.stringify(data) || 'Unknown error';
+        console.error('Checkout error:', message, { fnError, data });
+        setIsProcessing(false);
+        setIsRedirecting(false);
+        setError(`Could not start checkout: ${message}`);
+        return;
+      }
+
+      window.location.href = data.url;
+    } catch (err) {
+      console.error('Checkout exception:', err);
       setIsProcessing(false);
       setIsRedirecting(false);
-      setError('Could not start checkout. Please try again.');
-      return;
+      setError('Could not reach payment service. Please try again.');
     }
-
-    window.location.href = data.url;
   };
 
   return (
