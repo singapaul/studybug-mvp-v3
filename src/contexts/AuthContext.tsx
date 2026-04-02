@@ -3,7 +3,10 @@ import { Role, UserSession, AuthContextType, SubscriptionStatus } from '@/types/
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Hardcoded mock users aligned with seed data
+// ---------------------------------------------------------------------------
+// Mock session data (used when VITE_API_MODE=mock or no Clerk key is present)
+// ---------------------------------------------------------------------------
+
 const DEV_TUTOR_SESSION: UserSession = {
   user: {
     id: 'tutor-dev-1',
@@ -48,15 +51,14 @@ const DEV_STUDENT_SESSION: UserSession = {
   },
 };
 
-interface AuthProviderProps {
-  children: ReactNode;
-}
+// ---------------------------------------------------------------------------
+// Mock AuthProvider — used when no Clerk publishable key is configured
+// ---------------------------------------------------------------------------
 
-export function AuthProvider({ children }: AuthProviderProps) {
+function MockAuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<UserSession | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Restore session from localStorage on mount
   useEffect(() => {
     const savedRole = localStorage.getItem('dev_role');
     if (savedRole === Role.TUTOR) {
@@ -82,7 +84,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
     login(role);
   };
 
-  // signIn: map email to mock role
   const signIn = async (email: string, _password: string) => {
     if (email.includes('tutor') || email === 'tutor@dev.local') {
       login(Role.TUTOR);
@@ -91,12 +92,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   };
 
-  // signUp: creates a mock session
   const signUp = async (_email: string, _password: string, role: Role) => {
     login(role);
   };
 
-  // setUserRole: updates the current user's role
   const setUserRole = async (role: Role) => {
     login(role);
   };
@@ -116,6 +115,121 @@ export function AuthProvider({ children }: AuthProviderProps) {
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
+
+// ---------------------------------------------------------------------------
+// Clerk AuthProvider — used when VITE_CLERK_PUBLISHABLE_KEY is set
+// Imported lazily to avoid errors when @clerk/clerk-react is available but
+// no key is provided (hooks throw outside ClerkProvider).
+// ---------------------------------------------------------------------------
+
+function ClerkAuthProvider({ children }: { children: ReactNode }) {
+  // Dynamic import of Clerk hooks — only used inside ClerkProvider tree
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { useUser, useAuth: useClerkAuth, useClerk } = require('@clerk/clerk-react');
+
+  const { user, isLoaded: userLoaded } = useUser();
+  const { isSignedIn, isLoaded: authLoaded } = useClerkAuth();
+  const { signOut, openSignIn } = useClerk();
+
+  const isLoading = !userLoaded || !authLoaded;
+
+  const role = (user?.publicMetadata?.role as Role) ?? null;
+  const isTutor = role === Role.TUTOR;
+  const isStudent = role === Role.STUDENT;
+
+  const session: UserSession | null = isSignedIn && user
+    ? {
+        user: {
+          id: user.id,
+          email: user.primaryEmailAddress?.emailAddress ?? '',
+          role: role ?? Role.STUDENT,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          emailVerified: user.primaryEmailAddress?.verification?.status === 'verified',
+          createdAt: new Date(user.createdAt),
+          updatedAt: new Date(user.updatedAt),
+        },
+        tutor: isTutor
+          ? {
+              id: '',
+              userId: user.id,
+              subscriptionStatus: SubscriptionStatus.TRIALING,
+              trialEndsAt: null,
+              subscriptionPeriodEnd: null,
+              createdAt: new Date(),
+              updatedAt: new Date(),
+            }
+          : undefined,
+        student: isStudent
+          ? {
+              id: '',
+              userId: user.id,
+              subscriptionStatus: SubscriptionStatus.TRIALING,
+              trialEndsAt: null,
+              subscriptionPeriodEnd: null,
+              createdAt: new Date(),
+              updatedAt: new Date(),
+            }
+          : undefined,
+      }
+    : null;
+
+  // login is a mock-mode concept; in Clerk mode it is a no-op
+  const login = (_role: Role) => {};
+
+  const logout = async () => {
+    await signOut();
+  };
+
+  // switchRole is not applicable in Clerk mode — roles are set at signup
+  const switchRole = (_role: Role) => {};
+
+  const signIn = async (_email: string, _password: string) => {
+    openSignIn();
+  };
+
+  const signUp = async (_email: string, _password: string, _role: Role) => {
+    // Signup handled by Clerk's UI components with metadata
+  };
+
+  const setUserRole = async (role: Role) => {
+    await user?.update({ unsafeMetadata: { role } });
+  };
+
+  const value: AuthContextType = {
+    session,
+    isAuthenticated: !!isSignedIn,
+    isTutor,
+    isStudent,
+    isLoading,
+    login,
+    logout,
+    switchRole,
+    signIn,
+    signUp,
+    setUserRole,
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
+
+// ---------------------------------------------------------------------------
+// Public AuthProvider — delegates to Clerk or Mock based on env
+// ---------------------------------------------------------------------------
+
+interface AuthProviderProps {
+  children: ReactNode;
+}
+
+export function AuthProvider({ children }: AuthProviderProps) {
+  const hasClerkKey = Boolean(import.meta.env.VITE_CLERK_PUBLISHABLE_KEY);
+
+  if (hasClerkKey) {
+    return <ClerkAuthProvider>{children}</ClerkAuthProvider>;
+  }
+
+  return <MockAuthProvider>{children}</MockAuthProvider>;
 }
 
 export function useAuth() {
