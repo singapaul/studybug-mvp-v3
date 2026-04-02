@@ -33,7 +33,7 @@ import {
 } from 'lucide-react';
 import { Group } from '@/types/group';
 import { StudentAssignment, AssignmentFilter, AssignmentSort } from '@/types/assignment';
-import { getMyGroups, getMyAssignments, getMyStats } from '@/services/supabase/student.service';
+import { services } from '@/services';
 import JoinGroupDialog from '@/components/student/JoinGroupDialog';
 import { StudentTestDataButton } from '@/components/dev/StudentTestDataButton';
 import { formatDistanceToNow } from 'date-fns';
@@ -80,9 +80,9 @@ export default function StudentDashboard() {
     setIsLoading(true);
     try {
       const [groupsData, assignmentsData, statsData] = await Promise.all([
-        getMyGroups(),
-        getMyAssignments(filter, sort),
-        getMyStats(),
+        services.groups.getMyGroupsAsStudent(studentId),
+        services.assignments.getMyAssignments(studentId, filter, sort),
+        services.assignments.getMyStats(studentId),
       ]);
 
       setGroups(groupsData);

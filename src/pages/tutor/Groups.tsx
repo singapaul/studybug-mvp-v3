@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/dialog';
 import { useAuth } from '@/contexts/AuthContext';
 import { CreateGroupFormData } from '@/schemas/group.schema';
-import { createGroup, getMyGroups } from '@/services/supabase/group.service';
+import { services } from '@/services';
 import { Group } from '@/types/group';
 import { Loader2, Plus, Users } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -34,7 +34,7 @@ export default function Groups() {
 
     try {
       setIsLoading(true);
-      const data = await getMyGroups();
+      const data = await services.groups.getMyGroups(session.tutor!.userId);
       setGroups(data);
     } catch (error) {
       console.error('Error loading groups:', error);
@@ -49,7 +49,7 @@ export default function Groups() {
 
     try {
       setIsCreating(true);
-      const newGroup = await createGroup({
+      const newGroup = await services.groups.createGroup(session!.tutor!.userId, {
         name: data.name,
         ageRange: data.ageRange,
         subjectArea: data.subjectArea,

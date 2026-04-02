@@ -14,7 +14,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { Copy, Check, Mail, Link as LinkIcon, Send } from 'lucide-react';
 import { formatJoinCode, getJoinLink } from '@/lib/join-code';
 import { toast } from 'sonner';
-import { supabase } from '@/lib/supabase';
 
 interface InviteStudentsDialogProps {
   open: boolean;
@@ -76,13 +75,10 @@ export function InviteStudentsDialog({
 
     setIsSendingEmails(true);
     try {
-      const { data, error } = await supabase.functions.invoke('send-group-invite', {
-        body: { emails: rawEmails, tutorName, groupName, joinCode },
-      });
-
-      if (error) throw error;
-
-      const sent = (data as { sent?: number })?.sent ?? rawEmails.length;
+      // Mock: group invite emails would be sent here in production
+      console.log('Mock: send-group-invite', { emails: rawEmails, tutorName, groupName, joinCode });
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      const sent = rawEmails.length;
       toast.success(`Invitation${sent !== 1 ? 's' : ''} sent to ${sent} email address${sent !== 1 ? 'es' : ''}`);
       setEmailInput('');
     } catch (err) {

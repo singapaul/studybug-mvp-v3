@@ -5,8 +5,8 @@ import SwipeGame from '@/components/games/swipe/SwipeGame';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-import { saveGameAttempt } from '@/services/supabase/game-attempt.service';
-import { getAssignmentById } from '@/services/supabase/student.service';
+import { services } from '@/services';
+import { useAuth } from '@/contexts/AuthContext';
 import { Assignment } from '@/types/assignment';
 import {
   GameType,
@@ -24,6 +24,7 @@ import { toast } from 'sonner';
 export default function PlayGame() {
   const { assignmentId } = useParams<{ assignmentId: string }>();
   const navigate = useNavigate();
+  const { session } = useAuth();
 
   const [assignment, setAssignment] = useState<Assignment | null>(null);
   const [game, setGame] = useState<GameWithData | null>(null);
@@ -41,8 +42,9 @@ export default function PlayGame() {
       setIsLoading(true);
       setError(null);
 
-      // Fetch assignment with game and group data from Supabase
-      const assignmentData = await getAssignmentById(assignmentId);
+      // Fetch assignment with game and group data
+      const studentId = session?.student?.id ?? 'student-profile-1';
+      const assignmentData = await services.assignments.getAssignmentById(studentId, assignmentId);
 
       if (!assignmentData) {
         throw new Error('Assignment not found');
@@ -70,7 +72,9 @@ export default function PlayGame() {
     attemptData: Record<string, unknown>;
   }) => {
     try {
-      await saveGameAttempt(
+      const studentId = session?.student?.id ?? 'student-profile-1';
+      await services.gameAttempts.saveGameAttempt(
+        studentId,
         assignmentId!,
         result.scorePercentage,
         result.timeTaken,

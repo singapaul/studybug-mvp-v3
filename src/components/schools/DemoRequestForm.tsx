@@ -14,7 +14,6 @@ import {
 } from '@/components/ui/select';
 import { z } from 'zod';
 import { Building2, User, Mail, Phone, Users, Clock } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
 
 interface FormData {
   schoolName: string;
@@ -103,19 +102,8 @@ export function DemoRequestForm() {
         .filter(Boolean)
         .join('\n');
 
-      const { error } = await supabase.functions.invoke('send-contact-email', {
-        body: {
-          name: formData.contactName,
-          email: formData.email,
-          subject: 'School Demo Request',
-          message: messageLines,
-          type: 'demo',
-          schoolName: formData.schoolName,
-        },
-      });
-
-      if (error) throw error;
-
+      // Mock: demo request form submission
+      console.log('Demo request submitted:', { name: formData.contactName, email: formData.email, message: messageLines });
       navigate('/schools/demo/success');
     } catch (err) {
       console.error('Demo request form error:', err);

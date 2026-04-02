@@ -13,7 +13,7 @@ import {
   XCircle,
   Play,
 } from 'lucide-react';
-import { getAttemptDetails } from '@/services/supabase/student.service';
+import { services } from '@/services';
 import { format } from 'date-fns';
 import { motion } from 'framer-motion';
 
@@ -32,7 +32,7 @@ export default function AttemptDetails() {
 
     setLoading(true);
     try {
-      const data = await getAttemptDetails(attemptId);
+      const data = await services.assignments.getAttemptDetails(attemptId);
       setAttempt(data);
     } catch (error) {
       console.error('Failed to load attempt details:', error);

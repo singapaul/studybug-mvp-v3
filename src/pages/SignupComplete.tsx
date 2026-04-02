@@ -6,7 +6,6 @@ import { Header } from '@/components/layout/Header';
 import { Button } from '@/components/ui/button';
 import { CheckCircle2, Sparkles, Rocket, Layers, Library } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { supabase } from '@/lib/supabase';
 
 export default function SignupComplete() {
   const { session, isLoading } = useAuth();
@@ -46,13 +45,11 @@ export default function SignupComplete() {
     return () => clearInterval(interval);
   }, []);
 
-  // Fire welcome email once when we have a session
+  // Mock: welcome email would be sent here in production
   useEffect(() => {
     if (session?.user.id && !welcomeEmailSentRef.current) {
       welcomeEmailSentRef.current = true;
-      supabase.functions
-        .invoke('send-welcome-email', { body: { userId: session.user.id } })
-        .catch((err) => console.error('Failed to send welcome email:', err));
+      console.log('Mock: send-welcome-email for userId:', session.user.id);
     }
   }, [session?.user.id]);
 

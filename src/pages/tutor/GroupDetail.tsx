@@ -15,8 +15,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { formatJoinCode, getJoinLink } from '@/lib/join-code';
-import { deleteAssignment } from '@/services/supabase/assignment.service';
-import { getGroupById, removeStudentFromGroup } from '@/services/supabase/group.service';
+import { services } from '@/services';
 import { GroupWithDetails } from '@/types/group';
 import {
   ArrowLeft,
@@ -57,7 +56,7 @@ export default function GroupDetail() {
 
     try {
       setIsLoading(true);
-      const data = await getGroupById(groupId);
+      const data = await services.groups.getGroupById(groupId);
       if (!data) {
         toast.error('Group not found');
         navigate('/tutor/groups');
@@ -98,7 +97,7 @@ export default function GroupDetail() {
 
     try {
       setIsRemoving(true);
-      await removeStudentFromGroup(groupId, studentToRemove);
+      await services.groups.removeStudentFromGroup(groupId, studentToRemove);
       await loadGroup();
       toast.success('Student removed from group');
       setStudentToRemove(null);
@@ -115,7 +114,7 @@ export default function GroupDetail() {
 
     try {
       setIsRemoving(true);
-      await deleteAssignment(assignmentToRemove);
+      await services.assignments.deleteAssignment(assignmentToRemove);
       await loadGroup();
       toast.success('Game assignment removed');
       setAssignmentToRemove(null);

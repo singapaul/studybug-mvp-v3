@@ -16,8 +16,8 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { cn } from '@/lib/utils';
 import { CalendarIcon, Check, Gamepad2, Loader2 } from 'lucide-react';
 import { format } from 'date-fns';
-import { getMyGames } from '@/services/supabase/game.service';
-import { createAssignment } from '@/services/supabase/assignment.service';
+import { services } from '@/services';
+import { useAuth } from '@/contexts/AuthContext';
 import { Game } from '@/types/game';
 import { toast } from 'sonner';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
@@ -39,6 +39,7 @@ export function AssignGameDialog({
   existingGameIds = [],
   onAssignmentCreated,
 }: AssignGameDialogProps) {
+  const { session } = useAuth();
   const [games, setGames] = useState<Game[]>([]);
   const [isLoadingGames, setIsLoadingGames] = useState(false);
   const [selectedGameId, setSelectedGameId] = useState<string>('');
@@ -59,7 +60,7 @@ export function AssignGameDialog({
   const loadGames = async () => {
     try {
       setIsLoadingGames(true);
-      const data = await getMyGames();
+      const data = await services.games.getMyGames(session!.user.id);
       setGames(data);
     } catch (error) {
       console.error('Error loading games:', error);
@@ -79,7 +80,7 @@ export function AssignGameDialog({
 
     try {
       setIsSubmitting(true);
-      await createAssignment({
+      await services.assignments.createAssignment({
         gameId: selectedGameId,
         groupId,
         dueDate: dueDate || null,

@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { TrendingUp, Flame, Target, BarChart3 } from 'lucide-react';
-import { getMyProgressTrends } from '@/services/supabase/student.service';
+import { services } from '@/services';
 import {
   LineChart,
   Line,
@@ -41,7 +41,7 @@ export default function ProgressTrendsTab({ studentId }: ProgressTrendsTabProps)
   const loadData = async () => {
     setLoading(true);
     try {
-      const data = await getMyProgressTrends(studentId, timeRange);
+      const data = await services.assignments.getMyProgressTrends(studentId, timeRange);
       setTrends(data);
     } catch (error) {
       console.error('Failed to load progress trends:', error);

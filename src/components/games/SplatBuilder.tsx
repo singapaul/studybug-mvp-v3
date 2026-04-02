@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
-import { createGame } from '@/services/supabase/game.service';
+import { services } from '@/services';
 import { GameType, SplatGameData, SplatItem } from '@/types/game';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -49,7 +49,7 @@ export function SplatBuilder() {
     try {
       setIsSaving(true);
       const gameData: SplatGameData = { timeLimit, items };
-      await createGame(session.tutor.id, {
+      await services.games.createGame(session!.user.id, {
         name: gameName,
         gameType: GameType.SPLAT,
         gameData,

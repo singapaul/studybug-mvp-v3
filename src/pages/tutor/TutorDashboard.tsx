@@ -18,8 +18,7 @@ import {
   BookOpen,
   Target,
 } from 'lucide-react';
-import { getMyGroups } from '@/services/supabase/group.service';
-import { getMyGames } from '@/services/supabase/game.service';
+import { services } from '@/services';
 import { format } from 'date-fns';
 import { TutorTestDataButton } from '@/components/dev/TutorTestDataButton';
 
@@ -53,11 +52,16 @@ export default function TutorDashboard() {
 
     setLoading(true);
     try {
-      const [groupsData, gamesData] = await Promise.all([getMyGroups(), getMyGames()]);
+      const userId = session!.user.id;
+      const tutorId = session!.tutor!.userId;
+      const [groupsData, gamesData] = await Promise.all([
+        services.groups.getMyGroups(tutorId),
+        services.games.getMyGames(userId),
+      ]);
 
       // Calculate stats
       const totalStudents = groupsData.reduce(
-        (sum: number, g: any) => sum + (g.memberCount || 0),
+        (sum: number, g: any) => sum + (g._count?.members || g.memberCount || 0),
         0
       );
 
@@ -324,7 +328,7 @@ export default function TutorDashboard() {
                         <div>
                           <p className="font-medium">{group.name}</p>
                           <p className="text-xs text-muted-foreground">
-                            {group.memberCount || 0} students
+                            {group._count?.members || 0} students
                           </p>
                         </div>
                       </div>

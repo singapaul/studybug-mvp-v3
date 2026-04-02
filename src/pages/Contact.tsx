@@ -14,7 +14,6 @@ import {
 } from '@/components/ui/select';
 import { Mail, Phone, MapPin, Clock, Check, Send } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { supabase } from '@/lib/supabase';
 
 export default function Contact() {
   const { toast } = useToast();
@@ -32,18 +31,8 @@ export default function Contact() {
     setIsLoading(true);
 
     try {
-      const { error } = await supabase.functions.invoke('send-contact-email', {
-        body: {
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-          type: 'contact',
-        },
-      });
-
-      if (error) throw error;
-
+      // Mock: contact form submission
+      console.log('Contact form submitted:', formData);
       setIsSuccess(true);
       toast({
         title: 'Message sent!',

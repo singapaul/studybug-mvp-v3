@@ -6,13 +6,11 @@ import { ProgressIndicator } from '@/components/signup/ProgressIndicator';
 import { PlanSummary } from '@/components/signup/PlanSummary';
 import { ChoosePlanStep } from '@/components/signup/steps/ChoosePlanStep';
 import { AccountDetailsStep } from '@/components/signup/steps/AccountDetailsStep';
-import { PaymentStep } from '@/components/signup/steps/PaymentStep';
 import { SuccessStep } from '@/components/signup/steps/SuccessStep';
 import { ProcessingOverlay } from '@/components/signup/ProcessingOverlay';
 import {
   PlanSelectionSkeleton,
   SignupStepSkeleton,
-  PaymentSkeleton,
   PlanSummarySkeleton,
 } from '@/components/signup/SignupSkeletons';
 import { PlanType, BillingCycle } from '@/types/signup';
@@ -20,8 +18,7 @@ import { PlanType, BillingCycle } from '@/types/signup';
 const steps = [
   { number: 1, title: 'Choose Plan' },
   { number: 2, title: 'Account' },
-  { number: 3, title: 'Payment' },
-  { number: 4, title: 'Complete' },
+  { number: 3, title: 'Complete' },
 ];
 
 function SignupContent() {
@@ -56,8 +53,6 @@ function SignupContent() {
           return <PlanSelectionSkeleton />;
         case 2:
           return <SignupStepSkeleton />;
-        case 3:
-          return <PaymentSkeleton />;
         default:
           return <SignupStepSkeleton />;
       }
@@ -70,14 +65,12 @@ function SignupContent() {
         const isFree = formData.plan === 'free';
         return (
           <AccountDetailsStep
-            onNext={() => setCurrentStep(isFree ? 4 : 3)}
+            onNext={() => setCurrentStep(3)}
             onBack={() => (isFree ? navigate(-1) : setCurrentStep(1))}
           />
         );
       }
       case 3:
-        return <PaymentStep onNext={() => setCurrentStep(4)} onBack={() => setCurrentStep(2)} />;
-      case 4:
         return <SuccessStep />;
       default:
         return null;
@@ -90,7 +83,7 @@ function SignupContent() {
       <main className="flex-1 py-8">
         <div className="container">
           {/* Progress */}
-          {currentStep < 4 && formData.plan !== 'free' && (
+          {currentStep < 3 && formData.plan !== 'free' && (
             <div className="max-w-2xl mx-auto mb-8">
               <ProgressIndicator steps={steps} currentStep={currentStep} />
             </div>
@@ -100,7 +93,7 @@ function SignupContent() {
             {/* Main Content */}
             <div
               className={
-                currentStep === 4 || formData.plan === 'free' ? 'lg:col-span-3' : 'lg:col-span-2'
+                currentStep === 3 || formData.plan === 'free' ? 'lg:col-span-3' : 'lg:col-span-2'
               }
             >
               <div className="bg-card border border-border rounded-2xl p-6 md:p-8">
@@ -109,7 +102,7 @@ function SignupContent() {
             </div>
 
             {/* Sidebar */}
-            {currentStep < 4 && formData.plan !== 'free' && (
+            {currentStep < 3 && formData.plan !== 'free' && (
               <div className="lg:col-span-1">
                 {isLoading ? <PlanSummarySkeleton /> : <PlanSummary />}
               </div>

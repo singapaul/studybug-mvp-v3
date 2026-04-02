@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Trophy, Clock, Target, TrendingUp, Play } from 'lucide-react';
-import { getMyPersonalBests } from '@/services/supabase/student.service';
+import { services } from '@/services';
 import { format } from 'date-fns';
 import { motion } from 'framer-motion';
 
@@ -29,7 +29,7 @@ export default function PersonalBestsTab({ studentId }: PersonalBestsTabProps) {
   const loadData = async () => {
     setLoading(true);
     try {
-      const bests = await getMyPersonalBests(studentId);
+      const bests = await services.assignments.getMyPersonalBests(studentId);
       setPersonalBests(bests);
 
       // Calculate overall stats

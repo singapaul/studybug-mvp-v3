@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useSubscription } from '@/hooks/useSubscription';
-import { supabase } from '@/lib/supabase';
+
 import { SubscriptionStatus } from '@/types/auth';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -65,12 +65,7 @@ export default function TutorSettings() {
   const handleManageBilling = async () => {
     setIsOpeningPortal(true);
     try {
-      const { data, error } = await supabase.functions.invoke('create-portal-session');
-      if (error || !data?.url) {
-        toast.error('Could not open billing portal. Please try again.');
-        return;
-      }
-      window.location.href = data.url;
+      toast.info('Billing portal is not available in mock mode.');
     } finally {
       setIsOpeningPortal(false);
     }
