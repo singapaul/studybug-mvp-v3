@@ -12,8 +12,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Mail, Phone, MapPin, Clock, Check, AlertCircle, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Check, Send } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/lib/supabase';
 
 export default function Contact() {
   const { toast } = useToast();
@@ -30,15 +31,34 @@ export default function Contact() {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const { error } = await supabase.functions.invoke('send-contact-email', {
+        body: {
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          type: 'contact',
+        },
+      });
 
-    setIsLoading(false);
-    setIsSuccess(true);
-    toast({
-      title: 'Message sent!',
-      description: "We'll get back to you within 24 hours.",
-    });
+      if (error) throw error;
+
+      setIsSuccess(true);
+      toast({
+        title: 'Message sent!',
+        description: "We'll get back to you within 1-2 business days.",
+      });
+    } catch (err) {
+      console.error('Contact form error:', err);
+      toast({
+        title: 'Something went wrong',
+        description: 'Failed to send your message. Please try again or email us directly.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const updateField = (field: string, value: string) => {
@@ -84,91 +104,91 @@ export default function Contact() {
                         Thanks for reaching out!
                       </h2>
                       <p className="text-muted-foreground mb-6">
-                        We'll get back to you within 24 hours.
+                        We'll get back to you within 1-2 business days. Check your inbox for a
+                        confirmation email.
                       </p>
-                      <Button onClick={() => setIsSuccess(false)} variant="outline">
+                      <Button
+                        onClick={() => {
+                          setIsSuccess(false);
+                          setFormData({ name: '', email: '', subject: '', message: '' });
+                        }}
+                        variant="outline"
+                      >
                         Send another message
                       </Button>
                     </div>
                   ) : (
-                    <>
-                      {/* Demo Notice */}
-                      <div className="flex items-center gap-3 p-4 rounded-lg bg-accent/10 border border-accent/20 mb-6">
-                        <AlertCircle className="w-5 h-5 text-accent-foreground flex-shrink-0" />
-                        <p className="text-sm text-accent-foreground">
-                          Demo mode - validation disabled
-                        </p>
-                      </div>
-
-                      <form onSubmit={handleSubmit} className="space-y-6">
-                        <div className="grid md:grid-cols-2 gap-6">
-                          <div className="space-y-2">
-                            <Label htmlFor="name">Name</Label>
-                            <Input
-                              id="name"
-                              placeholder="Your name"
-                              value={formData.name}
-                              onChange={(e) => updateField('name', e.target.value)}
-                            />
-                          </div>
-                          <div className="space-y-2">
-                            <Label htmlFor="email">Email</Label>
-                            <Input
-                              id="email"
-                              type="email"
-                              placeholder="your@email.com"
-                              value={formData.email}
-                              onChange={(e) => updateField('email', e.target.value)}
-                            />
-                          </div>
-                        </div>
-
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                      <div className="grid md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                          <Label htmlFor="subject">Subject</Label>
-                          <Select
-                            value={formData.subject}
-                            onValueChange={(value) => updateField('subject', value)}
-                          >
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select a topic" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="general">General Enquiry</SelectItem>
-                              <SelectItem value="support">Technical Support</SelectItem>
-                              <SelectItem value="school">School Enquiry</SelectItem>
-                              <SelectItem value="partnership">Partnership</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-
-                        <div className="space-y-2">
-                          <Label htmlFor="message">Message</Label>
-                          <Textarea
-                            id="message"
-                            placeholder="How can we help?"
-                            rows={5}
-                            value={formData.message}
-                            onChange={(e) => updateField('message', e.target.value)}
+                          <Label htmlFor="name">Name</Label>
+                          <Input
+                            id="name"
+                            placeholder="Your name"
+                            value={formData.name}
+                            onChange={(e) => updateField('name', e.target.value)}
+                            required
                           />
                         </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="email">Email</Label>
+                          <Input
+                            id="email"
+                            type="email"
+                            placeholder="your@email.com"
+                            value={formData.email}
+                            onChange={(e) => updateField('email', e.target.value)}
+                            required
+                          />
+                        </div>
+                      </div>
 
-                        <Button
-                          type="submit"
-                          size="lg"
-                          className="w-full bg-primary text-white hover:bg-primary/90"
-                          disabled={isLoading}
+                      <div className="space-y-2">
+                        <Label htmlFor="subject">Subject</Label>
+                        <Select
+                          value={formData.subject}
+                          onValueChange={(value) => updateField('subject', value)}
                         >
-                          {isLoading ? (
-                            'Sending...'
-                          ) : (
-                            <>
-                              <Send className="w-5 h-5 mr-2" />
-                              Send Message
-                            </>
-                          )}
-                        </Button>
-                      </form>
-                    </>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a topic" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="general">General Enquiry</SelectItem>
+                            <SelectItem value="support">Technical Support</SelectItem>
+                            <SelectItem value="school">School Enquiry</SelectItem>
+                            <SelectItem value="partnership">Partnership</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="message">Message</Label>
+                        <Textarea
+                          id="message"
+                          placeholder="How can we help?"
+                          rows={5}
+                          value={formData.message}
+                          onChange={(e) => updateField('message', e.target.value)}
+                          required
+                        />
+                      </div>
+
+                      <Button
+                        type="submit"
+                        size="lg"
+                        className="w-full bg-primary text-white hover:bg-primary/90"
+                        disabled={isLoading}
+                      >
+                        {isLoading ? (
+                          'Sending...'
+                        ) : (
+                          <>
+                            <Send className="w-5 h-5 mr-2" />
+                            Send Message
+                          </>
+                        )}
+                      </Button>
+                    </form>
                   )}
                 </div>
               </div>

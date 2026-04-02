@@ -36,6 +36,7 @@ import { Game, GameType } from '@/types/game';
 import { Group } from '@/types/group';
 import { toast } from 'sonner';
 import { Separator } from '@/components/ui/separator';
+import { supabase } from '@/lib/supabase';
 
 const GAME_TYPE_COLORS = {
   PAIRS: 'bg-blue-100 text-blue-700 border-blue-200',
@@ -130,12 +131,21 @@ export default function CreateAssignment() {
         })
       );
 
-      await Promise.all(assignmentPromises);
+      const createdAssignments = await Promise.all(assignmentPromises);
 
       const selectedGame = games.find((g) => g.id === selectedGameId);
       toast.success(
         `Successfully assigned "${selectedGame?.name}" to ${selectedGroupIds.length} group${selectedGroupIds.length > 1 ? 's' : ''}!`
       );
+
+      // Fire-and-forget: notify students for each created assignment
+      for (const assignment of createdAssignments) {
+        if (assignment?.id) {
+          supabase.functions
+            .invoke('send-assignment-notification', { body: { assignmentId: assignment.id } })
+            .catch((err) => console.error('Failed to send assignment notification:', err));
+        }
+      }
 
       navigate('/tutor/dashboard');
     } catch (error) {

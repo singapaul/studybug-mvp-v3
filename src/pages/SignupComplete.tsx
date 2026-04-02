@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Role } from '@/types/auth';
@@ -6,10 +6,12 @@ import { Header } from '@/components/layout/Header';
 import { Button } from '@/components/ui/button';
 import { CheckCircle2, Sparkles, Rocket, Layers, Library } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { supabase } from '@/lib/supabase';
 
 export default function SignupComplete() {
   const { session, isLoading } = useAuth();
   const navigate = useNavigate();
+  const welcomeEmailSentRef = useRef(false);
 
   const dashboardPath = session?.user.role === Role.TUTOR ? '/tutor/dashboard' : '/student/dashboard';
 
@@ -43,6 +45,16 @@ export default function SignupComplete() {
 
     return () => clearInterval(interval);
   }, []);
+
+  // Fire welcome email once when we have a session
+  useEffect(() => {
+    if (session?.user.id && !welcomeEmailSentRef.current) {
+      welcomeEmailSentRef.current = true;
+      supabase.functions
+        .invoke('send-welcome-email', { body: { userId: session.user.id } })
+        .catch((err) => console.error('Failed to send welcome email:', err));
+    }
+  }, [session?.user.id]);
 
   const onboardingCards = [
     {

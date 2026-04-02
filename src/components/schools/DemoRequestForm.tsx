@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/select';
 import { z } from 'zod';
 import { Building2, User, Mail, Phone, Users, Clock } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
 
 interface FormData {
   schoolName: string;
@@ -80,11 +81,48 @@ export function DemoRequestForm() {
     setErrors({});
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      // Build a readable message from all the form fields
+      const preferredTimes = [
+        formData.preferredMorning ? 'Morning (9am-12pm)' : null,
+        formData.preferredAfternoon ? 'Afternoon (12pm-5pm)' : null,
+      ]
+        .filter(Boolean)
+        .join(', ');
 
-    setIsSubmitting(false);
-    navigate('/schools/demo/success');
+      const messageLines = [
+        `School: ${formData.schoolName}`,
+        `Role: ${formData.contactRole}`,
+        `Phone: ${formData.phone}`,
+        `Students: ${formData.numberOfStudents}`,
+        `Teachers: ${formData.numberOfTeachers}`,
+        preferredTimes ? `Preferred contact time: ${preferredTimes}` : null,
+        formData.specificDate ? `Specific date: ${formData.specificDate}` : null,
+        formData.additionalNotes ? `\nNotes: ${formData.additionalNotes}` : null,
+      ]
+        .filter(Boolean)
+        .join('\n');
+
+      const { error } = await supabase.functions.invoke('send-contact-email', {
+        body: {
+          name: formData.contactName,
+          email: formData.email,
+          subject: 'School Demo Request',
+          message: messageLines,
+          type: 'demo',
+          schoolName: formData.schoolName,
+        },
+      });
+
+      if (error) throw error;
+
+      navigate('/schools/demo/success');
+    } catch (err) {
+      console.error('Demo request form error:', err);
+      setErrors({ form: 'Something went wrong. Please try again or contact us directly.' });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const studentOptions = ['1-100', '101-500', '501-1000', '1000+'];
@@ -95,6 +133,13 @@ export function DemoRequestForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Form-level error */}
+      {errors.form && (
+        <p className="text-sm text-destructive bg-destructive/10 rounded-md px-4 py-3">
+          {errors.form}
+        </p>
+      )}
+
       {/* School Name */}
       <div className="space-y-2">
         <Label htmlFor="schoolName" className="flex items-center gap-2">

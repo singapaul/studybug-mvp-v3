@@ -33,10 +33,12 @@ import {
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'sonner';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function GroupDetail() {
   const { groupId } = useParams<{ groupId: string }>();
   const navigate = useNavigate();
+  const { session } = useAuth();
 
   const [group, setGroup] = useState<GroupWithDetails | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -48,9 +50,7 @@ export default function GroupDetail() {
   const [assignmentToRemove, setAssignmentToRemove] = useState<string | null>(null);
   const [isRemoving, setIsRemoving] = useState(false);
 
-  useEffect(() => {
-    loadGroup();
-  }, [groupId]);
+  const tutorName = session?.user.firstName ?? 'Your teacher';
 
   const loadGroup = async () => {
     if (!groupId) return;
@@ -71,6 +71,11 @@ export default function GroupDetail() {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    loadGroup();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [groupId]);
 
   const copyToClipboard = async (text: string, type: 'code' | 'link') => {
     try {
@@ -362,6 +367,7 @@ export default function GroupDetail() {
         onOpenChange={setInviteDialogOpen}
         groupName={group.name}
         joinCode={group.joinCode}
+        tutorName={tutorName}
       />
 
       {/* Assign Game Dialog */}

@@ -1,5 +1,10 @@
 import Stripe from 'https://esm.sh/stripe@14?target=deno';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2?target=deno';
+import { sendEmail } from '../_shared/email.ts';
+import { trialStartedEmail } from '../_shared/email-templates/trial-started.ts';
+import { paymentSuccessfulEmail } from '../_shared/email-templates/payment-successful.ts';
+import { paymentFailedEmail } from '../_shared/email-templates/payment-failed.ts';
+import { subscriptionCancelledEmail } from '../_shared/email-templates/subscription-cancelled.ts';
 
 const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!, {
   apiVersion: '2023-10-16',
@@ -45,6 +50,52 @@ async function updateSubscription(
   await supabase.from('Student').update(fields).eq('stripeCustomerId', stripeCustomerId);
 }
 
+/**
+ * Looks up the user record (email + profile) associated with a Stripe customer ID.
+ * Returns null if not found.
+ */
+async function getUserByStripeCustomerId(
+  customerId: string,
+): Promise<{ email: string; firstName: string; planName?: string } | null> {
+  // Try Tutor
+  const { data: tutor } = await supabase
+    .from('Tutor')
+    .select('userId, firstName, stripePriceId')
+    .eq('stripeCustomerId', customerId)
+    .single();
+
+  if (tutor) {
+    const { data: { user } } = await supabase.auth.admin.getUserById(tutor.userId);
+    if (user?.email) {
+      return { email: user.email, firstName: tutor.firstName ?? 'there' };
+    }
+  }
+
+  // Try Student
+  const { data: student } = await supabase
+    .from('Student')
+    .select('userId, firstName')
+    .eq('stripeCustomerId', customerId)
+    .single();
+
+  if (student) {
+    const { data: { user } } = await supabase.auth.admin.getUserById(student.userId);
+    if (user?.email) {
+      return { email: user.email, firstName: student.firstName ?? 'there' };
+    }
+  }
+
+  return null;
+}
+
+function formatDate(timestamp: number): string {
+  return new Date(timestamp * 1000).toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+}
+
 Deno.serve(async (req) => {
   const signature = req.headers.get('stripe-signature');
   const webhookSecret = Deno.env.get('STRIPE_WEBHOOK_SECRET')!;
@@ -77,6 +128,17 @@ Deno.serve(async (req) => {
             : null,
           subscriptionPeriodEnd: new Date(subscription.current_period_end * 1000).toISOString(),
         });
+
+        // Send trial started email (fire-and-forget)
+        if (subscription.status === 'trialing' && subscription.trial_end) {
+          const userInfo = await getUserByStripeCustomerId(customerId);
+          if (userInfo) {
+            const trialEndDate = formatDate(subscription.trial_end);
+            const planName = subscription.items.data[0]?.price.nickname ?? 'StudyBug';
+            const { subject, html } = trialStartedEmail(userInfo.firstName, trialEndDate, planName);
+            sendEmail(userInfo.email, subject, html);
+          }
+        }
         break;
       }
 
@@ -103,6 +165,14 @@ Deno.serve(async (req) => {
           subscriptionStatus: 'CANCELLED',
           subscriptionPeriodEnd: new Date(subscription.current_period_end * 1000).toISOString(),
         });
+
+        // Send cancellation email (fire-and-forget)
+        const userInfo = await getUserByStripeCustomerId(customerId);
+        if (userInfo) {
+          const periodEnd = formatDate(subscription.current_period_end);
+          const { subject, html } = subscriptionCancelledEmail(userInfo.firstName, periodEnd);
+          sendEmail(userInfo.email, subject, html);
+        }
         break;
       }
 
@@ -117,6 +187,17 @@ Deno.serve(async (req) => {
           subscriptionStatus: 'ACTIVE',
           subscriptionPeriodEnd: new Date(subscription.current_period_end * 1000).toISOString(),
         });
+
+        // Send payment successful email (fire-and-forget)
+        // Skip if this is the first invoice for a trialing subscription (avoid double email)
+        if (invoice.billing_reason !== 'subscription_create') {
+          const userInfo = await getUserByStripeCustomerId(customerId);
+          if (userInfo) {
+            const periodEnd = formatDate(subscription.current_period_end);
+            const { subject, html } = paymentSuccessfulEmail(userInfo.firstName, periodEnd);
+            sendEmail(userInfo.email, subject, html);
+          }
+        }
         break;
       }
 
@@ -127,6 +208,13 @@ Deno.serve(async (req) => {
         await updateSubscription(customerId, {
           subscriptionStatus: 'EXPIRED',
         });
+
+        // Send payment failed email (fire-and-forget)
+        const userInfo = await getUserByStripeCustomerId(customerId);
+        if (userInfo) {
+          const { subject, html } = paymentFailedEmail(userInfo.firstName);
+          sendEmail(userInfo.email, subject, html);
+        }
         break;
       }
 
