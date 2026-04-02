@@ -130,17 +130,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
       }
       setIsLoading(false);
     } else {
-      supabaseAuth.getSession().then(async (supabaseSession) => {
-        setSession(await buildUserSession(supabaseSession));
-        setIsLoading(false);
-      });
-
       const {
         data: { subscription },
       } = supabaseAuth.onAuthStateChange(async (event, supabaseSession) => {
         console.log('Auth state changed:', event);
-        setSession(await buildUserSession(supabaseSession));
         setIsLoading(false);
+        setSession(await buildUserSession(supabaseSession));
       });
 
       return () => {

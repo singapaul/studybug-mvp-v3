@@ -102,26 +102,28 @@ export function AccountDetailsStep({ onNext, onBack }: AccountDetailsStepProps) 
 
     const role = formData.accountType === 'teacher' ? 'TUTOR' : 'STUDENT';
 
-    const { error } = await supabase.auth.signUp({
-      email: formData.email,
-      password: formData.password,
-      options: {
-        data: {
-          role,
-          first_name: formData.firstName,
-          last_name: formData.lastName,
+    try {
+      const { error } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            role,
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+          },
         },
-      },
-    });
+      });
 
-    setIsProcessing(false);
+      if (error) {
+        setErrors({ email: error.message });
+        return;
+      }
 
-    if (error) {
-      setErrors({ email: error.message });
-      return;
+      onNext();
+    } finally {
+      setIsProcessing(false);
     }
-
-    onNext();
   };
 
   const strengthInfo = getStrengthLabel();

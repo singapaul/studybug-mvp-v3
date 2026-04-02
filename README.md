@@ -17,7 +17,7 @@ Install Stripe CLI if needed: `brew install stripe/stripe-cli/stripe`
 
 ## 1. Environment Setup
 
-Create `.env.local` (if it doesn't exist):
+Create `studybug-mvp-v3/.env.local` (frontend env vars):
 
 ```env
 # Supabase — get these from https://supabase.com/dashboard/project/qjqlillerghqnrwppeei/settings/api
@@ -29,6 +29,21 @@ VITE_MOCK_USER_MODE=false
 ```
 
 > Set `VITE_MOCK_USER_MODE=true` if you want to develop UI without hitting Supabase auth.
+
+Create `supabase/functions/.env` (Edge Function secrets — never commit this):
+
+```env
+STRIPE_SECRET_KEY=sk_test_xxxxxxxxxxxxxxxx
+STRIPE_WEBHOOK_SECRET=whsec_xxxxxxxxxxxxxxxx   # from `stripe listen` output
+
+# Price IDs from https://dashboard.stripe.com/test/products
+STRIPE_PRICE_STUDENT_MONTHLY=price_xxxxxxxxxxxxxxxx
+STRIPE_PRICE_STUDENT_ANNUAL=price_xxxxxxxxxxxxxxxx
+STRIPE_PRICE_TEACHER_MONTHLY=price_xxxxxxxxxxxxxxxx
+STRIPE_PRICE_TEACHER_ANNUAL=price_xxxxxxxxxxxxxxxx
+
+APP_URL=http://localhost:8080
+```
 
 ---
 
@@ -56,15 +71,17 @@ The project points at Supabase Cloud, so functions run remotely. To serve them l
 
 ```bash
 # From the repo root (where /supabase lives)
-supabase functions serve --env-file studybug-mvp-v3/.env.local
+supabase functions serve --env-file supabase/functions/.env
 ```
 
-> This serves all functions in `supabase/functions/` on **http://localhost:54321/functions/v1/**. There are no functions yet, so this is only needed once you add one.
+> This serves all functions in `supabase/functions/` on **http://localhost:54321/functions/v1/**.
 
 If you need to deploy a function to the remote project:
 
 ```bash
 supabase functions deploy <function-name>
+# Set secrets on the remote project
+supabase secrets set --env-file supabase/functions/.env
 ```
 
 ---
@@ -77,16 +94,10 @@ Log in to Stripe CLI (one-time setup):
 stripe login
 ```
 
-Forward webhook events to your local app. The target URL depends on where your webhook handler lives — either a Supabase Edge Function or a local endpoint:
+Forward webhook events to the `stripe-webhook` Edge Function:
 
-**If handled by a Supabase Edge Function:**
 ```bash
 stripe listen --forward-to http://localhost:54321/functions/v1/stripe-webhook
-```
-
-**If handled directly by the Vite dev server** (e.g. a custom express proxy):
-```bash
-stripe listen --forward-to http://localhost:8080/api/stripe-webhook
 ```
 
 The CLI will print a **webhook signing secret** like:
@@ -94,7 +105,7 @@ The CLI will print a **webhook signing secret** like:
 > Ready! Your webhook signing secret is whsec_xxxxxxxxxxxxxxxx
 ```
 
-Add this to your `.env.local`:
+Add this to `supabase/functions/.env`:
 ```env
 STRIPE_WEBHOOK_SECRET=whsec_xxxxxxxxxxxxxxxx
 ```
@@ -112,9 +123,9 @@ Open three terminal tabs:
 cd studybug-mvp-v3 && npm run dev
 ```
 
-**Tab 2 — Supabase Functions** *(only needed when functions exist)*
+**Tab 2 — Supabase Functions**
 ```bash
-supabase functions serve --env-file studybug-mvp-v3/.env.local
+supabase functions serve --env-file supabase/functions/.env
 ```
 
 **Tab 3 — Stripe Webhook Forwarding**
