@@ -1,4 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { useUser, useAuth as useClerkAuth, useClerk, useSignIn } from '@clerk/clerk-react';
+import { tokenStore } from '@/services/api/token-store';
 import { Role, UserSession, AuthContextType, SubscriptionStatus } from '@/types/auth';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -124,17 +126,18 @@ function MockAuthProvider({ children }: { children: ReactNode }) {
 // ---------------------------------------------------------------------------
 
 function ClerkAuthProvider({ children }: { children: ReactNode }) {
-  // Dynamic import of Clerk hooks — only used inside ClerkProvider tree
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const { useUser, useAuth: useClerkAuth, useClerk } = require('@clerk/clerk-react');
-
   const { user, isLoaded: userLoaded } = useUser();
-  const { isSignedIn, isLoaded: authLoaded } = useClerkAuth();
-  const { signOut, openSignIn } = useClerk();
+  const { isSignedIn, isLoaded: authLoaded, getToken } = useClerkAuth();
+  const { signIn: clerkSignIn, setActive } = useSignIn();
+
+  useEffect(() => {
+    tokenStore.setGetter(() => getToken());
+  }, [getToken]);
+  const { signOut } = useClerk();
 
   const isLoading = !userLoaded || !authLoaded;
 
-  const role = (user?.publicMetadata?.role as Role) ?? null;
+  const role = ((user?.publicMetadata?.role ?? user?.unsafeMetadata?.role) as Role) ?? null;
   const isTutor = role === Role.TUTOR;
   const isStudent = role === Role.STUDENT;
 
@@ -185,8 +188,14 @@ function ClerkAuthProvider({ children }: { children: ReactNode }) {
   // switchRole is not applicable in Clerk mode — roles are set at signup
   const switchRole = (_role: Role) => {};
 
-  const signIn = async (_email: string, _password: string) => {
-    openSignIn();
+  const signIn = async (email: string, password: string) => {
+    if (!clerkSignIn) throw new Error('Sign-in is not available. Please reload and try again.');
+    const result = await clerkSignIn.create({ identifier: email, password });
+    if (result.status === 'complete') {
+      await setActive?.({ session: result.createdSessionId });
+    } else {
+      throw new Error('Sign-in incomplete. Please try again.');
+    }
   };
 
   const signUp = async (_email: string, _password: string, _role: Role) => {

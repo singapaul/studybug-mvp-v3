@@ -37,7 +37,9 @@ import { toast } from 'sonner';
 
 export default function TutorSettings() {
   const { session } = useAuth();
-  const { status, isTrial, trialEndsAt, subscriptionPeriodEnd } = useSubscription();
+  const { status, trialEndsAt, periodEnd } = useSubscription();
+  const isTrial = status === 'TRIALING';
+  const subscriptionPeriodEnd = periodEnd;
   const [isOpeningPortal, setIsOpeningPortal] = useState(false);
   const [activeTab, setActiveTab] = useState('profile');
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);

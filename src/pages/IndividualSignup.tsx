@@ -31,12 +31,16 @@ function SignupContent() {
   useEffect(() => {
     const plan = searchParams.get('plan') as PlanType | null;
     const billing = searchParams.get('billing') as BillingCycle | null;
+
     if (plan === 'free') {
       updateFormData({ plan: 'free' });
       setCurrentStep(2);
     } else if (plan === 'student' || plan === 'teacher') {
       updateFormData({ plan });
+      // Skip ChoosePlanStep when plan is provided via URL params
+      setCurrentStep(2);
     }
+
     if (billing === 'monthly' || billing === 'annual') {
       updateFormData({ billingCycle: billing });
     }

@@ -18,13 +18,18 @@ export async function handleClerkWebhook(
     first_name: string | null
     last_name: string | null
     public_metadata: { role?: string }
+    unsafe_metadata: { role?: string }
   }
 
   const primaryEmail = data.email_addresses.find(
     e => e.id === data.primary_email_address_id
   )?.email_address ?? ''
 
-  const role = (data.public_metadata?.role ?? 'STUDENT') as 'TUTOR' | 'STUDENT'
+  // Prefer public_metadata.role (set server-side); fall back to unsafe_metadata.role
+  // (set client-side via signUp.create({ unsafeMetadata: { role } }))
+  const role = (
+    data.public_metadata?.role ?? data.unsafe_metadata?.role ?? 'STUDENT'
+  ) as 'TUTOR' | 'STUDENT'
 
   // Idempotency: check if user already exists
   const existing = await getUserByClerkId(db, data.id)

@@ -104,4 +104,84 @@ describe('handleClerkWebhook', () => {
     expect(calls[0].to).toBe('welcome@test.com')
     expect(calls[0].firstName).toBe('Welcome')
   })
+
+  // Cycle 5: role from unsafe_metadata when public_metadata has no role
+  test('creates tutor from unsafe_metadata.role when public_metadata.role is absent', async () => {
+    const db = await createTestDb()
+    const mockSendEmail = async () => {}
+
+    await handleClerkWebhook({
+      type: 'user.created',
+      data: {
+        id: 'clerk_unsafe_tutor',
+        email_addresses: [{ email_address: 'unsafe_tutor@test.com', id: 'email_5' }],
+        primary_email_address_id: 'email_5',
+        first_name: 'Unsafe',
+        last_name: 'Tutor',
+        public_metadata: {},
+        unsafe_metadata: { role: 'TUTOR' }
+      }
+    }, db, mockSendEmail)
+
+    const user = await getUserByClerkId(db, 'clerk_unsafe_tutor')
+    expect(user).not.toBeNull()
+    expect(user!.role).toBe('TUTOR')
+
+    const tutor = await getTutorByUserId(db, user!.id)
+    expect(tutor).not.toBeNull()
+  })
+
+  // Cycle 6: role from unsafe_metadata for student
+  test('creates student from unsafe_metadata.role when public_metadata.role is absent', async () => {
+    const db = await createTestDb()
+    const mockSendEmail = async () => {}
+
+    await handleClerkWebhook({
+      type: 'user.created',
+      data: {
+        id: 'clerk_unsafe_student',
+        email_addresses: [{ email_address: 'unsafe_student@test.com', id: 'email_6' }],
+        primary_email_address_id: 'email_6',
+        first_name: 'Unsafe',
+        last_name: 'Student',
+        public_metadata: {},
+        unsafe_metadata: { role: 'STUDENT' }
+      }
+    }, db, mockSendEmail)
+
+    const user = await getUserByClerkId(db, 'clerk_unsafe_student')
+    expect(user).not.toBeNull()
+    expect(user!.role).toBe('STUDENT')
+
+    const student = await getStudentByUserId(db, user!.id)
+    expect(student).not.toBeNull()
+  })
+
+  // Cycle 7: public_metadata.role takes precedence over unsafe_metadata.role
+  test('prefers public_metadata.role over unsafe_metadata.role', async () => {
+    const db = await createTestDb()
+    const mockSendEmail = async () => {}
+
+    await handleClerkWebhook({
+      type: 'user.created',
+      data: {
+        id: 'clerk_both_meta',
+        email_addresses: [{ email_address: 'both_meta@test.com', id: 'email_7' }],
+        primary_email_address_id: 'email_7',
+        first_name: 'Both',
+        last_name: 'Meta',
+        public_metadata: { role: 'TUTOR' },
+        unsafe_metadata: { role: 'STUDENT' }
+      }
+    }, db, mockSendEmail)
+
+    const user = await getUserByClerkId(db, 'clerk_both_meta')
+    expect(user).not.toBeNull()
+    // public_metadata wins
+    expect(user!.role).toBe('TUTOR')
+
+    const tutor = await getTutorByUserId(db, user!.id)
+    expect(tutor).not.toBeNull()
+  })
+
 })

@@ -42,8 +42,8 @@ export function SignInForm({ onSuccess, onToggleMode }: SignInFormProps) {
       await signIn(data.email, data.password);
       onSuccess?.();
     } catch (err: any) {
-      console.error('Sign in error:', err);
-      setError(err.message || 'Failed to sign in. Please check your credentials and try again.');
+      const clerkMessage = err?.errors?.[0]?.longMessage ?? err?.errors?.[0]?.message;
+      setError(clerkMessage ?? err.message ?? 'Failed to sign in. Please check your credentials and try again.');
     } finally {
       setIsSubmitting(false);
     }

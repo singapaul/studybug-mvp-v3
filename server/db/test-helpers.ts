@@ -48,6 +48,52 @@ export async function createTestDb() {
       created_at TIMESTAMP NOT NULL DEFAULT NOW(),
       updated_at TIMESTAMP NOT NULL DEFAULT NOW()
     );
+
+    CREATE TABLE groups (
+      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+      tutor_id UUID NOT NULL REFERENCES tutors(id) ON DELETE CASCADE,
+      name TEXT NOT NULL,
+      join_code TEXT NOT NULL UNIQUE,
+      age_range TEXT,
+      subject_area TEXT,
+      created_at TIMESTAMP NOT NULL DEFAULT NOW()
+    );
+
+    CREATE TABLE games (
+      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+      tutor_id UUID NOT NULL REFERENCES tutors(id) ON DELETE CASCADE,
+      name TEXT NOT NULL,
+      game_type game_type NOT NULL,
+      game_data JSONB NOT NULL,
+      created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+      updated_at TIMESTAMP NOT NULL DEFAULT NOW()
+    );
+
+    CREATE TABLE group_members (
+      group_id UUID NOT NULL REFERENCES groups(id) ON DELETE CASCADE,
+      student_id UUID NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+      joined_at TIMESTAMP NOT NULL DEFAULT NOW(),
+      PRIMARY KEY (group_id, student_id)
+    );
+
+    CREATE TABLE assignments (
+      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+      group_id UUID NOT NULL REFERENCES groups(id) ON DELETE CASCADE,
+      game_id UUID NOT NULL REFERENCES games(id) ON DELETE CASCADE,
+      due_date TIMESTAMP,
+      pass_percentage INTEGER,
+      created_at TIMESTAMP NOT NULL DEFAULT NOW()
+    );
+
+    CREATE TABLE game_attempts (
+      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+      student_id UUID NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+      assignment_id UUID NOT NULL REFERENCES assignments(id) ON DELETE CASCADE,
+      score_percentage INTEGER NOT NULL,
+      time_taken INTEGER NOT NULL,
+      attempt_data JSONB NOT NULL,
+      created_at TIMESTAMP NOT NULL DEFAULT NOW()
+    );
   `)
 
   return db
